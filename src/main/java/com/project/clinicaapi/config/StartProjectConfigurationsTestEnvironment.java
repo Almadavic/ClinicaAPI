@@ -1,12 +1,18 @@
 package com.project.clinicaapi.config;
 
+import com.project.clinicaapi.entity.Dentist;
 import com.project.clinicaapi.entity.User;
+import com.project.clinicaapi.entity.WorkDay;
 import com.project.clinicaapi.enumerated.Role;
-import com.project.clinicaapi.enumerated.Situation;
+import com.project.clinicaapi.enumerated.Specialty;
+import com.project.clinicaapi.enumerated.WorkDayEnum;
 import com.project.clinicaapi.repository.UserRepository;
+import com.project.clinicaapi.repository.WorkDayRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
+
+import java.util.Arrays;
 
 
 @Configuration
@@ -15,23 +21,46 @@ public class StartProjectConfigurationsTestEnvironment implements CommandLineRun
 
     private final UserRepository userRepository;
 
+    private final WorkDayRepository workDayRepository;
+
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args)  {
+
+        Dentist dentist = Dentist.dentistBuilder()
+                .name("nome")
+                .password("1424224")
+                .country("Brasil")
+                .cellphone("193189744")
+                .state("MG")
+                .city("Belo Horizonte")
+                .role(Role.DENTIST)
+                .email("almada@hotmail.com")
+                .enabled(true)
+                .specialty(Specialty.ORTHODONTICS)
+                .build();
+
+            userRepository.save(dentist);
+
+        WorkDay wd1 = new WorkDay(WorkDayEnum.MONDAY);
+        WorkDay wd2 = new WorkDay(WorkDayEnum.TUESDAY);
+        WorkDay wd3 = new WorkDay(WorkDayEnum.WEDNESDAY);
+        WorkDay wd4 = new WorkDay(WorkDayEnum.THURSDAY);
+        WorkDay wd5 = new WorkDay(WorkDayEnum.FRIDAY);
+        WorkDay wd6 = new WorkDay(WorkDayEnum.SATURDAY);
+
+        workDayRepository.saveAll(Arrays.asList(wd1, wd2, wd3, wd4, wd5, wd6));
 
 
-        User u1 = new User();
-            u1.setCellphone("139713871381781");
-            u1.setName("João");
-            u1.setEmail("aodjaojadoaodd");
-            u1.setPassword("1903819891");
-            u1.setRole(Role.DOCTOR);
-            u1.setSituation(Situation.ATIVO);
+        dentist.addWorkDay(wd1);
+        dentist.addWorkDay(wd2);
+        dentist.addWorkDay(wd3);
 
-            u1.getAddress().setCity("Belo Horizonte");
-            u1.getAddress().setState("Minas Gerais");
-            u1.getAddress().setCountry("Brasil");
+        userRepository.save(dentist);
 
-            userRepository.save(u1);
+
+//        for(int i =0 ; i< dentist.getWorkDays().size(); i++) {
+//            System.out.println(dentist.getWorkDays().get(i).getWorkDay().toString());
+//        }
 
     }
 
