@@ -1,0 +1,22 @@
+package com.project.clinicaapi.vo;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
+import lombok.Getter;
+import lombok.Setter;
+
+@Embeddable
+@Getter
+@Setter
+public class Address {
+
+    @Column(name = "country", nullable = false)
+    private String country;
+
+    @Column(name = "state", nullable = false)
+    private String state;
+
+    @Column(name = "city", nullable = false)
+    private String city;
+
+}
