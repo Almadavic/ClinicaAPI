@@ -23,7 +23,6 @@ public class Address implements Serializable {
     @Column(name = "city", nullable = false)
     private String city;
 
-
     public Address(String country, String state, String city) {
         this.country = country;
         this.state = state;

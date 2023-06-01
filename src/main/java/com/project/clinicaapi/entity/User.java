@@ -1,5 +1,6 @@
 package com.project.clinicaapi.entity;
 
+import com.project.clinicaapi.enumerated.Gender;
 import com.project.clinicaapi.enumerated.Role;
 import com.project.clinicaapi.vo.Address;
 import jakarta.persistence.*;
@@ -39,26 +40,30 @@ public class User implements UserDetails {
     @Column(name = "password")
     private String password;
 
+    @Column(name = "enable", nullable = false)
+    private boolean enabled;
+
+    @Column(name = "gender", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
+
     @Column(name = "role", nullable = false)
     @Enumerated(EnumType.STRING)
     @Getter(AccessLevel.NONE)
     private Role role;
 
-    @Column(name = "enable", nullable = false)
-    private boolean enabled;
-
     @Embedded
     private Address address;
 
     @Builder
-    public User(@NonNull String email, @NonNull String name, @NonNull String cellphone, String password, @NonNull Role role, boolean enabled,
-                @NonNull String country, @NonNull String state, @NonNull String city) {
+    public User(@NonNull String email, @NonNull String name, @NonNull String cellphone, String password, boolean enabled,
+                @NonNull Gender gender, @NonNull String country, @NonNull String state, @NonNull String city) {
         this.email = email;
         this.name = name;
         this.cellphone = cellphone;
         this.password = password;
-        this.role = role;
         this.enabled = enabled;
+        this.gender = gender;
         this.address = new Address(country, state, city);
     }
 

@@ -1,5 +1,6 @@
 package com.project.clinicaapi.entity;
 
+import com.project.clinicaapi.enumerated.Gender;
 import com.project.clinicaapi.enumerated.Role;
 import com.project.clinicaapi.enumerated.Specialty;
 import jakarta.persistence.*;
@@ -18,7 +19,8 @@ public class Dentist extends User {
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "tb_dentists_workdays",
             joinColumns = @JoinColumn(name = "dentist_id"),
-            inverseJoinColumns = @JoinColumn(name = "workday_id"))
+            inverseJoinColumns = @JoinColumn(name = "workday_id"),
+            indexes = {@Index(columnList = "dentist_id, workday_id", unique = true)})
     @Setter(AccessLevel.NONE)
     private final List<WorkDay> workDays = new ArrayList<>();
 
@@ -26,10 +28,14 @@ public class Dentist extends User {
     @Column(name = "specialty", nullable = false)
     private Specialty specialty;
 
+    @OneToMany(mappedBy = "dentist")
+    private List<Appointment> appointments = new ArrayList<>();
+
     @Builder(builderMethodName = "dentistBuilder")
-    public Dentist(@NonNull String email, @NonNull String name, @NonNull String cellphone, String password, @NonNull Role role, boolean enabled,
-                   @NonNull String country, @NonNull String state, @NonNull String city, @NonNull Specialty specialty) {
-        super(email, name, cellphone, password, role, enabled, country, state, city);
+    public Dentist(@NonNull String email, @NonNull String name, @NonNull String cellphone, String password, boolean enabled,
+                   @NonNull Gender gender, @NonNull String country, @NonNull String state, @NonNull String city, @NonNull Specialty specialty) {
+        super(email, name, cellphone, password, enabled, gender, country, state, city);
+        setRole(Role.DENTIST);
         this.specialty = specialty;
     }
 
