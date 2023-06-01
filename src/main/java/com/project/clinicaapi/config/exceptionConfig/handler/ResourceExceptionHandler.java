@@ -6,9 +6,7 @@ import com.project.clinicaapi.config.exceptionConfig.handler.httpMessageNotReada
 import com.project.clinicaapi.config.exceptionConfig.standardError.beanValidationStandardError.StandardErrorFieldsNotValid;
 import com.project.clinicaapi.config.exceptionConfig.standardError.beanValidationStandardError.ValidationErrorCollection;
 import com.project.clinicaapi.config.exceptionConfig.standardError.commomStandardError.StandardError;
-import com.project.clinicaapi.service.customException.DatabaseException;
-import com.project.clinicaapi.service.customException.JWTException;
-import com.project.clinicaapi.service.customException.ResourceNotFoundException;
+import com.project.clinicaapi.service.customException.*;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -115,6 +113,21 @@ public class ResourceExceptionHandler {
     @ExceptionHandler(value = DatabaseException.class)
     public ResponseEntity<StandardError> dataBase(DatabaseException exception, HttpServletRequest request) {
         return handlingException(exception, request, "Erro no banco de dados", HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(value = ParameterMissingException.class)
+    public ResponseEntity<StandardError> parameterMissing(ParameterMissingException exception, HttpServletRequest request) {
+        return handlingException(exception, request, "Parãmetros obrigatórios faltando", HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(value = DateOrderException.class)
+    public ResponseEntity<StandardError> dateOrder(DateOrderException exception, HttpServletRequest request) {
+        return handlingException(exception, request, "Ordem de datas inválida", HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(value = InvalidDateFormatException.class)
+    public ResponseEntity<StandardError> invalidDateFormat(InvalidDateFormatException exception, HttpServletRequest request) {
+        return handlingException(exception, request, "Formato de data inválido", HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(value = ResourceNotFoundException.class)

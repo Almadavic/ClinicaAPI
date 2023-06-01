@@ -11,18 +11,18 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 
 @AllArgsConstructor
 @Getter
-@JsonPropertyOrder(value = {"email", "password"})
+@JsonPropertyOrder(value = {"login", "password"})
 public class LoginData {
 
     @NotBlank
-    @JsonProperty(value = "email")
-    private String email;
+    @JsonProperty(value = "login")
+    private String login;
 
     @NotBlank
     @JsonProperty(value = "password")
     private String password;
 
     public UsernamePasswordAuthenticationToken toConvert() {
-        return new UsernamePasswordAuthenticationToken(email, password);
+        return new UsernamePasswordAuthenticationToken(login, password);
     }
 }

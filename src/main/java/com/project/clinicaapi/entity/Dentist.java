@@ -32,9 +32,9 @@ public class Dentist extends User {
     private List<Appointment> appointments = new ArrayList<>();
 
     @Builder(builderMethodName = "dentistBuilder")
-    public Dentist(@NonNull String email, @NonNull String name, @NonNull String cellphone, String password, boolean enabled,
+    public Dentist(@NonNull String login , @NonNull String email, @NonNull String name, @NonNull String cellphone, String password, boolean enabled,
                    @NonNull Gender gender, @NonNull String country, @NonNull String state, @NonNull String city, @NonNull Specialty specialty) {
-        super(email, name, cellphone, password, enabled, gender, country, state, city);
+        super(login, email, name, cellphone, password, enabled, gender, country, state, city);
         setRole(Role.DENTIST);
         this.specialty = specialty;
     }

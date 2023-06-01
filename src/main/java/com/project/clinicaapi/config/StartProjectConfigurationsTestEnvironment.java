@@ -36,6 +36,7 @@ public class StartProjectConfigurationsTestEnvironment implements CommandLineRun
     public void run(String... args) {
 
         Dentist dentist = Dentist.dentistBuilder()
+                .login("dentist")
                 .name("nome1")
                 .password(encoder.encode("123456"))
                 .country("Brasil")
@@ -49,6 +50,7 @@ public class StartProjectConfigurationsTestEnvironment implements CommandLineRun
                 .build();
 
         Patient patient = Patient.patientBuilder()
+                .login("patient")
                 .name("nome2")
                 .password(encoder.encode("123456"))
                 .country("Brasil")
@@ -61,6 +63,7 @@ public class StartProjectConfigurationsTestEnvironment implements CommandLineRun
                 .build();
 
         Patient user = Patient.patientBuilder()
+                .login("admin")
                 .name("admin")
                 .password(encoder.encode("123456"))
                 .country("Brasil")

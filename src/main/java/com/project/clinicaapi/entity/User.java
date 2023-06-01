@@ -27,8 +27,11 @@ public class User implements UserDetails {
     @Column(name = "id", nullable = false, unique = true)
     private final String id = UUID.randomUUID().toString();
 
-    @Column(name = "email", nullable = false, unique = true)
+    @Column(name = "login", nullable = false, unique = true)
     @Getter(AccessLevel.NONE)
+    private String login;
+
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
 
     @Column(name = "name", nullable = false)
@@ -56,8 +59,9 @@ public class User implements UserDetails {
     private Address address;
 
     @Builder
-    public User(@NonNull String email, @NonNull String name, @NonNull String cellphone, String password, boolean enabled,
+    public User(@NonNull String login , @NonNull String email, @NonNull String name, @NonNull String cellphone, String password, boolean enabled,
                 @NonNull Gender gender, @NonNull String country, @NonNull String state, @NonNull String city) {
+        this.login = login;
         this.email = email;
         this.name = name;
         this.cellphone = cellphone;
@@ -74,7 +78,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return email;
+        return login;
     }
 
     @Override

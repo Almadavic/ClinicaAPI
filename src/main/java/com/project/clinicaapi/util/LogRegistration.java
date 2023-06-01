@@ -13,8 +13,8 @@ public class LogRegistration {
 
     private final LogRepository logRepository;
 
-    public void saveLog(User user, String evento) {
-        logRepository.save(new Log(user.getUsername(), user.getName(), evento));
+    public void saveLog(String login, String evento) {
+        logRepository.save(new Log(login, evento));
     }
 
 }

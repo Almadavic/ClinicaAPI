@@ -23,8 +23,8 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepository.findByEmail(username)
-                .orElseThrow(() -> new RuntimeException("User not found with the e-mail : " + username));
+        return userRepository.findByLogin(username)
+                .orElseThrow(() -> new RuntimeException("User not found with the login : " + username));
     }
 
     public Page<UserResponseDTO> findPage(Pageable pageable) {
@@ -37,7 +37,7 @@ public class UserService implements UserDetailsService {
 
     private User returnUserDataBase(String userId) {
         return userRepository.findById(userId)
-                .orElseThrow(() -> new ResourceNotFoundException("The user id: "+ userId + " wasn't found on database"));
+                .orElseThrow(() -> new ResourceNotFoundException("The user id: " + userId + " wasn't found on database"));
     }
 
 }

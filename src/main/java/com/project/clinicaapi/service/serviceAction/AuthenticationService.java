@@ -42,9 +42,9 @@ public class AuthenticationService {
 
     }
 
-    private User returnTokenUserName(String tokenJWT) {
+    private String returnTokenUserName(String tokenJWT) {
         String subject = tokenService.getSubject(tokenJWT);
-        return userRepository.findById(subject).get();
+        return userRepository.findById(subject).get().getUsername();
     }
 
 }

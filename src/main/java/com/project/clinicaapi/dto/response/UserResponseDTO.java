@@ -7,12 +7,15 @@ import com.project.clinicaapi.entity.User;
 import lombok.Getter;
 
 
-@JsonPropertyOrder(value = {"id", "email", "name", "cellphone", "enabled", "gender", "role", "address"})
+@JsonPropertyOrder(value = {"id", "login", "email", "name", "cellphone", "enabled", "gender", "role", "address"})
 @Getter
 public class UserResponseDTO {
 
     @JsonProperty(value = "id")
     private final String id;
+
+    @JsonProperty(value = "login")
+    private final String login;
 
     @JsonProperty(value = "email")
     private final String email;
@@ -37,7 +40,8 @@ public class UserResponseDTO {
 
     public UserResponseDTO(User user) {
         this.id = user.getId();
-        this.email = user.getCellphone();
+        this.login = user.getUsername();
+        this.email = user.getEmail();
         this.name = user.getName();
         this.cellphone = user.getCellphone();
         this.enabled = user.isEnabled();
