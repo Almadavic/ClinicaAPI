@@ -26,13 +26,13 @@ public class InvalidFormatExceptionInstance extends FindExceptionInstance {
 
             String path = joinPath(ex.getPath());
 
-            String message = String.format("A propriedade '%s' recebeu o valor '%s', que é de um tipo inválido. " +
-                            "Corrija e informe um valor compatível com o tipo %s.", path, ex.getValue(),
+            String message = String.format("The property '%s' received the value '%s', which is of an invalid type. " +
+                            "Correct and enter a value compatible with type %s.", path, ex.getValue(),
                     ex.getTargetType().getSimpleName());
 
             return ResponseEntity.status(status).body(new StandardError(
                     status.value(),
-                    "Formato do valor inválido",
+                    "Invalid value format",
                     message,
                     args.request().getRequestURI()));
         }

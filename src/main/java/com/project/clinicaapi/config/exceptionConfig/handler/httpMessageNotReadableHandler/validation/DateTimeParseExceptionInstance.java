@@ -21,12 +21,12 @@ public class DateTimeParseExceptionInstance extends FindExceptionInstance {
 
         if (args.rootCause() instanceof DateTimeParseException ex) {
 
-            String message = String.format("Foi recebido o valor de '%s' para data, que é de um tipo inválido. ", ex.getParsedString());
+            String message = String.format("Received value '%s' for date, which is of an invalid type. ", ex.getParsedString());
 
             return ResponseEntity.status(status).body(new StandardError(
                     status.value(),
-                    "Formato de data inválido",
-                    message + " Formato de data adequado: yyyy-mm-dd",
+                    "Invalid Date Format",
+                    message + " Proper date format: yyyy-mm-dd",
                     args.request().getRequestURI()));
 
         }

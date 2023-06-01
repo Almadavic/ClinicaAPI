@@ -15,7 +15,7 @@ public class GenericExceptionInstance extends FindExceptionInstance {
     @Override
     public ResponseEntity<StandardError> verification(FindExceptionInstanceArgs args) {
 
-        StandardError err = new StandardError(status.value(), "Erro no client", args.exception().getMessage(), args.request().getRequestURI());
+        StandardError err = new StandardError(status.value(), "Client error", args.exception().getMessage(), args.request().getRequestURI());
 
         return ResponseEntity.ok().body(err);
     }

@@ -1,0 +1,20 @@
+package com.project.clinicaapi.util;
+
+import com.project.clinicaapi.entity.Log;
+import com.project.clinicaapi.entity.User;
+import com.project.clinicaapi.repository.LogRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+
+@Service
+@RequiredArgsConstructor
+public class LogRegistration {
+
+    private final LogRepository logRepository;
+
+    public void saveLog(User user, String evento) {
+        logRepository.save(new Log(user.getUsername(), user.getName(), evento));
+    }
+
+}

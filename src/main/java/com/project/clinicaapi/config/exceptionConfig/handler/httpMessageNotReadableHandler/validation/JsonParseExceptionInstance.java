@@ -23,7 +23,7 @@ public class JsonParseExceptionInstance extends FindExceptionInstance {
                 return ResponseEntity.status(status).body(new StandardError(
                         status.value(),
                         "JSON error",
-                        "Verfique o formato do JSON",
+                        "Verify the JSON format",
                         args.request().getRequestURI()));
             }
 

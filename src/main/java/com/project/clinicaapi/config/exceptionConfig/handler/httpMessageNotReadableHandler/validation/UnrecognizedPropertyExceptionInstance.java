@@ -21,8 +21,8 @@ public class UnrecognizedPropertyExceptionInstance extends FindExceptionInstance
 
             return ResponseEntity.status(status).body(new StandardError(
                     status.value(),
-                    "Campo não reconhecido: "+splitError[5].replace("\"", ""),
-                    "Nome (chave) de campo inválido não são aceitos",
+                    "Field not recognized: "+splitError[5].replace("\"", ""),
+                    "Name (key) of invalid fields are not accepted",
                     args.request().getRequestURI()));
         }
 

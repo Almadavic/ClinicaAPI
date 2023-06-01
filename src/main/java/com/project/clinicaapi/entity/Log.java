@@ -24,6 +24,9 @@ public class Log implements Serializable {
     @CreationTimestamp
     private LocalDateTime eventTime;
 
+    @Column(name = "user_email", nullable = false)
+    private String userEmail;
+
     @Column(name = "user_name", nullable = false)
     private String userName;
 
@@ -31,7 +34,8 @@ public class Log implements Serializable {
     private String event;
 
     @Builder
-    public Log(String userName, String event) {
+    public Log(String userEmail, String userName, String event) {
+        this.userEmail = userEmail;
         this.userName = userName;
         this.event = event;
     }

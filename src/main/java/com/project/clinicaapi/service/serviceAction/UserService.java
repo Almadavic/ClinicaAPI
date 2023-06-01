@@ -1,4 +1,4 @@
-package com.project.clinicaapi.service;
+package com.project.clinicaapi.service.serviceAction;
 
 import com.project.clinicaapi.dto.response.UserResponseDTO;
 import com.project.clinicaapi.entity.User;

@@ -2,6 +2,7 @@ package com.project.clinicaapi.config;
 
 import com.project.clinicaapi.entity.*;
 import com.project.clinicaapi.enumerated.Gender;
+import com.project.clinicaapi.enumerated.Role;
 import com.project.clinicaapi.enumerated.Specialty;
 import com.project.clinicaapi.enumerated.WorkDayEnum;
 import com.project.clinicaapi.repository.AppointmentRepository;
@@ -11,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -28,12 +30,14 @@ public class StartProjectConfigurationsTestEnvironment implements CommandLineRun
 
     private final AppointmentRepository appointmentRepository;
 
+    private final PasswordEncoder encoder;
+
     @Override
     public void run(String... args) {
 
         Dentist dentist = Dentist.dentistBuilder()
                 .name("nome1")
-                .password("1424224")
+                .password(encoder.encode("123456"))
                 .country("Brasil")
                 .cellphone("193189744")
                 .state("MG")
@@ -44,7 +48,33 @@ public class StartProjectConfigurationsTestEnvironment implements CommandLineRun
                 .gender(Gender.MALE)
                 .build();
 
-        userRepository.save(dentist);
+        Patient patient = Patient.patientBuilder()
+                .name("nome2")
+                .password(encoder.encode("123456"))
+                .country("Brasil")
+                .cellphone("1931891144")
+                .state("MG")
+                .city("Belo Horizonte")
+                .email("sergio@hotmail.com")
+                .enabled(true)
+                .gender(Gender.MALE)
+                .build();
+
+        Patient user = Patient.patientBuilder()
+                .name("admin")
+                .password(encoder.encode("123456"))
+                .country("Brasil")
+                .cellphone("1931891144")
+                .state("admin")
+                .city("admin")
+                .email("admin@hotmail.com")
+                .enabled(true)
+                .gender(Gender.MALE)
+                .build();
+
+        user.setRole(Role.ADMINISTRATOR);
+
+        userRepository.saveAll(Arrays.asList(dentist, patient, user));
 
 
         WorkDay wd1 = new WorkDay(WorkDayEnum.MONDAY);
@@ -63,21 +93,6 @@ public class StartProjectConfigurationsTestEnvironment implements CommandLineRun
 
        dentist = userRepository.save(dentist);
 
-
-        Patient patient = Patient.patientBuilder()
-                .name("nome2")
-                .password("1424224")
-                .country("Brasil")
-                .cellphone("1931891144")
-                .state("MG")
-                .city("Belo Horizonte")
-                .email("sergio@hotmail.com")
-                .enabled(true)
-                .gender(Gender.MALE)
-                .build();
-
-
-        patient = userRepository.save(patient);
 
         Appointment appointment = Appointment.builder()
                 .procedure("Limpeza de dente")

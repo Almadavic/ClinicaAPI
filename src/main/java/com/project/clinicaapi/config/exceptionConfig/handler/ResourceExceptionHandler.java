@@ -6,6 +6,8 @@ import com.project.clinicaapi.config.exceptionConfig.handler.httpMessageNotReada
 import com.project.clinicaapi.config.exceptionConfig.standardError.beanValidationStandardError.StandardErrorFieldsNotValid;
 import com.project.clinicaapi.config.exceptionConfig.standardError.beanValidationStandardError.ValidationErrorCollection;
 import com.project.clinicaapi.config.exceptionConfig.standardError.commomStandardError.StandardError;
+import com.project.clinicaapi.service.customException.DatabaseException;
+import com.project.clinicaapi.service.customException.JWTException;
 import com.project.clinicaapi.service.customException.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -105,6 +107,15 @@ public class ResourceExceptionHandler {
         return handlingException(exception, request, "Property Reference error", HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(value = JWTException.class)
+    public ResponseEntity<StandardError> jwt(JWTException exception, HttpServletRequest request) {
+        return handlingException(exception, request, "JWT error", HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(value = DatabaseException.class)
+    public ResponseEntity<StandardError> dataBase(DatabaseException exception, HttpServletRequest request) {
+        return handlingException(exception, request, "Erro no banco de dados", HttpStatus.BAD_REQUEST);
+    }
 
     @ExceptionHandler(value = ResourceNotFoundException.class)
     public ResponseEntity<StandardError> resourceNotFound(ResourceNotFoundException exception, HttpServletRequest request) {
