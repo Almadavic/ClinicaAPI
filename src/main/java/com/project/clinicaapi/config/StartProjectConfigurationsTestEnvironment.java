@@ -32,7 +32,7 @@ public class StartProjectConfigurationsTestEnvironment implements CommandLineRun
     public void run(String... args) {
 
         Dentist dentist = Dentist.dentistBuilder()
-                .name("nome")
+                .name("nome1")
                 .password("1424224")
                 .country("Brasil")
                 .cellphone("193189744")
@@ -65,7 +65,7 @@ public class StartProjectConfigurationsTestEnvironment implements CommandLineRun
 
 
         Patient patient = Patient.patientBuilder()
-                .name("nome")
+                .name("nome2")
                 .password("1424224")
                 .country("Brasil")
                 .cellphone("1931891144")
