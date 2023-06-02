@@ -32,12 +32,12 @@ public class AuthenticationService {
 
             String token = tokenService.generateToken(authentication);
 
-            logRegistration.saveLog(returnTokenUserName(token), "authenticated");
+            logRegistration.saveLog(returnTokenUserName(token), "authenticated in the system");
 
             return new Token( token , "Bearer");
 
         } catch (AuthenticationException e) {
-            throw new DatabaseException("Login and / or password is / are wrong | or your account is not active");
+            throw new DatabaseException("Login and / or password is / are wrong | or your account is disabled");
         }
 
     }

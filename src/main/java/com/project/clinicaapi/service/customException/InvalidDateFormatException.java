@@ -8,11 +8,11 @@ public class InvalidDateFormatException extends RuntimeException{
     private static final long serialVersionUID = 1L;
 
     public InvalidDateFormatException() {
-        super("Formato de data inválido, Formato válido: dd/MM/yyyy");
+        super("Invalid date format, Valid format: dd/MM/yyyy");
     }
 
     public InvalidDateFormatException(String dateField) {
-        super("O campo "+ dateField+" está com o formato inválido, Formato de data válido: yyyy-mm-dd");
+        super("The field "+ dateField+" has a wrong format, Valid date format: yyyy-mm-dd");
     }
 
 }

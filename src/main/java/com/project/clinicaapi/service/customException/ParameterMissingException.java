@@ -8,7 +8,7 @@ public class ParameterMissingException extends RuntimeException{
     private static final long serialVersionUID = 1L;
 
     public ParameterMissingException(String parameter) {
-        super("O parâmetro " + parameter + " não pode ser nulo nesse tipo de consulta");
+        super("The parameter " + parameter + " cannot be null in this query");
     }
 
 }

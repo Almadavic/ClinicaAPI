@@ -8,6 +8,7 @@ import com.project.clinicaapi.enumerated.WorkDayEnum;
 import com.project.clinicaapi.repository.AppointmentRepository;
 import com.project.clinicaapi.repository.UserRepository;
 import com.project.clinicaapi.repository.WorkDayRepository;
+import com.project.clinicaapi.util.LogRegistration;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -31,6 +32,8 @@ public class StartProjectConfigurationsTestEnvironment implements CommandLineRun
     private final AppointmentRepository appointmentRepository;
 
     private final PasswordEncoder encoder;
+
+    private final LogRegistration logRegistration;
 
     @Override
     public void run(String... args) {
@@ -62,7 +65,7 @@ public class StartProjectConfigurationsTestEnvironment implements CommandLineRun
                 .gender(Gender.MALE)
                 .build();
 
-        Patient user = Patient.patientBuilder()
+        User u1 = User.builder()
                 .login("admin")
                 .name("admin")
                 .password(encoder.encode("123456"))
@@ -75,9 +78,24 @@ public class StartProjectConfigurationsTestEnvironment implements CommandLineRun
                 .gender(Gender.MALE)
                 .build();
 
-        user.setRole(Role.ADMINISTRATOR);
+        u1.setRole(Role.ADMINISTRATOR);
 
-        userRepository.saveAll(Arrays.asList(dentist, patient, user));
+        User u2 = User.builder()
+                .login("joaozin")
+                .name("joaojoao")
+                .password(encoder.encode("123456"))
+                .country("Brasil")
+                .cellphone("2031891144")
+                .state("joao")
+                .city("joao")
+                .email("joao@hotmail.com")
+                .enabled(false)
+                .gender(Gender.MALE)
+                .build();
+
+        u2.setRole(Role.ADMINISTRATOR);
+
+        userRepository.saveAll(Arrays.asList(dentist, patient, u1, u2));
 
 
         WorkDay wd1 = new WorkDay(WorkDayEnum.MONDAY);
@@ -107,6 +125,8 @@ public class StartProjectConfigurationsTestEnvironment implements CommandLineRun
                 .build();
 
         appointmentRepository.save(appointment);
+
+        logRegistration.saveLog("admin", "authenticated in the system");
 
     }
 

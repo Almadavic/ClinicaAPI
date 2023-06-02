@@ -20,7 +20,7 @@ public class LogController implements LogSwagger {
 
     @Override
     @GetMapping
-    public ResponseEntity<Page<LogResponseDTO>> findPage(@PageableDefault(sort = "event_time", direction = Sort.Direction.ASC) Pageable pageable,
+    public ResponseEntity<Page<LogResponseDTO>> findPage(@PageableDefault(sort = "id", direction = Sort.Direction.ASC) Pageable pageable,
                                                          @RequestParam(value = "user", required = false) String user,
                                                          @RequestParam(value = "datestart", required = false) String dataStart,
                                                          @RequestParam(value = "dateend", required = false) String dataEnd) {

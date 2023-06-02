@@ -35,7 +35,7 @@ public abstract class LogFilterVerification {
 
         if(dateStart.isAfter(dateEnd)) {
             throw new DateOrderException("The property 'datestart' value '" + dateStartString + "' " +
-                    "cannot be after the 'dateemd' value '" + dateEndString + "'");
+                    "cannot be after the 'dateend' value '" + dateEndString + "'");
         }
 
     }
