@@ -5,6 +5,8 @@ import com.project.clinicaapi.dto.response.SecretaryResponseDTO;
 import com.project.clinicaapi.entity.Secretary;
 import com.project.clinicaapi.entity.User;
 import com.project.clinicaapi.repository.SecretaryRepository;
+import com.project.clinicaapi.service.businessRule.commitUser.registerUser.RegisterUserArgs;
+import com.project.clinicaapi.service.businessRule.commitUser.registerUser.RegisterUserVerification;
 import com.project.clinicaapi.service.customException.ResourceNotFoundException;
 import com.project.clinicaapi.util.LogRegistration;
 import com.project.clinicaapi.util.mapper.SecretaryMapper;
@@ -13,6 +15,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -26,7 +30,11 @@ public class SecretaryService {
 
     private final LogRegistration logRegistration;
 
+    private final List<RegisterUserVerification> registerUserVerifications;
+
     public SecretaryResponseDTO save(SecretaryRegisterDTO registerData, User userLogged) {
+
+        registerUserVerifications.forEach(v -> v.verification(new RegisterUserArgs(registerData)));
 
         Secretary secretary = mapper.toSecretaryEntity(registerData, encoder);
 

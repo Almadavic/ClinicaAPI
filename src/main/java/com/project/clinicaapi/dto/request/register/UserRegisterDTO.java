@@ -2,15 +2,16 @@ package com.project.clinicaapi.dto.request.register;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import jakarta.persistence.Column;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
+import lombok.Setter;
 
-@JsonPropertyOrder(value = {"login", "email", "name", "cellphone", "password", "gender", "address"})
+@JsonPropertyOrder(value = {"login", "email", "name", "cellphone", "password", "passwordconfirmation", "gender", "address"})
 @Getter
+@Setter
 public abstract class UserRegisterDTO {
 
     @JsonProperty(value = "login")
@@ -32,9 +33,12 @@ public abstract class UserRegisterDTO {
     @Size(min = 10)
     private String cellphone;
 
-    @Column(name = "password")
+    @JsonProperty(value = "password")
     @Size(min = 6)
     private String password;
+
+    @JsonProperty(value = "passwordconfirmation")
+    private String passwordConfirmation;
 
     @JsonProperty(value = "gender")
     @NotBlank

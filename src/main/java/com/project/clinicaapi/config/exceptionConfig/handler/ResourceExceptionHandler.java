@@ -115,9 +115,49 @@ public class ResourceExceptionHandler {
         return handlingException(exception, request, "Database Error", HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(value = InvalidCellphoneNumberException.class)
+    public ResponseEntity<StandardError> invalidCellPhoneNumber(InvalidCellphoneNumberException exception, HttpServletRequest request) {
+        return handlingException(exception, request, "The cellphone numbes cointains an invalid format", HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(value = InvalidEmailFormatException.class)
+    public ResponseEntity<StandardError> invalidEmailFormat(InvalidEmailFormatException exception, HttpServletRequest request) {
+        return handlingException(exception, request, "invalid e-mail", HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(value = InvalidNameFormatException.class)
+    public ResponseEntity<StandardError> invalidNameFormat(InvalidNameFormatException exception, HttpServletRequest request) {
+        return handlingException(exception, request, "Invalid name", HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(value = EmailAlreadyRegisteredException.class)
+    public ResponseEntity<StandardError> emailAlreadyRegistered(EmailAlreadyRegisteredException exception, HttpServletRequest request) {
+        return handlingException(exception, request, "Registering user error", HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(value = LoginAlreadyRegisteredException.class)
+    public ResponseEntity<StandardError> loginAlreadyRegistered(LoginAlreadyRegisteredException exception, HttpServletRequest request) {
+        return handlingException(exception, request, "Registering user error", HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(value = CellphoneAlreadyRegisteredException.class)
+    public ResponseEntity<StandardError> cellphoneAlreadyRegistered(CellphoneAlreadyRegisteredException exception, HttpServletRequest request) {
+        return handlingException(exception, request, "Registering user error", HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
     @ExceptionHandler(value = ParameterMissingException.class)
     public ResponseEntity<StandardError> parameterMissing(ParameterMissingException exception, HttpServletRequest request) {
         return handlingException(exception, request, "Required parameters missing", HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(value = PasswordDoesntMatchException.class)
+    public ResponseEntity<StandardError> passwordsDontMatchException(PasswordDoesntMatchException exception, HttpServletRequest request) {
+        return handlingException(exception, request, "Password error", HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(value = InvalidEnumValueException.class)
+    public ResponseEntity<StandardError> invalidEnumValue(InvalidEnumValueException exception, HttpServletRequest request) {
+        return handlingException(exception, request, "Invalid value", HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(value = DateOrderException.class)

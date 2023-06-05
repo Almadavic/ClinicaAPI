@@ -1,0 +1,14 @@
+package com.project.clinicaapi.service.customException;
+
+import java.io.Serial;
+
+public class InvalidCellphoneNumberException extends RuntimeException {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
+
+    public InvalidCellphoneNumberException(String celular) {
+       super("Cellphone number entered contains an invalid format: " + celular + ", Correct format: (XX)9XXXX-XXXX");
+    }
+
+}
