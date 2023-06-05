@@ -63,6 +63,20 @@ public class StartProjectConfigurationsTestEnvironment implements CommandLineRun
                 .email("sergio@hotmail.com")
                 .enabled(true)
                 .gender(Gender.MALE)
+                .cpf("115613986-02")
+                .build();
+
+        Secretary secretary = Secretary.secretaryBuilder()
+                .login("secretary")
+                .name("nome3")
+                .password(encoder.encode("123456"))
+                .country("Brasil")
+                .cellphone("1931131144")
+                .state("MG")
+                .city("Belo Horizonte")
+                .email("secratary@hotmail.com")
+                .gender(Gender.MALE)
+                .registration("1156139862302")
                 .build();
 
         User u1 = User.builder()
@@ -95,7 +109,7 @@ public class StartProjectConfigurationsTestEnvironment implements CommandLineRun
 
         u2.setRole(Role.ADMINISTRATOR);
 
-        userRepository.saveAll(Arrays.asList(dentist, patient, u1, u2));
+        userRepository.saveAll(Arrays.asList(dentist, patient, u1, u2, secretary));
 
 
         WorkDay wd1 = new WorkDay(WorkDayEnum.MONDAY);

@@ -59,7 +59,7 @@ public class User implements UserDetails {
     private Address address;
 
     @Builder
-    public User(@NonNull String login , @NonNull String email, @NonNull String name, @NonNull String cellphone, String password, boolean enabled,
+    public User(@NonNull String login , @NonNull String email, @NonNull String name, String cellphone, String password, boolean enabled,
                 @NonNull Gender gender, @NonNull String country, @NonNull String state, @NonNull String city) {
         this.login = login;
         this.email = email;
