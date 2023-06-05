@@ -9,16 +9,6 @@ public class ConvertingType {
 
     }
 
-    public static LocalDate toLocalDate(String date) {
-
-        if(date!=null) {
-            return LocalDate.parse(date,
-                    DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        }
-
-        return null;
-    }
-
     public static LocalDate toLocalDateBrazilFormat(String date) {
 
         if(date!=null) {

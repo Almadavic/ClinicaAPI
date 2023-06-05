@@ -43,7 +43,7 @@ public class ResourceExceptionHandler {
 
         HttpStatus status = HttpStatus.BAD_REQUEST;
         String path = request.getRequestURI();
-        String error = "Há um ou mais parametros inválidos";
+        String error = "There is one or more invalid parameters";
 
         ValidationErrorCollection validationErrs = new ValidationErrorCollection(status.value(), path, error);
 
@@ -75,12 +75,12 @@ public class ResourceExceptionHandler {
 
     @ExceptionHandler({EntityNotFoundException.class, NoHandlerFoundException.class})
     public ResponseEntity<StandardError> mappingNotFound(HttpServletRequest request) {
-        return handlingException(new ResourceNotFoundException("O recurso não está mapeado"), request, "Not found", HttpStatus.NOT_FOUND);
+        return handlingException(new ResourceNotFoundException("The resource is not mapped"), request, "Not found", HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public ResponseEntity<StandardError> methodArgumentTypeMismatch(MethodArgumentTypeMismatchException exception, HttpServletRequest request) {
-        return handlingException(exception, request, "Informação sendo passada errada para o servidor", HttpStatus.BAD_REQUEST);
+        return handlingException(exception, request, "Information being passed wrong to the server", HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(MissingServletRequestParameterException.class)
@@ -88,16 +88,16 @@ public class ResourceExceptionHandler {
 
         HttpStatus status = HttpStatus.BAD_REQUEST;
 
-        String message = exception.getMessage().split("'")[1] + " não pode ser nulo";
+        String message = exception.getMessage().split("'")[1] + " cannot be null";
 
-        StandardError err = new StandardError(status.value(), "Valor de parametro faltando", message, request.getRequestURI());
+        StandardError err = new StandardError(status.value(), "Missing parameter value", message, request.getRequestURI());
         log(exception);
         return ResponseEntity.status(status).body(err);
     }
 
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     public ResponseEntity<StandardError> methodNotSupportedException(HttpRequestMethodNotSupportedException exception, HttpServletRequest request) {
-        return handlingException(exception, request, "Método não permitido", HttpStatus.METHOD_NOT_ALLOWED);
+        return handlingException(exception, request, "Method not allowed", HttpStatus.METHOD_NOT_ALLOWED);
     }
 
     @ExceptionHandler(value = PropertyReferenceException.class)
@@ -112,33 +112,33 @@ public class ResourceExceptionHandler {
 
     @ExceptionHandler(value = DatabaseException.class)
     public ResponseEntity<StandardError> dataBase(DatabaseException exception, HttpServletRequest request) {
-        return handlingException(exception, request, "Erro no banco de dados", HttpStatus.BAD_REQUEST);
+        return handlingException(exception, request, "Database Error", HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(value = ParameterMissingException.class)
     public ResponseEntity<StandardError> parameterMissing(ParameterMissingException exception, HttpServletRequest request) {
-        return handlingException(exception, request, "Parãmetros obrigatórios faltando", HttpStatus.BAD_REQUEST);
+        return handlingException(exception, request, "Required parameters missing", HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(value = DateOrderException.class)
     public ResponseEntity<StandardError> dateOrder(DateOrderException exception, HttpServletRequest request) {
-        return handlingException(exception, request, "Ordem de datas inválida", HttpStatus.BAD_REQUEST);
+        return handlingException(exception, request, "Invalid date order", HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(value = InvalidDateFormatException.class)
     public ResponseEntity<StandardError> invalidDateFormat(InvalidDateFormatException exception, HttpServletRequest request) {
-        return handlingException(exception, request, "Formato de data inválido", HttpStatus.BAD_REQUEST);
+        return handlingException(exception, request, "Invalid date format", HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(value = ResourceNotFoundException.class)
     public ResponseEntity<StandardError> resourceNotFound(ResourceNotFoundException exception, HttpServletRequest request) {
-        return handlingException(exception, request, "Recurso não encontrado", HttpStatus.NOT_FOUND);
+        return handlingException(exception, request, "Resource not found", HttpStatus.NOT_FOUND);
     }
 
 
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<StandardError> genericException(RuntimeException exception, HttpServletRequest request) {
-        return handlingException(exception, request, "Erro interno no servidor", HttpStatus.INTERNAL_SERVER_ERROR);
+        return handlingException(exception, request, "Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     private ResponseEntity<StandardError> handlingException(Exception exception, HttpServletRequest request, String error, HttpStatus status) {

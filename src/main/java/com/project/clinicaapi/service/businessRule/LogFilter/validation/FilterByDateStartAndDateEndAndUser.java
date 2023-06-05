@@ -10,9 +10,9 @@ import org.springframework.data.domain.Page;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-public class FilterByDataStartAndDataEndAndUser extends LogFilterVerification {
+public class FilterByDateStartAndDateEndAndUser extends LogFilterVerification {
 
-    public FilterByDataStartAndDataEndAndUser(LogFilterVerification nextOne) {
+    public FilterByDateStartAndDateEndAndUser(LogFilterVerification nextOne) {
         super(nextOne);
     }
 

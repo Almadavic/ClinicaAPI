@@ -25,7 +25,7 @@ public class LogService {
     public Page<LogResponseDTO> findPage(Pageable pageable, String user, String dateStart, String dateEnd) {
 
         LogFilterVerification verification = new DateEndNotNullWhileDateStartNull(
-                new FilterByDataStartAndDataEndAndUser(
+                new FilterByDateStartAndDateEndAndUser(
                         new FilterByDateStartAndDateEnd(
                                 new FilterByDateStartAndUser(
                                         new FilterByDateStart(
