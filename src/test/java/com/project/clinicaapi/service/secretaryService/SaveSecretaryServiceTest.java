@@ -5,6 +5,7 @@ import com.project.clinicaapi.dto.request.register.SecretaryRegisterDTO;
 import com.project.clinicaapi.dto.response.SecretaryResponseDTO;
 import com.project.clinicaapi.entity.Secretary;
 import com.project.clinicaapi.entity.User;
+import com.project.clinicaapi.enumerated.Gender;
 import com.project.clinicaapi.repository.UserRepository;
 import com.project.clinicaapi.service.serviceAction.SecretaryService;
 import org.junit.jupiter.api.Assertions;
@@ -16,7 +17,7 @@ import org.springframework.test.context.ActiveProfiles;
 
 @ActiveProfiles(value = "test")
 @SpringBootTest
-public class SaveSecretaryServiceTest {
+class SaveSecretaryServiceTest {
 
     @Autowired
     private SecretaryService secretaryService;
@@ -45,6 +46,7 @@ public class SaveSecretaryServiceTest {
         Secretary secretary = findSecretaryByLogin(secretaryResponseDTO.getLogin());
 
         Assertions.assertTrue(encoder.matches("123456", secretary.getPassword()));
+        Assertions.assertEquals(Gender.MALE, Gender.valueOf(secretaryResponseDTO.getGender()));
 
     }
 

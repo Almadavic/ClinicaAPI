@@ -43,7 +43,7 @@ public class StartProjectConfigurationsTestEnvironment implements CommandLineRun
                 .name("nome1")
                 .password(encoder.encode("123456"))
                 .country("Brasil")
-                .cellphone("193189744")
+                .cellphone("(31)98858-8362")
                 .state("MG")
                 .city("Belo Horizonte")
                 .email("almada@hotmail.com")
