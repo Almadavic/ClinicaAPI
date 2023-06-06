@@ -47,10 +47,11 @@ public class StartProjectConfigurationsTestEnvironment implements CommandLineRun
                 .state("MG")
                 .city("Belo Horizonte")
                 .email("almada@hotmail.com")
-                .enabled(true)
                 .specialty(Specialty.ORTHODONTICS)
                 .gender(Gender.MALE)
                 .build();
+
+        dentist.setEnabled(true);
 
         Patient patient = Patient.patientBuilder()
                 .login("patient")
@@ -61,10 +62,11 @@ public class StartProjectConfigurationsTestEnvironment implements CommandLineRun
                 .state("MG")
                 .city("Belo Horizonte")
                 .email("sergio@hotmail.com")
-                .enabled(true)
                 .gender(Gender.MALE)
                 .cpf("115613986-02")
                 .build();
+
+        patient.setEnabled(true);
 
         Secretary secretary = Secretary.secretaryBuilder()
                 .login("secretary")
@@ -88,9 +90,10 @@ public class StartProjectConfigurationsTestEnvironment implements CommandLineRun
                 .state("admin")
                 .city("admin")
                 .email("admin@hotmail.com")
-                .enabled(true)
                 .gender(Gender.MALE)
                 .build();
+
+        u1.setEnabled(true);
 
         u1.setRole(Role.ADMINISTRATOR);
 
@@ -103,7 +106,6 @@ public class StartProjectConfigurationsTestEnvironment implements CommandLineRun
                 .state("joao")
                 .city("joao")
                 .email("joao@hotmail.com")
-                .enabled(false)
                 .gender(Gender.MALE)
                 .build();
 

@@ -5,6 +5,8 @@ import com.project.clinicaapi.dto.response.SecretaryResponseDTO;
 import com.project.clinicaapi.entity.Secretary;
 import com.project.clinicaapi.entity.User;
 import com.project.clinicaapi.repository.SecretaryRepository;
+import com.project.clinicaapi.service.businessRule.commitSecretary.registerSecretary.RegisterSecretaryArgs;
+import com.project.clinicaapi.service.businessRule.commitSecretary.registerSecretary.RegisterSecretaryVerification;
 import com.project.clinicaapi.service.businessRule.commitUser.registerUser.RegisterUserArgs;
 import com.project.clinicaapi.service.businessRule.commitUser.registerUser.RegisterUserVerification;
 import com.project.clinicaapi.service.customException.ResourceNotFoundException;
@@ -32,9 +34,11 @@ public class SecretaryService {
 
     private final List<RegisterUserVerification> registerUserVerifications;
 
+    private final List<RegisterSecretaryVerification> registerSecretaryVerifications;
+
     public SecretaryResponseDTO save(SecretaryRegisterDTO registerData, User userLogged) {
 
-        registerUserVerifications.forEach(v -> v.verification(new RegisterUserArgs(registerData)));
+        saveSecretaryVerifications(registerData);
 
         Secretary secretary = mapper.toSecretaryEntity(registerData, encoder);
 
@@ -57,6 +61,11 @@ public class SecretaryService {
         return mapper.toSecretaryDTO(
         secretaryRepository.findByRegistration(registration)
                 .orElseThrow(() -> new ResourceNotFoundException("The secretary registration: " +registration + " wasn't found on database")));
+    }
+
+    private void saveSecretaryVerifications(SecretaryRegisterDTO registerData) {
+        registerUserVerifications.forEach(v -> v.verification(new RegisterUserArgs(registerData)));
+        registerSecretaryVerifications.forEach(v -> v.verification(new RegisterSecretaryArgs(registerData)));
     }
 
     private Secretary returnSecretaryDataBase(String secretaryId) {

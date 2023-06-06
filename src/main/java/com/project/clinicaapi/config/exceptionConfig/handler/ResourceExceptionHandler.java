@@ -140,6 +140,11 @@ public class ResourceExceptionHandler {
         return handlingException(exception, request, "Registering user error", HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    @ExceptionHandler(value = RegistrationAlreadyRegisteredException.class)
+    public ResponseEntity<StandardError> registrationAlreadyRegistered(RegistrationAlreadyRegisteredException exception, HttpServletRequest request) {
+        return handlingException(exception, request, "Registering secretary error", HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
     @ExceptionHandler(value = CellphoneAlreadyRegisteredException.class)
     public ResponseEntity<StandardError> cellphoneAlreadyRegistered(CellphoneAlreadyRegisteredException exception, HttpServletRequest request) {
         return handlingException(exception, request, "Registering user error", HttpStatus.INTERNAL_SERVER_ERROR);

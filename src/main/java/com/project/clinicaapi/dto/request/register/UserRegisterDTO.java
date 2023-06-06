@@ -6,10 +6,13 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
+
 
 @JsonPropertyOrder(value = {"login", "email", "name", "cellphone", "password", "passwordconfirmation", "gender", "address"})
+@SuperBuilder(toBuilder = true)
+@NoArgsConstructor
 @Getter
 @Setter
 public abstract class UserRegisterDTO {

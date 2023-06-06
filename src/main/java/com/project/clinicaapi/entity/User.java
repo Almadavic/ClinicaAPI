@@ -59,14 +59,13 @@ public class User implements UserDetails {
     private Address address;
 
     @Builder
-    public User(@NonNull String login , @NonNull String email, @NonNull String name, String cellphone, String password, boolean enabled,
+    public User(@NonNull String login , @NonNull String email, @NonNull String name, String cellphone, String password,
                 @NonNull Gender gender, @NonNull String country, @NonNull String state, @NonNull String city) {
         this.login = login;
         this.email = email;
         this.name = name;
         this.cellphone = cellphone;
         this.password = password;
-        this.enabled = enabled;
         this.gender = gender;
         this.address = new Address(country, state, city);
     }
