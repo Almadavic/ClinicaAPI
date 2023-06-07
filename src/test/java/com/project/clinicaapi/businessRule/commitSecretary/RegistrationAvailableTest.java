@@ -28,7 +28,7 @@ class RegistrationAvailableTest {
     @Test
     void registrationAvailable() {
 
-        Assertions.assertDoesNotThrow( () -> CommitSecretaryValidations.findSecretaryByRegistrationValidation(secretaryRepository, "11561398623"));
+        Assertions.assertDoesNotThrow(() -> CommitSecretaryValidations.findSecretaryByRegistrationValidation(secretaryRepository, "11561398623"));
 
     }
 

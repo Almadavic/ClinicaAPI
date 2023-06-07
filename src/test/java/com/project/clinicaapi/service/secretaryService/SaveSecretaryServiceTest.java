@@ -29,7 +29,7 @@ class SaveSecretaryServiceTest {
     private PasswordEncoder encoder;
 
     @Test
-    void passwordEntered() {
+    void noPasswordEntered() {
 
         SecretaryRegisterDTO secretaryDTO = SecretaryRegisterDTO.builder()
                 .login("login")
@@ -51,7 +51,7 @@ class SaveSecretaryServiceTest {
     }
 
     @Test
-    void noPasswordEntered() {
+    void PasswordEntered() {
 
         String password = "12345678";
 

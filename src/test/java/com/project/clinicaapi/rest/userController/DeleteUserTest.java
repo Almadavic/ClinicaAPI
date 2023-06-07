@@ -28,7 +28,7 @@ class DeleteUserTest extends ClassTestParent {
     @Test
     void deleteUserByIdSuccess() throws  Exception {
 
-        mockMvc.perform(delete(path+"/{id}", returnUser().getId())
+        mockMvc.perform(delete(path+"/{id}", returnUser())
                         .header("Authorization", token("admin","123456")))
                 .andExpect(status().is(ok));
 
@@ -48,8 +48,8 @@ class DeleteUserTest extends ClassTestParent {
 
     }
 
-    private User returnUser() {
-        return userRepository.findByLogin("delete").get();
+    private String returnUser() {
+        return userRepository.findByLogin("delete").get().getId();
     }
 
 }
