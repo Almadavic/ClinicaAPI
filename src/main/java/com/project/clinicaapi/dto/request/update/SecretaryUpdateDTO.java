@@ -1,8 +1,7 @@
-package com.project.clinicaapi.dto.request.register;
+package com.project.clinicaapi.dto.request.update;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -11,10 +10,9 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @SuperBuilder(toBuilder = true)
 @Getter
-public class SecretaryRegisterDTO extends UserRegisterDTO{
+public class SecretaryUpdateDTO extends UserUpdateDTO {
 
     @JsonProperty(value = "registration")
-    @NotBlank
     private String registration;
 
 }

@@ -2,11 +2,15 @@ package com.project.clinicaapi.rest.userController;
 
 import com.project.clinicaapi.dto.request.register.AddessRegisterDTO;
 import com.project.clinicaapi.dto.request.register.SecretaryRegisterDTO;
+import com.project.clinicaapi.dto.request.update.SecretaryUpdateDTO;
+import com.project.clinicaapi.entity.User;
 import com.project.clinicaapi.enumerated.Gender;
+import com.project.clinicaapi.repository.UserRepository;
 import com.project.clinicaapi.rest.ClassTestParent;
 import com.project.clinicaapi.service.customException.*;
 import com.project.clinicaapi.util.ListEnumValues;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
@@ -15,13 +19,16 @@ import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ActiveProfiles(value = "test")
 @SpringBootTest
 @AutoConfigureMockMvc
-class CommitEntitiesExtendUserTest extends ClassTestParent {
+class UpdateEntitiesExtendUserTest extends ClassTestParent {
+
+    @Autowired
+    private UserRepository userRepository;
 
     private final String path = "/secretaries";
 
@@ -30,17 +37,11 @@ class CommitEntitiesExtendUserTest extends ClassTestParent {
 
         String email = "admin@hotmail.com";
 
-        SecretaryRegisterDTO secretaryDTO = SecretaryRegisterDTO.builder()
-                .login("newlogin")
-                .address(new AddessRegisterDTO("country", "state", "city"))
+        SecretaryUpdateDTO secretaryDTO = SecretaryUpdateDTO.builder()
                 .email(email)
-                .name("name nome")
-                .cellphone("(61)98589-7284")
-                .registration("1238917287128")
-                .gender("MALE")
                 .build();
 
-        mockMvc.perform(post(path)
+        mockMvc.perform(patch(path + "/" + returnUser().getId())
                         .header("Authorization", token("admin","123456"))
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(secretaryDTO)))
@@ -56,17 +57,11 @@ class CommitEntitiesExtendUserTest extends ClassTestParent {
 
         String login = "admin";
 
-        SecretaryRegisterDTO secretaryDTO = SecretaryRegisterDTO.builder()
+        SecretaryUpdateDTO secretaryDTO = SecretaryUpdateDTO.builder()
                 .login(login)
-                .address(new AddessRegisterDTO("country", "state", "city"))
-                .email("newemail@hotmail.com")
-                .name("name nome")
-                .cellphone("(61)98589-7284")
-                .registration("1937819371891")
-                .gender("MALE")
                 .build();
 
-        mockMvc.perform(post(path)
+        mockMvc.perform(patch(path + "/" + returnUser().getId())
                         .header("Authorization", token("admin","123456"))
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(secretaryDTO)))
@@ -82,17 +77,11 @@ class CommitEntitiesExtendUserTest extends ClassTestParent {
 
         String gender = "maleee";
 
-        SecretaryRegisterDTO secretaryDTO = SecretaryRegisterDTO.builder()
-                .login("novologin")
-                .address(new AddessRegisterDTO("country", "state", "city"))
-                .email("newemail@hotmail.com")
-                .name("name nome")
-                .cellphone("(61)98589-7284")
-                .registration("1937819371891")
+        SecretaryUpdateDTO secretaryDTO = SecretaryUpdateDTO.builder()
                 .gender(gender)
                 .build();
 
-        mockMvc.perform(post(path)
+        mockMvc.perform(patch(path + "/" + returnUser().getId())
                         .header("Authorization", token("admin","123456"))
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(secretaryDTO)))
@@ -109,18 +98,12 @@ class CommitEntitiesExtendUserTest extends ClassTestParent {
 
         String cellphone = "31924701495aaff";
 
-        SecretaryRegisterDTO secretaryDTO = SecretaryRegisterDTO.builder()
-                .login("novologin")
-                .address(new AddessRegisterDTO("country", "state", "city"))
-                .email("newemail@hotmail.com")
-                .name("name nome")
+        SecretaryUpdateDTO secretaryDTO = SecretaryUpdateDTO.builder()
                 .cellphone(cellphone)
-                .registration("1937819371891")
-                .gender("male")
                 .build();
 
 
-        mockMvc.perform(post(path)
+        mockMvc.perform(patch(path + "/" + returnUser().getId())
                         .header("Authorization", token("admin","123456"))
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(secretaryDTO)))
@@ -136,18 +119,11 @@ class CommitEntitiesExtendUserTest extends ClassTestParent {
 
         String name = "123 Victor!";
 
-        SecretaryRegisterDTO secretaryDTO = SecretaryRegisterDTO.builder()
-                .login("novologin")
-                .address(new AddessRegisterDTO("country", "state", "city"))
-                .email("newemail@hotmail.com")
+        SecretaryUpdateDTO secretaryDTO = SecretaryUpdateDTO.builder()
                 .name(name)
-                .cellphone("(61)98589-7284")
-                .registration("1937819371891")
-                .gender("male")
                 .build();
 
-
-        mockMvc.perform(post(path)
+        mockMvc.perform(patch(path + "/" + returnUser().getId())
                         .header("Authorization", token("admin","123456"))
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(secretaryDTO)))
@@ -163,17 +139,11 @@ class CommitEntitiesExtendUserTest extends ClassTestParent {
 
         String email = "aosjoas@hotmail.com!!";
 
-        SecretaryRegisterDTO secretaryDTO = SecretaryRegisterDTO.builder()
-                .login("novologin")
-                .address(new AddessRegisterDTO("country", "state", "city"))
+        SecretaryUpdateDTO secretaryDTO = SecretaryUpdateDTO.builder()
                 .email(email)
-                .name("Sergio Augusto")
-                .cellphone("(61)98589-7284")
-                .registration("1937819371891")
-                .gender("male")
                 .build();
 
-        mockMvc.perform(post(path)
+        mockMvc.perform(patch(path + "/" + returnUser().getId())
                         .header("Authorization", token("admin","123456"))
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(secretaryDTO)))
@@ -182,6 +152,10 @@ class CommitEntitiesExtendUserTest extends ClassTestParent {
                 .andExpect(result -> assertEquals("The e-mail: " + email + " contains an invalid format"
                         , result.getResolvedException().getMessage()));
 
+    }
+
+    private User returnUser() {
+        return userRepository.findByLogin("secretary2").get();
     }
 
 }

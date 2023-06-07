@@ -4,6 +4,7 @@ import com.project.clinicaapi.dto.response.UserResponseDTO;
 import com.project.clinicaapi.entity.User;
 import com.project.clinicaapi.repository.UserRepository;
 import com.project.clinicaapi.service.customException.ResourceNotFoundException;
+import com.project.clinicaapi.util.LogRegistration;
 import com.project.clinicaapi.util.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -21,6 +22,8 @@ public class UserService implements UserDetailsService {
 
     private final UserMapper mapper;
 
+    private final LogRegistration logRegistration;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository.findByLogin(username)
@@ -33,6 +36,12 @@ public class UserService implements UserDetailsService {
 
     public UserResponseDTO findById(String userId) {
         return mapper.toUserDTO(returnUserDataBase(userId));
+    }
+
+    public void delete(String id, User userLogged) {
+        User user = returnUserDataBase(id);
+        userRepository.delete(user);
+        logRegistration.saveLog(userLogged.getUsername(), "deleted the secretary: "+ user.getUsername());
     }
 
     private User returnUserDataBase(String userId) {

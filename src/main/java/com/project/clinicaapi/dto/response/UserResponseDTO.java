@@ -23,7 +23,7 @@ public class UserResponseDTO {
     @JsonProperty(value = "name")
     private final String name;
 
-    @JsonProperty(value = "callphone")
+    @JsonProperty(value = "cellphone")
     private final String cellphone;
 
     @JsonProperty(value = "enabled")

@@ -2,6 +2,7 @@ package com.project.clinicaapi.config.swaggerConfig.endPoint;
 
 import com.project.clinicaapi.config.exceptionConfig.standardError.commomStandardError.StandardError;
 import com.project.clinicaapi.dto.request.register.SecretaryRegisterDTO;
+import com.project.clinicaapi.dto.request.update.SecretaryUpdateDTO;
 import com.project.clinicaapi.dto.response.SecretaryResponseDTO;
 import com.project.clinicaapi.entity.User;
 import io.swagger.v3.oas.annotations.Operation;
@@ -14,9 +15,13 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @Tag(name = "Secretárias", description = "Operações relacionadas á secretarias")
@@ -70,5 +75,19 @@ public interface SecretarySwagger {
     })
     ResponseEntity<SecretaryResponseDTO> findByRegistration(String registration);
 
+    @Operation(summary = "Atualiza uma secretária por id.", security = {@SecurityRequirement(name = "bearer-key")})
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Secretária atualizada",
+                    content = {@Content(mediaType = "application/json", schema = @Schema(implementation = SecretaryResponseDTO.class))}),
+            @ApiResponse(responseCode = "400", description = "As senhas não são correspondentes. | " +
+                    "O enum referente a gênero  foi passado de forma incorreta. | " +
+                    "A senha foi passada sem a confirmação ou vice-versa. | Nenhum valor preenchido",
+                    content = {@Content(mediaType = "application/json", schema = @Schema(implementation = StandardError.class))}),
+            @ApiResponse(responseCode = "404", description = "Secretária  não encontrada no banco de dados",
+                    content = {@Content(mediaType = "application/json", schema = @Schema(implementation = StandardError.class))}),
+            @ApiResponse(responseCode = "500", description = "O e-mail, login, celular, número de registro digitados já existem no sistema.",
+                    content = {@Content(mediaType = "application/json", schema = @Schema(implementation = StandardError.class))}),
+    })
+    ResponseEntity<SecretaryResponseDTO> update(String id, SecretaryUpdateDTO secretaryDTO, User userLogged);
 
 }

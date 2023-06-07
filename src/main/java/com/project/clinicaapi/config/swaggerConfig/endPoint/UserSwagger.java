@@ -2,6 +2,7 @@ package com.project.clinicaapi.config.swaggerConfig.endPoint;
 
 import com.project.clinicaapi.config.exceptionConfig.standardError.commomStandardError.StandardError;
 import com.project.clinicaapi.dto.response.UserResponseDTO;
+import com.project.clinicaapi.entity.User;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
@@ -15,6 +16,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Tag(name = "Usuários", description = "Operações relacionadas á usuários")
 public interface UserSwagger {
@@ -50,5 +53,14 @@ public interface UserSwagger {
                     content = {@Content(mediaType = "application/json", schema = @Schema(implementation = StandardError.class))})
     })
     ResponseEntity<UserResponseDTO> findById(String userId);
+
+    @Operation(summary = "Deleta um usuário por id.", security = {@SecurityRequirement(name = "bearer-key")})
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Usuário deletado com sucesso",
+                    content = {@Content(mediaType = "application/json",array = @ArraySchema(schema = @Schema(implementation = String.class)))}),
+            @ApiResponse(responseCode = "404", description = "Usuário não encontrado",
+                    content = {@Content(mediaType = "application/json", schema = @Schema(implementation = StandardError.class))})
+    })
+    ResponseEntity<String> delete(String id, User userLogged);
 
 }

@@ -105,6 +105,11 @@ public class ResourceExceptionHandler {
         return handlingException(exception, request, "Property Reference error", HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(NoFieldFilledException.class)
+    public ResponseEntity<StandardError> noFieldFilled(NoFieldFilledException exception, HttpServletRequest request) {
+        return handlingException(exception, request, "No value filled", HttpStatus.BAD_REQUEST);
+    }
+
     @ExceptionHandler(value = JWTException.class)
     public ResponseEntity<StandardError> jwt(JWTException exception, HttpServletRequest request) {
         return handlingException(exception, request, "JWT error", HttpStatus.INTERNAL_SERVER_ERROR);

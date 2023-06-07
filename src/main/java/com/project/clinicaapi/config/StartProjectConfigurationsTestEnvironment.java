@@ -81,6 +81,19 @@ public class StartProjectConfigurationsTestEnvironment implements CommandLineRun
                 .registration("1156139862302")
                 .build();
 
+        Secretary secretary2 = Secretary.secretaryBuilder()
+                .login("secretary2")
+                .name("nome4")
+                .password(encoder.encode("123456"))
+                .country("Brasil")
+                .cellphone("19311242444")
+                .state("MG")
+                .city("Belo Horizonte")
+                .email("secratary2@hotmail.com")
+                .gender(Gender.MALE)
+                .registration("1151387")
+                .build();
+
         User u1 = User.builder()
                 .login("admin")
                 .name("admin")
@@ -111,7 +124,21 @@ public class StartProjectConfigurationsTestEnvironment implements CommandLineRun
 
         u2.setRole(Role.ADMINISTRATOR);
 
-        userRepository.saveAll(Arrays.asList(dentist, patient, u1, u2, secretary));
+        User u3 = User.builder()
+                .login("delete")
+                .name("delete")
+                .password(encoder.encode("123456"))
+                .country("Delete")
+                .cellphone("delete")
+                .state("delete")
+                .city("delete")
+                .email("delete")
+                .gender(Gender.MALE)
+                .build();
+
+        u3.setRole(Role.PATIENT);
+
+        userRepository.saveAll(Arrays.asList(dentist, patient, secretary, secretary2, u1, u2, u3));
 
 
         WorkDay wd1 = new WorkDay(WorkDayEnum.MONDAY);

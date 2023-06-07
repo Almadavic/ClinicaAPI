@@ -34,7 +34,7 @@ public class TokenService {
 
         try {
             return JWT.create()
-                    .withIssuer("BioData API")
+                    .withIssuer("Clinica API")
                     .withSubject(userDTO.getId())
                     .withClaim("login", userDTO.getEmail())
                     .withClaim("role", userDTO.getRole())
@@ -42,14 +42,14 @@ public class TokenService {
                     .withExpiresAt(expirationInstant())
                     .sign(secretAlgorithm());
         } catch (JWTCreationException exception) {
-            throw new JWTException("Erro na geração do token JWT");
+            throw new JWTException("Generating JWT Token error");
         }
     }
 
     public String getSubject(String token) {
         try {
             return JWT.require(secretAlgorithm())
-                    .withIssuer("BioData API")
+                    .withIssuer("Clinica API")
                     .build()
                     .verify(token)
                     .getSubject();

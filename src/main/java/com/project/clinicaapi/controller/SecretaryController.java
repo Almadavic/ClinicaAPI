@@ -2,6 +2,7 @@ package com.project.clinicaapi.controller;
 
 import com.project.clinicaapi.config.swaggerConfig.endPoint.SecretarySwagger;
 import com.project.clinicaapi.dto.request.register.SecretaryRegisterDTO;
+import com.project.clinicaapi.dto.request.update.SecretaryUpdateDTO;
 import com.project.clinicaapi.dto.response.SecretaryResponseDTO;
 import com.project.clinicaapi.entity.User;
 import com.project.clinicaapi.service.serviceAction.SecretaryService;
@@ -53,6 +54,15 @@ public class SecretaryController implements SecretarySwagger {
     @GetMapping(value = "/registration/{registration}")
     public ResponseEntity<SecretaryResponseDTO> findByRegistration(@PathVariable(value = "registration") String registration) {
         return ResponseEntity.ok().body(secretaryService.findByRegistration(registration));
+    }
+
+    @Override
+    @PatchMapping(value = "/{id}")
+    public ResponseEntity<SecretaryResponseDTO> update(@PathVariable(value = "id") String id,
+                                                       @RequestBody @Valid SecretaryUpdateDTO secretaryDTO,
+                                                       @AuthenticationPrincipal User userLogged) {
+
+        return ResponseEntity.ok().body(secretaryService.update(id, secretaryDTO, userLogged));
     }
 
 }
