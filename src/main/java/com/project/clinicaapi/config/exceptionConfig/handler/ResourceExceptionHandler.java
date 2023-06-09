@@ -140,6 +140,11 @@ public class ResourceExceptionHandler {
         return handlingException(exception, request, "Registering user error", HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    @ExceptionHandler(value = CpfAlreadyRegisteredException.class)
+    public ResponseEntity<StandardError> cpfAlreadyRegistered(CpfAlreadyRegisteredException exception, HttpServletRequest request) {
+        return handlingException(exception, request, "Registering patient error", HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
     @ExceptionHandler(value = LoginAlreadyRegisteredException.class)
     public ResponseEntity<StandardError> loginAlreadyRegistered(LoginAlreadyRegisteredException exception, HttpServletRequest request) {
         return handlingException(exception, request, "Registering user error", HttpStatus.INTERNAL_SERVER_ERROR);

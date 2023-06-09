@@ -1,0 +1,26 @@
+package com.project.clinicaapi.service.businessRule.commitPatient.registerPatient.validation;
+
+import com.project.clinicaapi.repository.PatientRepository;
+import com.project.clinicaapi.service.businessRule.commitPatient.CommitPatientValidations;
+import com.project.clinicaapi.service.businessRule.commitPatient.registerPatient.RegisterPatientArgs;
+import com.project.clinicaapi.service.businessRule.commitPatient.registerPatient.RegisterPatientVerification;
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Component;
+
+@Order(value = 1)
+@Component
+@RequiredArgsConstructor
+public class CpfAvailableRegister implements RegisterPatientVerification {
+
+    private final PatientRepository patientRepository;
+
+    @Override
+    public void verification(RegisterPatientArgs args) {
+
+        CommitPatientValidations.findPatientByCpfValidation(patientRepository, args.patientDTO().getCpf());
+
+    }
+
+}

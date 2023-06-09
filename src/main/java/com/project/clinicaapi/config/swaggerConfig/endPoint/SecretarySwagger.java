@@ -68,7 +68,7 @@ public interface SecretarySwagger {
     })
     ResponseEntity<SecretaryResponseDTO> findById(String id);
 
-    @Operation(summary = "Encontra uma secretária por id.", security = {@SecurityRequirement(name = "bearer-key")})
+    @Operation(summary = "Encontra uma secretária por número de registro.", security = {@SecurityRequirement(name = "bearer-key")})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Secretária encontrada com sucesso",
                     content = {@Content(mediaType = "application/json", schema = @Schema(implementation = SecretaryResponseDTO.class))}),

@@ -1,20 +1,18 @@
-package com.project.clinicaapi.dto.request.register;
+package com.project.clinicaapi.dto.request.update;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-@JsonPropertyOrder(value = {"login", "email", "name", "cellphone", "gender", "cpf", "address"})
+@JsonPropertyOrder(value = {"login", "email", "name", "cellphone", "password", "passwordconfirmation", "gender", "cpf", "address"})
 @NoArgsConstructor
 @SuperBuilder(toBuilder = true)
 @Getter
-public class PatientRegisterDTO extends UserRegisterDTO {
+public class PatientUpdateDTO extends UserUpdateDTO{
 
     @JsonProperty(value = "cpf")
-    @NotBlank
     private String cpf;
 
 }

@@ -33,8 +33,6 @@ public class SecretaryService {
 
     private final SecretaryRepository secretaryRepository;
 
-    private final PasswordEncoder encoder;
-
     private final SecretaryMapper mapper;
 
     private final LogRegistration logRegistration;
@@ -52,7 +50,7 @@ public class SecretaryService {
 
         saveSecretaryVerifications(registerData);
 
-        Secretary secretary = mapper.toSecretaryEntity(registerData, encoder);
+        Secretary secretary = mapper.toSecretaryEntity(registerData);
 
         SecretaryResponseDTO secretaryDTO = saveAndConvertToDTO(secretary);
 

@@ -11,7 +11,7 @@ import lombok.Getter;
 public class SecretaryResponseDTO extends UserResponseDTO {
 
     @JsonProperty(value = "registration")
-    private String registration;
+    private final String registration;
 
     public SecretaryResponseDTO(User user) {
         super(user);
