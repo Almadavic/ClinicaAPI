@@ -15,13 +15,9 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @Tag(name = "Secretárias", description = "Operações relacionadas á secretarias")
@@ -29,8 +25,14 @@ public interface SecretarySwagger {
 
     @Operation(summary = "Registra uma secretária no sistema.", security = {@SecurityRequirement(name = "bearer-key")})
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Usuário cadastrado com sucesso",
+            @ApiResponse(responseCode = "201", description = "Secretária cadastrada com sucesso",
                     content = {@Content(mediaType = "application/json", schema = @Schema(implementation = SecretaryResponseDTO.class))}),
+            @ApiResponse(responseCode = "400", description = "As senhas não são correspondentes. | " +
+                    "O enum referente a gênero  foi passado de forma incorreta. | " +
+                    "A senha foi passada sem a confirmação ou vice-versa. | Campos inválidos",
+                    content = {@Content(mediaType = "application/json", schema = @Schema(implementation = StandardError.class))}),
+            @ApiResponse(responseCode = "500", description = "O e-mail, login, celular, número de registro digitados já existem no sistema.",
+                    content = {@Content(mediaType = "application/json", schema = @Schema(implementation = StandardError.class))}),
     })
     ResponseEntity<SecretaryResponseDTO> save(SecretaryRegisterDTO secretaryDTO, User userLogged, UriComponentsBuilder uriBuilder);
 
@@ -51,7 +53,7 @@ public interface SecretarySwagger {
     })
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Secretárias encontradas com sucesso",
-                    content = {@Content(mediaType = "application/json",array = @ArraySchema(schema = @Schema(implementation = SecretaryResponseDTO.class)))}),
+                    content = {@Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = SecretaryResponseDTO.class)))}),
             @ApiResponse(responseCode = "400", description = "Valor incorreto para sort",
                     content = {@Content(mediaType = "application/json", schema = @Schema(implementation = StandardError.class))})
     })
@@ -81,7 +83,7 @@ public interface SecretarySwagger {
                     content = {@Content(mediaType = "application/json", schema = @Schema(implementation = SecretaryResponseDTO.class))}),
             @ApiResponse(responseCode = "400", description = "As senhas não são correspondentes. | " +
                     "O enum referente a gênero  foi passado de forma incorreta. | " +
-                    "A senha foi passada sem a confirmação ou vice-versa. | Nenhum valor preenchido",
+                    "A senha foi passada sem a confirmação ou vice-versa. | Nenhum valor preenchido | Campos inválidos",
                     content = {@Content(mediaType = "application/json", schema = @Schema(implementation = StandardError.class))}),
             @ApiResponse(responseCode = "404", description = "Secretária  não encontrada no banco de dados",
                     content = {@Content(mediaType = "application/json", schema = @Schema(implementation = StandardError.class))}),

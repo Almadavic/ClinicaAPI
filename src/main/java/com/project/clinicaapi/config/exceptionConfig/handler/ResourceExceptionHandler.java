@@ -84,7 +84,7 @@ public class ResourceExceptionHandler {
     }
 
     @ExceptionHandler(MissingServletRequestParameterException.class)
-    public ResponseEntity<StandardError>missingServletRequestParameterException(MissingServletRequestParameterException exception, HttpServletRequest request) {
+    public ResponseEntity<StandardError> missingServletRequestParameterException(MissingServletRequestParameterException exception, HttpServletRequest request) {
 
         HttpStatus status = HttpStatus.BAD_REQUEST;
 

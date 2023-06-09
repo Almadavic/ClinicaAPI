@@ -26,21 +26,21 @@ class DeleteUserTest extends ClassTestParent {
     private final String path = "/users";
 
     @Test
-    void deleteUserByIdSuccess() throws  Exception {
+    void deleteUserByIdSuccess() throws Exception {
 
-        mockMvc.perform(delete(path+"/{id}", returnUser())
-                        .header("Authorization", token("admin","123456")))
+        mockMvc.perform(delete(path + "/{id}", returnUser())
+                        .header("Authorization", token("admin", "123456")))
                 .andExpect(status().is(ok));
 
     }
 
     @Test
-    void deleteUserByIdNotFound() throws  Exception {
+    void deleteUserByIdNotFound() throws Exception {
 
         Long id = 90L;
 
-        mockMvc.perform(delete(path+"/{id}", id)
-                        .header("Authorization", token("admin","123456")))
+        mockMvc.perform(delete(path + "/{id}", id)
+                        .header("Authorization", token("admin", "123456")))
                 .andExpect(status().is(notFound))
                 .andExpect(result -> assertTrue(result.getResolvedException() instanceof ResourceNotFoundException))
                 .andExpect(result -> assertEquals("The user id: " + id + " wasn't found on database",

@@ -17,7 +17,7 @@ import java.util.List;
 @Table(name = "tb_patients")
 @Getter
 @Setter
-public class Patient extends User{
+public class Patient extends User {
 
     @Column(name = "cpf", length = 12, nullable = false, unique = true)
     private String cpf;
@@ -26,7 +26,7 @@ public class Patient extends User{
     private List<Appointment> appointments = new ArrayList<>();
 
     @Builder(builderMethodName = "patientBuilder")
-    public Patient(@NonNull String login , @NonNull String email, @NonNull String name, @NonNull String cellphone, String password, @NonNull Gender gender,
+    public Patient(@NonNull String login, @NonNull String email, @NonNull String name, @NonNull String cellphone, String password, @NonNull Gender gender,
                    @NonNull String country, @NonNull String state, @NonNull String city, @NonNull String cpf) {
         super(login, email, name, cellphone, password, gender, country, state, city);
         setRole(Role.PATIENT);

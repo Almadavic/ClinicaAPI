@@ -39,7 +39,7 @@ class AccessResourcesTest extends ClassTestParent {
     void accessInvalidResourceLogged() throws Exception {
 
         mockMvc.perform(delete("/INVALID")
-                        .header("Authorization", token("admin","123456")))
+                        .header("Authorization", token("admin", "123456")))
                 .andExpect(status().is(notFound));
 
     }
@@ -48,7 +48,7 @@ class AccessResourcesTest extends ClassTestParent {
     void accessMethodNotAllowedResourceLogged() throws Exception {
 
         mockMvc.perform(patch("/users")
-                        .header("Authorization", token("admin","123456")))
+                        .header("Authorization", token("admin", "123456")))
                 .andExpect(status().is(methodNotAllowed));
 
     }

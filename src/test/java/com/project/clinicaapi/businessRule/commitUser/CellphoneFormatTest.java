@@ -31,7 +31,7 @@ class CellphoneFormatTest {
 
     private void testingFail(String cellphone) {
         Assertions.assertThrows(InvalidCellphoneNumberException.class,
-                ()-> CommitUserValidations.cellphoneFormatValidation(cellphone));
+                () -> CommitUserValidations.cellphoneFormatValidation(cellphone));
     }
 
     private void testingSuccess(String cellphone) {

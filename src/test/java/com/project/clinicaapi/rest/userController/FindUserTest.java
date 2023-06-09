@@ -29,7 +29,7 @@ class FindUserTest extends ClassTestParent {
 
 
         mockMvc.perform(get(path)
-                .header("Authorization", token("admin", "123456")))
+                        .header("Authorization", token("admin", "123456")))
                 .andExpect(status().is(ok));
 
     }
@@ -39,8 +39,8 @@ class FindUserTest extends ClassTestParent {
 
         String id = "aspjaioasjs9aasjassaas9sa";
 
-        mockMvc.perform(get(path+"/{userid}", id)
-                .header("Authorization", token("admin", "123456")))
+        mockMvc.perform(get(path + "/{userid}", id)
+                        .header("Authorization", token("admin", "123456")))
                 .andExpect(status().is(notFound))
                 .andExpect(result -> assertTrue(result.getResolvedException() instanceof ResourceNotFoundException))
                 .andExpect(result -> assertEquals("The user id: " + id + " wasn't found on database", result.getResolvedException().getMessage()));
@@ -52,7 +52,7 @@ class FindUserTest extends ClassTestParent {
 
         User user = userRepository.findByLogin("admin").get();
 
-        mockMvc.perform(get(path+"/{userid}", user.getId())
+        mockMvc.perform(get(path + "/{userid}", user.getId())
                         .header("Authorization", token("admin", "123456")))
                 .andExpect(status().is(ok));
 

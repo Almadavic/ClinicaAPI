@@ -15,7 +15,7 @@ public class DateEndNotNullWhileDateStartNull extends LogFilterVerification {
     @Override
     public Page<Log> verification(LogFilterArgs args) {
 
-        if(args.dateEnd() != null && args.dateStart() == null) {
+        if (args.dateEnd() != null && args.dateStart() == null) {
             throw new ParameterMissingException("datestart");
         }
 

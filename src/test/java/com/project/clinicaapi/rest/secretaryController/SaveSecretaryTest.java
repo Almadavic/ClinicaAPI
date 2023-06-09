@@ -42,7 +42,7 @@ class SaveSecretaryTest extends ClassTestParent {
                 .build();
 
         mockMvc.perform(post(path)
-                        .header("Authorization", token("admin","123456"))
+                        .header("Authorization", token("admin", "123456"))
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(secretaryDTO)))
                 .andExpect(status().is(internalServerError))
@@ -72,7 +72,7 @@ class SaveSecretaryTest extends ClassTestParent {
                 .build();
 
         mockMvc.perform(post(path)
-                        .header("Authorization", token("admin","123456"))
+                        .header("Authorization", token("admin", "123456"))
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(secretaryDTO)))
                 .andExpect(status().is(created));

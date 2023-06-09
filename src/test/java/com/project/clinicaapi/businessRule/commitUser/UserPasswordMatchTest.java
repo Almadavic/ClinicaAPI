@@ -15,14 +15,14 @@ class UserPasswordMatchTest {
     void passwordDoesNotMatch() {
 
         Assertions.assertThrows(PasswordDoesntMatchException.class,
-                () ->  CommitUserValidations.passwordMatch("123456", "1234567"));
+                () -> CommitUserValidations.passwordMatch("123456", "1234567"));
 
     }
 
     @Test
     void passwordMatch() {
 
-        Assertions.assertDoesNotThrow(() ->  CommitUserValidations.passwordMatch("123456", "123456"));
+        Assertions.assertDoesNotThrow(() -> CommitUserValidations.passwordMatch("123456", "123456"));
 
     }
 

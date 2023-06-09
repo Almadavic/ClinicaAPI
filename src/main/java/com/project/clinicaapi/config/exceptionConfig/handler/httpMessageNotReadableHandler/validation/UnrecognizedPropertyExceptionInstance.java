@@ -17,11 +17,11 @@ public class UnrecognizedPropertyExceptionInstance extends FindExceptionInstance
 
         if (args.rootCause() instanceof UnrecognizedPropertyException) {
 
-            String [] splitError = args.exception().getMessage().split(" ");
+            String[] splitError = args.exception().getMessage().split(" ");
 
             return ResponseEntity.status(status).body(new StandardError(
                     status.value(),
-                    "Field not recognized: "+splitError[5].replace("\"", ""),
+                    "Field not recognized: " + splitError[5].replace("\"", ""),
                     "Name (key) of invalid fields are not accepted",
                     args.request().getRequestURI()));
         }

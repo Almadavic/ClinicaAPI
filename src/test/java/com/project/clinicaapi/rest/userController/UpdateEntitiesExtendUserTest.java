@@ -42,7 +42,7 @@ class UpdateEntitiesExtendUserTest extends ClassTestParent {
                 .build();
 
         mockMvc.perform(patch(path + "/" + returnUser().getId())
-                        .header("Authorization", token("admin","123456"))
+                        .header("Authorization", token("admin", "123456"))
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(secretaryDTO)))
                 .andExpect(status().is(internalServerError))
@@ -62,7 +62,7 @@ class UpdateEntitiesExtendUserTest extends ClassTestParent {
                 .build();
 
         mockMvc.perform(patch(path + "/" + returnUser().getId())
-                        .header("Authorization", token("admin","123456"))
+                        .header("Authorization", token("admin", "123456"))
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(secretaryDTO)))
                 .andExpect(status().is(internalServerError))
@@ -82,7 +82,7 @@ class UpdateEntitiesExtendUserTest extends ClassTestParent {
                 .build();
 
         mockMvc.perform(patch(path + "/" + returnUser().getId())
-                        .header("Authorization", token("admin","123456"))
+                        .header("Authorization", token("admin", "123456"))
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(secretaryDTO)))
                 .andExpect(status().is(badRequest))
@@ -104,7 +104,7 @@ class UpdateEntitiesExtendUserTest extends ClassTestParent {
 
 
         mockMvc.perform(patch(path + "/" + returnUser().getId())
-                        .header("Authorization", token("admin","123456"))
+                        .header("Authorization", token("admin", "123456"))
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(secretaryDTO)))
                 .andExpect(status().is(badRequest))
@@ -124,7 +124,7 @@ class UpdateEntitiesExtendUserTest extends ClassTestParent {
                 .build();
 
         mockMvc.perform(patch(path + "/" + returnUser().getId())
-                        .header("Authorization", token("admin","123456"))
+                        .header("Authorization", token("admin", "123456"))
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(secretaryDTO)))
                 .andExpect(status().is(badRequest))
@@ -144,7 +144,7 @@ class UpdateEntitiesExtendUserTest extends ClassTestParent {
                 .build();
 
         mockMvc.perform(patch(path + "/" + returnUser().getId())
-                        .header("Authorization", token("admin","123456"))
+                        .header("Authorization", token("admin", "123456"))
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(secretaryDTO)))
                 .andExpect(status().is(badRequest))

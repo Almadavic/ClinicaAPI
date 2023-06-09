@@ -1,8 +1,6 @@
 package com.project.clinicaapi.service.businessRule.commitUser.updateUser.validation;
 
 import com.project.clinicaapi.service.businessRule.commitUser.CommitUserValidations;
-import com.project.clinicaapi.service.businessRule.commitUser.registerUser.RegisterUserArgs;
-import com.project.clinicaapi.service.businessRule.commitUser.registerUser.RegisterUserVerification;
 import com.project.clinicaapi.service.businessRule.commitUser.updateUser.UpdateUserArgs;
 import com.project.clinicaapi.service.businessRule.commitUser.updateUser.UpdateUserVerification;
 import org.springframework.core.annotation.Order;
@@ -17,7 +15,7 @@ public class GenderValidationUpdate implements UpdateUserVerification {
 
         String gender = args.userDTO().getGender();
 
-        if(gender != null) {
+        if (gender != null) {
             CommitUserValidations.genderValueValidation(gender);
         }
 

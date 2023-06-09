@@ -24,10 +24,10 @@ public interface LogRepository extends JpaRepository<Log, Long> {
                                        @Param(value = "user") String user, Pageable pageable);
 
     @Query(value = "SELECT * FROM tb_logs l where l.event_time BETWEEN :datestart AND :dateend", nativeQuery = true)
-    Page<Log> findPageBetweenInterval(@Param(value = "datestart") LocalDateTime dateStart, @Param(value = "dateend")LocalDateTime dateEnd, Pageable pageable);
+    Page<Log> findPageBetweenInterval(@Param(value = "datestart") LocalDateTime dateStart, @Param(value = "dateend") LocalDateTime dateEnd, Pageable pageable);
 
-    @Query(value = "SELECT * FROM tb_logs l where l.event_time BETWEEN :datestart AND :dateend AND l.user_name = :user" , nativeQuery = true)
+    @Query(value = "SELECT * FROM tb_logs l where l.event_time BETWEEN :datestart AND :dateend AND l.user_name = :user", nativeQuery = true)
     Page<Log> findPageBetweenIntervalAndUser(@Param(value = "datestart") LocalDateTime dateStart, @Param(value = "dateend") LocalDateTime dateEnd,
-                                             @Param(value = "user")String user, Pageable pageable);
+                                             @Param(value = "user") String user, Pageable pageable);
 
 }

@@ -16,8 +16,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.PathVariable;
 
 @Tag(name = "Usuários", description = "Operações relacionadas á usuários")
 public interface UserSwagger {
@@ -39,7 +37,7 @@ public interface UserSwagger {
     })
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Usuários encontradas com sucesso",
-                    content = {@Content(mediaType = "application/json",array = @ArraySchema(schema = @Schema(implementation = UserResponseDTO.class)))}),
+                    content = {@Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = UserResponseDTO.class)))}),
             @ApiResponse(responseCode = "400", description = "Valor incorreto para sort",
                     content = {@Content(mediaType = "application/json", schema = @Schema(implementation = StandardError.class))})
     })
@@ -57,7 +55,7 @@ public interface UserSwagger {
     @Operation(summary = "Deleta um usuário por id.", security = {@SecurityRequirement(name = "bearer-key")})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Usuário deletado com sucesso",
-                    content = {@Content(mediaType = "application/json",array = @ArraySchema(schema = @Schema(implementation = String.class)))}),
+                    content = {@Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = String.class)))}),
             @ApiResponse(responseCode = "404", description = "Usuário não encontrado",
                     content = {@Content(mediaType = "application/json", schema = @Schema(implementation = StandardError.class))})
     })

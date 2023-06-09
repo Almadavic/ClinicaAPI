@@ -18,6 +18,8 @@ import com.project.clinicaapi.service.customException.ResourceNotFoundException;
 import com.project.clinicaapi.util.LogRegistration;
 import com.project.clinicaapi.util.mapper.SecretaryMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -45,6 +47,7 @@ public class SecretaryService {
 
     private final List<UpdateSecretaryVerification> updateSecretaryVerifications;
 
+    @CacheEvict(value = {"secretariesPage", "usersPage"}, allEntries = true)
     public SecretaryResponseDTO save(SecretaryRegisterDTO registerData, User userLogged) {
 
         saveSecretaryVerifications(registerData);
@@ -53,11 +56,12 @@ public class SecretaryService {
 
         SecretaryResponseDTO secretaryDTO = saveAndConvertToDTO(secretary);
 
-        logRegistration.saveLog(userLogged.getUsername(), "registered the secretary: "+ secretary.getUsername());
+        logRegistration.saveLog(userLogged.getUsername(), "registered the secretary: " + secretary.getUsername());
 
         return secretaryDTO;
     }
 
+    @Cacheable(value = "secretariesPage")
     public Page<SecretaryResponseDTO> findPage(Pageable pageable) {
         return mapper.toSecretaryDTOPage(secretaryRepository.findAll(pageable));
     }
@@ -68,10 +72,11 @@ public class SecretaryService {
 
     public SecretaryResponseDTO findByRegistration(String registration) {
         return mapper.toSecretaryDTO(
-        secretaryRepository.findByRegistration(registration)
-                .orElseThrow(() -> new ResourceNotFoundException("The secretary registration: " +registration + " wasn't found on database")));
+                secretaryRepository.findByRegistration(registration)
+                        .orElseThrow(() -> new ResourceNotFoundException("The secretary registration: " + registration + " wasn't found on database")));
     }
 
+    @CacheEvict(value = {"secretariesPage", "usersPage"}, allEntries = true)
     public SecretaryResponseDTO update(String secretaryId, SecretaryUpdateDTO updateData, User userLogged) {
 
         Secretary secretary = returnSecretaryDataBase(secretaryId);
@@ -80,7 +85,7 @@ public class SecretaryService {
 
         SecretaryResponseDTO secretaryDTO = saveAndConvertToDTO(secretary);
 
-        logRegistration.saveLog(userLogged.getUsername(), "updated the secretary: "+ secretary.getUsername());
+        logRegistration.saveLog(userLogged.getUsername(), "updated the secretary: " + secretary.getUsername());
 
         return secretaryDTO;
     }

@@ -19,7 +19,7 @@ public class UnauthorizedHandler extends AuthorizationAuthenticationHandler impl
 
             status = HttpStatus.UNAUTHORIZED.value();
             error = "Not authenticated";
-            messageError = exception !=null ? exception.toString().split(":")[1] : "In order to access that resource, you have to be logged in the system";
+            messageError = exception != null ? exception.toString().split(":")[1] : "In order to access that resource, you have to be logged in the system";
 
             responseClient(request, response, status, error, messageError);
 

@@ -16,18 +16,18 @@ public class JsonParseExceptionInstance extends FindExceptionInstance {
     @Override
     public ResponseEntity<StandardError> verification(FindExceptionInstanceArgs args) {
 
-            Throwable rootCause = args.rootCause();
+        Throwable rootCause = args.rootCause();
 
-            if (rootCause instanceof JsonParseException) {
+        if (rootCause instanceof JsonParseException) {
 
-                return ResponseEntity.status(status).body(new StandardError(
-                        status.value(),
-                        "JSON error",
-                        "Verify the JSON format",
-                        args.request().getRequestURI()));
-            }
+            return ResponseEntity.status(status).body(new StandardError(
+                    status.value(),
+                    "JSON error",
+                    "Verify the JSON format",
+                    args.request().getRequestURI()));
+        }
 
-            return nextOne.verification(args);
+        return nextOne.verification(args);
 
     }
 

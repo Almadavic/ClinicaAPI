@@ -7,6 +7,8 @@ import com.project.clinicaapi.service.customException.ResourceNotFoundException;
 import com.project.clinicaapi.util.LogRegistration;
 import com.project.clinicaapi.util.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -30,6 +32,7 @@ public class UserService implements UserDetailsService {
                 .orElseThrow(() -> new RuntimeException("User not found with the login : " + username));
     }
 
+    @Cacheable(value = "usersPage")
     public Page<UserResponseDTO> findPage(Pageable pageable) {
         return mapper.toUserDTOPage(userRepository.findAll(pageable));
     }
@@ -38,10 +41,11 @@ public class UserService implements UserDetailsService {
         return mapper.toUserDTO(returnUserDataBase(userId));
     }
 
+    @CacheEvict(value = {"usersPage", "secretariesPage"}, allEntries = true)
     public void delete(String id, User userLogged) {
         User user = returnUserDataBase(id);
         userRepository.delete(user);
-        logRegistration.saveLog(userLogged.getUsername(), "deleted the secretary: "+ user.getUsername());
+        logRegistration.saveLog(userLogged.getUsername(), "deleted the secretary: " + user.getUsername());
     }
 
     private User returnUserDataBase(String userId) {

@@ -31,7 +31,7 @@ class EmailFormatTest {
 
     private void testingFail(String email) {
         Assertions.assertThrows(InvalidEmailFormatException.class,
-                ()-> CommitUserValidations.emailFormatValidation(email));
+                () -> CommitUserValidations.emailFormatValidation(email));
     }
 
     private void testingSuccess(String email) {

@@ -36,7 +36,7 @@ public class TokenService {
             return JWT.create()
                     .withIssuer("Clinica API")
                     .withSubject(userDTO.getId())
-                    .withClaim("login", userDTO.getEmail())
+                    .withClaim("login", userDTO.getLogin())
                     .withClaim("role", userDTO.getRole())
                     .withIssuedAt(Instant.now())
                     .withExpiresAt(expirationInstant())
@@ -64,8 +64,8 @@ public class TokenService {
 
     }
 
-    private Algorithm secretAlgorithm () {
-        return  Algorithm.HMAC256(secret);
+    private Algorithm secretAlgorithm() {
+        return Algorithm.HMAC256(secret);
     }
 
 }

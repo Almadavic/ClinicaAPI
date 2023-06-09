@@ -8,7 +8,7 @@ public class InvalidCellphoneNumberException extends RuntimeException {
     private static final long serialVersionUID = 1L;
 
     public InvalidCellphoneNumberException(String celular) {
-       super("Cellphone number entered contains an invalid format: " + celular + ", Correct format: (XX)9XXXX-XXXX");
+        super("Cellphone number entered contains an invalid format: " + celular + ", Correct format: (XX)9XXXX-XXXX");
     }
 
 }

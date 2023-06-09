@@ -1,7 +1,6 @@
 package com.project.clinicaapi.service.businessRule.LogFilter.validation;
 
 
-
 import com.project.clinicaapi.entity.Log;
 import com.project.clinicaapi.service.businessRule.LogFilter.LogFilterArgs;
 import com.project.clinicaapi.service.businessRule.LogFilter.LogFilterVerification;

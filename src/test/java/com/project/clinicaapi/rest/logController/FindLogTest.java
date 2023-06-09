@@ -49,7 +49,7 @@ class FindLogTest extends ClassTestParent {
     void findPageLogsNoParameter() throws Exception {
 
         mockMvc.perform(get(path)
-                        .header("Authorization", token("admin","123456")))
+                        .header("Authorization", token("admin", "123456")))
                 .andExpect(status().is(ok));
 
     }

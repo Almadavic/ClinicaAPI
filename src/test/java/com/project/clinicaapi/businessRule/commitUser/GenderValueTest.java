@@ -33,7 +33,7 @@ class GenderValueTest {
     }
 
     private void testingSuccess(String value) {
-        Assertions.assertDoesNotThrow(()-> CommitUserValidations.genderValueValidation(value));
+        Assertions.assertDoesNotThrow(() -> CommitUserValidations.genderValueValidation(value));
     }
 
 }

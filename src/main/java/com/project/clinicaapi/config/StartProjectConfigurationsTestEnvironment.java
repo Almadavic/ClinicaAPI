@@ -140,7 +140,6 @@ public class StartProjectConfigurationsTestEnvironment implements CommandLineRun
 
         userRepository.saveAll(Arrays.asList(dentist, patient, secretary, secretary2, u1, u2, u3));
 
-
         WorkDay wd1 = new WorkDay(WorkDayEnum.MONDAY);
         WorkDay wd2 = new WorkDay(WorkDayEnum.TUESDAY);
         WorkDay wd3 = new WorkDay(WorkDayEnum.WEDNESDAY);
@@ -155,7 +154,7 @@ public class StartProjectConfigurationsTestEnvironment implements CommandLineRun
         dentist.addWorkDay(wd2);
         dentist.addWorkDay(wd3);
 
-       dentist = userRepository.save(dentist);
+        dentist = userRepository.save(dentist);
 
 
         Appointment appointment = Appointment.builder()

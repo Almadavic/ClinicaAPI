@@ -2,7 +2,7 @@ package com.project.clinicaapi.service.customException;
 
 import java.io.Serial;
 
-public class InvalidDateFormatException extends RuntimeException{
+public class InvalidDateFormatException extends RuntimeException {
 
     @Serial
     private static final long serialVersionUID = 1L;
@@ -12,7 +12,7 @@ public class InvalidDateFormatException extends RuntimeException{
     }
 
     public InvalidDateFormatException(String dateField) {
-        super("The field "+ dateField+" has a wrong format, Valid date format: yyyy-mm-dd");
+        super("The field " + dateField + " has a wrong format, Valid date format: yyyy-mm-dd");
     }
 
 }

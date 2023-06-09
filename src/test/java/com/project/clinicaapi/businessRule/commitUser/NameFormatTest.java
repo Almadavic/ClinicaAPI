@@ -15,7 +15,7 @@ class NameFormatTest {
     void nameInvalidFormat() {
 
         Assertions.assertThrows(InvalidNameFormatException.class,
-                ()-> CommitUserValidations.nameFormatValidation("Victor! 19"));
+                () -> CommitUserValidations.nameFormatValidation("Victor! 19"));
 
     }
 

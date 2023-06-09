@@ -54,7 +54,7 @@ class findLogPageTest {
 
         String timeEnd = "09/12/2023";
 
-        Page<LogResponseDTO> logsDTO = logService.findPage(returnPageable(), null,  timeStart, timeEnd);
+        Page<LogResponseDTO> logsDTO = logService.findPage(returnPageable(), null, timeStart, timeEnd);
 
         Assertions.assertTrue(matchInterval(logsDTO, timeStart, timeEnd));
 
@@ -137,7 +137,7 @@ class findLogPageTest {
 
     private boolean matchUserAndInterval(Page<LogResponseDTO> logsDTO, String user, String tempoInicio, String tempoFim) {
 
-        return matchUser(logsDTO, user) && matchInterval(logsDTO, tempoInicio, tempoFim) ;
+        return matchUser(logsDTO, user) && matchInterval(logsDTO, tempoInicio, tempoFim);
     }
 
     private Pageable returnPageable() {

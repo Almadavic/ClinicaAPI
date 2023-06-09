@@ -7,5 +7,5 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder(toBuilder = true)
 @NoArgsConstructor
 @Getter
-public class PatientRegisterDTO extends UserRegisterDTO{
+public class PatientRegisterDTO extends UserRegisterDTO {
 }

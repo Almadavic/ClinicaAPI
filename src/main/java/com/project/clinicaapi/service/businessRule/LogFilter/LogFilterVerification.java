@@ -20,7 +20,7 @@ public abstract class LogFilterVerification {
     public abstract Page<Log> verification(LogFilterArgs args);
 
     protected LocalDateTime converToLocalDateTime(String date, LocalTime localTime) {
-        return  LocalDateTime.of(convertToLocalDate(date), localTime);
+        return LocalDateTime.of(convertToLocalDate(date), localTime);
     }
 
     private LocalDate convertToLocalDate(String date) {
@@ -33,7 +33,7 @@ public abstract class LogFilterVerification {
 
     protected void dateOrder(LocalDateTime dateStart, LocalDateTime dateEnd, String dateStartString, String dateEndString) {
 
-        if(dateStart.isAfter(dateEnd)) {
+        if (dateStart.isAfter(dateEnd)) {
             throw new DateOrderException("The property 'datestart' value '" + dateStartString + "' " +
                     "cannot be after the 'dateend' value '" + dateEndString + "'");
         }

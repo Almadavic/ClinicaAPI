@@ -36,7 +36,7 @@ public interface LogSwagger {
     })
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Logs encontradas com sucesso",
-                    content = {@Content(mediaType = "application/json",array = @ArraySchema(schema = @Schema(implementation = LogResponseDTO.class)))}),
+                    content = {@Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = LogResponseDTO.class)))}),
             @ApiResponse(responseCode = "400", description = "Valor incorreto para sort || Formato de data inválido",
                     content = {@Content(mediaType = "application/json", schema = @Schema(implementation = StandardError.class))})
     })

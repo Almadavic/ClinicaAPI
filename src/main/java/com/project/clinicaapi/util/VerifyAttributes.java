@@ -20,7 +20,7 @@ public class VerifyAttributes {
 
         boolean allNull = true;
 
-        for(Object attribute : attributes) {
+        for (Object attribute : attributes) {
             if (attribute != null) {
                 allNull = false;
                 break;

@@ -11,7 +11,7 @@ public class ConvertingType {
 
     public static LocalDate toLocalDateBrazilFormat(String date) {
 
-        if(date!=null) {
+        if (date != null) {
             return LocalDate.parse(date,
                     DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         }

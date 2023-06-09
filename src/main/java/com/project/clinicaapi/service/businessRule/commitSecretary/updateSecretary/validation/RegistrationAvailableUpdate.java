@@ -20,7 +20,7 @@ public class RegistrationAvailableUpdate implements UpdateSecretaryVerification 
 
         String registration = args.secretaryDTO().getRegistration();
 
-        if(registration != null) {
+        if (registration != null) {
             CommitSecretaryValidations.findSecretaryByRegistrationValidation(secretaryRepository, registration);
         }
 

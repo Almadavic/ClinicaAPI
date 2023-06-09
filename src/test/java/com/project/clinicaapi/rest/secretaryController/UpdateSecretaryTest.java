@@ -37,7 +37,7 @@ class UpdateSecretaryTest extends ClassTestParent {
                 .build();
 
         mockMvc.perform(patch(path + "/" + returnSecretaryId())
-                        .header("Authorization", token("admin","123456"))
+                        .header("Authorization", token("admin", "123456"))
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(secretaryDTO)))
                 .andExpect(status().is(internalServerError))
@@ -54,7 +54,7 @@ class UpdateSecretaryTest extends ClassTestParent {
                 .build();
 
         mockMvc.perform(patch(path + "/" + returnSecretaryId())
-                        .header("Authorization", token("admin","123456"))
+                        .header("Authorization", token("admin", "123456"))
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(secretaryDTO)))
                 .andExpect(status().is(badRequest))
@@ -72,7 +72,7 @@ class UpdateSecretaryTest extends ClassTestParent {
                 .build();
 
         mockMvc.perform(patch(path + "/" + returnSecretaryId())
-                        .header("Authorization", token("admin","123456"))
+                        .header("Authorization", token("admin", "123456"))
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(secretaryDTO)))
                 .andExpect(status().is(badRequest))
@@ -91,7 +91,7 @@ class UpdateSecretaryTest extends ClassTestParent {
 
 
         mockMvc.perform(patch(path + "/" + returnSecretaryId())
-                        .header("Authorization", token("admin","123456"))
+                        .header("Authorization", token("admin", "123456"))
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(secretaryDTO)))
                 .andExpect(status().is(ok));
@@ -107,7 +107,7 @@ class UpdateSecretaryTest extends ClassTestParent {
                 .build();
 
         mockMvc.perform(patch(path + "/" + returnSecretaryId())
-                        .header("Authorization", token("admin","123456"))
+                        .header("Authorization", token("admin", "123456"))
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(secretaryDTO)))
                 .andExpect(status().is(ok));
@@ -122,7 +122,7 @@ class UpdateSecretaryTest extends ClassTestParent {
                 .build();
 
         mockMvc.perform(patch(path + "/" + returnSecretaryId())
-                        .header("Authorization", token("admin","123456"))
+                        .header("Authorization", token("admin", "123456"))
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(secretaryDTO)))
                 .andExpect(status().is(ok));

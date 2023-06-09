@@ -31,7 +31,7 @@ class FindSecretaryTest extends ClassTestParent {
     void findPageSecretaries() throws Exception {
 
         mockMvc.perform(get(path)
-                .header("Authorization", token("admin", "123456")))
+                        .header("Authorization", token("admin", "123456")))
                 .andExpect(status().is(ok));
 
     }
@@ -41,8 +41,8 @@ class FindSecretaryTest extends ClassTestParent {
 
         String id = "aspjaioasjs9aasjassaas9sa";
 
-        mockMvc.perform(get(path+"/{userid}", id)
-                .header("Authorization", token("admin", "123456")))
+        mockMvc.perform(get(path + "/{userid}", id)
+                        .header("Authorization", token("admin", "123456")))
                 .andExpect(status().is(notFound))
                 .andExpect(result -> assertTrue(result.getResolvedException() instanceof ResourceNotFoundException))
                 .andExpect(result -> assertEquals("The secretary id: " + id + " wasn't found on database", result.getResolvedException().getMessage()));
@@ -54,7 +54,7 @@ class FindSecretaryTest extends ClassTestParent {
 
         Secretary secretary = (Secretary) userRepository.findByLogin("secretary").get();
 
-        mockMvc.perform(get(path+"/{userid}", secretary.getId())
+        mockMvc.perform(get(path + "/{userid}", secretary.getId())
                         .header("Authorization", token("admin", "123456")))
                 .andExpect(status().is(ok));
 
@@ -65,7 +65,7 @@ class FindSecretaryTest extends ClassTestParent {
 
         String registration = "1393178asias";
 
-        mockMvc.perform(get(path+"/registration/{registration}", registration)
+        mockMvc.perform(get(path + "/registration/{registration}", registration)
                         .header("Authorization", token("admin", "123456")))
                 .andExpect(status().is(notFound))
                 .andExpect(result -> assertTrue(result.getResolvedException() instanceof ResourceNotFoundException))
@@ -77,7 +77,7 @@ class FindSecretaryTest extends ClassTestParent {
     @Test
     void findSecretaryByRegistrationSuccess() throws Exception {
 
-        mockMvc.perform(get(path+"/registration/{registration}", "1156139862302")
+        mockMvc.perform(get(path + "/registration/{registration}", "1156139862302")
                         .header("Authorization", token("admin", "123456")))
                 .andExpect(status().is(ok));
 

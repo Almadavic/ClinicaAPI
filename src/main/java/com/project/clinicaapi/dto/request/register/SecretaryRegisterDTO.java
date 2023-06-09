@@ -11,7 +11,7 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @SuperBuilder(toBuilder = true)
 @Getter
-public class SecretaryRegisterDTO extends UserRegisterDTO{
+public class SecretaryRegisterDTO extends UserRegisterDTO {
 
     @JsonProperty(value = "registration")
     @NotBlank

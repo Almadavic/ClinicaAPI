@@ -41,7 +41,7 @@ class SaveSecretaryServiceTest {
                 .gender("MALE")
                 .build();
 
-       SecretaryResponseDTO secretaryResponseDTO =  secretaryService.save(secretaryDTO, returnUser());
+        SecretaryResponseDTO secretaryResponseDTO = secretaryService.save(secretaryDTO, returnUser());
 
         Secretary secretary = findSecretaryByLogin(secretaryResponseDTO.getLogin());
 
@@ -51,23 +51,23 @@ class SaveSecretaryServiceTest {
     }
 
     @Test
-    void PasswordEntered() {
+    void passwordEntered() {
 
         String password = "12345678";
 
         SecretaryRegisterDTO secretaryDTO = SecretaryRegisterDTO.builder()
                 .login("newlogin")
                 .address(new AddessRegisterDTO("country", "state", "city"))
-                .email("newemail@hotmail.com")
+                .email("newemaill@hotmail.com")
                 .name("name nome")
                 .password(password)
                 .passwordConfirmation(password)
-                .cellphone("(61)98589-7284")
-                .registration("91237198-A")
+                .cellphone("(61)98589-7289")
+                .registration("91237198-Z")
                 .gender("MALE")
                 .build();
 
-        SecretaryResponseDTO secretaryResponseDTO =  secretaryService.save(secretaryDTO, returnUser());
+        SecretaryResponseDTO secretaryResponseDTO = secretaryService.save(secretaryDTO, returnUser());
 
         Secretary secretary = findSecretaryByLogin(secretaryResponseDTO.getLogin());
 

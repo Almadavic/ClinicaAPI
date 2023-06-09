@@ -2,7 +2,6 @@ package com.project.clinicaapi.service.serviceAction;
 
 import com.project.clinicaapi.config.securityConfig.LoginData;
 import com.project.clinicaapi.config.securityConfig.Token;
-import com.project.clinicaapi.entity.User;
 import com.project.clinicaapi.repository.UserRepository;
 import com.project.clinicaapi.service.customException.DatabaseException;
 import com.project.clinicaapi.util.LogRegistration;
@@ -34,7 +33,7 @@ public class AuthenticationService {
 
             logRegistration.saveLog(returnTokenUserName(token), "authenticated in the system");
 
-            return new Token( token , "Bearer");
+            return new Token(token, "Bearer");
 
         } catch (AuthenticationException e) {
             throw new DatabaseException("Login and / or password is / are wrong | or your account is disabled");

@@ -8,7 +8,7 @@ import lombok.Getter;
 
 @Getter
 @JsonPropertyOrder(value = {"id", "login", "email", "name", "cellphone", "enabled", "gender", "registration", "role", "address"})
-public class SecretaryResponseDTO extends UserResponseDTO{
+public class SecretaryResponseDTO extends UserResponseDTO {
 
     @JsonProperty(value = "registration")
     private String registration;

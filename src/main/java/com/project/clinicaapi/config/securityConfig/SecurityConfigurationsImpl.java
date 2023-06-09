@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -61,8 +62,19 @@ public class SecurityConfigurationsImpl implements SecurityConfigurations {
                 .requestMatchers("/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**").permitAll()
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")).permitAll()
 
+                .requestMatchers("/auth").permitAll()
 
-                .anyRequest().permitAll() // POR ENQUANTO
+                .requestMatchers("/logs/**").hasRole("ADMINISTRATOR")
+
+                .requestMatchers("/user/**").hasRole("ADMINISTRATOR")
+
+                .requestMatchers(HttpMethod.GET, "/secretaries").hasRole("ADMINISTRATOR")
+                .requestMatchers(HttpMethod.POST, "/secretaries").hasRole("ADMINISTRATOR")
+                .requestMatchers(HttpMethod.PATCH, "/secretaries").hasAnyRole("ADMINISTRATOR", "SECRETARY")
+
+
+
+                .anyRequest().authenticated() // POR ENQUANTO
                 .and().cors()
                 .and().headers().frameOptions().disable()
                 .and().csrf().disable()

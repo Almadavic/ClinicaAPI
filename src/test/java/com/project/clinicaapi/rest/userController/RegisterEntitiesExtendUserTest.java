@@ -41,7 +41,7 @@ class RegisterEntitiesExtendUserTest extends ClassTestParent {
                 .build();
 
         mockMvc.perform(post(path)
-                        .header("Authorization", token("admin","123456"))
+                        .header("Authorization", token("admin", "123456"))
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(secretaryDTO)))
                 .andExpect(status().is(internalServerError))
@@ -67,7 +67,7 @@ class RegisterEntitiesExtendUserTest extends ClassTestParent {
                 .build();
 
         mockMvc.perform(post(path)
-                        .header("Authorization", token("admin","123456"))
+                        .header("Authorization", token("admin", "123456"))
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(secretaryDTO)))
                 .andExpect(status().is(internalServerError))
@@ -83,17 +83,17 @@ class RegisterEntitiesExtendUserTest extends ClassTestParent {
         String gender = "maleee";
 
         SecretaryRegisterDTO secretaryDTO = SecretaryRegisterDTO.builder()
-                .login("novologin")
+                .login("novologinn")
                 .address(new AddessRegisterDTO("country", "state", "city"))
-                .email("newemail@hotmail.com")
+                .email("newema@hotmail.com")
                 .name("name nome")
-                .cellphone("(61)98589-7284")
-                .registration("1937819371891")
+                .cellphone("(61)98589-7282")
+                .registration("193781937189A")
                 .gender(gender)
                 .build();
 
         mockMvc.perform(post(path)
-                        .header("Authorization", token("admin","123456"))
+                        .header("Authorization", token("admin", "123456"))
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(secretaryDTO)))
                 .andExpect(status().is(badRequest))
@@ -110,18 +110,18 @@ class RegisterEntitiesExtendUserTest extends ClassTestParent {
         String cellphone = "31924701495aaff";
 
         SecretaryRegisterDTO secretaryDTO = SecretaryRegisterDTO.builder()
-                .login("novologin")
+                .login("login1234")
                 .address(new AddessRegisterDTO("country", "state", "city"))
-                .email("newemail@hotmail.com")
+                .email("emailnovosergio@hotmail.com")
                 .name("name nome")
                 .cellphone(cellphone)
-                .registration("1937819371891")
+                .registration("193781B4N")
                 .gender("male")
                 .build();
 
 
         mockMvc.perform(post(path)
-                        .header("Authorization", token("admin","123456"))
+                        .header("Authorization", token("admin", "123456"))
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(secretaryDTO)))
                 .andExpect(status().is(badRequest))
@@ -137,18 +137,18 @@ class RegisterEntitiesExtendUserTest extends ClassTestParent {
         String name = "123 Victor!";
 
         SecretaryRegisterDTO secretaryDTO = SecretaryRegisterDTO.builder()
-                .login("novologin")
+                .login("Larissa Oliveira")
                 .address(new AddessRegisterDTO("country", "state", "city"))
-                .email("newemail@hotmail.com")
+                .email("larissaoliveira@hotmail.com")
                 .name(name)
-                .cellphone("(61)98589-7284")
-                .registration("1937819371891")
+                .cellphone("(61)98589-7984")
+                .registration("1937b0419")
                 .gender("male")
                 .build();
 
 
         mockMvc.perform(post(path)
-                        .header("Authorization", token("admin","123456"))
+                        .header("Authorization", token("admin", "123456"))
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(secretaryDTO)))
                 .andExpect(status().is(badRequest))
@@ -174,7 +174,7 @@ class RegisterEntitiesExtendUserTest extends ClassTestParent {
                 .build();
 
         mockMvc.perform(post(path)
-                        .header("Authorization", token("admin","123456"))
+                        .header("Authorization", token("admin", "123456"))
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(secretaryDTO)))
                 .andExpect(status().is(badRequest))

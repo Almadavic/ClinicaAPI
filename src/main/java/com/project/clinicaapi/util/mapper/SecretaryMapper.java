@@ -15,7 +15,7 @@ public class SecretaryMapper {
 
         String password = "123456";
 
-        if(secretaryDTO.getPassword() != null) {
+        if (secretaryDTO.getPassword() != null) {
             password = secretaryDTO.getPassword();
         }
 

@@ -12,7 +12,7 @@ import lombok.*;
 @Table(name = "tb_secreataries")
 @Getter
 @Setter
-public class Secretary extends User{
+public class Secretary extends User {
 
     @Column(name = "registration", nullable = false, unique = true)
     private String registration;

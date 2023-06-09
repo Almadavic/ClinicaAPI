@@ -1,5 +1,6 @@
 package com.project.clinicaapi.filter;
 
+import com.project.clinicaapi.entity.Secretary;
 import com.project.clinicaapi.entity.User;
 import com.project.clinicaapi.repository.UserRepository;
 import com.project.clinicaapi.service.customException.JWTException;

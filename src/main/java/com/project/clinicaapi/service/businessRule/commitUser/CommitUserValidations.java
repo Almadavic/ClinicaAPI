@@ -102,7 +102,7 @@ public class CommitUserValidations {
 
     public static void passwordMatch(String password, String passwordConfirmation) {
 
-        if(password !=null && (!password.equals(passwordConfirmation))) {
+        if (password != null && (!password.equals(passwordConfirmation))) {
             throw new PasswordDoesntMatchException();
         }
 
@@ -110,7 +110,7 @@ public class CommitUserValidations {
 
     public static void genderValueValidation(String gender) {
 
-        try{
+        try {
             Gender.valueOf(gender.toUpperCase());
         } catch (IllegalArgumentException exception) {
             throw new InvalidEnumValueException(gender, "Gender", ListEnumValues.returnEnumValues(Arrays.asList(Gender.values())));

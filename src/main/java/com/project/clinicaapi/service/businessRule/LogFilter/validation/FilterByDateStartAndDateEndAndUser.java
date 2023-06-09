@@ -1,7 +1,5 @@
 package com.project.clinicaapi.service.businessRule.LogFilter.validation;
 
-
-
 import com.project.clinicaapi.entity.Log;
 import com.project.clinicaapi.service.businessRule.LogFilter.LogFilterArgs;
 import com.project.clinicaapi.service.businessRule.LogFilter.LogFilterVerification;
@@ -33,7 +31,7 @@ public class FilterByDateStartAndDateEndAndUser extends LogFilterVerification {
 
             dateOrder(localDateTimeStart, localDateTimeEnd, dateStart, dateEnd);
 
-            return args.logRepository().findPageBetweenIntervalAndUser(localDateTimeStart, localDateTimeEnd, user,  args.pageable());
+            return args.logRepository().findPageBetweenIntervalAndUser(localDateTimeStart, localDateTimeEnd, user, args.pageable());
         }
 
         return nextOne.verification(args);
