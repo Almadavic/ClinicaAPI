@@ -8,7 +8,7 @@ public class CpfAlreadyRegisteredException extends RuntimeException {
     private static final long serialVersionUID = 1L;
 
     public CpfAlreadyRegisteredException(String cpf) {
-        super("The registration: " + cpf + " already exists in the system");
+        super("The cpf: " + cpf + " already exists in the system");
     }
 
 }

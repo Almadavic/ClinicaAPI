@@ -1,32 +1,24 @@
 package com.project.clinicaapi.service.businessRule.commitPatient.updatePatient.validation;
 
-import com.project.clinicaapi.dto.request.update.PatientUpdateDTO;
-import com.project.clinicaapi.entity.Patient;
+import com.project.clinicaapi.service.businessRule.commitPatient.CommitPatientValidations;
 import com.project.clinicaapi.service.businessRule.commitPatient.updatePatient.UpdatePatientArgs;
 import com.project.clinicaapi.service.businessRule.commitPatient.updatePatient.UpdatePatientVerification;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-@Order(value = 4)
+@Order(value = 2)
 @Component
-public class UpdatingPatientData implements UpdatePatientVerification {
+public class CpfFormatUpdate implements UpdatePatientVerification {
 
     @Override
     public void verification(UpdatePatientArgs args) {
 
-        PatientUpdateDTO patientDTO = args.patientDTO();
+        String cpf = args.patientDTO().getCpf();
 
-        Patient patient = args.patient();
-
-        setCpf(patientDTO, patient);
-
-    }
-
-    public void setCpf(PatientUpdateDTO patientDTO, Patient patient) {
-        String cpf = patientDTO.getCpf();
         if(cpf != null) {
-            patient.setCpf(cpf);
+            CommitPatientValidations.cpfFormatValidation(cpf);
         }
+
     }
 
 }

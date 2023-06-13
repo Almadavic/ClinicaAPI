@@ -20,7 +20,7 @@ public interface AuthenticationSwagger {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Usuário logado",
                     content = {@Content(mediaType = "application/json", schema = @Schema(implementation = Token.class))}),
-            @ApiResponse(responseCode = "400", description = "E-mail e / ou senha está / estão errados",
+            @ApiResponse(responseCode = "400", description = "E-mail e | ou senha está | estão errados | Conta inativa",
                     content = {@Content(mediaType = "application/json", schema = @Schema(implementation = StandardError.class))})
     })
     ResponseEntity<Token> authenticate(LoginData loginData) throws JsonProcessingException;

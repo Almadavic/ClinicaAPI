@@ -47,6 +47,7 @@ public class StartProjectConfigurationsTestEnvironment implements CommandLineRun
                 .state("MG")
                 .city("Belo Horizonte")
                 .email("almada@hotmail.com")
+                .cro("13718")
                 .specialty(Specialty.ORTHODONTICS)
                 .gender(Gender.MALE)
                 .build();
@@ -63,7 +64,7 @@ public class StartProjectConfigurationsTestEnvironment implements CommandLineRun
                 .city("Belo Horizonte")
                 .email("sergio@hotmail.com")
                 .gender(Gender.MALE)
-                .cpf("115613986-02")
+                .cpf("115.613.986-02")
                 .build();
 
         patient.setEnabled(true);

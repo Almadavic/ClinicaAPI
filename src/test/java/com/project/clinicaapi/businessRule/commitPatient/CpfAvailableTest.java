@@ -22,7 +22,7 @@ class CpfAvailableTest {
     void registrationUnavailable() {
 
         Assertions.assertThrows(CpfAlreadyRegisteredException.class,
-                () -> CommitPatientValidations.findPatientByCpfValidation(patientRepository, "115613986-02"));
+                () -> CommitPatientValidations.findPatientByCpfValidation(patientRepository, "115.613.986-02"));
 
     }
 

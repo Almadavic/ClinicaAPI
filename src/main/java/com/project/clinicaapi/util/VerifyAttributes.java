@@ -12,15 +12,15 @@ public class VerifyAttributes {
     }
 
     public static boolean commonAndAddressFieldsNull(List<Object> attributes, AddressUpdateDTO addressDTO) {
-        return (commomNAttributesNull(attributes) && addressDTO == null) || addressFieldsNull(attributes, addressDTO);
+        return (commonAttributesNull(attributes) && addressDTO == null) || addressFieldsNull(attributes, addressDTO);
     }
 
     private static boolean addressFieldsNull(List<Object> attributes, AddressUpdateDTO addressDTO) {
-        return (addressDTO != null && commomNAttributesNull(Arrays.asList(addressDTO.getCountry(), addressDTO.getState(), addressDTO.getCity()))
-                && commomNAttributesNull(attributes));
+        return (addressDTO != null && commonAttributesNull(Arrays.asList(addressDTO.getCountry(), addressDTO.getState(), addressDTO.getCity()))
+                && commonAttributesNull(attributes));
     }
 
-    public static boolean commomNAttributesNull(List<Object> attributes) {
+    public static boolean commonAttributesNull(List<Object> attributes) {
 
         boolean allNull = true;
 

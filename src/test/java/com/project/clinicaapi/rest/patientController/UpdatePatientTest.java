@@ -1,11 +1,11 @@
-package com.project.clinicaapi.rest.secretaryController;
+package com.project.clinicaapi.rest.patientController;
 
-import com.project.clinicaapi.dto.request.update.AddressUpdateDTO;
-import com.project.clinicaapi.dto.request.update.SecretaryUpdateDTO;
+import com.project.clinicaapi.dto.request.update.PatientUpdateDTO;
 import com.project.clinicaapi.repository.UserRepository;
 import com.project.clinicaapi.rest.ClassTestParent;
+import com.project.clinicaapi.service.customException.CpfAlreadyRegisteredException;
+import com.project.clinicaapi.service.customException.InvalidCpfFormatException;
 import com.project.clinicaapi.service.customException.NoFieldFilledException;
-import com.project.clinicaapi.service.customException.RegistrationAlreadyRegisteredException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -20,29 +20,50 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ActiveProfiles(value = "test")
 @SpringBootTest
 @AutoConfigureMockMvc
-class UpdateSecretaryTest extends ClassTestParent {
+class UpdatePatientTest extends ClassTestParent {
 
     @Autowired
     private UserRepository userRepository;
 
-    private final String path = "/secretaries";
+    private final String path = "/patients";
 
     @Test
-    void registrationAlreadyExistsInTheSystem() throws Exception {
+    void cpfAlreadyExistsInTheSystem() throws Exception {
 
-        String registration = "1151387";
+        String cpf = "115.613.986-02";
 
-        SecretaryUpdateDTO secretaryDTO = SecretaryUpdateDTO.builder()
-                .registration(registration)
+        PatientUpdateDTO patientDTO = PatientUpdateDTO.builder()
+                .cpf(cpf)
+                .build();
+
+
+        mockMvc.perform(patch(path + "/" + returnSecretaryId())
+                        .header("Authorization", token("admin", "123456"))
+                        .contentType("application/json")
+                        .content(objectMapper.writeValueAsString(patientDTO)))
+                .andExpect(status().is(internalServerError))
+                .andExpect(result -> assertTrue(result.getResolvedException() instanceof CpfAlreadyRegisteredException))
+                .andExpect(result -> assertEquals("The cpf: " + cpf + " already exists in the system"
+                        , result.getResolvedException().getMessage()));
+
+    }
+
+    @Test
+    void invalidCpfFormat() throws Exception {
+
+        String cpf = "913.7135012-08";
+
+        PatientUpdateDTO patientDTO = PatientUpdateDTO.builder()
+                .cpf(cpf)
                 .build();
 
         mockMvc.perform(patch(path + "/" + returnSecretaryId())
                         .header("Authorization", token("admin", "123456"))
                         .contentType("application/json")
-                        .content(objectMapper.writeValueAsString(secretaryDTO)))
-                .andExpect(status().is(internalServerError))
-                .andExpect(result -> assertTrue(result.getResolvedException() instanceof RegistrationAlreadyRegisteredException))
-                .andExpect(result -> assertEquals("The registration: " + registration + " already exists in the system"
+                        .content(objectMapper.writeValueAsString(patientDTO)))
+                .andExpect(status().is(badRequest))
+                .andExpect(result -> assertTrue(result.getResolvedException() instanceof InvalidCpfFormatException))
+                .andExpect(result -> assertEquals("The cpf: " + cpf + " contains an invalid format"
                         , result.getResolvedException().getMessage()));
 
     }
@@ -50,13 +71,12 @@ class UpdateSecretaryTest extends ClassTestParent {
     @Test
     void noFieldFilledToUpdate() throws Exception {
 
-        SecretaryUpdateDTO secretaryDTO = SecretaryUpdateDTO.builder()
-                .build();
+        PatientUpdateDTO patientDTO = PatientUpdateDTO.builder().build();
 
         mockMvc.perform(patch(path + "/" + returnSecretaryId())
                         .header("Authorization", token("admin", "123456"))
                         .contentType("application/json")
-                        .content(objectMapper.writeValueAsString(secretaryDTO)))
+                        .content(objectMapper.writeValueAsString(patientDTO)))
                 .andExpect(status().is(badRequest))
                 .andExpect(result -> assertTrue(result.getResolvedException() instanceof NoFieldFilledException))
                 .andExpect(result -> assertEquals("You have to update at least one field"
@@ -65,22 +85,22 @@ class UpdateSecretaryTest extends ClassTestParent {
     }
 
     @Test
-    void updateSecretarySuccess() throws Exception {
+    void updatePatientSuccess() throws Exception {
 
-        SecretaryUpdateDTO secretaryDTO = SecretaryUpdateDTO.builder()
-                .registration("1156139862392")
+        PatientUpdateDTO patientDTO = PatientUpdateDTO.builder()
+                .cpf("112.448.221-02")
                 .build();
 
         mockMvc.perform(patch(path + "/" + returnSecretaryId())
                         .header("Authorization", token("admin", "123456"))
                         .contentType("application/json")
-                        .content(objectMapper.writeValueAsString(secretaryDTO)))
+                        .content(objectMapper.writeValueAsString(patientDTO)))
                 .andExpect(status().is(ok));
 
     }
 
     private String returnSecretaryId() {
-        return userRepository.findByLogin("secretary").get().getId();
+        return userRepository.findByLogin("patient").get().getId();
     }
 
 }

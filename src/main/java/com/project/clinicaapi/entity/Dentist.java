@@ -16,6 +16,9 @@ import java.util.List;
 @Setter
 public class Dentist extends User {
 
+    @Column(name = "cro", length = 6, nullable = false, unique = true)
+    private String cro;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "tb_dentists_workdays",
             joinColumns = @JoinColumn(name = "dentist_id"),
@@ -33,9 +36,10 @@ public class Dentist extends User {
 
     @Builder(builderMethodName = "dentistBuilder")
     public Dentist(@NonNull String login, @NonNull String email, @NonNull String name, @NonNull String cellphone, String password, @NonNull Gender gender,
-                   @NonNull String country, @NonNull String state, @NonNull String city, @NonNull Specialty specialty) {
+                   @NonNull String country, @NonNull String state, @NonNull String city, @NonNull String cro, @NonNull Specialty specialty) {
         super(login, email, name, cellphone, password, gender, country, state, city);
         setRole(Role.DENTIST);
+        this.cro = cro;
         this.specialty = specialty;
     }
 

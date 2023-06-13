@@ -3,6 +3,7 @@ package com.project.clinicaapi.dto.request.register;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -15,6 +16,7 @@ public class PatientRegisterDTO extends UserRegisterDTO {
 
     @JsonProperty(value = "cpf")
     @NotBlank
+    @Size(min = 14, max = 14)
     private String cpf;
 
 }

@@ -135,6 +135,11 @@ public class ResourceExceptionHandler {
         return handlingException(exception, request, "Invalid name", HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(value = InvalidCpfFormatException.class)
+    public ResponseEntity<StandardError> invalidCpfFormat(InvalidCpfFormatException exception, HttpServletRequest request) {
+        return handlingException(exception, request, "Invalid cpf", HttpStatus.BAD_REQUEST);
+    }
+
     @ExceptionHandler(value = EmailAlreadyRegisteredException.class)
     public ResponseEntity<StandardError> emailAlreadyRegistered(EmailAlreadyRegisteredException exception, HttpServletRequest request) {
         return handlingException(exception, request, "Registering user error", HttpStatus.INTERNAL_SERVER_ERROR);

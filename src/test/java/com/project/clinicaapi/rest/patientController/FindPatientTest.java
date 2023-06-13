@@ -1,8 +1,7 @@
-package com.project.clinicaapi.rest.secretaryController;
+package com.project.clinicaapi.rest.patientController;
 
+import com.project.clinicaapi.entity.Patient;
 import com.project.clinicaapi.entity.Secretary;
-import com.project.clinicaapi.entity.User;
-import com.project.clinicaapi.repository.SecretaryRepository;
 import com.project.clinicaapi.repository.UserRepository;
 import com.project.clinicaapi.rest.ClassTestParent;
 import com.project.clinicaapi.service.customException.ResourceNotFoundException;
@@ -20,15 +19,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ActiveProfiles(value = "test")
 @SpringBootTest
 @AutoConfigureMockMvc
-class FindSecretaryTest extends ClassTestParent {
+class FindPatientTest extends ClassTestParent {
 
-    private final String path = "/secretaries";
+    private final String path = "/patients";
 
     @Autowired
     private UserRepository userRepository;
 
     @Test
-    void findPageSecretaries() throws Exception {
+    void findPagePatients() throws Exception {
 
         mockMvc.perform(get(path)
                         .header("Authorization", token("admin", "123456")))
@@ -37,47 +36,47 @@ class FindSecretaryTest extends ClassTestParent {
     }
 
     @Test
-    void findSecretaryByIdNotFound() throws Exception {
+    void findSPatientByIdNotFound() throws Exception {
 
         String id = "aspjaioasjs9aasjassaas9sa";
 
-        mockMvc.perform(get(path + "/{secretaryid}", id)
+        mockMvc.perform(get(path + "/{patientid}", id)
                         .header("Authorization", token("admin", "123456")))
                 .andExpect(status().is(notFound))
                 .andExpect(result -> assertTrue(result.getResolvedException() instanceof ResourceNotFoundException))
-                .andExpect(result -> assertEquals("The secretary id: " + id + " wasn't found on database", result.getResolvedException().getMessage()));
+                .andExpect(result -> assertEquals("The patient id: " + id + " wasn't found on database", result.getResolvedException().getMessage()));
 
     }
 
     @Test
-    void findSecretaryByIdSuccess() throws Exception {
+    void findPatientByIdSuccess() throws Exception {
 
-        Secretary secretary = (Secretary) userRepository.findByLogin("secretary").get();
+        Patient patient = (Patient) userRepository.findByLogin("patient").get();
 
-        mockMvc.perform(get(path + "/{secretaryid}", secretary.getId())
+        mockMvc.perform(get(path + "/{patientid}", patient.getId())
                         .header("Authorization", token("admin", "123456")))
                 .andExpect(status().is(ok));
 
     }
 
     @Test
-    void findSecretaryByRegistrationNotFound() throws Exception {
+    void findPatientByCpfNotFound() throws Exception {
 
-        String registration = "1393178asias";
+        String cpf = "120891481";
 
-        mockMvc.perform(get(path + "/registration/{registration}", registration)
+        mockMvc.perform(get(path + "/cpf/{cpf}", cpf)
                         .header("Authorization", token("admin", "123456")))
                 .andExpect(status().is(notFound))
                 .andExpect(result -> assertTrue(result.getResolvedException() instanceof ResourceNotFoundException))
-                .andExpect(result -> assertEquals("The secretary registration: " + registration + " wasn't found on database",
+                .andExpect(result -> assertEquals("The patient cpf: " + cpf + " wasn't found on database",
                         result.getResolvedException().getMessage()));
 
     }
 
     @Test
-    void findSecretaryByRegistrationSuccess() throws Exception {
+    void findPatientByCpfSuccess() throws Exception {
 
-        mockMvc.perform(get(path + "/registration/{registration}", "1156139862302")
+        mockMvc.perform(get(path + "/cpf/{cpf}", "115.613.986-02")
                         .header("Authorization", token("admin", "123456")))
                 .andExpect(status().is(ok));
 

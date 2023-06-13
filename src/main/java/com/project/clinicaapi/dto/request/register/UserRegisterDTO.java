@@ -11,8 +11,8 @@ import lombok.experimental.SuperBuilder;
 
 
 @JsonPropertyOrder(value = {"login", "email", "name", "cellphone", "gender", "address"})
-@SuperBuilder(toBuilder = true)
 @NoArgsConstructor
+@SuperBuilder(toBuilder = true)
 @Getter
 @Setter
 public abstract class UserRegisterDTO {

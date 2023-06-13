@@ -2,6 +2,7 @@ package com.project.clinicaapi.dto.request.update;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -13,6 +14,7 @@ import lombok.experimental.SuperBuilder;
 public class PatientUpdateDTO extends UserUpdateDTO{
 
     @JsonProperty(value = "cpf")
+    @Size(min = 14, max = 14)
     private String cpf;
 
 }

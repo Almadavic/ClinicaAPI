@@ -19,7 +19,7 @@ import java.util.List;
 @Setter
 public class Patient extends User {
 
-    @Column(name = "cpf", length = 12, nullable = false, unique = true)
+    @Column(name = "cpf", length = 14, nullable = false, unique = true)
     private String cpf;
 
     @OneToMany(mappedBy = "patient")

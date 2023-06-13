@@ -2,6 +2,7 @@ package com.project.clinicaapi.rest.userController;
 
 import com.project.clinicaapi.dto.request.register.AddessRegisterDTO;
 import com.project.clinicaapi.dto.request.register.SecretaryRegisterDTO;
+import com.project.clinicaapi.dto.request.update.AddressUpdateDTO;
 import com.project.clinicaapi.dto.request.update.SecretaryUpdateDTO;
 import com.project.clinicaapi.entity.User;
 import com.project.clinicaapi.enumerated.Gender;
@@ -207,6 +208,42 @@ class UpdateEntitiesExtendUserTest extends ClassTestParent {
                 .andExpect(result -> assertTrue(result.getResolvedException() instanceof PasswordDoesntMatchException))
                 .andExpect(result -> assertEquals("The value of the fields password and passwordconfirmation don't match"
                         , result.getResolvedException().getMessage()));
+
+    }
+
+    @Test
+    void noAddressFieldFilledToUpdate() throws Exception {
+
+        SecretaryUpdateDTO secretaryDTO = SecretaryUpdateDTO.builder()
+                .address(new AddressUpdateDTO())
+                .build();
+
+        mockMvc.perform(patch(path + "/" + returnUserId())
+                        .header("Authorization", token("admin", "123456"))
+                        .contentType("application/json")
+                        .content(objectMapper.writeValueAsString(secretaryDTO)))
+                .andExpect(status().is(badRequest))
+                .andExpect(result -> assertTrue(result.getResolvedException() instanceof NoFieldFilledException))
+                .andExpect(result -> assertEquals("You have to update at least one field"
+                        , result.getResolvedException().getMessage()));
+
+    }
+
+
+    @Test
+    void addressFieldFilledToUpdate() throws Exception {
+
+        SecretaryUpdateDTO secretaryDTO = SecretaryUpdateDTO.builder()
+                .address(AddressUpdateDTO.builder()
+                        .city("São Paulo")
+                        .build())
+                .build();
+
+        mockMvc.perform(patch(path + "/" + returnUserId())
+                        .header("Authorization", token("admin", "123456"))
+                        .contentType("application/json")
+                        .content(objectMapper.writeValueAsString(secretaryDTO)))
+                .andExpect(status().is(ok));
 
     }
 

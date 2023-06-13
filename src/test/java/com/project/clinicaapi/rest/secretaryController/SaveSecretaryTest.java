@@ -155,9 +155,9 @@ class SaveSecretaryTest extends ClassTestParent {
 
     }
 
-    private void enterSystemUserSaved(String login, String senha) throws Exception {
+    private void enterSystemUserSaved(String login, String password) throws Exception {
 
-        LoginData loginData = new LoginData(login, senha);
+        LoginData loginData = new LoginData(login, password);
 
         mockMvc.perform(post("/auth")
                         .contentType("application/json")
