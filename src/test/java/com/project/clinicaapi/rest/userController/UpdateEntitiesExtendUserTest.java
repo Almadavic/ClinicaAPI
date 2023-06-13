@@ -20,6 +20,7 @@ import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ActiveProfiles(value = "test")
@@ -41,7 +42,7 @@ class UpdateEntitiesExtendUserTest extends ClassTestParent {
                 .email(email)
                 .build();
 
-        mockMvc.perform(patch(path + "/" + returnUser().getId())
+        mockMvc.perform(patch(path + "/" + returnUserId())
                         .header("Authorization", token("admin", "123456"))
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(secretaryDTO)))
@@ -61,7 +62,7 @@ class UpdateEntitiesExtendUserTest extends ClassTestParent {
                 .login(login)
                 .build();
 
-        mockMvc.perform(patch(path + "/" + returnUser().getId())
+        mockMvc.perform(patch(path + "/" + returnUserId())
                         .header("Authorization", token("admin", "123456"))
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(secretaryDTO)))
@@ -81,7 +82,7 @@ class UpdateEntitiesExtendUserTest extends ClassTestParent {
                 .gender(gender)
                 .build();
 
-        mockMvc.perform(patch(path + "/" + returnUser().getId())
+        mockMvc.perform(patch(path + "/" + returnUserId())
                         .header("Authorization", token("admin", "123456"))
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(secretaryDTO)))
@@ -103,7 +104,7 @@ class UpdateEntitiesExtendUserTest extends ClassTestParent {
                 .build();
 
 
-        mockMvc.perform(patch(path + "/" + returnUser().getId())
+        mockMvc.perform(patch(path + "/" + returnUserId())
                         .header("Authorization", token("admin", "123456"))
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(secretaryDTO)))
@@ -123,7 +124,7 @@ class UpdateEntitiesExtendUserTest extends ClassTestParent {
                 .name(name)
                 .build();
 
-        mockMvc.perform(patch(path + "/" + returnUser().getId())
+        mockMvc.perform(patch(path + "/" + returnUserId())
                         .header("Authorization", token("admin", "123456"))
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(secretaryDTO)))
@@ -143,7 +144,7 @@ class UpdateEntitiesExtendUserTest extends ClassTestParent {
                 .email(email)
                 .build();
 
-        mockMvc.perform(patch(path + "/" + returnUser().getId())
+        mockMvc.perform(patch(path + "/" + returnUserId())
                         .header("Authorization", token("admin", "123456"))
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(secretaryDTO)))
@@ -154,8 +155,63 @@ class UpdateEntitiesExtendUserTest extends ClassTestParent {
 
     }
 
-    private User returnUser() {
-        return userRepository.findByLogin("secretary2").get();
+    @Test
+    void passwordNull() throws Exception {
+
+        SecretaryUpdateDTO secretaryDTO = SecretaryUpdateDTO.builder()
+                .passwordConfirmation("123456")
+                .build();
+
+        mockMvc.perform(patch(path + "/" + returnUserId())
+                        .header("Authorization", token("admin", "123456"))
+                        .contentType("application/json")
+                        .content(objectMapper.writeValueAsString(secretaryDTO)))
+                .andExpect(status().is(badRequest))
+                .andExpect(result -> assertTrue(result.getResolvedException() instanceof PasswordNullException))
+                .andExpect(result -> assertEquals("In order to register your account and set a password, you have to enter the fields 'password' and 'passwordconfirmation'."
+                        , result.getResolvedException().getMessage()));
+
+    }
+
+    @Test
+    void passwordConfirmationNull() throws Exception {
+
+        SecretaryUpdateDTO secretaryDTO = SecretaryUpdateDTO.builder()
+                .password("123456")
+                .build();
+
+        mockMvc.perform(patch(path + "/" + returnUserId())
+                        .header("Authorization", token("admin", "123456"))
+                        .contentType("application/json")
+                        .content(objectMapper.writeValueAsString(secretaryDTO)))
+                .andExpect(status().is(badRequest))
+                .andExpect(result -> assertTrue(result.getResolvedException() instanceof PasswordNullException))
+                .andExpect(result -> assertEquals("In order to register your account and set a password, you have to enter the fields 'password' and 'passwordconfirmation'."
+                        , result.getResolvedException().getMessage()));
+
+    }
+
+    @Test
+    void passwordsDontMatch() throws Exception {
+
+        SecretaryUpdateDTO secretaryDTO = SecretaryUpdateDTO.builder()
+                .password("123456")
+                .passwordConfirmation("1234567")
+                .build();
+
+        mockMvc.perform(patch(path + "/" + returnUserId())
+                        .header("Authorization", token("admin", "123456"))
+                        .contentType("application/json")
+                        .content(objectMapper.writeValueAsString(secretaryDTO)))
+                .andExpect(status().is(badRequest))
+                .andExpect(result -> assertTrue(result.getResolvedException() instanceof PasswordDoesntMatchException))
+                .andExpect(result -> assertEquals("The value of the fields password and passwordconfirmation don't match"
+                        , result.getResolvedException().getMessage()));
+
+    }
+
+    private String returnUserId() {
+        return userRepository.findByLogin("secretary2").get().getId();
     }
 
 }

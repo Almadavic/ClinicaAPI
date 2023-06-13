@@ -5,12 +5,13 @@ import com.project.clinicaapi.service.businessRule.commitSecretary.CommitSecreta
 import com.project.clinicaapi.service.businessRule.commitSecretary.registerSecretary.RegisterSecretaryArgs;
 import com.project.clinicaapi.service.businessRule.commitSecretary.registerSecretary.RegisterSecretaryVerification;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 @Order(value = 1)
 @Component
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class RegistrationAvailableRegister implements RegisterSecretaryVerification {
 
     private final SecretaryRepository secretaryRepository;

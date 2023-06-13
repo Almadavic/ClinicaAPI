@@ -7,8 +7,8 @@ public class PasswordNullException extends RuntimeException {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    public PasswordNullException(String msg) {
-        super(msg);
+    public PasswordNullException() {
+        super("In order to register your account and set a password, you have to enter the fields 'password' and 'passwordconfirmation'.");
     }
 
 }

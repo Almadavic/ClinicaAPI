@@ -53,7 +53,7 @@ public class SecurityConfigurationsImpl implements SecurityConfigurations {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-        String administrator = "ADMINISTRAtOR";
+        String administrator = "ADMINISTRATOR";
         String secretary = "SECRETARY";
         String patient = "PATIENT";
         String dentist = "DENTIST";
@@ -64,17 +64,20 @@ public class SecurityConfigurationsImpl implements SecurityConfigurations {
 
                 .requestMatchers("/auth").permitAll()
 
-                .requestMatchers("/logs/**").hasRole("ADMINISTRATOR")
+                .requestMatchers("/logs/**").hasRole(administrator)
 
-                .requestMatchers("/user/**").hasRole("ADMINISTRATOR")
+                .requestMatchers("/user/**").hasRole(administrator)
 
-                .requestMatchers(HttpMethod.GET, "/secretaries").hasRole("ADMINISTRATOR")
-                .requestMatchers(HttpMethod.POST, "/secretaries").hasRole("ADMINISTRATOR")
-                .requestMatchers(HttpMethod.PATCH, "/secretaries").hasAnyRole("ADMINISTRATOR", "SECRETARY")
+                .requestMatchers(HttpMethod.GET, "/secretaries/**").hasRole(administrator)
+                .requestMatchers(HttpMethod.POST, "/secretaries").hasRole(administrator)
+                .requestMatchers(HttpMethod.PATCH, "/secretaries/*").hasAnyRole(administrator, secretary)
+
+                .requestMatchers(HttpMethod.GET, "/patients/**").hasAnyRole(administrator, secretary)
+                .requestMatchers(HttpMethod.POST, "/patients").hasAnyRole(administrator, secretary)
+                .requestMatchers(HttpMethod.PATCH, "/patients/*").hasAnyRole(administrator, secretary, patient)
 
 
-
-                .anyRequest().authenticated() // POR ENQUANTO
+                .anyRequest().authenticated()
                 .and().cors()
                 .and().headers().frameOptions().disable()
                 .and().csrf().disable()

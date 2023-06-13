@@ -88,14 +88,12 @@ public class CommitUserValidations {
 
     public static void passwordNull(String password, String passwordConfirmation) {
 
-        String errorMessage = "In order to register your account and set a password, you have to enter the fields 'password' and 'passwordconfirmation'.";
-
         if (password != null && passwordConfirmation == null) {
-            throw new PasswordNullException(errorMessage);
+            throw new PasswordNullException();
         }
 
         if (password == null && passwordConfirmation != null) {
-            throw new PasswordNullException(errorMessage);
+            throw new PasswordNullException();
         }
 
     }

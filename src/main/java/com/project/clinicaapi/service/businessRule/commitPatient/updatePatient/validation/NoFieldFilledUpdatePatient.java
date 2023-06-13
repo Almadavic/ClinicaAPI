@@ -21,13 +21,10 @@ public class NoFieldFilledUpdatePatient implements UpdatePatientVerification {
 
         PatientUpdateDTO patientDTO = args.patientDTO();
 
-        AddressUpdateDTO addressDTO = patientDTO.getAddress();
-
         List<Object> attributes = Arrays.asList(patientDTO.getLogin(), patientDTO.getPassword(), patientDTO.getEmail(), patientDTO.getName(),
                 patientDTO.getCellphone(), patientDTO.getCpf(), patientDTO.getGender(), patientDTO.getPasswordConfirmation());
 
-        if ((VerifyAttributes.allNAttributesNull(attributes) && addressDTO == null) ||
-                (VerifyAttributes.addressFieldsNullToo(addressDTO, attributes))) {
+        if (VerifyAttributes.commonAndAddressFieldsNull(attributes, patientDTO.getAddress())) {
             throw new NoFieldFilledException();
         }
 
