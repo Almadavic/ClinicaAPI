@@ -7,7 +7,7 @@ import com.project.clinicaapi.entity.User;
 import lombok.Getter;
 
 @Getter
-@JsonPropertyOrder(value = {"id", "login", "email", "name", "cellphone", "enabled", "gender", "registration", "role", "address"})
+@JsonPropertyOrder(value = {"id", "login", "email", "name", "cellphone", "gender", "registration", "address"})
 public class SecretaryResponseDTO extends UserResponseDTO {
 
     @JsonProperty(value = "registration")

@@ -110,6 +110,11 @@ public class ResourceExceptionHandler {
         return handlingException(exception, request, "No value filled", HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(WorkDayNumberSizeException.class)
+    public ResponseEntity<StandardError> workDayNumberSize(WorkDayNumberSizeException exception, HttpServletRequest request) {
+        return handlingException(exception, request, "Value not accepted", HttpStatus.BAD_REQUEST);
+    }
+
     @ExceptionHandler(value = JWTException.class)
     public ResponseEntity<StandardError> jwt(JWTException exception, HttpServletRequest request) {
         return handlingException(exception, request, "JWT error", HttpStatus.INTERNAL_SERVER_ERROR);
@@ -140,6 +145,11 @@ public class ResourceExceptionHandler {
         return handlingException(exception, request, "Invalid cpf", HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(value = InvalidCroFormatException.class)
+    public ResponseEntity<StandardError> invalidCroFormat(InvalidCroFormatException exception, HttpServletRequest request) {
+        return handlingException(exception, request, "Invalid cro", HttpStatus.BAD_REQUEST);
+    }
+
     @ExceptionHandler(value = EmailAlreadyRegisteredException.class)
     public ResponseEntity<StandardError> emailAlreadyRegistered(EmailAlreadyRegisteredException exception, HttpServletRequest request) {
         return handlingException(exception, request, "Registering user error", HttpStatus.INTERNAL_SERVER_ERROR);
@@ -148,6 +158,11 @@ public class ResourceExceptionHandler {
     @ExceptionHandler(value = CpfAlreadyRegisteredException.class)
     public ResponseEntity<StandardError> cpfAlreadyRegistered(CpfAlreadyRegisteredException exception, HttpServletRequest request) {
         return handlingException(exception, request, "Registering patient error", HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(value = CroAlreadyRegisteredException.class)
+    public ResponseEntity<StandardError> croAlreadyRegistered(CroAlreadyRegisteredException exception, HttpServletRequest request) {
+        return handlingException(exception, request, "Registering dentist error", HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(value = LoginAlreadyRegisteredException.class)

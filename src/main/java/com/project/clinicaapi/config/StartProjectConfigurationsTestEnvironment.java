@@ -202,16 +202,16 @@ public class StartProjectConfigurationsTestEnvironment implements CommandLineRun
         dentist1.addWorkDay(wd1);
         dentist1.addWorkDay(wd2);
 
-        dentist2.addWorkDay(wd1);
         dentist2.addWorkDay(wd2);
+        dentist2.addWorkDay(wd1);
         dentist2.addWorkDay(wd3);
 
-        dentist3.addWorkDay(wd4);
-        dentist3.addWorkDay(wd5);
         dentist3.addWorkDay(wd6);
+        dentist3.addWorkDay(wd5);
+        dentist3.addWorkDay(wd4);
 
-        dentist4.addWorkDay(wd1);
         dentist4.addWorkDay(wd3);
+        dentist4.addWorkDay(wd1);
 
         userRepository.saveAll(Arrays.asList(dentist2, dentist3, dentist4));
 

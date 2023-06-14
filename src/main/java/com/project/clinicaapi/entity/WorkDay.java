@@ -15,7 +15,6 @@ import java.util.*;
 @NoArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class WorkDay implements Serializable {
 
     @Id
@@ -23,7 +22,6 @@ public class WorkDay implements Serializable {
     @Column(name = "id", nullable = false, unique = true)
     private Long id;
 
-    @EqualsAndHashCode.Include
     @Column(name = "work_day", nullable = false, unique = true)
     @Enumerated(EnumType.STRING)
     private WorkDayEnum workDay;

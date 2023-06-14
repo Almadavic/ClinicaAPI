@@ -5,13 +5,15 @@ import com.project.clinicaapi.dto.request.update.DentistUpdateDTO;
 import com.project.clinicaapi.dto.response.DentistResponseDTO;
 import com.project.clinicaapi.entity.Dentist;
 import com.project.clinicaapi.entity.User;
-import com.project.clinicaapi.enumerated.Gender;
-import com.project.clinicaapi.enumerated.Specialty;
+import com.project.clinicaapi.entity.WorkDay;
 import com.project.clinicaapi.repository.DentistRepository;
-import com.project.clinicaapi.service.customException.InvalidEnumValueException;
+import com.project.clinicaapi.service.businessRule.commitDentist.CommitDentistValidations;
+import com.project.clinicaapi.service.businessRule.commitDentist.registerDentist.RegisterDentistArgs;
+import com.project.clinicaapi.service.businessRule.commitDentist.registerDentist.RegisterDentistVerification;
+import com.project.clinicaapi.service.businessRule.commitUser.registerUser.RegisterUserArgs;
+import com.project.clinicaapi.service.businessRule.commitUser.registerUser.RegisterUserVerification;
 import com.project.clinicaapi.service.customException.ResourceNotFoundException;
 import com.project.clinicaapi.util.DentistSpecifications;
-import com.project.clinicaapi.util.ListEnumValues;
 import com.project.clinicaapi.util.LogRegistration;
 import com.project.clinicaapi.util.mapper.DentistMapper;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +22,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 
-import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
 
 @Component
 @RequiredArgsConstructor
@@ -32,9 +35,19 @@ public class DentistService {
 
     private final LogRegistration logRegistration;
 
+    private final WorkDayService workDayService;
+
+    private final List<RegisterUserVerification> registerUserVerifications;
+
+    private final List<RegisterDentistVerification> registerDentistVerifications;
+
     public DentistResponseDTO save(DentistRegisterDTO registerData, User userLogged) {
 
+        saveDentistVerifications(registerData);
+
         Dentist dentist = mapper.toDentistEntity(registerData);
+
+        setDentistReferences(dentist, registerData);
 
         DentistResponseDTO dentistDTO = saveAndConvert(dentist);
 
@@ -45,7 +58,7 @@ public class DentistService {
 
     public Page<DentistResponseDTO> findPage(Pageable pageable, String name, String specialty) {
 
-        Specification<Dentist> spec = DentistSpecifications.filter(name, specialtyValueValidation(specialty));
+        Specification<Dentist> spec = DentistSpecifications.filter(name, CommitDentistValidations.specialtyValueValidation(specialty));
 
         return mapper.toDentistDTOPage(dentistRepository.findAll(spec, pageable));
     }
@@ -71,6 +84,11 @@ public class DentistService {
         return dentistDTO;
     }
 
+    private void saveDentistVerifications(DentistRegisterDTO registerData) {
+        registerUserVerifications.forEach(v -> v.verification(new RegisterUserArgs(registerData)));
+        registerDentistVerifications.forEach(v -> v.verification(new RegisterDentistArgs(registerData)));
+    }
+
     private DentistResponseDTO saveAndConvert(Dentist dentist) {
         return mapper.toDentistDTO(dentistRepository.save(dentist));
     }
@@ -80,14 +98,13 @@ public class DentistService {
                 .orElseThrow(() -> new ResourceNotFoundException("The dentist id: " + dentistId + " wasn't found on database"));
     }
 
-    private static Specialty specialtyValueValidation(String specialty) {
-        try {
-            if(specialty != null) {
-                return Specialty.valueOf(specialty.toUpperCase());
-            }
-            return null;
-        } catch (IllegalArgumentException exception) {
-            throw new InvalidEnumValueException(specialty, "Specialty", ListEnumValues.returnEnumValues(Arrays.asList(Specialty.values())));
+    private void setDentistReferences(Dentist dentist, DentistRegisterDTO dentistDTO) {
+
+        Set<Long> workDays = dentistDTO.getWorkDays();
+
+        if (workDays != null) {
+            workDays.forEach(workday ->
+                    dentist.addWorkDay(workDayService.returnWorkDayDataBase(workday)));
         }
 
     }

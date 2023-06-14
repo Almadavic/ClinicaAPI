@@ -28,9 +28,12 @@ public class WorkDayService {
     }
 
     public WorkDayResponseDTO findById(Long id) {
-        return mapper.toWorkDayResponseDTO(
-                workDayRepository.findById(id)
-                        .orElseThrow(() -> new ResourceNotFoundException("The workday id: " + id + " wasn't found on database")));
+        return mapper.toWorkDayResponseDTO(returnWorkDayDataBase(id));
+    }
+
+    public WorkDay returnWorkDayDataBase(Long id) {
+        return  workDayRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("The workday id: " + id + " wasn't found on database"));
     }
 
 }

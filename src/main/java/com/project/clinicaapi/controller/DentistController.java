@@ -1,5 +1,6 @@
 package com.project.clinicaapi.controller;
 
+import com.project.clinicaapi.config.swaggerConfig.endPoint.DentistSwagger;
 import com.project.clinicaapi.dto.request.register.DentistRegisterDTO;
 import com.project.clinicaapi.dto.request.update.DentistUpdateDTO;
 import com.project.clinicaapi.dto.response.DentistResponseDTO;
@@ -20,7 +21,7 @@ import java.net.URI;
 @RestController
 @RequestMapping(value = "/dentists")
 @RequiredArgsConstructor
-public class DentistController {
+public class DentistController implements DentistSwagger {
 
     private final DentistService dentistService;
 

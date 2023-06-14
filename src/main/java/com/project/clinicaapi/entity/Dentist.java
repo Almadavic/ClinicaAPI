@@ -3,7 +3,6 @@ package com.project.clinicaapi.entity;
 import com.project.clinicaapi.enumerated.Gender;
 import com.project.clinicaapi.enumerated.Role;
 import com.project.clinicaapi.enumerated.Specialty;
-import com.project.clinicaapi.util.MyWorkDayListComparator;
 import jakarta.persistence.*;
 import lombok.*;
 

@@ -3,6 +3,7 @@ package com.project.clinicaapi.service.serviceAction;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
+import com.project.clinicaapi.dto.response.UserMonitoringResponseDTO;
 import com.project.clinicaapi.dto.response.UserResponseDTO;
 import com.project.clinicaapi.entity.User;
 import com.project.clinicaapi.service.customException.JWTException;
@@ -30,7 +31,7 @@ public class TokenService {
 
     public String generateToken(Authentication authentication) {
 
-        UserResponseDTO userDTO = mapper.toUserDTO((User) authentication.getPrincipal());
+        UserMonitoringResponseDTO userDTO = mapper.toUserMonitoringDTO((User) authentication.getPrincipal());
 
         try {
             return JWT.create()

@@ -34,11 +34,11 @@ public class UserService implements UserDetailsService {
 
     @Cacheable(value = "usersPage")
     public Page<UserResponseDTO> findPage(Pageable pageable) {
-        return mapper.toUserDTOPage(userRepository.findAll(pageable));
+        return mapper.toUserMonitoringDTOPage(userRepository.findAll(pageable));
     }
 
     public UserResponseDTO findById(String userId) {
-        return mapper.toUserDTO(returnUserDataBase(userId));
+        return mapper.toUserMonitoringDTO(returnUserDataBase(userId));
     }
 
     @CacheEvict(value = {"usersPage", "secretariesPage"}, allEntries = true)

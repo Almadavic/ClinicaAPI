@@ -17,7 +17,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 
 
-@Tag(name = "Log", description = "Operações relacionadas á logs")
+@Tag(name = "Logs", description = "Operações relacionadas á logs")
 public interface LogSwagger {
 
     @Operation(summary = "Encontra uma página de logs registrados", security = {@SecurityRequirement(name = "bearer-key")}, parameters = {

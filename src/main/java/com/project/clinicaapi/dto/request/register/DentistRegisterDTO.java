@@ -8,7 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-import java.util.List;
+import java.util.Set;
 
 @JsonPropertyOrder(value = {"login", "email", "name", "cellphone", "gender", "cro", "speciality", "workdays", "address"})
 @NoArgsConstructor
@@ -27,6 +27,6 @@ public class DentistRegisterDTO extends UserRegisterDTO {
 
     @JsonProperty(value = "workdays")
     @Size(max = 6)
-    private List<Integer> workDays;
+    private Set<Long> workDays;
 
 }
