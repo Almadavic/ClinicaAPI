@@ -19,11 +19,13 @@ public class WorkDayController implements WorkDaySwagger {
 
     private final WorkDayService workDayService;
 
+    @Override
     @GetMapping
     public ResponseEntity<List<WorkDayResponseDTO>> findAll() {
         return ResponseEntity.ok().body(workDayService.findAll());
     }
 
+    @Override
     @GetMapping(value = "/{id}")
     public ResponseEntity<WorkDayResponseDTO> findById(@PathVariable(value = "id") Long id) {
         return ResponseEntity.ok().body(workDayService.findById(id));

@@ -36,7 +36,7 @@ class FindPatientTest extends ClassTestParent {
     }
 
     @Test
-    void findSPatientByIdNotFound() throws Exception {
+    void findPatientByIdNotFound() throws Exception {
 
         String id = "aspjaioasjs9aasjassaas9sa";
 

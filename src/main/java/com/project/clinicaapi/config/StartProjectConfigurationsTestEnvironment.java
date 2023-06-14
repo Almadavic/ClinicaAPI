@@ -38,21 +38,69 @@ public class StartProjectConfigurationsTestEnvironment implements CommandLineRun
     @Override
     public void run(String... args) {
 
-        Dentist dentist = Dentist.dentistBuilder()
-                .login("dentist")
-                .name("nome1")
+        Dentist dentist1 = Dentist.dentistBuilder()
+                .login("dentist1")
+                .name("dentist1")
                 .password(encoder.encode("123456"))
                 .country("Brasil")
                 .cellphone("(31)98858-8362")
                 .state("MG")
                 .city("Belo Horizonte")
-                .email("almada@hotmail.com")
-                .cro("13718")
+                .email("dentist1@hotmail.com")
+                .cro("137180")
                 .specialty(Specialty.ORTHODONTICS)
                 .gender(Gender.MALE)
                 .build();
 
-        dentist.setEnabled(true);
+        dentist1.setEnabled(true);
+
+        Dentist dentist2 = Dentist.dentistBuilder()
+                .login("dentist2")
+                .name("dentist2")
+                .password(encoder.encode("123456"))
+                .country("Brasil")
+                .cellphone("(31)98896-8362")
+                .state("MG")
+                .city("Belo Horizonte")
+                .email("dentist2@hotmail.com")
+                .cro("137185")
+                .specialty(Specialty.ENDODONTICS)
+                .gender(Gender.MALE)
+                .build();
+
+        dentist2.setEnabled(true);
+
+        Dentist dentist3 = Dentist.dentistBuilder()
+                .login("dentist3")
+                .name("dentist3")
+                .password(encoder.encode("123456"))
+                .country("Brasil")
+                .cellphone("(31)98895-8362")
+                .state("MG")
+                .city("Belo Horizonte")
+                .email("dentist3@hotmail.com")
+                .cro("137182")
+                .specialty(Specialty.ORTHODONTICS)
+                .gender(Gender.MALE)
+                .build();
+
+        dentist3.setEnabled(true);
+
+        Dentist dentist4 = Dentist.dentistBuilder()
+                .login("dentist4")
+                .name("dentist4")
+                .password(encoder.encode("123456"))
+                .country("Brasil")
+                .cellphone("(31)98894-8362")
+                .state("MG")
+                .city("Belo Horizonte")
+                .email("dentist4@hotmail.com")
+                .cro("137188")
+                .specialty(Specialty.DENTISTRY)
+                .gender(Gender.MALE)
+                .build();
+
+        dentist4.setEnabled(true);
 
         Patient patient = Patient.patientBuilder()
                 .login("patient")
@@ -139,7 +187,7 @@ public class StartProjectConfigurationsTestEnvironment implements CommandLineRun
 
         u3.setRole(Role.PATIENT);
 
-        userRepository.saveAll(Arrays.asList(dentist, patient, secretary, secretary2, u1, u2, u3));
+        userRepository.saveAll(Arrays.asList(dentist1, dentist2, dentist3, dentist4, patient, secretary, secretary2, u1, u2, u3));
 
         WorkDay wd1 = new WorkDay(WorkDayEnum.MONDAY);
         WorkDay wd2 = new WorkDay(WorkDayEnum.TUESDAY);
@@ -151,11 +199,23 @@ public class StartProjectConfigurationsTestEnvironment implements CommandLineRun
         workDayRepository.saveAll(Arrays.asList(wd1, wd2, wd3, wd4, wd5, wd6));
 
 
-        dentist.addWorkDay(wd1);
-        dentist.addWorkDay(wd2);
-        dentist.addWorkDay(wd3);
+        dentist1.addWorkDay(wd1);
+        dentist1.addWorkDay(wd2);
 
-        dentist = userRepository.save(dentist);
+        dentist2.addWorkDay(wd1);
+        dentist2.addWorkDay(wd2);
+        dentist2.addWorkDay(wd3);
+
+        dentist3.addWorkDay(wd4);
+        dentist3.addWorkDay(wd5);
+        dentist3.addWorkDay(wd6);
+
+        dentist4.addWorkDay(wd1);
+        dentist4.addWorkDay(wd3);
+
+        userRepository.saveAll(Arrays.asList(dentist2, dentist3, dentist4));
+
+        dentist1 = userRepository.save(dentist1);
 
 
         Appointment appointment = Appointment.builder()
@@ -163,7 +223,7 @@ public class StartProjectConfigurationsTestEnvironment implements CommandLineRun
                 .appointmentDay(LocalDate.of(2023, 06, 01))
                 .timeStart(LocalTime.now())
                 .timeEnd(LocalTime.now().plusHours(1))
-                .dentist(dentist)
+                .dentist(dentist1)
                 .patient(patient)
                 .build();
 

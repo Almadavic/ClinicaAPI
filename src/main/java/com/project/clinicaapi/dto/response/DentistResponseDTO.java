@@ -5,9 +5,16 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.project.clinicaapi.entity.Dentist;
 import com.project.clinicaapi.entity.User;
 import com.project.clinicaapi.entity.WorkDay;
+import com.project.clinicaapi.util.MyWorkDayListComparator;
+import com.project.clinicaapi.util.MyWorkDayListDTOComparator;
 import lombok.Getter;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.*;
 
 @Getter
 @JsonPropertyOrder(value = {"id", "login", "email", "name", "cellphone", "enabled", "gender", "cro", "speciality", "workdays", "role", "address"})
