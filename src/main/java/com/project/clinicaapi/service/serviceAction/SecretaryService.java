@@ -90,12 +90,12 @@ public class SecretaryService {
 
     private void saveSecretaryVerifications(SecretaryRegisterDTO registerData) {
         registerUserVerifications.forEach(v -> v.verification(new RegisterUserArgs(registerData)));
-        registerSecretaryVerifications.forEach(v -> v.verification(new RegisterSecretaryArgs(registerData)));
+        registerSecretaryVerifications.forEach(v -> v.verification(new RegisterSecretaryArgs(registerData, secretaryRepository)));
     }
 
-    private void updateSecretaryVerifications(SecretaryUpdateDTO registerData, Secretary secretary) {
-        updateSecretaryVerifications.forEach(v -> v.verification(new UpdateSecretaryArgs(registerData, secretary)));
-        updateUserVerifications.forEach(v -> v.verification(new UpdateUserArgs(registerData, secretary)));
+    private void updateSecretaryVerifications(SecretaryUpdateDTO updateData, Secretary secretary) {
+        updateSecretaryVerifications.forEach(v -> v.verification(new UpdateSecretaryArgs(updateData, secretary, secretaryRepository)));
+        updateUserVerifications.forEach(v -> v.verification(new UpdateUserArgs(updateData, secretary)));
     }
 
     private Secretary returnSecretaryDataBase(String secretaryId) {

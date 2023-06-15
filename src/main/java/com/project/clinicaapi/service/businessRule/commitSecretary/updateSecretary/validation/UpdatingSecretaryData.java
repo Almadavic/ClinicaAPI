@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 
 @Order(value = 3)
 @Component
-@RequiredArgsConstructor
 public class UpdatingSecretaryData implements UpdateSecretaryVerification {
 
     @Override

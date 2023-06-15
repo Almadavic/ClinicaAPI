@@ -3,9 +3,6 @@ package com.project.clinicaapi.service.businessRule.commitDentist.registerDentis
 import com.project.clinicaapi.service.businessRule.commitDentist.CommitDentistValidations;
 import com.project.clinicaapi.service.businessRule.commitDentist.registerDentist.RegisterDentistArgs;
 import com.project.clinicaapi.service.businessRule.commitDentist.registerDentist.RegisterDentistVerification;
-import com.project.clinicaapi.service.businessRule.commitUser.CommitUserValidations;
-import com.project.clinicaapi.service.businessRule.commitUser.registerUser.RegisterUserArgs;
-import com.project.clinicaapi.service.businessRule.commitUser.registerUser.RegisterUserVerification;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 

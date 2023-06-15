@@ -19,10 +19,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 class FindUserTest extends ClassTestParent {
 
-    private final String path = "/users";
-
     @Autowired
     private UserRepository userRepository;
+
+    private final String path = "/users";
 
     @Test
     void findPageUsers() throws Exception {

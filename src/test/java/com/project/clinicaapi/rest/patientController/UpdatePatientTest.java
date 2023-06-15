@@ -30,7 +30,7 @@ class UpdatePatientTest extends ClassTestParent {
     @Test
     void cpfAlreadyExistsInTheSystem() throws Exception {
 
-        String cpf = "115.613.986-02";
+        String cpf = "115.613.982-01";
 
         PatientUpdateDTO patientDTO = PatientUpdateDTO.builder()
                 .cpf(cpf)

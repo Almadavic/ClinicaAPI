@@ -22,7 +22,7 @@ public class UpdatingPatientData implements UpdatePatientVerification {
 
     }
 
-    public void setCpf(PatientUpdateDTO patientDTO, Patient patient) {
+    private void setCpf(PatientUpdateDTO patientDTO, Patient patient) {
         String cpf = patientDTO.getCpf();
         if(cpf != null) {
             patient.setCpf(cpf);

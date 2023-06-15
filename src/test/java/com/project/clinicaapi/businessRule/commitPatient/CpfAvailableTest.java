@@ -19,7 +19,7 @@ class CpfAvailableTest {
     private PatientRepository patientRepository;
 
     @Test
-    void registrationUnavailable() {
+    void cpfUnavailable() {
 
         Assertions.assertThrows(CpfAlreadyRegisteredException.class,
                 () -> CommitPatientValidations.findPatientByCpfValidation(patientRepository, "115.613.986-02"));
@@ -27,7 +27,7 @@ class CpfAvailableTest {
     }
 
     @Test
-    void registrationAvailable() {
+    void cpfAvailable() {
 
         Assertions.assertDoesNotThrow(() -> CommitPatientValidations.findPatientByCpfValidation(patientRepository, "1156139322"));
 

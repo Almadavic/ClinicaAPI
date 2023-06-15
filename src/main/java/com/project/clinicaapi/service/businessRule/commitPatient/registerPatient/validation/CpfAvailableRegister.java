@@ -10,15 +10,12 @@ import org.springframework.stereotype.Component;
 
 @Order(value = 2)
 @Component
-@RequiredArgsConstructor
 public class CpfAvailableRegister implements RegisterPatientVerification {
-
-    private final PatientRepository patientRepository;
 
     @Override
     public void verification(RegisterPatientArgs args) {
 
-        CommitPatientValidations.findPatientByCpfValidation(patientRepository, args.patientDTO().getCpf());
+        CommitPatientValidations.findPatientByCpfValidation(args.patientRepository(), args.patientDTO().getCpf());
 
     }
 

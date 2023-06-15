@@ -21,10 +21,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 class FindPatientTest extends ClassTestParent {
 
-    private final String path = "/patients";
-
     @Autowired
     private UserRepository userRepository;
+
+    private final String path = "/patients";
 
     @Test
     void findPagePatients() throws Exception {

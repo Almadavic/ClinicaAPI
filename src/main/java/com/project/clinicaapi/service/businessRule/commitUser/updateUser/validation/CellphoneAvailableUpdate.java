@@ -20,7 +20,7 @@ public class CellphoneAvailableUpdate implements UpdateUserVerification {
 
         String cellphone = args.userDTO().getCellphone();
 
-        if (cellphone != null && !args.userDTO().getCellphone().equals(args.user().getCellphone())) {
+        if (cellphone != null && !cellphone.equals(args.user().getCellphone())) {
             CommitUserValidations.findUserByCellphoneValidation(userRepository, cellphone);
         }
 

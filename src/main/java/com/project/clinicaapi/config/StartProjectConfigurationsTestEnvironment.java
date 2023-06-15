@@ -102,7 +102,7 @@ public class StartProjectConfigurationsTestEnvironment implements CommandLineRun
 
         dentist4.setEnabled(true);
 
-        Patient patient = Patient.patientBuilder()
+        Patient patient1 = Patient.patientBuilder()
                 .login("patient")
                 .name("nome2")
                 .password(encoder.encode("123456"))
@@ -115,7 +115,22 @@ public class StartProjectConfigurationsTestEnvironment implements CommandLineRun
                 .cpf("115.613.986-02")
                 .build();
 
-        patient.setEnabled(true);
+        patient1.setEnabled(true);
+
+        Patient patient2 = Patient.patientBuilder()
+                .login("patient2")
+                .name("nome2")
+                .password(encoder.encode("123456"))
+                .country("Brasil")
+                .cellphone("1931891141")
+                .state("MG")
+                .city("Belo Horizonte")
+                .email("sergio222@hotmail.com")
+                .gender(Gender.MALE)
+                .cpf("115.613.982-01")
+                .build();
+
+        patient2.setEnabled(true);
 
         Secretary secretary = Secretary.secretaryBuilder()
                 .login("secretary")
@@ -187,7 +202,7 @@ public class StartProjectConfigurationsTestEnvironment implements CommandLineRun
 
         u3.setRole(Role.PATIENT);
 
-        userRepository.saveAll(Arrays.asList(dentist1, dentist2, dentist3, dentist4, patient, secretary, secretary2, u1, u2, u3));
+        userRepository.saveAll(Arrays.asList(dentist1, dentist2, dentist3, dentist4, patient1, patient2, secretary, secretary2, u1, u2, u3));
 
         WorkDay wd1 = new WorkDay(WorkDayEnum.MONDAY);
         WorkDay wd2 = new WorkDay(WorkDayEnum.TUESDAY);
@@ -224,7 +239,7 @@ public class StartProjectConfigurationsTestEnvironment implements CommandLineRun
                 .timeStart(LocalTime.now())
                 .timeEnd(LocalTime.now().plusHours(1))
                 .dentist(dentist1)
-                .patient(patient)
+                .patient(patient1)
                 .build();
 
         appointmentRepository.save(appointment);

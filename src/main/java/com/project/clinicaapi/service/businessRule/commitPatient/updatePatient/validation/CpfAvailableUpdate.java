@@ -10,15 +10,16 @@ import org.springframework.stereotype.Component;
 
 @Order(value = 3)
 @Component
-@RequiredArgsConstructor
 public class CpfAvailableUpdate implements UpdatePatientVerification {
-
-    private final PatientRepository patientRepository;
 
     @Override
     public void verification(UpdatePatientArgs args) {
 
-        CommitPatientValidations.findPatientByCpfValidation(patientRepository, args.patientDTO().getCpf());
+        String cpf = args.patientDTO().getCpf();
+
+        if(cpf != null && !cpf.equals(args.patient().getCpf())) {
+            CommitPatientValidations.findPatientByCpfValidation(args.patientRepository(), cpf);
+        }
 
     }
 

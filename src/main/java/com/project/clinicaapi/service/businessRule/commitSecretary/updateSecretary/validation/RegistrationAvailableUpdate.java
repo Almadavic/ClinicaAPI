@@ -10,18 +10,15 @@ import org.springframework.stereotype.Component;
 
 @Order(value = 2)
 @Component
-@RequiredArgsConstructor
 public class RegistrationAvailableUpdate implements UpdateSecretaryVerification {
-
-    private final SecretaryRepository secretaryRepository;
 
     @Override
     public void verification(UpdateSecretaryArgs args) {
 
         String registration = args.secretaryDTO().getRegistration();
 
-        if (registration != null) {
-            CommitSecretaryValidations.findSecretaryByRegistrationValidation(secretaryRepository, registration);
+        if (registration != null && !registration.equals(args.secretary().getRegistration())) {
+            CommitSecretaryValidations.findSecretaryByRegistrationValidation(args.secretaryRepository(), registration);
         }
 
     }

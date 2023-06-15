@@ -84,12 +84,12 @@ public class PatientService {
 
     private void savePatientVerifications(PatientRegisterDTO registerData) {
         registerUserVerifications.forEach(v -> v.verification(new RegisterUserArgs(registerData)));
-        registerPatientVerifications.forEach(v -> v.verification(new RegisterPatientArgs(registerData)));
+        registerPatientVerifications.forEach(v -> v.verification(new RegisterPatientArgs(registerData, patientRepository)));
     }
 
-    private void updatePatientVerifications(PatientUpdateDTO registerData, Patient patient) {
-        updatePatientVerifications.forEach(v -> v.verification(new UpdatePatientArgs(registerData, patient)));
-        updateUserVerifications.forEach(v -> v.verification(new UpdateUserArgs(registerData, patient)));
+    private void updatePatientVerifications(PatientUpdateDTO updateData, Patient patient) {
+        updatePatientVerifications.forEach(v -> v.verification(new UpdatePatientArgs(updateData, patient, patientRepository)));
+        updateUserVerifications.forEach(v -> v.verification(new UpdateUserArgs(updateData, patient)));
     }
 
     private PatientResponseDTO saveAndConvertToDTO(Patient patient) {

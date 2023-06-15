@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class UpdatingUserData implements UpdateUserVerification {
 
-    private PasswordEncoder encoder;
+    private final PasswordEncoder encoder;
 
     @Override
     public void verification(UpdateUserArgs args) {

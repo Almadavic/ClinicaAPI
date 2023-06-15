@@ -27,7 +27,7 @@ class UpdateSecretaryFieldsTest {
                 .build();
 
         Assertions.assertThrows(NoFieldFilledException.class,
-                () -> service.verification(new UpdateSecretaryArgs(secretaryDTO, null)));
+                () -> service.verification(new UpdateSecretaryArgs(secretaryDTO, null, null)));
 
     }
 
@@ -39,7 +39,7 @@ class UpdateSecretaryFieldsTest {
                 .registration("13781791")
                 .build();
 
-        Assertions.assertDoesNotThrow(() -> service.verification(new UpdateSecretaryArgs(secretaryDTO, null)));
+        Assertions.assertDoesNotThrow(() -> service.verification(new UpdateSecretaryArgs(secretaryDTO, null, null)));
 
     }
 

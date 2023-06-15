@@ -2,7 +2,6 @@ package com.project.clinicaapi.entity;
 
 import com.project.clinicaapi.enumerated.WorkDayEnum;
 import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

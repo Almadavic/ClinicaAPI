@@ -78,10 +78,6 @@ class SavePatientTest extends ClassTestParent {
     @Test
     void savePatientSuccess() throws Exception {
 
-        String login = "newLogin";
-
-        String password = "1234567";
-
         PatientRegisterDTO patientDTO = PatientRegisterDTO.builder()
                 .login("patientnovo")
                 .address(new AddessRegisterDTO("country", "state", "city"))

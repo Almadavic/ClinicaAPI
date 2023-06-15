@@ -18,17 +18,17 @@ public class Dentist extends User {
     @Column(name = "cro", length = 6, nullable = false, unique = true)
     private String cro;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "tb_dentists_workdays",
-            joinColumns = @JoinColumn(name = "dentist_id"),
-            inverseJoinColumns = @JoinColumn(name = "workday_id"),
-            indexes = {@Index(columnList = "dentist_id, workday_id", unique = true)})
-    @Setter(AccessLevel.NONE)
-    private final List<WorkDay> workDays = new ArrayList<>();
-
     @Enumerated(EnumType.STRING)
     @Column(name = "specialty", nullable = false)
     private Specialty specialty;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "tb_dentists_workdays",
+            joinColumns = @JoinColumn(name = "dentist_id", foreignKey = @ForeignKey(name = "fk_dentist")),
+            inverseJoinColumns = @JoinColumn(name = "workday_id", foreignKey = @ForeignKey(name = "fk_workday")),
+            indexes = {@Index(name = "dentists_workdays_pkey",columnList = "dentist_id, workday_id", unique = true)})
+    @Setter(AccessLevel.NONE)
+    private final List<WorkDay> workDays = new ArrayList<>();
 
     @OneToMany(mappedBy = "dentist")
     private List<Appointment> appointments = new ArrayList<>();

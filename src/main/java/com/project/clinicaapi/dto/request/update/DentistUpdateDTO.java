@@ -2,17 +2,16 @@ package com.project.clinicaapi.dto.request.update;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
-import java.util.List;
+import java.util.Set;
 
-@JsonPropertyOrder(value = {"login", "email", "name", "cellphone", "gender", "cro", "speciality", "workdays", "address"})
+@JsonPropertyOrder(value = {"login", "email", "name", "cellphone", "password", "passwordconfirmation", "gender", "cro", "speciality", "workdays", "address"})
 @NoArgsConstructor
+@SuperBuilder(toBuilder = true)
 @Getter
 public class DentistUpdateDTO extends UserUpdateDTO{
 
@@ -25,6 +24,6 @@ public class DentistUpdateDTO extends UserUpdateDTO{
 
     @JsonProperty(value = "workdays")
     @Size(max = 6)
-    private List<Integer> workDays;
+    private Set<Long> workDays;
 
 }

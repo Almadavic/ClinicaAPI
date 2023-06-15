@@ -20,7 +20,7 @@ public class EmailAvailableUpdate implements UpdateUserVerification {
 
         String email = args.userDTO().getEmail();
 
-        if (email != null && !args.userDTO().getEmail().equals(args.user().getEmail())) {
+        if (email != null && !email.equals(args.user().getEmail())) {
             CommitUserValidations.findUserByEmailValidation(userRepository, email);
         }
 

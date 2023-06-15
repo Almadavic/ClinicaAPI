@@ -5,27 +5,31 @@ import com.project.clinicaapi.dto.request.update.DentistUpdateDTO;
 import com.project.clinicaapi.dto.response.DentistResponseDTO;
 import com.project.clinicaapi.entity.Dentist;
 import com.project.clinicaapi.entity.User;
-import com.project.clinicaapi.entity.WorkDay;
 import com.project.clinicaapi.repository.DentistRepository;
 import com.project.clinicaapi.service.businessRule.commitDentist.CommitDentistValidations;
 import com.project.clinicaapi.service.businessRule.commitDentist.registerDentist.RegisterDentistArgs;
 import com.project.clinicaapi.service.businessRule.commitDentist.registerDentist.RegisterDentistVerification;
+import com.project.clinicaapi.service.businessRule.commitDentist.updateDentist.UpdateDentistArgs;
+import com.project.clinicaapi.service.businessRule.commitDentist.updateDentist.UpdateDentistVerification;
 import com.project.clinicaapi.service.businessRule.commitUser.registerUser.RegisterUserArgs;
 import com.project.clinicaapi.service.businessRule.commitUser.registerUser.RegisterUserVerification;
+import com.project.clinicaapi.service.businessRule.commitUser.updateUser.UpdateUserArgs;
+import com.project.clinicaapi.service.businessRule.commitUser.updateUser.UpdateUserVerification;
 import com.project.clinicaapi.service.customException.ResourceNotFoundException;
 import com.project.clinicaapi.util.DentistSpecifications;
 import com.project.clinicaapi.util.LogRegistration;
 import com.project.clinicaapi.util.mapper.DentistMapper;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Set;
 
-@Component
+@Service
 @RequiredArgsConstructor
 public class DentistService {
 
@@ -41,13 +45,17 @@ public class DentistService {
 
     private final List<RegisterDentistVerification> registerDentistVerifications;
 
+    private final List<UpdateUserVerification> updateUserVerifications;
+
+    private final List<UpdateDentistVerification> updateDentistVerifications;
+
     public DentistResponseDTO save(DentistRegisterDTO registerData, User userLogged) {
 
         saveDentistVerifications(registerData);
 
         Dentist dentist = mapper.toDentistEntity(registerData);
 
-        setDentistReferences(dentist, registerData);
+        setWorkDaysList(dentist, registerData);
 
         DentistResponseDTO dentistDTO = saveAndConvert(dentist);
 
@@ -73,9 +81,12 @@ public class DentistService {
                         .orElseThrow(() -> new ResourceNotFoundException("The dentist cro: " + cro + " wasn't found on database")));
     }
 
+    @Transactional
     public DentistResponseDTO update(String dentistId, DentistUpdateDTO updateData, User userLogged) {
 
         Dentist dentist = returnDentistDataBase(dentistId);
+
+        updateDentistVerifications(updateData, dentist);
 
         DentistResponseDTO dentistDTO = saveAndConvert(dentist);
 
@@ -86,7 +97,12 @@ public class DentistService {
 
     private void saveDentistVerifications(DentistRegisterDTO registerData) {
         registerUserVerifications.forEach(v -> v.verification(new RegisterUserArgs(registerData)));
-        registerDentistVerifications.forEach(v -> v.verification(new RegisterDentistArgs(registerData)));
+        registerDentistVerifications.forEach(v -> v.verification(new RegisterDentistArgs(registerData, dentistRepository)));
+    }
+
+    private void updateDentistVerifications(DentistUpdateDTO updateData, Dentist dentist) {
+        updateDentistVerifications.forEach(v -> v.verification(new UpdateDentistArgs(updateData, dentist, dentistRepository, workDayService)));
+        updateUserVerifications.forEach(v -> v.verification(new UpdateUserArgs(updateData, dentist)));
     }
 
     private DentistResponseDTO saveAndConvert(Dentist dentist) {
@@ -98,7 +114,7 @@ public class DentistService {
                 .orElseThrow(() -> new ResourceNotFoundException("The dentist id: " + dentistId + " wasn't found on database"));
     }
 
-    private void setDentistReferences(Dentist dentist, DentistRegisterDTO dentistDTO) {
+    private void setWorkDaysList(Dentist dentist, DentistRegisterDTO dentistDTO) {
 
         Set<Long> workDays = dentistDTO.getWorkDays();
 

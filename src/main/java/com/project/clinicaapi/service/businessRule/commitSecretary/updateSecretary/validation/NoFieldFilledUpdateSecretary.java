@@ -3,11 +3,13 @@ package com.project.clinicaapi.service.businessRule.commitSecretary.updateSecret
 import com.project.clinicaapi.dto.request.update.SecretaryUpdateDTO;
 import com.project.clinicaapi.service.businessRule.commitSecretary.updateSecretary.UpdateSecretaryArgs;
 import com.project.clinicaapi.service.businessRule.commitSecretary.updateSecretary.UpdateSecretaryVerification;
+import com.project.clinicaapi.service.businessRule.commitUser.CommitUserValidations;
 import com.project.clinicaapi.service.customException.NoFieldFilledException;
 import com.project.clinicaapi.util.VerifyAttributes;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -20,10 +22,12 @@ public class NoFieldFilledUpdateSecretary implements UpdateSecretaryVerification
 
         SecretaryUpdateDTO secretaryDTO = args.secretaryDTO();
 
-        List<Object> attributes = Arrays.asList(secretaryDTO.getLogin(), secretaryDTO.getPassword(), secretaryDTO.getEmail(), secretaryDTO.getName(),
-                secretaryDTO.getCellphone(), secretaryDTO.getRegistration(), secretaryDTO.getGender(), secretaryDTO.getPasswordConfirmation());
+        List<Object> attributes = new ArrayList<>(Arrays.asList(secretaryDTO.getLogin(), secretaryDTO.getPassword(), secretaryDTO.getEmail(), secretaryDTO.getName(),
+                secretaryDTO.getCellphone(), secretaryDTO.getRegistration(), secretaryDTO.getGender(), secretaryDTO.getPasswordConfirmation()));
 
-        if (VerifyAttributes.commonAndAddressFieldsNull(attributes, secretaryDTO.getAddress())) {
+        CommitUserValidations.addAddressAttributesToList(attributes, secretaryDTO.getAddress());
+
+        if (VerifyAttributes.allAttributesNull(attributes)) {
             throw new NoFieldFilledException();
         }
 

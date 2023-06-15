@@ -11,15 +11,12 @@ import org.springframework.stereotype.Component;
 
 @Order(value = 1)
 @Component
-@RequiredArgsConstructor
 public class RegistrationAvailableRegister implements RegisterSecretaryVerification {
-
-    private final SecretaryRepository secretaryRepository;
 
     @Override
     public void verification(RegisterSecretaryArgs args) {
 
-        CommitSecretaryValidations.findSecretaryByRegistrationValidation(secretaryRepository, args.secretaryDTO().getRegistration());
+        CommitSecretaryValidations.findSecretaryByRegistrationValidation(args.secretaryRepository(), args.secretaryDTO().getRegistration());
 
     }
 

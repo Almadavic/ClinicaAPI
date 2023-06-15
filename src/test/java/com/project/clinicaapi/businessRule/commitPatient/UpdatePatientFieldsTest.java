@@ -27,7 +27,7 @@ class UpdatePatientFieldsTest {
         PatientUpdateDTO patientDTO = PatientUpdateDTO.builder().build();
 
         Assertions.assertThrows(NoFieldFilledException.class,
-                () -> service.verification(new UpdatePatientArgs(patientDTO, null)));
+                () -> service.verification(new UpdatePatientArgs(patientDTO, null, null)));
 
     }
 
@@ -38,7 +38,7 @@ class UpdatePatientFieldsTest {
                 .cpf("91371387113")
                 .build();
 
-        Assertions.assertDoesNotThrow(() -> service.verification(new UpdatePatientArgs(patientDTO, null)));
+        Assertions.assertDoesNotThrow(() -> service.verification(new UpdatePatientArgs(patientDTO, null, null)));
 
     }
 

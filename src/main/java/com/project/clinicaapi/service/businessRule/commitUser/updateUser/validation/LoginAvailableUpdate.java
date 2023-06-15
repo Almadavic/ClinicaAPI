@@ -20,7 +20,7 @@ public class LoginAvailableUpdate implements UpdateUserVerification {
 
         String login = args.userDTO().getLogin();
 
-        if (login != null && !args.userDTO().getLogin().equals(args.user().getUsername())) {
+        if (login != null && !login.equals(args.user().getUsername())) {
             CommitUserValidations.findUserByLoginValidation(userRepository, login);
         }
 

@@ -37,6 +37,18 @@ public class CommitDentistValidations {
 
     }
 
+    public static Specialty specialtyValueValidation(String specialty) {
+        try {
+            if(specialty != null) {
+                return Specialty.valueOf(specialty.toUpperCase());
+            }
+            return null;
+        } catch (IllegalArgumentException exception) {
+            throw new InvalidEnumValueException(specialty, "Specialty", ListEnumValues.returnEnumValues(Arrays.asList(Specialty.values())));
+        }
+
+    }
+
     public static void workdayListValidation(Set<Long> workDays) {
 
         if(workDays != null) {
@@ -49,18 +61,6 @@ public class CommitDentistValidations {
         if (number < 1 || number > 6) {
             throw new WorkDayNumberSizeException();
         }
-    }
-
-    public static Specialty specialtyValueValidation(String specialty) {
-        try {
-            if(specialty != null) {
-                return Specialty.valueOf(specialty.toUpperCase());
-            }
-            return null;
-        } catch (IllegalArgumentException exception) {
-            throw new InvalidEnumValueException(specialty, "Specialty", ListEnumValues.returnEnumValues(Arrays.asList(Specialty.values())));
-        }
-
     }
 
 }

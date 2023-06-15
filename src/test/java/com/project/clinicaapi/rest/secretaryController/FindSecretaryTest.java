@@ -22,10 +22,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 class FindSecretaryTest extends ClassTestParent {
 
-    private final String path = "/secretaries";
-
     @Autowired
     private UserRepository userRepository;
+
+    private final String path = "/secretaries";
 
     @Test
     void findPageSecretaries() throws Exception {
