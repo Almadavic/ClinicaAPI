@@ -58,6 +58,8 @@ public interface UserSwagger {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Usuário desabilitado com sucesso",
                     content = {@Content(mediaType = "application/json")}),
+            @ApiResponse(responseCode = "401", description = "Você não tem permissão para deletar um administrador",
+                    content = {@Content(mediaType = "application/json", schema = @Schema(implementation = StandardError.class))}),
             @ApiResponse(responseCode = "404", description = "Usuário não encontrado",
                     content = {@Content(mediaType = "application/json", schema = @Schema(implementation = StandardError.class))})
     })

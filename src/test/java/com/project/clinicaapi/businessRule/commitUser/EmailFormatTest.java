@@ -14,27 +14,27 @@ class EmailFormatTest {
     @Test
     void emailInvalidFormat() {
 
-        testingFail("emaildeteste");
+        testingThrowsException("emaildeteste");
 
-        testingFail("emaildeteste@hotmail.com!");
+        testingThrowsException("emaildeteste@hotmail.com!");
 
     }
 
     @Test
     void emailValidFormat() {
 
-        testingSuccess("georgia@hotmail.com");
-        testingSuccess("larissa@gmail.com");
-        testingSuccess("vanessa@live.com");
+        testingDoesNotThrowException("georgia@hotmail.com");
+        testingDoesNotThrowException("larissa@gmail.com");
+        testingDoesNotThrowException("vanessa@live.com");
 
     }
 
-    private void testingFail(String email) {
+    private void testingThrowsException(String email) {
         Assertions.assertThrows(InvalidEmailFormatException.class,
                 () -> CommitUserValidations.emailFormatValidation(email));
     }
 
-    private void testingSuccess(String email) {
+    private void testingDoesNotThrowException(String email) {
         Assertions.assertDoesNotThrow(() -> CommitUserValidations.emailFormatValidation(email));
     }
 

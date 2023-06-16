@@ -14,25 +14,25 @@ class SpecialtyValueTest {
     @Test
     void specialtyInvalidValue() {
 
-        testingFail("oçyrthodontiss");
-        testingFail("implanttt");
+        testingThrowsException("oçyrthodontiss");
+        testingThrowsException("implanttt");
 
     }
 
     @Test
     void specialtyValidValue() {
 
-        testingSuccess("OrThoDontiCS");
-        testingSuccess("IMPlant_DentistrY");
+        testingDoesNotThrowException("OrThoDontiCS");
+        testingDoesNotThrowException("IMPlant_DentistrY");
 
     }
 
-    private void testingFail(String value) {
+    private void testingThrowsException(String value) {
         Assertions.assertThrows(InvalidEnumValueException.class,
                 () -> CommitDentistValidations.specialtyValueValidation(value));
     }
 
-    private void testingSuccess(String value) {
+    private void testingDoesNotThrowException(String value) {
         Assertions.assertDoesNotThrow(() -> CommitDentistValidations.specialtyValueValidation(value));
     }
 

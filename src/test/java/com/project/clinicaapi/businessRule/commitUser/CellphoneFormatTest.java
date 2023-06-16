@@ -14,27 +14,27 @@ class CellphoneFormatTest {
     @Test
     void cellphoneInvalidFormat() {
 
-        testingFail("319858989550");
+        testingThrowsException("319858989550");
 
-        testingFail("0181399a");
+        testingThrowsException("0181399a");
 
     }
 
     @Test
     void cellphoneValidFormat() {
 
-        testingSuccess("(31)98589-8952");
-        testingSuccess("(31)98589-8422");
-        testingSuccess("55(31)98589-8955");
+        testingDoesNotThrowException("(31)98589-8952");
+        testingDoesNotThrowException("(31)98589-8422");
+        testingDoesNotThrowException("55(31)98589-8955");
 
     }
 
-    private void testingFail(String cellphone) {
+    private void testingThrowsException(String cellphone) {
         Assertions.assertThrows(InvalidCellphoneNumberException.class,
                 () -> CommitUserValidations.cellphoneFormatValidation(cellphone));
     }
 
-    private void testingSuccess(String cellphone) {
+    private void testingDoesNotThrowException(String cellphone) {
         Assertions.assertDoesNotThrow(() -> CommitUserValidations.cellphoneFormatValidation(cellphone));
     }
 

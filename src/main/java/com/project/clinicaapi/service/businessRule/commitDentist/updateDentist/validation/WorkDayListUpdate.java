@@ -15,7 +15,7 @@ public class WorkDayListUpdate implements UpdateDentistVerification {
     @Override
     public void verification(UpdateDentistArgs args) {
 
-        Set<Long> workDays = args.dentistDTO().getWorkDays();
+        Set<Integer> workDays = args.dentistDTO().getWorkDays();
 
         if (workDays != null) {
             CommitDentistValidations.workdayListValidation(workDays);

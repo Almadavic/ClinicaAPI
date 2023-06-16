@@ -14,25 +14,25 @@ class GenderValueTest {
     @Test
     void genderInvalidValue() {
 
-        testingFail("fimale");
-        testingFail("malee");
+        testingThrowsException("fimale");
+        testingThrowsException("malee");
 
     }
 
     @Test
     void genderValidValue() {
 
-        testingSuccess("MAle");
-        testingSuccess("FemalE");
+        testingDoesNotThrowException("MAle");
+        testingDoesNotThrowException("FemalE");
 
     }
 
-    private void testingFail(String value) {
+    private void testingThrowsException(String value) {
         Assertions.assertThrows(InvalidEnumValueException.class,
                 () -> CommitUserValidations.genderValueValidation(value));
     }
 
-    private void testingSuccess(String value) {
+    private void testingDoesNotThrowException(String value) {
         Assertions.assertDoesNotThrow(() -> CommitUserValidations.genderValueValidation(value));
     }
 

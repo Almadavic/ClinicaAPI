@@ -25,6 +25,9 @@ public class WorkDay implements Serializable {
     @Enumerated(EnumType.STRING)
     private WorkDayEnum workDay;
 
+    @Column(name = "index", nullable = false, unique = true)
+    private Integer index;
+
     @OneToMany(mappedBy = "weekDay")
     private final List<Appointment> appointments = new ArrayList<>();
 
@@ -33,6 +36,7 @@ public class WorkDay implements Serializable {
 
     public WorkDay(WorkDayEnum workDay) {
         this.workDay = workDay;
+        this.index = workDay.getIndex();
     }
 
 }

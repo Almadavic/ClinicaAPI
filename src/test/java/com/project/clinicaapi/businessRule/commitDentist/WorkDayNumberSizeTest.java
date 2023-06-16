@@ -18,25 +18,25 @@ class WorkDayNumberSizeTest {
     @Test
     void validValues() {
 
-        testingFail(new HashSet<>(Arrays.asList(0L, 5L, 1L, -1L)));
-        testingFail(new HashSet<>(Arrays.asList(7L, 9L, 1L)));
+        testingThrowsException(new HashSet<>(Arrays.asList(0, 5, 1, -1)));
+        testingThrowsException(new HashSet<>(Arrays.asList(7, 9, 1)));
 
     }
 
     @Test
     void invalidValues() {
 
-        testingSuccess(new HashSet<>(Arrays.asList(1L, 2L, 3L)));
-        testingSuccess(new HashSet<>(Arrays.asList(4L, 3L, 2L)));
+        testingDoesNotThrowException(new HashSet<>(Arrays.asList(1, 2, 3)));
+        testingDoesNotThrowException(new HashSet<>(Arrays.asList(4, 3, 2)));
 
     }
 
-    private void testingFail(Set<Long> workDays) {
+    private void testingThrowsException(Set<Integer> workDays) {
         Assertions.assertThrows(WorkDayNumberSizeException.class,
                 () -> CommitDentistValidations.workdayListValidation(workDays));
     }
 
-    private void testingSuccess(Set<Long> workDays) {
+    private void testingDoesNotThrowException(Set<Integer> workDays) {
         Assertions.assertDoesNotThrow(() -> CommitDentistValidations.workdayListValidation(workDays));
     }
 

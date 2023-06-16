@@ -116,7 +116,7 @@ public class DentistService {
 
     private void setWorkDaysList(Dentist dentist, DentistRegisterDTO dentistDTO) {
 
-        Set<Long> workDays = dentistDTO.getWorkDays();
+        Set<Integer> workDays = dentistDTO.getWorkDays();
 
         if (workDays != null) {
             workDays.forEach(workday ->

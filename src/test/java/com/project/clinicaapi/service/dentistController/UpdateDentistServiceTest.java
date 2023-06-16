@@ -40,19 +40,19 @@ class UpdateDentistServiceTest {
         DentistUpdateDTO dentistDTO = DentistUpdateDTO.builder()
                 .cro(cro)
                 .speciality(specialty)
-                .workDays(new HashSet<>(Arrays.asList(1L, 2L, 3L, 4L)))
+                .workDays(new HashSet<>(Arrays.asList(1, 2, 3, 4)))
                 .build();
 
         DentistResponseDTO dentistResponseDTO = dentistService.update(returnDentistId(), dentistDTO, userLogged());
 
         Assertions.assertEquals(cro, dentistResponseDTO.getCro());
         Assertions.assertTrue(specialty.equalsIgnoreCase(dentistResponseDTO.getSpeciality()));
-        Assertions.assertTrue(dentistResponseDTO.getWorkDays().contains(new WorkDayResponseDTO(workDayService.returnWorkDayDataBase(1L))));
-        Assertions.assertTrue(dentistResponseDTO.getWorkDays().contains(new WorkDayResponseDTO(workDayService.returnWorkDayDataBase(2L))));
-        Assertions.assertTrue(dentistResponseDTO.getWorkDays().contains(new WorkDayResponseDTO(workDayService.returnWorkDayDataBase(3L))));
-        Assertions.assertTrue(dentistResponseDTO.getWorkDays().contains(new WorkDayResponseDTO(workDayService.returnWorkDayDataBase(4L))));
-        Assertions.assertFalse(dentistResponseDTO.getWorkDays().contains(new WorkDayResponseDTO(workDayService.returnWorkDayDataBase(5L))));
-        Assertions.assertFalse(dentistResponseDTO.getWorkDays().contains(new WorkDayResponseDTO(workDayService.returnWorkDayDataBase(6L))));
+        Assertions.assertTrue(dentistResponseDTO.getWorkDays().contains(new WorkDayResponseDTO(workDayService.returnWorkDayDataBase(1))));
+        Assertions.assertTrue(dentistResponseDTO.getWorkDays().contains(new WorkDayResponseDTO(workDayService.returnWorkDayDataBase(2))));
+        Assertions.assertTrue(dentistResponseDTO.getWorkDays().contains(new WorkDayResponseDTO(workDayService.returnWorkDayDataBase(3))));
+        Assertions.assertTrue(dentistResponseDTO.getWorkDays().contains(new WorkDayResponseDTO(workDayService.returnWorkDayDataBase(4))));
+        Assertions.assertFalse(dentistResponseDTO.getWorkDays().contains(new WorkDayResponseDTO(workDayService.returnWorkDayDataBase(5))));
+        Assertions.assertFalse(dentistResponseDTO.getWorkDays().contains(new WorkDayResponseDTO(workDayService.returnWorkDayDataBase(6))));
 
     }
 

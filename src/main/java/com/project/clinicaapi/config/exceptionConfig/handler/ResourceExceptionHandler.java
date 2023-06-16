@@ -110,6 +110,11 @@ public class ResourceExceptionHandler {
         return handlingException(exception, request, "No value filled", HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(DisableOwnAccountException.class)
+    public ResponseEntity<StandardError> disableOwnAccount(DisableOwnAccountException exception, HttpServletRequest request) {
+        return handlingException(exception, request, "Disable account error", HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
     @ExceptionHandler(WorkDayNumberSizeException.class)
     public ResponseEntity<StandardError> workDayNumberSize(WorkDayNumberSizeException exception, HttpServletRequest request) {
         return handlingException(exception, request, "Value not accepted", HttpStatus.BAD_REQUEST);

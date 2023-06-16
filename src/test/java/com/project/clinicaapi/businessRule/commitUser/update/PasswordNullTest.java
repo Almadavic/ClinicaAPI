@@ -1,4 +1,4 @@
-package com.project.clinicaapi.businessRule.commitSecretary;
+package com.project.clinicaapi.businessRule.commitUser.update;
 
 import com.project.clinicaapi.service.businessRule.commitUser.CommitUserValidations;
 import com.project.clinicaapi.service.customException.PasswordNullException;

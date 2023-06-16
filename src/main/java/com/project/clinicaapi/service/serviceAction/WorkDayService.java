@@ -3,6 +3,7 @@ package com.project.clinicaapi.service.serviceAction;
 import com.project.clinicaapi.dto.response.WorkDayResponseDTO;
 import com.project.clinicaapi.entity.WorkDay;
 import com.project.clinicaapi.repository.WorkDayRepository;
+import com.project.clinicaapi.service.businessRule.commitUser.updateUser.UpdateUserVerification;
 import com.project.clinicaapi.service.customException.ResourceNotFoundException;
 import com.project.clinicaapi.util.MyWorkDayListComparator;
 import com.project.clinicaapi.util.mapper.WorkDayMapper;
@@ -27,13 +28,13 @@ public class WorkDayService {
         return mapper.toWorkDayResponseDTOList(workDays);
     }
 
-    public WorkDayResponseDTO findById(Long id) {
-        return mapper.toWorkDayResponseDTO(returnWorkDayDataBase(id));
+    public WorkDayResponseDTO findById(Integer index) {
+        return mapper.toWorkDayResponseDTO(returnWorkDayDataBase(index));
     }
 
-    public WorkDay returnWorkDayDataBase(Long id) {
-        return  workDayRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("The workday id: " + id + " wasn't found on database"));
+    public WorkDay returnWorkDayDataBase(Integer index) {
+        return  workDayRepository.findByIndex(index)
+                .orElseThrow(() -> new ResourceNotFoundException("The workday index: " + index + " wasn't found on database"));
     }
 
 }

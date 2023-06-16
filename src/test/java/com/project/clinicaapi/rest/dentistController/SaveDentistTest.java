@@ -122,7 +122,7 @@ class SaveDentistTest extends ClassTestParent {
                 .cellphone("(61)98571-7484")
                 .cro("81736")
                 .speciality("orthodontics")
-                .workDays(new HashSet<>(Arrays.asList(0L, 9L)))
+                .workDays(new HashSet<>(Arrays.asList(0, 9)))
                 .gender("MALE")
                 .build();
 
@@ -148,7 +148,7 @@ class SaveDentistTest extends ClassTestParent {
                 .cellphone("(41)98565-7484")
                 .cro("81700")
                 .speciality("orthodontics")
-                .workDays(new HashSet<>(Arrays.asList(1L, 2L, 3L)))
+                .workDays(new HashSet<>(Arrays.asList(1, 2, 3)))
                 .gender("MALE")
                 .build();
 

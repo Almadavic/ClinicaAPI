@@ -24,6 +24,6 @@ public class DentistUpdateDTO extends UserUpdateDTO{
 
     @JsonProperty(value = "workdays")
     @Size(max = 6)
-    private Set<Long> workDays;
+    private Set<Integer> workDays;
 
 }

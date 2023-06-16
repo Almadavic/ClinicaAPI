@@ -40,7 +40,7 @@ public class NoFieldFilledUpdateDentist implements UpdateDentistVerification {
     }
 
     private boolean workDayNotNullButListEmpty(List<Object> attributes, DentistUpdateDTO dentistDTO) {
-        Set<Long> workDays = dentistDTO.getWorkDays();
+        Set<Integer> workDays = dentistDTO.getWorkDays();
         return VerifyAttributes.allAttributesNull(attributes) && workDays != null && workDays.isEmpty();
     }
 

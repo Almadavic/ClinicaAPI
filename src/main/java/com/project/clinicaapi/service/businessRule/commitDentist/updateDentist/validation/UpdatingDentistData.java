@@ -45,7 +45,7 @@ public class UpdatingDentistData implements UpdateDentistVerification {
 
     private void setWorkDaysList(Dentist dentist, DentistUpdateDTO dentistDTO, WorkDayService workDayService) {
 
-        Set<Long> workDays = dentistDTO.getWorkDays();
+        Set<Integer> workDays = dentistDTO.getWorkDays();
 
         if (!workDays.isEmpty()) {
             dentist.getWorkDays().clear();

@@ -34,7 +34,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserAreaService {
 
-    private final UserRepository userRepository;
+    private final UserService userService;
 
     private final SecretaryService secretaryService;
 
@@ -53,11 +53,11 @@ public class UserAreaService {
     public UserResponseDTO changeProfileDataAsUserGeneric(UserUpdateDTO updateData, User userLogged) {
         updateUserVerifications.forEach(v -> v.verification(new UpdateUserArgs(updateData, userLogged)));
 
-        User updated = userRepository.save(userLogged);
+        UserResponseDTO userResponseDTO = userService.update(updateData, userLogged);
 
         saveLog(userLogged.getUsername());
 
-        return new UserResponseDTO(userRepository.save(updated));
+        return userResponseDTO;
     }
 
     public SecretaryResponseDTO changeProfileDataAsSecretary(SecretaryUpdateDTO updateData, User userLogged) {
@@ -75,7 +75,7 @@ public class UserAreaService {
 
         saveLog(userLogged.getUsername());
 
-        return dentistService.update(userLogged.getId(), updateData, userLogged);
+        return dentistResponseDTO;
     }
 
     public PatientResponseDTO changeProfileDataAsPatient(PatientUpdateDTO updateData, User userLogged) {

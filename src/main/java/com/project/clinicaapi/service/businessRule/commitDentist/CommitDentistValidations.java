@@ -1,7 +1,6 @@
 package com.project.clinicaapi.service.businessRule.commitDentist;
 
 import com.project.clinicaapi.entity.Dentist;
-import com.project.clinicaapi.enumerated.Gender;
 import com.project.clinicaapi.enumerated.Specialty;
 import com.project.clinicaapi.repository.DentistRepository;
 import com.project.clinicaapi.service.customException.*;
@@ -49,7 +48,7 @@ public class CommitDentistValidations {
 
     }
 
-    public static void workdayListValidation(Set<Long> workDays) {
+    public static void workdayListValidation(Set<Integer> workDays) {
 
         if(workDays != null) {
             workDays.forEach(CommitDentistValidations::verifyNumberSize);
@@ -57,7 +56,7 @@ public class CommitDentistValidations {
 
     }
 
-    private static void verifyNumberSize(long number) {
+    private static void verifyNumberSize(Integer number) {
         if (number < 1 || number > 6) {
             throw new WorkDayNumberSizeException();
         }

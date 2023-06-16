@@ -14,29 +14,29 @@ class CroFormatTest {
     @Test
     void croInvalidFormat() {
 
-        testingFail("adihadiadhdaiad");
+        testingThrowsException("adihadiadhdaiad");
 
-        testingFail("!8137813");
+        testingThrowsException("!8137813");
 
-        testingFail("1156-76-06");
+        testingThrowsException("1156-76-06");
 
     }
 
     @Test
     void croValidFormat() {
 
-        testingSuccess("138613");
-        testingSuccess("12861");
-        testingSuccess("013318");
+        testingDoesNotThrowException("138613");
+        testingDoesNotThrowException("12861");
+        testingDoesNotThrowException("013318");
 
     }
 
-    private void testingFail(String cro) {
+    private void testingThrowsException(String cro) {
         Assertions.assertThrows(InvalidCroFormatException.class,
                 () -> CommitDentistValidations.croFormatValidation(cro));
     }
 
-    private void testingSuccess(String cro) {
+    private void testingDoesNotThrowException(String cro) {
         Assertions.assertDoesNotThrow(() -> CommitDentistValidations.croFormatValidation(cro));
     }
 

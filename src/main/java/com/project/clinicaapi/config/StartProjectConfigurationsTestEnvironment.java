@@ -251,6 +251,7 @@ public class StartProjectConfigurationsTestEnvironment implements CommandLineRun
                 .appointmentDate(LocalDate.of(2023, 06, 01))
                 .timeStart(LocalTime.now())
                 .timeEnd(LocalTime.now().plusHours(1))
+                .weekDay(WorkDayEnum.FRIDAY)
                 .dentist(dentist1)
                 .patient(patient1)
                 .build();

@@ -1,4 +1,4 @@
-package com.project.clinicaapi.businessRule.commitDentist;
+package com.project.clinicaapi.businessRule.commitDentist.update;
 
 import com.project.clinicaapi.dto.request.update.DentistUpdateDTO;
 import com.project.clinicaapi.service.businessRule.commitDentist.updateDentist.UpdateDentistArgs;
@@ -58,7 +58,7 @@ class UpdateDentistFieldsTest {
     void workDayFieldFilledToUpdate() {
 
         DentistUpdateDTO dentistDTO = DentistUpdateDTO.builder()
-                .workDays(new HashSet<>(Arrays.asList(1L, 2L, 4L)))
+                .workDays(new HashSet<>(Arrays.asList(1, 2, 4)))
                 .build();
 
         Assertions.assertDoesNotThrow(() -> service.verification(new UpdateDentistArgs(dentistDTO, null, null, null)));

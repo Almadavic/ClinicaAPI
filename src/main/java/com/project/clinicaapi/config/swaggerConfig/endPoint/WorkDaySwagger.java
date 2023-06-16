@@ -30,6 +30,6 @@ public interface WorkDaySwagger {
             @ApiResponse(responseCode = "404", description = "Dia de trabalho não encontrado",
                     content = {@Content(mediaType = "application/json", schema = @Schema(implementation = StandardError.class))})
     })
-    ResponseEntity<WorkDayResponseDTO> findById(Long id);
+    ResponseEntity<WorkDayResponseDTO> findById(Integer index);
 
 }

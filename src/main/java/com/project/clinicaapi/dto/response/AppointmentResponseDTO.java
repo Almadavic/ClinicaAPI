@@ -28,7 +28,7 @@ public class AppointmentResponseDTO {
     private final LocalTime timeEnd;
 
     @JsonProperty(value= "weekDay")
-    private final WorkDayResponseDTO weekDay;
+    private final String weekDay;
 
     @JsonProperty(value = "dentistId")
     private final String dentistId;
@@ -42,9 +42,9 @@ public class AppointmentResponseDTO {
         this.appointmentDate = appointment.getAppointmentDate();
         this.timeStart = appointment.getTimeStart();
         this.timeEnd = appointment.getTimeEnd();
+        this.weekDay = appointment.getWeekDay().toString();
         this.dentistId = appointment.getDentist().getId();
         this.patientId = appointment.getPatient().getId();
-        this.weekDay = new WorkDayResponseDTO(appointment.getWeekDay());
     }
 
 }

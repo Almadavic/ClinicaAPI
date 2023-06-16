@@ -8,6 +8,6 @@ import java.util.Optional;
 
 public interface WorkDayRepository extends JpaRepository<WorkDay, Long> {
 
-    Optional<WorkDay> findByWorkDay(Specialty specialty);
+    Optional<WorkDay> findByIndex(Integer index);
 
 }

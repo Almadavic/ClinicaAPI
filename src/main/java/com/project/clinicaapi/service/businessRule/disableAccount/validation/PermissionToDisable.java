@@ -7,7 +7,7 @@ import com.project.clinicaapi.service.customException.NoPermissionException;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-@Order(value = 1)
+@Order(value = 2)
 @Component
 public class PermissionToDisable implements DisableAccountVerification {
 

@@ -1,5 +1,6 @@
 package com.project.clinicaapi.entity;
 
+import com.project.clinicaapi.enumerated.WorkDayEnum;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.jdbc.Work;
@@ -34,9 +35,8 @@ public class Appointment implements Serializable {
     @Column(name = "time_end", nullable = false)
     private LocalTime timeEnd;
 
-    @ManyToOne
-    @JoinColumn(name = "week_day", foreignKey = @ForeignKey(name = "fk_appointment_weekday"), nullable = false)
-    private WorkDay weekDay;
+    @Column(name = "week_day", nullable = false)
+    private WorkDayEnum weekDay;
 
     @ManyToOne
     @JoinColumn(name = "dentist_id", foreignKey = @ForeignKey(name = "fk_appointment_dentist"), nullable = false)
@@ -48,7 +48,7 @@ public class Appointment implements Serializable {
 
     @Builder
     public Appointment(@NonNull String procedure, @NonNull LocalDate appointmentDate, @NonNull LocalTime timeStart, @NonNull LocalTime timeEnd,
-                       @NonNull WorkDay weekDay, @NonNull Dentist dentist, @NonNull Patient patient) {
+                       @NonNull WorkDayEnum weekDay, @NonNull Dentist dentist, @NonNull Patient patient) {
 
         this.procedure = procedure;
         this.appointmentDate = appointmentDate;

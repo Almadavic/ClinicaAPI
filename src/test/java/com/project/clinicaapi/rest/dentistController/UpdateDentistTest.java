@@ -155,7 +155,7 @@ class UpdateDentistTest extends ClassTestParent {
     void invalidWorkDayNumberSizeValue() throws Exception {
 
         DentistUpdateDTO dentistDTO = DentistUpdateDTO.builder()
-                .workDays(new HashSet<>(Arrays.asList(0L, 9L, -1L)))
+                .workDays(new HashSet<>(Arrays.asList(0, 9, -1)))
                 .build();
 
         mockMvc.perform(patch(path + "/" + returnDentistId())
@@ -175,7 +175,7 @@ class UpdateDentistTest extends ClassTestParent {
         DentistUpdateDTO dentistDTO = DentistUpdateDTO.builder()
                 .cro("137319")
                 .speciality("orthodontics")
-                .workDays(new HashSet<>(Arrays.asList(1L, 2L, 3L)))
+                .workDays(new HashSet<>(Arrays.asList(1, 2, 3)))
                 .build();
 
 

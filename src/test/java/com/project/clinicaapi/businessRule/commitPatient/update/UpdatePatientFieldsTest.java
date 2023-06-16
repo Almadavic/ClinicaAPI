@@ -1,12 +1,13 @@
-package com.project.clinicaapi.businessRule.commitSecretary;
+package com.project.clinicaapi.businessRule.commitPatient.update;
 
 import com.project.clinicaapi.dto.request.update.AddressUpdateDTO;
+import com.project.clinicaapi.dto.request.update.PatientUpdateDTO;
 import com.project.clinicaapi.dto.request.update.SecretaryUpdateDTO;
-import com.project.clinicaapi.service.businessRule.commitSecretary.CommitSecretaryValidations;
+import com.project.clinicaapi.service.businessRule.commitPatient.updatePatient.UpdatePatientArgs;
+import com.project.clinicaapi.service.businessRule.commitPatient.updatePatient.validation.NoFieldFilledUpdatePatient;
 import com.project.clinicaapi.service.businessRule.commitSecretary.updateSecretary.UpdateSecretaryArgs;
 import com.project.clinicaapi.service.businessRule.commitSecretary.updateSecretary.validation.NoFieldFilledUpdateSecretary;
 import com.project.clinicaapi.service.customException.NoFieldFilledException;
-import com.project.clinicaapi.service.customException.RegistrationAlreadyRegisteredException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,32 +16,31 @@ import org.springframework.test.context.ActiveProfiles;
 
 @ActiveProfiles(value = "test")
 @SpringBootTest
-class UpdateSecretaryFieldsTest {
+class UpdatePatientFieldsTest {
 
     @Autowired
-    private NoFieldFilledUpdateSecretary service;
+    private NoFieldFilledUpdatePatient service;
 
     @Test
     void noFieldFilledToUpdate() {
 
-        SecretaryUpdateDTO secretaryDTO = SecretaryUpdateDTO.builder()
-                .build();
+        PatientUpdateDTO patientDTO = PatientUpdateDTO.builder().build();
 
         Assertions.assertThrows(NoFieldFilledException.class,
-                () -> service.verification(new UpdateSecretaryArgs(secretaryDTO, null, null)));
+                () -> service.verification(new UpdatePatientArgs(patientDTO, null, null)));
 
     }
-
 
     @Test
     void fieldFilledToUpdate() {
 
-        SecretaryUpdateDTO secretaryDTO = SecretaryUpdateDTO.builder()
-                .registration("13781791")
+        PatientUpdateDTO patientDTO = PatientUpdateDTO.builder()
+                .cpf("91371387113")
                 .build();
 
-        Assertions.assertDoesNotThrow(() -> service.verification(new UpdateSecretaryArgs(secretaryDTO, null, null)));
+        Assertions.assertDoesNotThrow(() -> service.verification(new UpdatePatientArgs(patientDTO, null, null)));
 
     }
+
 
 }

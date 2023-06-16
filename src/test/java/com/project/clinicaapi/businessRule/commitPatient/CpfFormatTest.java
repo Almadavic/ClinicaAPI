@@ -14,29 +14,29 @@ class CpfFormatTest {
     @Test
     void cpfInvalidFormat() {
 
-        testingFail("adihadiadhdaiad");
+        testingThrowsException("adihadiadhdaiad");
 
-        testingFail("1937318173dafafy7fa");
+        testingThrowsException("1937318173dafafy7fa");
 
-        testingFail("115613876-06");
+        testingThrowsException("115613876-06");
 
     }
 
     @Test
     void cpfValidFormat() {
 
-        testingSuccess("118.613.816-94");
-        testingSuccess("911.219.476-12");
-        testingSuccess("002.558.181-29");
+        testingDoesNotThrowException("118.613.816-94");
+        testingDoesNotThrowException("911.219.476-12");
+        testingDoesNotThrowException("002.558.181-29");
 
     }
 
-    private void testingFail(String cpf) {
+    private void testingThrowsException(String cpf) {
         Assertions.assertThrows(InvalidCpfFormatException.class,
                 () -> CommitPatientValidations.cpfFormatValidation(cpf));
     }
 
-    private void testingSuccess(String cpf) {
+    private void testingDoesNotThrowException(String cpf) {
         Assertions.assertDoesNotThrow(() -> CommitPatientValidations.cpfFormatValidation(cpf));
     }
 
