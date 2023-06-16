@@ -17,7 +17,7 @@ public class UserMonitoringResponseDTO extends UserResponseDTO{
 
     public UserMonitoringResponseDTO(User user) {
         super(user);
-        this.role = user.getAuthorities().toString();
+        this.role = user.getRole().toString();
         this.enabled = user.isEnabled();
     }
 

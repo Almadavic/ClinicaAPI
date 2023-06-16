@@ -16,7 +16,7 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @Getter
 @Setter
-public abstract class UserUpdateDTO {
+public class UserUpdateDTO {
 
     @JsonProperty(value = "login")
     @Size(min = 4)

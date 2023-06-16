@@ -66,7 +66,10 @@ public class SecurityConfigurationsImpl implements SecurityConfigurations {
 
                 .requestMatchers("/logs/**").hasRole(administrator)
 
-                .requestMatchers("/user/**").hasRole(administrator)
+                .requestMatchers(HttpMethod.GET,  "/users/**").hasRole(administrator)
+                .requestMatchers(HttpMethod.DELETE,  "/users/**").hasRole(administrator)
+
+                .requestMatchers("/users/disable/*").hasAnyRole(administrator, secretary)
 
                 .requestMatchers(HttpMethod.GET, "/secretaries/**").hasRole(administrator)
                 .requestMatchers(HttpMethod.POST, "/secretaries").hasRole(administrator)
@@ -80,6 +83,14 @@ public class SecurityConfigurationsImpl implements SecurityConfigurations {
                 .requestMatchers(HttpMethod.POST, "/dentists").hasAnyRole(administrator, secretary)
                 .requestMatchers(HttpMethod.PATCH, "/dentists/*").hasAnyRole(administrator, secretary)
 
+
+                .requestMatchers("/userarea/admin").hasRole(administrator)
+
+                .requestMatchers("/userarea/secretary").hasRole(secretary)
+
+                .requestMatchers("/userarea/patient").hasRole(patient)
+
+                .requestMatchers("/userarea/dentist").hasRole(dentist)
 
                 .anyRequest().authenticated()
                 .and().cors()

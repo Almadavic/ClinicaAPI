@@ -158,6 +158,19 @@ public class StartProjectConfigurationsTestEnvironment implements CommandLineRun
                 .registration("1151387")
                 .build();
 
+        Secretary secretary3 = Secretary.secretaryBuilder()
+                .login("secretary3")
+                .name("nome5")
+                .password(encoder.encode("123456"))
+                .country("Brasil")
+                .cellphone("19311242333")
+                .state("MG")
+                .city("Belo Horizonte")
+                .email("secratary38@hotmail.com")
+                .gender(Gender.MALE)
+                .registration("11513899")
+                .build();
+
         User u1 = User.builder()
                 .login("admin")
                 .name("admin")
@@ -202,7 +215,7 @@ public class StartProjectConfigurationsTestEnvironment implements CommandLineRun
 
         u3.setRole(Role.PATIENT);
 
-        userRepository.saveAll(Arrays.asList(dentist1, dentist2, dentist3, dentist4, patient1, patient2, secretary, secretary2, u1, u2, u3));
+        userRepository.saveAll(Arrays.asList(dentist1, dentist2, dentist3, dentist4, patient1, patient2, secretary, secretary2, secretary3, u1, u2, u3));
 
         WorkDay wd1 = new WorkDay(WorkDayEnum.MONDAY);
         WorkDay wd2 = new WorkDay(WorkDayEnum.TUESDAY);
@@ -235,7 +248,7 @@ public class StartProjectConfigurationsTestEnvironment implements CommandLineRun
 
         Appointment appointment = Appointment.builder()
                 .procedure("Limpeza de dente")
-                .appointmentDay(LocalDate.of(2023, 06, 01))
+                .appointmentDate(LocalDate.of(2023, 06, 01))
                 .timeStart(LocalTime.now())
                 .timeEnd(LocalTime.now().plusHours(1))
                 .dentist(dentist1)

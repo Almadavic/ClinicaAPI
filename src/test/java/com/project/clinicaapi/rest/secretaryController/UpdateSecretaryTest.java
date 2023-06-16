@@ -1,11 +1,13 @@
 package com.project.clinicaapi.rest.secretaryController;
 
 import com.project.clinicaapi.dto.request.update.AddressUpdateDTO;
+import com.project.clinicaapi.dto.request.update.DentistUpdateDTO;
 import com.project.clinicaapi.dto.request.update.SecretaryUpdateDTO;
 import com.project.clinicaapi.repository.UserRepository;
 import com.project.clinicaapi.rest.ClassTestParent;
 import com.project.clinicaapi.service.customException.NoFieldFilledException;
 import com.project.clinicaapi.service.customException.RegistrationAlreadyRegisteredException;
+import com.project.clinicaapi.service.customException.ResourceNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -28,9 +30,27 @@ class UpdateSecretaryTest extends ClassTestParent {
     private final String path = "/secretaries";
 
     @Test
+    void secretaryByIdNotFound() throws Exception {
+
+        String id = "aspjaioasjs9aasjassaas9sa";
+
+        SecretaryUpdateDTO secretaryDTO = SecretaryUpdateDTO.builder().build();
+
+        mockMvc.perform(patch(path + "/{dentistid}", id)
+                        .header("Authorization", token("admin", "123456"))
+                        .contentType("application/json")
+                        .content(objectMapper.writeValueAsString(secretaryDTO)))
+                .andExpect(status().is(notFound))
+                .andExpect(result -> assertTrue(result.getResolvedException() instanceof ResourceNotFoundException))
+                .andExpect(result -> assertEquals("The secretary id: " + id + " wasn't found on database",
+                        result.getResolvedException().getMessage()));
+
+    }
+
+    @Test
     void registrationAlreadyExistsInTheSystem() throws Exception {
 
-        String registration = "1151387";
+        String registration = "1156139862302";
 
         SecretaryUpdateDTO secretaryDTO = SecretaryUpdateDTO.builder()
                 .registration(registration)
@@ -64,23 +84,8 @@ class UpdateSecretaryTest extends ClassTestParent {
 
     }
 
-    @Test
-    void updateSecretarySuccess() throws Exception {
-
-        SecretaryUpdateDTO secretaryDTO = SecretaryUpdateDTO.builder()
-                .registration("1156139862392")
-                .build();
-
-        mockMvc.perform(patch(path + "/" + returnSecretaryId())
-                        .header("Authorization", token("admin", "123456"))
-                        .contentType("application/json")
-                        .content(objectMapper.writeValueAsString(secretaryDTO)))
-                .andExpect(status().is(ok));
-
-    }
-
     private String returnSecretaryId() {
-        return userRepository.findByLogin("secretary").get().getId();
+        return userRepository.findByLogin("secretary2").get().getId();
     }
 
 }

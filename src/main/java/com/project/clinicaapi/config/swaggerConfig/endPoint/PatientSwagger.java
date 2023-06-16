@@ -35,7 +35,6 @@ public interface PatientSwagger {
     })
     ResponseEntity<PatientResponseDTO> save(PatientRegisterDTO patientDTO, User userLogged, UriComponentsBuilder uriBuilder);
 
-
     @Operation(summary = "Encontra uma página de pacientes registrados", security = {@SecurityRequirement(name = "bearer-key")}, parameters = {
             @Parameter(in = ParameterIn.QUERY
                     , description = "Index da página que deseja acessar"

@@ -25,6 +25,9 @@ public class WorkDay implements Serializable {
     @Enumerated(EnumType.STRING)
     private WorkDayEnum workDay;
 
+    @OneToMany(mappedBy = "weekDay")
+    private final List<Appointment> appointments = new ArrayList<>();
+
     @ManyToMany(mappedBy = "workDays")
     private final List<Dentist> dentists = new ArrayList<>();
 

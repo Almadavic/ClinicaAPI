@@ -1,11 +1,13 @@
 package com.project.clinicaapi.rest.patientController;
 
+import com.project.clinicaapi.dto.request.update.DentistUpdateDTO;
 import com.project.clinicaapi.dto.request.update.PatientUpdateDTO;
 import com.project.clinicaapi.repository.UserRepository;
 import com.project.clinicaapi.rest.ClassTestParent;
 import com.project.clinicaapi.service.customException.CpfAlreadyRegisteredException;
 import com.project.clinicaapi.service.customException.InvalidCpfFormatException;
 import com.project.clinicaapi.service.customException.NoFieldFilledException;
+import com.project.clinicaapi.service.customException.ResourceNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -26,6 +28,24 @@ class UpdatePatientTest extends ClassTestParent {
     private UserRepository userRepository;
 
     private final String path = "/patients";
+
+    @Test
+    void patientByIdNotFound() throws Exception {
+
+        String id = "aspjaioasjs9aasjassaas9sa";
+
+        PatientUpdateDTO patientDTO = PatientUpdateDTO.builder().build();
+
+        mockMvc.perform(patch(path + "/{dentistid}", id)
+                        .header("Authorization", token("admin", "123456"))
+                        .contentType("application/json")
+                        .content(objectMapper.writeValueAsString(patientDTO)))
+                .andExpect(status().is(notFound))
+                .andExpect(result -> assertTrue(result.getResolvedException() instanceof ResourceNotFoundException))
+                .andExpect(result -> assertEquals("The patient id: " + id + " wasn't found on database",
+                        result.getResolvedException().getMessage()));
+
+    }
 
     @Test
     void cpfAlreadyExistsInTheSystem() throws Exception {

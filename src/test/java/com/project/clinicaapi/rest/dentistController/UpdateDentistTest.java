@@ -22,8 +22,7 @@ import java.util.HashSet;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
@@ -36,6 +35,24 @@ class UpdateDentistTest extends ClassTestParent {
     private UserRepository userRepository;
 
     private final String path = "/dentists";
+
+    @Test
+    void dentistByIdNotFound() throws Exception {
+
+        String id = "aspjaioasjs9aasjassaas9sa";
+
+        DentistUpdateDTO dentistDTO = DentistUpdateDTO.builder().build();
+
+        mockMvc.perform(patch(path + "/{dentistid}", id)
+                        .header("Authorization", token("admin", "123456"))
+                .contentType("application/json")
+                .content(objectMapper.writeValueAsString(dentistDTO)))
+                .andExpect(status().is(notFound))
+                .andExpect(result -> assertTrue(result.getResolvedException() instanceof ResourceNotFoundException))
+                .andExpect(result -> assertEquals("The dentist id: " + id + " wasn't found on database",
+                        result.getResolvedException().getMessage()));
+
+    }
 
     @Test
     void croAlreadyExistsInTheSystem() throws Exception {

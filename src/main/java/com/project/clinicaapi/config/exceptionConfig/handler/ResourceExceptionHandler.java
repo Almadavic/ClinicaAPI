@@ -115,6 +115,11 @@ public class ResourceExceptionHandler {
         return handlingException(exception, request, "Value not accepted", HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(NoPermissionException.class)
+    public ResponseEntity<StandardError> noPermission(NoPermissionException exception, HttpServletRequest request) {
+        return handlingException(exception, request, "No permission", HttpStatus.FORBIDDEN);
+    }
+
     @ExceptionHandler(value = JWTException.class)
     public ResponseEntity<StandardError> jwt(JWTException exception, HttpServletRequest request) {
         return handlingException(exception, request, "JWT error", HttpStatus.INTERNAL_SERVER_ERROR);

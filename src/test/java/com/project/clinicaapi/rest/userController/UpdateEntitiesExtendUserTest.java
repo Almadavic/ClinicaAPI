@@ -247,8 +247,33 @@ class UpdateEntitiesExtendUserTest extends ClassTestParent {
 
     }
 
+    @Test
+    void updateUserSuccess() throws Exception {
+
+        SecretaryUpdateDTO secretaryDTO = SecretaryUpdateDTO.builder()
+                .cellphone("(31)99872-1540")
+                .registration("1156139862392")
+                .login("newLoginNovo")
+                .password("1234567")
+                .passwordConfirmation("1234567")
+                .name("Novo nome Secretária")
+                .address(new AddressUpdateDTO("country", "state", "city"))
+                .build();
+
+        mockMvc.perform(patch(path + "/" + returnUserSuccessId())
+                        .header("Authorization", token("admin", "123456"))
+                        .contentType("application/json")
+                        .content(objectMapper.writeValueAsString(secretaryDTO)))
+                .andExpect(status().is(ok));
+
+    }
+
     private String returnUserId() {
-        return userRepository.findByLogin("secretary2").get().getId();
+        return userRepository.findByLogin("secretary").get().getId();
+    }
+
+    private String returnUserSuccessId() {
+        return userRepository.findByLogin("secretary3").get().getId();
     }
 
 }

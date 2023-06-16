@@ -73,7 +73,7 @@ public class AuthenticationJWTFilter extends OncePerRequestFilter {
     }
 
     private String roleValidFormat(User user) {
-        return "ROLE_" + user.getAuthorities().toString().replace("[", "").replace("]", "");
+        return "ROLE_" + user.getRole().toString();
     }
 
 }

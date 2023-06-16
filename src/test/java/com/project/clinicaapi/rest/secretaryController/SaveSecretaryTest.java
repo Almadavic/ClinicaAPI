@@ -139,9 +139,9 @@ class SaveSecretaryTest extends ClassTestParent {
                 .email("newemail@hotmail.com")
                 .name("name nome")
                 .cellphone("(61)98589-7284")
-                .password("1234567")
+                .password(password)
                 .passwordConfirmation(password)
-                .registration(password)
+                .registration("123456")
                 .gender("MALE")
                 .build();
 

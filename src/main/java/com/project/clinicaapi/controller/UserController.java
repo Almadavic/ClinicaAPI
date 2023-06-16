@@ -32,6 +32,15 @@ public class UserController implements UserSwagger {
     }
 
     @Override
+    @PatchMapping(value = "/disable/{userid}")
+    public ResponseEntity<Void> disableAccount(@PathVariable(value = "userid") String id,
+                                               @AuthenticationPrincipal User userLogged) {
+
+        userService.disableAccount(id, userLogged);
+        return ResponseEntity.noContent().build();
+    }
+
+    @Override
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<String> delete(@PathVariable(value = "id") String id, @AuthenticationPrincipal User userLogged) {
         userService.delete(id, userLogged);

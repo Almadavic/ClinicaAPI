@@ -39,7 +39,7 @@ class FindDentistTest extends ClassTestParent {
 
         String id = "aspjaioasjs9aasjassaas9sa";
 
-        mockMvc.perform(get(path + "/{patientid}", id)
+        mockMvc.perform(get(path + "/{dentistid}", id)
                         .header("Authorization", token("admin", "123456")))
                 .andExpect(status().is(notFound))
                 .andExpect(result -> assertTrue(result.getResolvedException() instanceof ResourceNotFoundException))
@@ -52,7 +52,7 @@ class FindDentistTest extends ClassTestParent {
 
         Dentist dentist = (Dentist) userRepository.findByLogin("dentist1").get();
 
-        mockMvc.perform(get(path + "/{patientid}", dentist.getId())
+        mockMvc.perform(get(path + "/{dentistid}", dentist.getId())
                         .header("Authorization", token("admin", "123456")))
                 .andExpect(status().is(ok));
 
