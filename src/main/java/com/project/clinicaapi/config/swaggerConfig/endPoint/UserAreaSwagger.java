@@ -1,6 +1,13 @@
 package com.project.clinicaapi.config.swaggerConfig.endPoint;
 
 import com.project.clinicaapi.config.exceptionConfig.standardError.commomStandardError.StandardError;
+import com.project.clinicaapi.dto.request.update.DentistUpdateDTO;
+import com.project.clinicaapi.dto.request.update.PatientUpdateDTO;
+import com.project.clinicaapi.dto.request.update.SecretaryUpdateDTO;
+import com.project.clinicaapi.dto.request.update.UserUpdateDTO;
+import com.project.clinicaapi.dto.response.DentistResponseDTO;
+import com.project.clinicaapi.dto.response.PatientResponseDTO;
+import com.project.clinicaapi.dto.response.SecretaryResponseDTO;
 import com.project.clinicaapi.dto.response.UserResponseDTO;
 import com.project.clinicaapi.entity.User;
 import io.swagger.v3.oas.annotations.Operation;
@@ -10,7 +17,10 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Tag(name = "Área do Usuário", description = "Área onde o usuário visualiza suas informações")
 public interface UserAreaSwagger {
@@ -23,5 +33,13 @@ public interface UserAreaSwagger {
                     content = {@Content(mediaType = "application/json", schema = @Schema(implementation = StandardError.class))})
     })
     ResponseEntity<UserResponseDTO> myProfile(User userLogged);
+
+    ResponseEntity<UserResponseDTO> changeProfileDataAsUserGeneric(UserUpdateDTO updateData, User userLogged);
+
+    ResponseEntity<SecretaryResponseDTO> changeProfileDataAsSecretary(SecretaryUpdateDTO updateData, User userLogged);
+
+    ResponseEntity<DentistResponseDTO> changeProfileDataAsDentist(DentistUpdateDTO updateData, User userLogged);
+
+    ResponseEntity<PatientResponseDTO> changeProfileDataAsPatient(PatientUpdateDTO updateData, User userLogged);
 
 }

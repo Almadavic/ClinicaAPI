@@ -2,6 +2,7 @@ package com.project.clinicaapi.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.jdbc.Work;
 
 import java.io.Serializable;
 import java.time.DayOfWeek;
@@ -34,33 +35,28 @@ public class Appointment implements Serializable {
     private LocalTime timeEnd;
 
     @ManyToOne
-    @JoinColumn(name = "week_day", foreignKey = @ForeignKey(name = "fk_appointment_weekday"))
+    @JoinColumn(name = "week_day", foreignKey = @ForeignKey(name = "fk_appointment_weekday"), nullable = false)
     private WorkDay weekDay;
 
     @ManyToOne
-    @JoinColumn(name = "dentist_id", foreignKey = @ForeignKey(name = "fk_appointment_dentist"))
+    @JoinColumn(name = "dentist_id", foreignKey = @ForeignKey(name = "fk_appointment_dentist"), nullable = false)
     private Dentist dentist;
 
     @ManyToOne
-    @JoinColumn(name = "patient_id", foreignKey = @ForeignKey(name = "fk_appointment_patient"))
+    @JoinColumn(name = "patient_id", foreignKey = @ForeignKey(name = "fk_appointment_patient"), nullable = false)
     private Patient patient;
 
     @Builder
     public Appointment(@NonNull String procedure, @NonNull LocalDate appointmentDate, @NonNull LocalTime timeStart, @NonNull LocalTime timeEnd,
-                       @NonNull Dentist dentist, @NonNull Patient patient) {
+                       @NonNull WorkDay weekDay, @NonNull Dentist dentist, @NonNull Patient patient) {
 
         this.procedure = procedure;
         this.appointmentDate = appointmentDate;
-        setWeekDay(appointmentDate);
         this.timeStart = timeStart;
         this.timeEnd = timeEnd;
+        this.weekDay = weekDay;
         this.dentist = dentist;
         this.patient = patient;
-    }
-
-    private void setWeekDay(LocalDate appointmentDate) {
-//        DayOfWeek dayOfWeek =  appointmentDate.getDayOfWeek();
-//        System.out.println(dayOfWeek+"-----------------------");
     }
 
 }
