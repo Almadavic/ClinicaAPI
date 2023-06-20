@@ -5,12 +5,16 @@ import com.project.clinicaapi.service.businessRule.commitPatient.CommitPatientVa
 import com.project.clinicaapi.service.businessRule.commitPatient.updatePatient.UpdatePatientArgs;
 import com.project.clinicaapi.service.businessRule.commitPatient.updatePatient.UpdatePatientVerification;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 @Order(value = 3)
 @Component
 public class CpfAvailableUpdate implements UpdatePatientVerification {
+
+    @Autowired
+    private PatientRepository patientRepository;
 
     @Override
     public void verification(UpdatePatientArgs args) {

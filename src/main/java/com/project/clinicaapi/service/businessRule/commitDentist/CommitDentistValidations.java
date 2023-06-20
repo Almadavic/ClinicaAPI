@@ -28,9 +28,9 @@ public class CommitDentistValidations {
 
     public static void croFormatValidation(String cro) {
 
-        String regexCroValid = "^[0-9]+$";
+        String croValidFormat = "^[0-9]+$";
 
-        if (!cro.matches(regexCroValid)) {
+        if (!cro.matches(croValidFormat)) {
             throw new InvalidCroFormatException(cro);
         }
 

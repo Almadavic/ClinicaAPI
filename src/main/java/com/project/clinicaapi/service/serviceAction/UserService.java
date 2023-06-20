@@ -8,6 +8,7 @@ import com.project.clinicaapi.service.businessRule.commitUser.updateUser.UpdateU
 import com.project.clinicaapi.service.businessRule.commitUser.updateUser.UpdateUserVerification;
 import com.project.clinicaapi.service.businessRule.disableAccount.DisableAccountArgs;
 import com.project.clinicaapi.service.businessRule.disableAccount.DisableAccountVerification;
+import com.project.clinicaapi.service.customException.NoFieldFilledException;
 import com.project.clinicaapi.service.customException.ResourceNotFoundException;
 import com.project.clinicaapi.util.LogRegistration;
 import com.project.clinicaapi.util.mapper.UserMapper;
@@ -33,6 +34,8 @@ public class UserService implements UserDetailsService {
 
     private final LogRegistration logRegistration;
 
+    private final AttributesListToUpdateService attributesListToUpdateService;
+
     private final List<UpdateUserVerification> updateUserVerifications;
 
     private final List<DisableAccountVerification> disableAccountVerifications;
@@ -55,8 +58,10 @@ public class UserService implements UserDetailsService {
     @CacheEvict(value = {"usersPage", "secretariesPage"}, allEntries = true)
     public UserResponseDTO update(UserUpdateDTO updateData, User userLogged) {
         updateUserVerifications.forEach(v -> v.verification(new UpdateUserArgs(updateData, userLogged)));
-        User updated = userRepository.save(userLogged);
-        return new UserResponseDTO(userRepository.save(updated));
+        verifyNullAttibutes(updateData);
+        UserResponseDTO userDTO = mapper.toUserDTO(userRepository.save(userLogged));
+        logRegistration.saveLog(userLogged.getUsername(), "updated its account data: ");
+        return userDTO;
     }
 
     @CacheEvict(value = {"usersPage", "secretariesPage"}, allEntries = true)
@@ -78,6 +83,15 @@ public class UserService implements UserDetailsService {
     private User returnUserDataBase(String userId) {
         return userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("The user id: " + userId + " wasn't found on database"));
+    }
+
+    private void verifyNullAttibutes(UserUpdateDTO updateData) {
+
+        List<Object> attributes = attributesListToUpdateService.getAttributesGenericsUser(updateData);
+
+        if (attributesListToUpdateService.allAttributesNull(attributes)) {
+            throw new NoFieldFilledException();
+        }
     }
 
 }

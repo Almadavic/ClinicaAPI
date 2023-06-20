@@ -1,9 +1,7 @@
-package com.project.clinicaapi.service.dentistController;
+package com.project.clinicaapi.service.dentistService;
 
 import com.project.clinicaapi.dto.request.update.DentistUpdateDTO;
-import com.project.clinicaapi.dto.request.update.SecretaryUpdateDTO;
 import com.project.clinicaapi.dto.response.DentistResponseDTO;
-import com.project.clinicaapi.dto.response.SecretaryResponseDTO;
 import com.project.clinicaapi.dto.response.WorkDayResponseDTO;
 import com.project.clinicaapi.entity.User;
 import com.project.clinicaapi.repository.UserRepository;

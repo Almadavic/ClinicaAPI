@@ -11,7 +11,7 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 
-@JsonPropertyOrder(value = {"login", "email", "name", "cellphone", "password", "passwordconfirmation", "gender", "address"})
+@JsonPropertyOrder(value = {"login", "email", "name", "cellphone", "password", "passwordConfirmation", "gender", "address"})
 @SuperBuilder(toBuilder = true)
 @NoArgsConstructor
 @Getter
@@ -38,7 +38,7 @@ public class UserUpdateDTO {
     @Size(min = 6)
     private String password;
 
-    @JsonProperty(value = "passwordconfirmation")
+    @JsonProperty(value = "passwordConfirmation")
     private String passwordConfirmation;
 
     @JsonProperty(value = "gender")

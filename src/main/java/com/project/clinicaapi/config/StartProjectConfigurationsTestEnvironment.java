@@ -1,5 +1,6 @@
 package com.project.clinicaapi.config;
 
+import com.project.clinicaapi.dto.response.DentistResponseDTO;
 import com.project.clinicaapi.entity.*;
 import com.project.clinicaapi.enumerated.Gender;
 import com.project.clinicaapi.enumerated.Role;

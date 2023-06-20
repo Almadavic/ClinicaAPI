@@ -125,7 +125,7 @@ class RegisterEntitiesExtendUserTest extends ClassTestParent {
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(secretaryDTO)))
                 .andExpect(status().is(badRequest))
-                .andExpect(result -> assertTrue(result.getResolvedException() instanceof InvalidCellphoneNumberException))
+                .andExpect(result -> assertTrue(result.getResolvedException() instanceof InvalidCellphoneNumberFormatException))
                 .andExpect(result -> assertEquals("Cellphone number entered contains an invalid format: " + cellphone + ", Correct format: (XX)9XXXX-XXXX"
                         , result.getResolvedException().getMessage()));
 

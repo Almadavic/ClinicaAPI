@@ -12,10 +12,10 @@ import lombok.Getter;
 public class WorkDayResponseDTO {
 
     @JsonProperty(value = "id")
-    private Long id;
+    private final Long id;
 
     @JsonProperty(value = "workday")
-    private String workDay;
+    private final String workDay;
 
     public WorkDayResponseDTO(WorkDay workDay) {
         this.id = workDay.getId();

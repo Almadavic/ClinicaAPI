@@ -42,8 +42,6 @@ public class UserAreaService {
 
     private final DentistService dentistService;
 
-    private final LogRegistration logRegistration;
-
     private final List<UpdateUserVerification> updateUserVerifications;
 
     public UserResponseDTO myProfile(User userLogged) {
@@ -52,43 +50,20 @@ public class UserAreaService {
 
     public UserResponseDTO changeProfileDataAsUserGeneric(UserUpdateDTO updateData, User userLogged) {
         updateUserVerifications.forEach(v -> v.verification(new UpdateUserArgs(updateData, userLogged)));
-
-        UserResponseDTO userResponseDTO = userService.update(updateData, userLogged);
-
-        saveLog(userLogged.getUsername());
-
-        return userResponseDTO;
+        return userService.update(updateData, userLogged);
     }
 
     public SecretaryResponseDTO changeProfileDataAsSecretary(SecretaryUpdateDTO updateData, User userLogged) {
-
-       SecretaryResponseDTO secretaryResponseDTO = secretaryService.update(userLogged.getId(), updateData, userLogged);
-
-        saveLog(userLogged.getUsername());
-
-        return secretaryResponseDTO;
+        return secretaryService.update(userLogged.getId(), updateData, userLogged);
     }
 
     public DentistResponseDTO changeProfileDataAsDentist(DentistUpdateDTO updateData, User userLogged) {
-
-        DentistResponseDTO dentistResponseDTO = dentistService.update(userLogged.getId(), updateData, userLogged);
-
-        saveLog(userLogged.getUsername());
-
-        return dentistResponseDTO;
+        return dentistService.update(userLogged.getId(), updateData, userLogged);
     }
 
     public PatientResponseDTO changeProfileDataAsPatient(PatientUpdateDTO updateData, User userLogged) {
 
-        PatientResponseDTO patientResponseDTO = patientService.update(userLogged.getId(), updateData, userLogged);
-
-        saveLog(userLogged.getUsername());
-
-        return patientResponseDTO;
-    }
-
-    private void saveLog(String userLoggedLogin) {
-        logRegistration.saveLog(userLoggedLogin, "updated its account data");
+        return patientService.update(userLogged.getId(), updateData, userLogged);
     }
 
     private UserResponseDTO verifyInstance(User userLogged) {

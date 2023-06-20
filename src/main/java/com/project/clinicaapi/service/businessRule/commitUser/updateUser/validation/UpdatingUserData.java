@@ -11,7 +11,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-@Order(value = 10)
+@Order(value = 11)
 @Component
 @RequiredArgsConstructor
 public class UpdatingUserData implements UpdateUserVerification {

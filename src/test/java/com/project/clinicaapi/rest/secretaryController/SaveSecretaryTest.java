@@ -111,8 +111,8 @@ class SaveSecretaryTest extends ClassTestParent {
                 .cellphone("(61)98989-7284")
                 .registration("115613986230255785")
                 .gender("MALE")
-                .password("123456")
-                .passwordConfirmation("1234567")
+                .password("123456A")
+                .passwordConfirmation("1234567A")
                 .build();
 
         mockMvc.perform(post(path)
@@ -131,7 +131,7 @@ class SaveSecretaryTest extends ClassTestParent {
 
         String login = "newLogin";
 
-        String password = "1234567";
+        String password = "1234567AB";
 
         SecretaryRegisterDTO secretaryDTO = SecretaryRegisterDTO.builder()
                 .login(login)

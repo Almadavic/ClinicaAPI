@@ -1,10 +1,7 @@
 package com.project.clinicaapi.rest.userController;
 
-import com.project.clinicaapi.dto.request.register.AddessRegisterDTO;
-import com.project.clinicaapi.dto.request.register.SecretaryRegisterDTO;
 import com.project.clinicaapi.dto.request.update.AddressUpdateDTO;
 import com.project.clinicaapi.dto.request.update.SecretaryUpdateDTO;
-import com.project.clinicaapi.entity.User;
 import com.project.clinicaapi.enumerated.Gender;
 import com.project.clinicaapi.repository.UserRepository;
 import com.project.clinicaapi.rest.ClassTestParent;
@@ -110,7 +107,7 @@ class UpdateEntitiesExtendUserTest extends ClassTestParent {
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(secretaryDTO)))
                 .andExpect(status().is(badRequest))
-                .andExpect(result -> assertTrue(result.getResolvedException() instanceof InvalidCellphoneNumberException))
+                .andExpect(result -> assertTrue(result.getResolvedException() instanceof InvalidCellphoneNumberFormatException))
                 .andExpect(result -> assertEquals("Cellphone number entered contains an invalid format: " + cellphone + ", Correct format: (XX)9XXXX-XXXX"
                         , result.getResolvedException().getMessage()));
 
@@ -152,6 +149,27 @@ class UpdateEntitiesExtendUserTest extends ClassTestParent {
                 .andExpect(status().is(badRequest))
                 .andExpect(result -> assertTrue(result.getResolvedException() instanceof InvalidEmailFormatException))
                 .andExpect(result -> assertEquals("The e-mail: " + email + " contains an invalid format"
+                        , result.getResolvedException().getMessage()));
+
+    }
+
+    @Test
+    void invalidPasswordFormat() throws Exception {
+
+        String password = "123456a";
+
+        SecretaryUpdateDTO secretaryDTO = SecretaryUpdateDTO.builder()
+                .password(password)
+                .passwordConfirmation(password)
+                .build();
+
+        mockMvc.perform(patch(path + "/" + returnUserId())
+                        .header("Authorization", token("admin", "123456"))
+                        .contentType("application/json")
+                        .content(objectMapper.writeValueAsString(secretaryDTO)))
+                .andExpect(status().is(badRequest))
+                .andExpect(result -> assertTrue(result.getResolvedException() instanceof InvalidPasswordFormatException))
+                .andExpect(result -> assertEquals("The password: " + password + " contains an invalid format"
                         , result.getResolvedException().getMessage()));
 
     }
@@ -254,8 +272,8 @@ class UpdateEntitiesExtendUserTest extends ClassTestParent {
                 .cellphone("(31)99872-1540")
                 .registration("1156139862392")
                 .login("newLoginNovo")
-                .password("1234567")
-                .passwordConfirmation("1234567")
+                .password("1234567A")
+                .passwordConfirmation("1234567A")
                 .name("Novo nome Secretária")
                 .address(new AddressUpdateDTO("country", "state", "city"))
                 .build();

@@ -6,18 +6,14 @@ import com.project.clinicaapi.service.businessRule.commitUser.updateUser.UpdateU
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-@Order(value = 10)
+@Order(value = 9)
 @Component
-public class GenderValidationUpdate implements UpdateUserVerification {
+public class PasswordFormatUpdate implements UpdateUserVerification {
 
     @Override
     public void verification(UpdateUserArgs args) {
 
-        String gender = args.userDTO().getGender();
-
-        if (gender != null) {
-            CommitUserValidations.genderValueValidation(gender);
-        }
+        CommitUserValidations.passwordFormatValidation(args.userDTO().getPassword());
 
     }
 

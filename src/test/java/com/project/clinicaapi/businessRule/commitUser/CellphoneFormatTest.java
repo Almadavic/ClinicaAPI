@@ -1,7 +1,7 @@
 package com.project.clinicaapi.businessRule.commitUser;
 
 import com.project.clinicaapi.service.businessRule.commitUser.CommitUserValidations;
-import com.project.clinicaapi.service.customException.InvalidCellphoneNumberException;
+import com.project.clinicaapi.service.customException.InvalidCellphoneNumberFormatException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -30,7 +30,7 @@ class CellphoneFormatTest {
     }
 
     private void testingThrowsException(String cellphone) {
-        Assertions.assertThrows(InvalidCellphoneNumberException.class,
+        Assertions.assertThrows(InvalidCellphoneNumberFormatException.class,
                 () -> CommitUserValidations.cellphoneFormatValidation(cellphone));
     }
 

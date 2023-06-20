@@ -1,6 +1,5 @@
 package com.project.clinicaapi.service.businessRule.commitUser;
 
-import com.project.clinicaapi.dto.request.update.AddressUpdateDTO;
 import com.project.clinicaapi.entity.User;
 import com.project.clinicaapi.enumerated.Gender;
 import com.project.clinicaapi.repository.UserRepository;
@@ -8,7 +7,6 @@ import com.project.clinicaapi.service.customException.*;
 import com.project.clinicaapi.util.ListEnumValues;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
 
 public class CommitUserValidations {
@@ -26,10 +24,10 @@ public class CommitUserValidations {
                         .replace("+", "");
             }
 
-            String regexCelularValid = "^\\([1-9]{2}\\)9?[6-9][0-9]{3}\\-[0-9]{4}$";
+            String cellphoneValidFormat = "^\\([1-9]{2}\\)9?[6-9][0-9]{3}\\-[0-9]{4}$";
 
-            if (!celular.matches(regexCelularValid)) {
-                throw new InvalidCellphoneNumberException(celular);
+            if (!celular.matches(cellphoneValidFormat)) {
+                throw new InvalidCellphoneNumberFormatException(celular);
             }
 
             return celular;
@@ -70,9 +68,9 @@ public class CommitUserValidations {
 
     public static void emailFormatValidation(String email) {
 
-        String regexValidEmail = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+        String emailValidFormat = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
 
-        if (!email.matches(regexValidEmail)) {
+        if (!email.matches(emailValidFormat)) {
             throw new InvalidEmailFormatException(email);
         }
 
@@ -80,9 +78,9 @@ public class CommitUserValidations {
 
     public static void nameFormatValidation(String nome) {
 
-        String regexNomeValid = "^[a-zA-ZÀ-ú]+([ ][a-zA-ZÀ-ú]+)*$";
+        String nameValidFormat = "^[a-zA-ZÀ-ú]+([ ][a-zA-ZÀ-ú]+)*$";
 
-        if (!nome.matches(regexNomeValid)) {
+        if (!nome.matches(nameValidFormat)) {
             throw new InvalidNameFormatException(nome);
         }
 
@@ -108,6 +106,20 @@ public class CommitUserValidations {
 
     }
 
+    public static void passwordFormatValidation(String password) {
+
+        if(password !=null) {
+
+            String passwordValidFormat = "^(?=.*[A-Z])(?=.*\\d).+$";
+
+            if (!password.matches(passwordValidFormat)) {
+                throw new InvalidPasswordFormatException(password);
+            }
+
+        }
+
+    }
+
     public static void genderValueValidation(String gender) {
 
         try {
@@ -116,13 +128,6 @@ public class CommitUserValidations {
             throw new InvalidEnumValueException(gender, "Gender", ListEnumValues.returnEnumValues(Arrays.asList(Gender.values())));
         }
 
-    }
-
-    public static void addAddressAttributesToList(List<Object> attributes, AddressUpdateDTO addressDTO) {
-
-        if (addressDTO != null) {
-            attributes.addAll(Arrays.asList(addressDTO.getCountry(), addressDTO.getState(), addressDTO.getCity()));
-        }
     }
 
 }

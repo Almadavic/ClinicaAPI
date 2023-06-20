@@ -9,7 +9,7 @@ import lombok.experimental.SuperBuilder;
 
 import java.util.Set;
 
-@JsonPropertyOrder(value = {"login", "email", "name", "cellphone", "password", "passwordconfirmation", "gender", "cro", "speciality", "workdays", "address"})
+@JsonPropertyOrder(value = {"login", "email", "name", "cellphone", "password", "passworConfirmation", "gender", "cro", "speciality", "workdays", "address"})
 @NoArgsConstructor
 @SuperBuilder(toBuilder = true)
 @Getter

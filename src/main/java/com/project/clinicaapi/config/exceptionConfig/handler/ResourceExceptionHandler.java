@@ -115,6 +115,11 @@ public class ResourceExceptionHandler {
         return handlingException(exception, request, "Disable account error", HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    @ExceptionHandler(InvalidInstanceException.class)
+    public ResponseEntity<StandardError> invalidInstance(InvalidInstanceException exception, HttpServletRequest request) {
+        return handlingException(exception, request, "Invalid cast", HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
     @ExceptionHandler(WorkDayNumberSizeException.class)
     public ResponseEntity<StandardError> workDayNumberSize(WorkDayNumberSizeException exception, HttpServletRequest request) {
         return handlingException(exception, request, "Value not accepted", HttpStatus.BAD_REQUEST);
@@ -135,9 +140,14 @@ public class ResourceExceptionHandler {
         return handlingException(exception, request, "Database Error", HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(value = InvalidCellphoneNumberException.class)
-    public ResponseEntity<StandardError> invalidCellPhoneNumber(InvalidCellphoneNumberException exception, HttpServletRequest request) {
-        return handlingException(exception, request, "The cellphone numbes cointains an invalid format", HttpStatus.BAD_REQUEST);
+    @ExceptionHandler(value = InvalidCellphoneNumberFormatException.class)
+    public ResponseEntity<StandardError> invalidCellPhoneNumberFormat(InvalidCellphoneNumberFormatException exception, HttpServletRequest request) {
+        return handlingException(exception, request, "Invalid cellphone", HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(value = InvalidPasswordFormatException.class)
+    public ResponseEntity<StandardError> invalidPasswordFormat(InvalidPasswordFormatException exception, HttpServletRequest request) {
+        return handlingException(exception, request, "Invalid password", HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(value = InvalidEmailFormatException.class)

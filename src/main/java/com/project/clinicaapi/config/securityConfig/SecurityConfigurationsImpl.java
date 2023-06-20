@@ -72,7 +72,7 @@ public class SecurityConfigurationsImpl implements SecurityConfigurations {
 
                 .requestMatchers(HttpMethod.GET, "/secretaries/**").hasRole(administrator)
                 .requestMatchers(HttpMethod.POST, "/secretaries").hasRole(administrator)
-                .requestMatchers(HttpMethod.PATCH, "/secretaries/*").hasAnyRole(administrator, secretary)
+                .requestMatchers(HttpMethod.PATCH, "/secretaries/*").hasAnyRole(administrator)
 
                 .requestMatchers(HttpMethod.GET, "/patients/**").hasAnyRole(administrator, secretary)
                 .requestMatchers(HttpMethod.POST, "/patients").hasAnyRole(administrator, secretary)

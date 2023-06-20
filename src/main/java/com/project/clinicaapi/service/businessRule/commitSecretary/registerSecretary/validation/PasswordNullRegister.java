@@ -7,7 +7,7 @@ import com.project.clinicaapi.service.businessRule.commitUser.CommitUserValidati
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-@Order(value = 2)
+@Order(value = 1)
 @Component
 public class PasswordNullRegister implements RegisterSecretaryVerification {
 

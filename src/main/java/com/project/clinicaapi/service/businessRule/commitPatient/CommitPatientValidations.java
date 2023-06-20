@@ -25,9 +25,9 @@ public class CommitPatientValidations {
 
     public static void cpfFormatValidation(String cpf) {
 
-        String regexCpfValid = "^\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}$";
+        String cpfValidFormat = "^\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}$";
 
-        if (!cpf.matches(regexCpfValid)) {
+        if (!cpf.matches(cpfValidFormat)) {
             throw new InvalidCpfFormatException(cpf);
         }
 

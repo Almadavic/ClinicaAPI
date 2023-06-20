@@ -53,7 +53,7 @@ class SaveSecretaryServiceTest {
     @Test
     void passwordEntered() {
 
-        String password = "12345678";
+        String password = "12345678A";
 
         SecretaryRegisterDTO secretaryDTO = SecretaryRegisterDTO.builder()
                 .login("newlogin")

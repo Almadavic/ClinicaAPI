@@ -9,6 +9,9 @@ import com.project.clinicaapi.dto.response.DentistResponseDTO;
 import com.project.clinicaapi.dto.response.PatientResponseDTO;
 import com.project.clinicaapi.dto.response.SecretaryResponseDTO;
 import com.project.clinicaapi.dto.response.UserResponseDTO;
+import com.project.clinicaapi.entity.Dentist;
+import com.project.clinicaapi.entity.Patient;
+import com.project.clinicaapi.entity.Secretary;
 import com.project.clinicaapi.entity.User;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -36,10 +39,10 @@ public interface UserAreaSwagger {
 
     ResponseEntity<UserResponseDTO> changeProfileDataAsUserGeneric(UserUpdateDTO updateData, User userLogged);
 
-    ResponseEntity<SecretaryResponseDTO> changeProfileDataAsSecretary(SecretaryUpdateDTO updateData, User userLogged);
+    ResponseEntity<SecretaryResponseDTO> changeProfileDataAsSecretary(SecretaryUpdateDTO updateData, Secretary userLogged);
 
-    ResponseEntity<DentistResponseDTO> changeProfileDataAsDentist(DentistUpdateDTO updateData, User userLogged);
+    ResponseEntity<DentistResponseDTO> changeProfileDataAsDentist(DentistUpdateDTO updateData, Dentist userLogged);
 
-    ResponseEntity<PatientResponseDTO> changeProfileDataAsPatient(PatientUpdateDTO updateData, User userLogged);
+    ResponseEntity<PatientResponseDTO> changeProfileDataAsPatient(PatientUpdateDTO updateData, Patient userLogged);
 
 }

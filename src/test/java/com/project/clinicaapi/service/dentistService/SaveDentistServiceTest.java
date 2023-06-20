@@ -1,4 +1,4 @@
-package com.project.clinicaapi.service.dentistController;
+package com.project.clinicaapi.service.dentistService;
 
 import com.project.clinicaapi.dto.request.register.AddessRegisterDTO;
 import com.project.clinicaapi.dto.request.register.DentistRegisterDTO;
