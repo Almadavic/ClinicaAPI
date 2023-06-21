@@ -6,6 +6,7 @@ import com.project.clinicaapi.entity.Appointment;
 import com.project.clinicaapi.enumerated.Specialty;
 import com.project.clinicaapi.enumerated.WorkDayEnum;
 import com.project.clinicaapi.service.customException.InvalidEnumValueException;
+import com.project.clinicaapi.util.ConvertingType;
 import com.project.clinicaapi.util.ListEnumValues;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
@@ -22,7 +23,7 @@ public class AppointmentMapper {
                 .appointmentDate(appointmentDTO.getAppointmentDate())
                 .timeStart(appointmentDTO.getTimeStart())
                 .timeEnd(appointmentDTO.getTimeEnd())
-                .weekDay(getWeekDayByLocalDate(appointmentDTO.getAppointmentDate()))
+                .weekDay(ConvertingType.getWeekDayByLocalDate(appointmentDTO.getAppointmentDate()))
                 .build();
     }
 
@@ -33,13 +34,5 @@ public class AppointmentMapper {
     public Page<AppointmentResponseDTO> toAppointmentDTOPage(Page<Appointment> appointments) {
         return appointments.map(AppointmentResponseDTO::new);
     }
-
-   private WorkDayEnum getWeekDayByLocalDate(LocalDate appointmentDate) {
-        try {
-            return WorkDayEnum.valueOf(appointmentDate.getDayOfWeek().toString());
-        }catch (IllegalArgumentException e) {
-            throw new InvalidEnumValueException("Sunday is not a valid day, we work from monday to saturday");
-        }
-   }
 
 }

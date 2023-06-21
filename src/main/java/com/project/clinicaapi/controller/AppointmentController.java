@@ -9,12 +9,12 @@ import com.project.clinicaapi.entity.User;
 import com.project.clinicaapi.service.serviceAction.AppointmentService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
@@ -37,6 +37,18 @@ public class AppointmentController implements AppointmentSwagger {
         URI uri = uriBuilder.path("/appointments/{id}").buildAndExpand(appointmentResponseDTO.getId()).toUri();
 
         return ResponseEntity.created(uri).body(appointmentResponseDTO);
+    }
+
+    @Override
+    @GetMapping
+    public ResponseEntity<Page<AppointmentResponseDTO>> findPage(@PageableDefault(sort = "appointmentDate") Pageable pageable) {
+        return ResponseEntity.ok().body(appointmentService.findPage(pageable));
+    }
+
+    @Override
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<AppointmentResponseDTO> findById(@PathVariable(value = "id") String id) {
+        return ResponseEntity.ok().body(appointmentService.findById(id));
     }
 
 }

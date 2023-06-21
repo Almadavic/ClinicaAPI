@@ -2,7 +2,6 @@ package com.project.clinicaapi.service.serviceAction;
 
 import com.project.clinicaapi.dto.request.register.AppointmentRegisterDTO;
 import com.project.clinicaapi.dto.response.AppointmentResponseDTO;
-import com.project.clinicaapi.dto.response.DentistResponseDTO;
 import com.project.clinicaapi.entity.Appointment;
 import com.project.clinicaapi.entity.Dentist;
 import com.project.clinicaapi.entity.Patient;
@@ -16,6 +15,8 @@ import com.project.clinicaapi.service.customException.ResourceNotFoundException;
 import com.project.clinicaapi.util.LogRegistration;
 import com.project.clinicaapi.util.mapper.AppointmentMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -47,6 +48,14 @@ public class AppointmentService {
         return appointmentDTO;
     }
 
+    public Page<AppointmentResponseDTO> findPage(Pageable pageable) {
+        return mapper.toAppointmentDTOPage(appointmentRepository.findAll(pageable));
+    }
+
+    public AppointmentResponseDTO findById(String appointmentId) {
+        return mapper.toAppointmentDTO(returnAppointmentDataBase(appointmentId));
+    }
+
     private AppointmentResponseDTO saveAndConvert(Appointment appointment) {
         return mapper.toAppointmentDTO(appointmentRepository.save(appointment));
     }
@@ -54,6 +63,11 @@ public class AppointmentService {
     private void setReferences(Appointment appointment, Patient patient, Dentist dentist) {
         appointment.setPatient(patient);
         appointment.setDentist(dentist);
+    }
+
+    private Appointment returnAppointmentDataBase(String appointmentId) {
+        return appointmentRepository.findById(appointmentId)
+                .orElseThrow(() -> new ResourceNotFoundException("The appointment id: " + appointmentId + " wasn't found on database"));
     }
 
     private Patient returnPatientDataBase(String patientId) {
