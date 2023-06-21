@@ -69,6 +69,7 @@ public class PatientService {
                         .orElseThrow(() -> new ResourceNotFoundException("The patient cpf: " + cpf + " wasn't found on database")));
     }
 
+
     public PatientResponseDTO update(String patientId, PatientUpdateDTO updateData, User userLogged) {
 
         Patient patient = returnPatientDataBase(patientId);

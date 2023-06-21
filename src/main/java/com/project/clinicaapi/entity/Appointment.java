@@ -48,7 +48,7 @@ public class Appointment implements Serializable {
 
     @Builder
     public Appointment(@NonNull String procedure, @NonNull LocalDate appointmentDate, @NonNull LocalTime timeStart, @NonNull LocalTime timeEnd,
-                       @NonNull WorkDayEnum weekDay, @NonNull Dentist dentist, @NonNull Patient patient) {
+                       @NonNull WorkDayEnum weekDay, Dentist dentist, Patient patient) {
 
         this.procedure = procedure;
         this.appointmentDate = appointmentDate;
