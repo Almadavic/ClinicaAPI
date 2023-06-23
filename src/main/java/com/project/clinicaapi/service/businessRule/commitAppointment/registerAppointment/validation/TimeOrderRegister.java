@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalTime;
 
-@Order(value = 3)
+@Order(value = 4)
 @Component
 public class TimeOrderRegister implements RegisterAppointmentVerification {
 

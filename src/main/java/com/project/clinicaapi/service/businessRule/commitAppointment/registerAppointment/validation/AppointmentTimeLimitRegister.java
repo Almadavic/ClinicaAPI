@@ -3,22 +3,24 @@ package com.project.clinicaapi.service.businessRule.commitAppointment.registerAp
 import com.project.clinicaapi.service.businessRule.commitAppointment.registerAppointment.RegisterAppointmentArgs;
 import com.project.clinicaapi.service.businessRule.commitAppointment.registerAppointment.RegisterAppointmentVerification;
 import com.project.clinicaapi.service.customException.ClinicOpeningHoursException;
-import com.project.clinicaapi.service.customException.InvalidEnumValueException;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-import java.time.DayOfWeek;
+import java.time.LocalTime;
 
-@Order(value = 3)
+@Order(value = 2)
 @Component
-public class DayOfTheWeekRegister implements RegisterAppointmentVerification {
-
+public class AppointmentTimeLimitRegister implements RegisterAppointmentVerification {
     @Override
     public void verification(RegisterAppointmentArgs args) {
 
-        if (args.appointmentDTO().getAppointmentDate().getDayOfWeek().equals(DayOfWeek.SUNDAY)) {
-            throw new ClinicOpeningHoursException("Sunday is not a valid day, we work from monday to saturday");
+        LocalTime clinicOpeningTime = LocalTime.of(8, 0);
+        LocalTime clinicClosingTime = LocalTime.of(18, 0);
+
+        if(args.appointmentDTO().getTimeStart().isBefore(clinicOpeningTime) || args.appointmentDTO().getTimeEnd().isAfter(clinicClosingTime)) {
+            throw new ClinicOpeningHoursException("The clinic works from 8:00 a.m to 18:00 p.m ");
         }
+
     }
 
 }

@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -81,6 +82,10 @@ public class SecurityConfigurationsImpl implements SecurityConfigurations {
                 .requestMatchers(HttpMethod.GET, "/dentists/**").hasAnyRole(administrator, secretary)
                 .requestMatchers(HttpMethod.POST, "/dentists").hasAnyRole(administrator, secretary)
                 .requestMatchers(HttpMethod.PATCH, "/dentists/*").hasAnyRole(administrator, secretary)
+
+                .requestMatchers(HttpMethod.GET, "/appointments/**").hasAnyRole(administrator, secretary)
+                .requestMatchers(HttpMethod.POST, "/appointments").hasAnyRole(administrator, secretary)
+                .requestMatchers(HttpMethod.PATCH, "/appointments/*").hasAnyRole(administrator, secretary)
 
 
                 .requestMatchers("/userarea/admin").hasRole(administrator)

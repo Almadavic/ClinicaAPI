@@ -21,18 +21,29 @@ public class DateTimeParseExceptionInstance extends FindExceptionInstance {
 
         if (args.rootCause() instanceof DateTimeParseException ex) {
 
-            String message = String.format("Received value '%s' for date, which is of an invalid type. ", ex.getParsedString());
-
             return ResponseEntity.status(status).body(new StandardError(
                     status.value(),
                     "Invalid Date Format",
-                    message + " Proper date format: yyyy-mm-dd",
+                    menageMessageException(args.exception(), ex),
                     args.request().getRequestURI()));
 
         }
 
         return nextOne.verification(args);
 
+    }
+
+    private String menageMessageException(Exception exception, DateTimeParseException ex) {
+
+        String message;
+
+        if(exception.getMessage().contains("LocalTime")) {
+            message = "Received value " + ex.getParsedString() + " for time, which is an invalid type. Proper time format: 00:00";
+        } else {
+            message = "Received value " + ex.getParsedString() + " for date, which is an invalid type. Proper date format: yyyy-mm-dd";
+        }
+
+        return message;
     }
 
 }

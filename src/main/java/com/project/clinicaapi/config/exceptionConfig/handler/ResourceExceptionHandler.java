@@ -110,9 +110,19 @@ public class ResourceExceptionHandler {
         return handlingException(exception, request, "No value filled", HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(DentistAvailableDayException.class)
+    public ResponseEntity<StandardError> dentistAvailableDay(DentistAvailableDayException exception, HttpServletRequest request) {
+        return handlingException(exception, request, "Unavailable day", HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
     @ExceptionHandler(DisableOwnAccountException.class)
     public ResponseEntity<StandardError> disableOwnAccount(DisableOwnAccountException exception, HttpServletRequest request) {
         return handlingException(exception, request, "Disable account error", HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(ClinicOpeningHoursException.class)
+    public ResponseEntity<StandardError> clinicOpeningHours(ClinicOpeningHoursException exception, HttpServletRequest request) {
+        return handlingException(exception, request, "Commit appointment error", HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(InvalidInstanceException.class)
