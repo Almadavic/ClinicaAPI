@@ -4,7 +4,7 @@ import com.project.clinicaapi.entity.WorkDay;
 import com.project.clinicaapi.enumerated.WorkDayEnum;
 import com.project.clinicaapi.service.businessRule.commitAppointment.registerAppointment.RegisterAppointmentArgs;
 import com.project.clinicaapi.service.businessRule.commitAppointment.registerAppointment.RegisterAppointmentVerification;
-import com.project.clinicaapi.service.customException.DentistAvailableDayException;
+import com.project.clinicaapi.service.customException.DentistNotAvailableException;
 import com.project.clinicaapi.util.ConvertingType;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -21,7 +21,7 @@ public class DentistAvailableDay implements RegisterAppointmentVerification {
         WorkDayEnum workDay = ConvertingType.getWeekDayByLocalDate(args.appointmentDTO().getAppointmentDate());
 
         if(!dentistAvailable(args.dentist().getWorkDays(), workDay)) {
-            throw new DentistAvailableDayException(workDay);
+            throw new DentistNotAvailableException(workDay);
         }
 
     }

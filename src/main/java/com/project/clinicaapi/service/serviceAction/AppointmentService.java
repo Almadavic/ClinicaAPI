@@ -40,7 +40,7 @@ public class AppointmentService {
     public AppointmentResponseDTO save(AppointmentRegisterDTO registerData, User userLogged) {
         Patient patient = returnPatientDataBase(registerData.getPatientId());
         Dentist dentist = returnDentistDataBase(registerData.getDentistId());
-        registerAppointmentVerifications.forEach(v -> v.verification(new RegisterAppointmentArgs(registerData, dentist)));
+        registerAppointmentVerifications.forEach(v -> v.verification(new RegisterAppointmentArgs(registerData, dentist, patient)));
         Appointment appointment = mapper.toAppointmentEntity(registerData);
         setReferences(appointment, patient, dentist);
         AppointmentResponseDTO appointmentDTO = saveAndConvert(appointment);

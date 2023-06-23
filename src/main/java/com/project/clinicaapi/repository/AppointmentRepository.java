@@ -2,9 +2,17 @@ package com.project.clinicaapi.repository;
 
 import com.project.clinicaapi.entity.Appointment;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
+import java.time.LocalDate;
+import java.util.List;
 
 @Repository
 public interface AppointmentRepository extends JpaRepository<Appointment, String> {
+
+    @Query(value = "SELECT * from tb_appointments a where a.dentist_id = :dentistid AND a.appointment_date = :appointmentdate", nativeQuery = true)
+    List<Appointment> findByDentistAndByDate(@Param(value = "dentistid")String dentistId, @Param(value = "appointmentdate")LocalDate appointmentDate);
 
 }

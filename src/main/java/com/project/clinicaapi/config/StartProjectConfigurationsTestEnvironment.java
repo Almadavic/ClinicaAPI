@@ -248,17 +248,57 @@ public class StartProjectConfigurationsTestEnvironment implements CommandLineRun
         dentist1 = userRepository.save(dentist1);
 
 
-        Appointment appointment = Appointment.builder()
+        Appointment appointment1 = Appointment.builder()
                 .procedure("Limpeza de dente")
-                .appointmentDate(LocalDate.of(2023, 06, 01))
+                .appointmentDate(LocalDate.of(2023, 06, 26))
                 .timeStart(LocalTime.now())
                 .timeEnd(LocalTime.now().plusHours(1))
-                .weekDay(WorkDayEnum.FRIDAY)
+                .weekDay(WorkDayEnum.MONDAY)
                 .dentist(dentist1)
                 .patient(patient1)
                 .build();
 
-        appointmentRepository.save(appointment);
+        Appointment appointment2 = Appointment.builder()
+                .procedure("Canal no dente")
+                .appointmentDate(LocalDate.of(2023, 06, 26))
+                .timeStart(LocalTime.now())
+                .timeEnd(LocalTime.now().plusHours(1))
+                .weekDay(WorkDayEnum.MONDAY)
+                .dentist(dentist1)
+                .patient(patient1)
+                .build();
+
+        Appointment appointment3 = Appointment.builder()
+                .procedure("Tirar o cizo")
+                .appointmentDate(LocalDate.of(2023, 06, 26))
+                .timeStart(LocalTime.now())
+                .timeEnd(LocalTime.now().plusHours(1))
+                .weekDay(WorkDayEnum.MONDAY)
+                .dentist(dentist1)
+                .patient(patient1)
+                .build();
+
+        Appointment appointment4 = Appointment.builder()
+                .procedure("Tirar dente de leite")
+                .appointmentDate(LocalDate.of(2023, 06, 26))
+                .timeStart(LocalTime.now())
+                .timeEnd(LocalTime.now().plusHours(1))
+                .weekDay(WorkDayEnum.MONDAY)
+                .dentist(dentist1)
+                .patient(patient1)
+                .build();
+
+        Appointment appointment5 = Appointment.builder()
+                .procedure("Ginoplastia")
+                .appointmentDate(LocalDate.of(2023, 06, 27))
+                .timeStart(LocalTime.now())
+                .timeEnd(LocalTime.now().plusHours(1))
+                .weekDay(WorkDayEnum.TUESDAY)
+                .dentist(dentist1)
+                .patient(patient1)
+                .build();
+
+        appointmentRepository.saveAll(Arrays.asList(appointment1, appointment2, appointment3, appointment4, appointment5));
 
         logRegistration.saveLog("admin", "authenticated in the system");
 

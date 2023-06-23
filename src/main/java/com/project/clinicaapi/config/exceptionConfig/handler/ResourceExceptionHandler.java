@@ -110,8 +110,8 @@ public class ResourceExceptionHandler {
         return handlingException(exception, request, "No value filled", HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(DentistAvailableDayException.class)
-    public ResponseEntity<StandardError> dentistAvailableDay(DentistAvailableDayException exception, HttpServletRequest request) {
+    @ExceptionHandler(DentistNotAvailableException.class)
+    public ResponseEntity<StandardError> dentistAvailableDay(DentistNotAvailableException exception, HttpServletRequest request) {
         return handlingException(exception, request, "Unavailable day", HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
