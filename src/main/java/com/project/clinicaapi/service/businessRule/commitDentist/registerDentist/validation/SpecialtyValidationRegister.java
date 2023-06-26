@@ -6,6 +6,8 @@ import com.project.clinicaapi.service.businessRule.commitDentist.registerDentist
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
+import java.time.DayOfWeek;
+
 @Order(value = 9)
 @Component
 public class SpecialtyValidationRegister implements RegisterDentistVerification {

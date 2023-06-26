@@ -12,7 +12,8 @@ import java.util.List;
 @Repository
 public interface AppointmentRepository extends JpaRepository<Appointment, String> {
 
-    @Query(value = "SELECT * from tb_appointments a where a.dentist_id = :dentistid AND a.appointment_date = :appointmentdate", nativeQuery = true)
+    @Query(value = "SELECT * from tb_appointments a where a.dentist_id = :dentistid AND a.appointment_date = :appointmentdate ORDER BY a.appointment_date, time_start ASC"
+            , nativeQuery = true)
     List<Appointment> findByDentistAndByDate(@Param(value = "dentistid")String dentistId, @Param(value = "appointmentdate")LocalDate appointmentDate);
 
 }

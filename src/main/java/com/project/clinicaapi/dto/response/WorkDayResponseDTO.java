@@ -7,18 +7,18 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
-@JsonPropertyOrder(value = {"id", "workday"})
-@EqualsAndHashCode(of = "id")
+@JsonPropertyOrder(value = {"index", "workday"})
+@EqualsAndHashCode(of = "index")
 public class WorkDayResponseDTO {
 
-    @JsonProperty(value = "id")
-    private final Long id;
+    @JsonProperty(value = "index")
+    private final Integer index;
 
     @JsonProperty(value = "workday")
     private final String workDay;
 
     public WorkDayResponseDTO(WorkDay workDay) {
-        this.id = workDay.getId();
+        this.index = workDay.getIndex();
         this.workDay = workDay.getWorkDay().toString();
     }
 

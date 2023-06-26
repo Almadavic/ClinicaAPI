@@ -6,7 +6,6 @@ import com.project.clinicaapi.enumerated.Specialty;
 import com.project.clinicaapi.service.businessRule.commitDentist.updateDentist.UpdateDentistArgs;
 import com.project.clinicaapi.service.businessRule.commitDentist.updateDentist.UpdateDentistVerification;
 import com.project.clinicaapi.service.serviceAction.WorkDayService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
@@ -47,10 +46,10 @@ public class UpdatingDentistData implements UpdateDentistVerification {
 
         Set<Integer> workDays = dentistDTO.getWorkDays();
 
-        if (!workDays.isEmpty()) {
-            dentist.getWorkDays().clear();
-            dentistDTO.getWorkDays().forEach(workday ->
-                    dentist.addWorkDay(workDayService.returnWorkDayDataBase(workday)));
+        if(workDays != null) {
+                dentist.getWorkDays().clear();
+                dentistDTO.getWorkDays().forEach(workday ->
+                        dentist.addWorkDay(workDayService.returnWorkDayDataBase(workday)));
         }
 
     }

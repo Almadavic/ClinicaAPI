@@ -1,7 +1,6 @@
 package com.project.clinicaapi.repository;
 
 import com.project.clinicaapi.entity.WorkDay;
-import com.project.clinicaapi.enumerated.Specialty;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

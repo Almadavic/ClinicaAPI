@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
+import java.time.DateTimeException;
 import java.util.List;
 
 @ControllerAdvice
@@ -65,10 +66,12 @@ public class ResourceExceptionHandler {
         Throwable rootCause = ExceptionUtils.getRootCause(exception);
 
         FindExceptionInstance verification = new DateTimeParseExceptionInstance(
-                new JsonParseExceptionInstance(
-                        new InvalidFormatExceptionInstance(
-                                new UnrecognizedPropertyExceptionInstance(
-                                        new GenericExceptionInstance()))));
+                new DateTimeExceptionInstance(
+                        new JsonParseExceptionInstance(
+                                new InvalidFormatExceptionInstance(
+                                        new UnrecognizedPropertyExceptionInstance(
+                                                new MismatchedInputExceptionInstance(
+                                                        new GenericExceptionInstance()))))));
 
         return verification.verification(new FindExceptionInstanceArgs(rootCause, request, exception));
     }
@@ -113,6 +116,11 @@ public class ResourceExceptionHandler {
     @ExceptionHandler(DentistNotAvailableException.class)
     public ResponseEntity<StandardError> dentistAvailableDay(DentistNotAvailableException exception, HttpServletRequest request) {
         return handlingException(exception, request, "Unavailable day", HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(AppointmentDurationException.class)
+    public ResponseEntity<StandardError> appointmentDuration(AppointmentDurationException exception, HttpServletRequest request) {
+        return handlingException(exception, request, "Appointment duration error", HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(DisableOwnAccountException.class)

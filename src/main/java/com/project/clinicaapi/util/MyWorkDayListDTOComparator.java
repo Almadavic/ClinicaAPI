@@ -9,7 +9,7 @@ public class MyWorkDayListDTOComparator implements Comparator<WorkDayResponseDTO
 
     @Override
     public int compare(WorkDayResponseDTO workDay1, WorkDayResponseDTO workDay2) {
-        return workDay1.getId().compareTo(workDay2.getId());
+        return workDay1.getIndex().compareTo(workDay2.getIndex());
     }
 
 }

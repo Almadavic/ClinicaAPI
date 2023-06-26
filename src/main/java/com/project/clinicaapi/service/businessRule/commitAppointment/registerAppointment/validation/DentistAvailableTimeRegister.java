@@ -4,6 +4,7 @@ import com.project.clinicaapi.entity.Appointment;
 import com.project.clinicaapi.repository.AppointmentRepository;
 import com.project.clinicaapi.service.businessRule.commitAppointment.registerAppointment.RegisterAppointmentArgs;
 import com.project.clinicaapi.service.businessRule.commitAppointment.registerAppointment.RegisterAppointmentVerification;
+import com.project.clinicaapi.service.customException.AnotherMeetingRunningException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -23,20 +24,23 @@ public class DentistAvailableTimeRegister implements RegisterAppointmentVerifica
 
         List<Appointment> appointments = appointmentRepository.findByDentistAndByDate(args.dentist().getId(), args.appointmentDTO().getAppointmentDate());
 
-        appointments.forEach(a -> verifyAvailability(a, args.appointmentDTO().getTimeStart(), args.appointmentDTO().getTimeEnd()));
+        if (requiredAppointmentAvailable(appointments, args.appointmentDTO().getTimeStart(), args.appointmentDTO().getTimeEnd())) {
+            throw new AnotherMeetingRunningException("dentist");
+        }
 
+    }
+
+    private boolean requiredAppointmentAvailable(List<Appointment> appointments, LocalTime startTimeDTO, LocalTime endTimeDTO) {
+        return appointments.stream().anyMatch(a -> verifyAvailability(a, startTimeDTO, endTimeDTO));
     }
 
     private boolean verifyAvailability(Appointment appointment, LocalTime startTimeDTO, LocalTime endTimeDTO) {
-        return startTimeWithinAnotherAppointment(startTimeDTO, appointment) || endTimeWithinAnotherAppointment(endTimeDTO, appointment);
+        return timeWithinAnotherAppointment(startTimeDTO, appointment) || timeWithinAnotherAppointment(endTimeDTO, appointment);
     }
 
-    private boolean startTimeWithinAnotherAppointment(LocalTime appointmentStartTimeDTO, Appointment appointment) {
-        return appointmentStartTimeDTO.isAfter(appointment.getTimeStart()) && appointmentStartTimeDTO.isBefore(appointment.getTimeEnd());
-    }
-
-    private boolean endTimeWithinAnotherAppointment(LocalTime appointmentEndTimeDTO, Appointment appointment) {
-        return appointmentEndTimeDTO.isAfter(appointment.getTimeStart()) && appointmentEndTimeDTO.isBefore(appointment.getTimeEnd());
+    private boolean timeWithinAnotherAppointment(LocalTime appointmentTimeDTO, Appointment appointment) {
+        return appointmentTimeDTO.isAfter(appointment.getTimeStart().minusMinutes(3)) &&
+                appointmentTimeDTO.isBefore(appointment.getTimeEnd().plusMinutes(3));
     }
 
 }

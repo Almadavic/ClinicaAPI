@@ -2,6 +2,7 @@ package com.project.clinicaapi.service.businessRule.commitAppointment.registerAp
 
 import com.project.clinicaapi.service.businessRule.commitAppointment.registerAppointment.RegisterAppointmentArgs;
 import com.project.clinicaapi.service.businessRule.commitAppointment.registerAppointment.RegisterAppointmentVerification;
+import com.project.clinicaapi.service.customException.AppointmentDurationException;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
@@ -16,8 +17,8 @@ public class AppointmentDuration implements RegisterAppointmentVerification {
 
         Duration duration = Duration.between(args.appointmentDTO().getTimeStart(), args.appointmentDTO().getTimeEnd());
 
-        if(duration.toHours() > 1) {
-            throw new RuntimeException("--------------------------------------"); // LANÇAR EXCEPTION
+        if (duration.toMinutes() > 60 || duration.toMinutes() < 30) {
+            throw new AppointmentDurationException();
         }
 
     }

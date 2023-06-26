@@ -6,8 +6,6 @@ import com.project.clinicaapi.entity.Dentist;
 import com.project.clinicaapi.entity.User;
 import com.project.clinicaapi.entity.WorkDay;
 import com.project.clinicaapi.service.customException.InvalidInstanceException;
-import com.project.clinicaapi.util.MyWorkDayListComparator;
-import com.project.clinicaapi.util.MyWorkDayListDTOComparator;
 import lombok.Getter;
 
 import java.util.List;

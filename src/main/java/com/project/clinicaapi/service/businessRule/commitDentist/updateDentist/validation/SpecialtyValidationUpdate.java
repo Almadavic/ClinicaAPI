@@ -15,9 +15,7 @@ public class SpecialtyValidationUpdate implements UpdateDentistVerification {
 
         String specialty = args.dentistDTO().getSpeciality();
 
-        if(specialty != null) {
             CommitDentistValidations.specialtyValueValidation(specialty);
-        }
 
     }
 

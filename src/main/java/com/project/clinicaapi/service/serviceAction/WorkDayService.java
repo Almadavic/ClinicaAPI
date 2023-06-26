@@ -28,7 +28,7 @@ public class WorkDayService {
         return mapper.toWorkDayResponseDTOList(workDays);
     }
 
-    public WorkDayResponseDTO findById(Integer index) {
+    public WorkDayResponseDTO findByIndex(Integer index) {
         return mapper.toWorkDayResponseDTO(returnWorkDayDataBase(index));
     }
 

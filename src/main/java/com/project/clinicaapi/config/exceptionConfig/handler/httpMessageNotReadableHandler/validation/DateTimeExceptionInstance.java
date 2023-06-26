@@ -1,40 +1,34 @@
 package com.project.clinicaapi.config.exceptionConfig.handler.httpMessageNotReadableHandler.validation;
 
 
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.project.clinicaapi.config.exceptionConfig.handler.httpMessageNotReadableHandler.FindExceptionInstance;
 import com.project.clinicaapi.config.exceptionConfig.handler.httpMessageNotReadableHandler.FindExceptionInstanceArgs;
 import com.project.clinicaapi.config.exceptionConfig.standardError.commomStandardError.StandardError;
 import org.springframework.http.ResponseEntity;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import java.time.DateTimeException;
+import java.time.format.DateTimeParseException;
 
-public class InvalidFormatExceptionInstance extends FindExceptionInstance {
 
-    public InvalidFormatExceptionInstance(FindExceptionInstance nextOne) {
+public class DateTimeExceptionInstance extends FindExceptionInstance {
+
+    public DateTimeExceptionInstance(FindExceptionInstance nextOne) {
         super(nextOne);
     }
 
     @Override
     public ResponseEntity<StandardError> verification(FindExceptionInstanceArgs args) {
 
-        Throwable rootCause = args.rootCause();
+         Throwable throwable = args.rootCause();
 
-        if (rootCause instanceof InvalidFormatException ex) {
-
-            String path = joinPath(ex.getPath());
-
-            String message = String.format("The property '%s' received the value '%s', which is of an invalid type. " +
-                            "Correct and enter a value compatible with type %s.", path, ex.getValue(),
-                    ex.getTargetType().getSimpleName());
+        if (throwable instanceof DateTimeException) {
 
             return ResponseEntity.status(status).body(new StandardError(
                     status.value(),
-                    "Invalid value format",
-                    message,
+                    "Invalid value to date",
+                    throwable.getMessage(),
                     args.request().getRequestURI()));
+
         }
 
         return nextOne.verification(args);
@@ -42,3 +36,4 @@ public class InvalidFormatExceptionInstance extends FindExceptionInstance {
     }
 
 }
+
