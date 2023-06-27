@@ -1,6 +1,6 @@
 package com.project.clinicaapi.businessRule.commitUser;
 
-import com.project.clinicaapi.service.businessRule.commitUser.CommitUserValidations;
+import com.project.clinicaapi.service.businessRule.commitUser.EmailFormat;
 import com.project.clinicaapi.service.customException.InvalidEmailFormatException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -31,11 +31,11 @@ class EmailFormatTest {
 
     private void testingThrowsException(String email) {
         Assertions.assertThrows(InvalidEmailFormatException.class,
-                () -> CommitUserValidations.emailFormatValidation(email));
+                () -> EmailFormat.verification(email));
     }
 
     private void testingDoesNotThrowException(String email) {
-        Assertions.assertDoesNotThrow(() -> CommitUserValidations.emailFormatValidation(email));
+        Assertions.assertDoesNotThrow(() -> EmailFormat.verification(email));
     }
 
 }

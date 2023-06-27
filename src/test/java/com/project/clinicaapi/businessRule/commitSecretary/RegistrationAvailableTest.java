@@ -1,8 +1,7 @@
 package com.project.clinicaapi.businessRule.commitSecretary;
 
 import com.project.clinicaapi.repository.SecretaryRepository;
-import com.project.clinicaapi.service.businessRule.commitSecretary.CommitSecretaryValidations;
-import com.project.clinicaapi.service.businessRule.commitUser.CommitUserValidations;
+import com.project.clinicaapi.service.businessRule.commitSecretary.RegistrationAvailable;
 import com.project.clinicaapi.service.customException.RegistrationAlreadyRegisteredException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -21,14 +20,14 @@ class RegistrationAvailableTest {
     void registrationUnavailable() {
 
         Assertions.assertThrows(RegistrationAlreadyRegisteredException.class,
-                () -> CommitSecretaryValidations.findSecretaryByRegistrationValidation(secretaryRepository, "1156139862302"));
+                () -> RegistrationAvailable.verification(secretaryRepository, "1156139862302"));
 
     }
 
     @Test
     void registrationAvailable() {
 
-        Assertions.assertDoesNotThrow(() -> CommitSecretaryValidations.findSecretaryByRegistrationValidation(secretaryRepository, "11561398623"));
+        Assertions.assertDoesNotThrow(() -> RegistrationAvailable.verification(secretaryRepository, "11561398623"));
 
     }
 

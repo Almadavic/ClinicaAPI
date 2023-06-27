@@ -1,7 +1,6 @@
 package com.project.clinicaapi.businessRule.commitAppointment;
 
-import com.project.clinicaapi.service.businessRule.commitAppointment.CommitAppointmentValidations;
-import com.project.clinicaapi.service.customException.AppointmentDurationException;
+import com.project.clinicaapi.service.businessRule.commitAppointment.AppointmentTimeLimit;
 import com.project.clinicaapi.service.customException.ClinicOpeningHoursException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -38,11 +37,11 @@ class AppointmentTimeLimitTest {
 
     private void testingThrowsException(LocalTime timeStart, LocalTime timeEnd) {
         Assertions.assertThrows(ClinicOpeningHoursException.class,
-                () -> CommitAppointmentValidations.appointmentTimeLimitValidation(timeStart, timeEnd));
+                () -> AppointmentTimeLimit.verification(timeStart, timeEnd));
     }
 
     private void testingDoesNotThrowException(LocalTime timeStart, LocalTime timeEnd) {
-        Assertions.assertDoesNotThrow(() -> CommitAppointmentValidations.appointmentTimeLimitValidation(timeStart, timeEnd));
+        Assertions.assertDoesNotThrow(() -> AppointmentTimeLimit.verification(timeStart, timeEnd));
     }
 
 }

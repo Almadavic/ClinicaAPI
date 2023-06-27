@@ -1,10 +1,8 @@
 package com.project.clinicaapi.service.businessRule.commitSecretary.updateSecretary.validation;
 
-import com.project.clinicaapi.repository.SecretaryRepository;
-import com.project.clinicaapi.service.businessRule.commitSecretary.CommitSecretaryValidations;
+import com.project.clinicaapi.service.businessRule.commitSecretary.RegistrationAvailable;
 import com.project.clinicaapi.service.businessRule.commitSecretary.updateSecretary.UpdateSecretaryArgs;
 import com.project.clinicaapi.service.businessRule.commitSecretary.updateSecretary.UpdateSecretaryVerification;
-import lombok.RequiredArgsConstructor;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
@@ -18,7 +16,7 @@ public class RegistrationAvailableUpdate implements UpdateSecretaryVerification 
         String registration = args.secretaryDTO().getRegistration();
 
         if (registration != null && !registration.equals(args.secretary().getRegistration())) {
-            CommitSecretaryValidations.findSecretaryByRegistrationValidation(args.secretaryRepository(), registration);
+            RegistrationAvailable.verification(args.secretaryRepository(), registration);
         }
 
     }

@@ -1,6 +1,6 @@
 package com.project.clinicaapi.service.businessRule.commitUser.registerUser.validation;
 
-import com.project.clinicaapi.service.businessRule.commitUser.CommitUserValidations;
+import com.project.clinicaapi.service.businessRule.commitUser.CellphoneFormat;
 import com.project.clinicaapi.service.businessRule.commitUser.registerUser.RegisterUserArgs;
 import com.project.clinicaapi.service.businessRule.commitUser.registerUser.RegisterUserVerification;
 import org.springframework.core.annotation.Order;
@@ -13,7 +13,7 @@ public class CellphoneFormatRegister implements RegisterUserVerification {
     @Override
     public void verification(RegisterUserArgs args) {
 
-        args.userDTO().setCellphone(CommitUserValidations.cellphoneFormatValidation(args.userDTO().getCellphone()));
+        args.userDTO().setCellphone(CellphoneFormat.verification(args.userDTO().getCellphone()));
 
     }
 

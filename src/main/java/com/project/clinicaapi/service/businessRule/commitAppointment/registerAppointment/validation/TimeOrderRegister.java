@@ -1,6 +1,6 @@
 package com.project.clinicaapi.service.businessRule.commitAppointment.registerAppointment.validation;
 
-import com.project.clinicaapi.service.businessRule.commitAppointment.CommitAppointmentValidations;
+import com.project.clinicaapi.service.businessRule.commitAppointment.TimeOrder;
 import com.project.clinicaapi.service.businessRule.commitAppointment.registerAppointment.RegisterAppointmentArgs;
 import com.project.clinicaapi.service.businessRule.commitAppointment.registerAppointment.RegisterAppointmentVerification;
 import org.springframework.core.annotation.Order;
@@ -14,7 +14,7 @@ public class TimeOrderRegister implements RegisterAppointmentVerification {
     @Override
     public void verification(RegisterAppointmentArgs args) {
 
-        CommitAppointmentValidations.timeOrderValidation(args.appointmentDTO().getTimeStart(), args.appointmentDTO().getTimeEnd());
+       TimeOrder.verification(args.appointmentDTO().getTimeStart(), args.appointmentDTO().getTimeEnd());
 
     }
 

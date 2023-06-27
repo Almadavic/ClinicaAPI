@@ -1,7 +1,7 @@
 package com.project.clinicaapi.service.businessRule.commitUser.registerUser.validation;
 
 import com.project.clinicaapi.repository.UserRepository;
-import com.project.clinicaapi.service.businessRule.commitUser.CommitUserValidations;
+import com.project.clinicaapi.service.businessRule.commitUser.LoginAvailable;
 import com.project.clinicaapi.service.businessRule.commitUser.registerUser.RegisterUserArgs;
 import com.project.clinicaapi.service.businessRule.commitUser.registerUser.RegisterUserVerification;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +18,7 @@ public class LoginAvailableRegister implements RegisterUserVerification {
     @Override
     public void verification(RegisterUserArgs args) {
 
-        CommitUserValidations.findUserByLoginValidation(userRepository, args.userDTO().getLogin());
+        LoginAvailable.verification(userRepository, args.userDTO().getLogin());
 
     }
 

@@ -1,6 +1,6 @@
 package com.project.clinicaapi.service.businessRule.commitDentist.updateDentist.validation;
 
-import com.project.clinicaapi.service.businessRule.commitDentist.CommitDentistValidations;
+import com.project.clinicaapi.service.businessRule.commitDentist.CroFormat;
 import com.project.clinicaapi.service.businessRule.commitDentist.updateDentist.UpdateDentistArgs;
 import com.project.clinicaapi.service.businessRule.commitDentist.updateDentist.UpdateDentistVerification;
 import org.springframework.core.annotation.Order;
@@ -16,7 +16,7 @@ public class CroFormatUpdate implements UpdateDentistVerification {
         String cro = args.dentistDTO().getCro();
 
         if (cro != null) {
-            CommitDentistValidations.croFormatValidation(args.dentistDTO().getCro());
+            CroFormat.verification(args.dentistDTO().getCro());
         }
 
     }

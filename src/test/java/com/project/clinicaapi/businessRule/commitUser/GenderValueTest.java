@@ -1,6 +1,6 @@
 package com.project.clinicaapi.businessRule.commitUser;
 
-import com.project.clinicaapi.service.businessRule.commitUser.CommitUserValidations;
+import com.project.clinicaapi.service.businessRule.commitUser.GenderValue;
 import com.project.clinicaapi.service.customException.InvalidEnumValueException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -29,11 +29,11 @@ class GenderValueTest {
 
     private void testingThrowsException(String value) {
         Assertions.assertThrows(InvalidEnumValueException.class,
-                () -> CommitUserValidations.genderValueValidation(value));
+                () -> GenderValue.verification(value));
     }
 
     private void testingDoesNotThrowException(String value) {
-        Assertions.assertDoesNotThrow(() -> CommitUserValidations.genderValueValidation(value));
+        Assertions.assertDoesNotThrow(() -> GenderValue.verification(value));
     }
 
 }

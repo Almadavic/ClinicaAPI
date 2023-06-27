@@ -1,6 +1,6 @@
 package com.project.clinicaapi.service.businessRule.commitDentist.updateDentist.validation;
 
-import com.project.clinicaapi.service.businessRule.commitDentist.CommitDentistValidations;
+import com.project.clinicaapi.service.businessRule.commitDentist.WorkDayList;
 import com.project.clinicaapi.service.businessRule.commitDentist.updateDentist.UpdateDentistArgs;
 import com.project.clinicaapi.service.businessRule.commitDentist.updateDentist.UpdateDentistVerification;
 import org.springframework.core.annotation.Order;
@@ -18,7 +18,7 @@ public class WorkDayListUpdate implements UpdateDentistVerification {
         Set<Integer> workDays = args.dentistDTO().getWorkDays();
 
         if (workDays != null) {
-            CommitDentistValidations.workdayListValidation(workDays);
+            WorkDayList.verification(workDays);
         }
 
     }

@@ -1,7 +1,7 @@
 package com.project.clinicaapi.businessRule.commitDentist;
 
 import com.project.clinicaapi.repository.DentistRepository;
-import com.project.clinicaapi.service.businessRule.commitDentist.CommitDentistValidations;
+import com.project.clinicaapi.service.businessRule.commitDentist.CroAvailable;
 import com.project.clinicaapi.service.customException.CroAlreadyRegisteredException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -20,14 +20,14 @@ class CroAvailableTest {
     void croUnavailable() {
 
         Assertions.assertThrows(CroAlreadyRegisteredException.class,
-                () -> CommitDentistValidations.findDentistByCroValidation(dentistRepository, "137185"));
+                () -> CroAvailable.verification(dentistRepository, "137185"));
 
     }
 
     @Test
     void croAvailable() {
 
-        Assertions.assertDoesNotThrow(() -> CommitDentistValidations.findDentistByCroValidation(dentistRepository, "1111111"));
+        Assertions.assertDoesNotThrow(() -> CroAvailable.verification(dentistRepository, "1111111"));
 
     }
 

@@ -1,9 +1,7 @@
 package com.project.clinicaapi.businessRule.commitAppointment;
 
-import com.project.clinicaapi.service.businessRule.commitAppointment.CommitAppointmentValidations;
-import com.project.clinicaapi.service.businessRule.commitDentist.CommitDentistValidations;
+import com.project.clinicaapi.service.businessRule.commitAppointment.AppointmentDuration;
 import com.project.clinicaapi.service.customException.AppointmentDurationException;
-import com.project.clinicaapi.service.customException.InvalidCroFormatException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -29,11 +27,11 @@ class AppointmentDurationTest {
 
     private void testingThrowsException(LocalTime timeStart, LocalTime timeEnd) {
         Assertions.assertThrows(AppointmentDurationException.class,
-                () -> CommitAppointmentValidations.appointmentDurationValidation(timeStart, timeEnd));
+                () -> AppointmentDuration.verification(timeStart, timeEnd));
     }
 
     private void testingDoesNotThrowException(LocalTime timeStart, LocalTime timeEnd) {
-        Assertions.assertDoesNotThrow(() -> CommitAppointmentValidations.appointmentDurationValidation(timeStart, timeEnd));
+        Assertions.assertDoesNotThrow(() -> AppointmentDuration.verification(timeStart, timeEnd));
     }
 
 }

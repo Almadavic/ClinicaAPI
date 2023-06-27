@@ -1,6 +1,6 @@
 package com.project.clinicaapi.service.businessRule.commitUser.registerUser.validation;
 
-import com.project.clinicaapi.service.businessRule.commitUser.CommitUserValidations;
+import com.project.clinicaapi.service.businessRule.commitUser.EmailFormat;
 import com.project.clinicaapi.service.businessRule.commitUser.registerUser.RegisterUserArgs;
 import com.project.clinicaapi.service.businessRule.commitUser.registerUser.RegisterUserVerification;
 import org.springframework.core.annotation.Order;
@@ -13,7 +13,7 @@ public class EmailFormatRegister implements RegisterUserVerification {
     @Override
     public void verification(RegisterUserArgs args) {
 
-        CommitUserValidations.emailFormatValidation(args.userDTO().getEmail());
+        EmailFormat.verification(args.userDTO().getEmail());
 
     }
 

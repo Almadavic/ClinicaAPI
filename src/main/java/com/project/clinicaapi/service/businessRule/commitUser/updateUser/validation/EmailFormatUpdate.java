@@ -1,6 +1,6 @@
 package com.project.clinicaapi.service.businessRule.commitUser.updateUser.validation;
 
-import com.project.clinicaapi.service.businessRule.commitUser.CommitUserValidations;
+import com.project.clinicaapi.service.businessRule.commitUser.EmailFormat;
 import com.project.clinicaapi.service.businessRule.commitUser.updateUser.UpdateUserArgs;
 import com.project.clinicaapi.service.businessRule.commitUser.updateUser.UpdateUserVerification;
 import org.springframework.core.annotation.Order;
@@ -16,7 +16,7 @@ public class EmailFormatUpdate implements UpdateUserVerification {
         String email = args.userDTO().getEmail();
 
         if (email != null) {
-            CommitUserValidations.emailFormatValidation(email);
+            EmailFormat.verification(email);
         }
 
     }

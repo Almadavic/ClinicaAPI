@@ -1,7 +1,6 @@
 package com.project.clinicaapi.businessRule.commitUser.update;
 
-import com.project.clinicaapi.service.businessRule.commitUser.CommitUserValidations;
-import com.project.clinicaapi.service.customException.InvalidCellphoneNumberFormatException;
+import com.project.clinicaapi.service.businessRule.commitUser.PasswordFormat;
 import com.project.clinicaapi.service.customException.InvalidPasswordFormatException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -34,11 +33,11 @@ class PasswordFormatTest {
 
     private void testingThrowsException(String password) {
         Assertions.assertThrows(InvalidPasswordFormatException.class,
-                () -> CommitUserValidations.passwordFormatValidation(password));
+                () -> PasswordFormat.verification(password));
     }
 
     private void testingDoesNotThrowException(String password) {
-        Assertions.assertDoesNotThrow(() -> CommitUserValidations.passwordFormatValidation(password));
+        Assertions.assertDoesNotThrow(() -> PasswordFormat.verification(password));
     }
 
 }

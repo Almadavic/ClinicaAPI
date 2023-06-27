@@ -1,6 +1,6 @@
 package com.project.clinicaapi.businessRule.commitUser;
 
-import com.project.clinicaapi.service.businessRule.commitUser.CommitUserValidations;
+import com.project.clinicaapi.service.businessRule.commitUser.CellphoneFormat;
 import com.project.clinicaapi.service.customException.InvalidCellphoneNumberFormatException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -31,11 +31,11 @@ class CellphoneFormatTest {
 
     private void testingThrowsException(String cellphone) {
         Assertions.assertThrows(InvalidCellphoneNumberFormatException.class,
-                () -> CommitUserValidations.cellphoneFormatValidation(cellphone));
+                () -> CellphoneFormat.verification(cellphone));
     }
 
     private void testingDoesNotThrowException(String cellphone) {
-        Assertions.assertDoesNotThrow(() -> CommitUserValidations.cellphoneFormatValidation(cellphone));
+        Assertions.assertDoesNotThrow(() -> CellphoneFormat.verification(cellphone));
     }
 
 }

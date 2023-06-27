@@ -1,6 +1,6 @@
 package com.project.clinicaapi.service.businessRule.commitPatient.updatePatient.validation;
 
-import com.project.clinicaapi.service.businessRule.commitPatient.CommitPatientValidations;
+import com.project.clinicaapi.service.businessRule.commitPatient.CpfFormat;
 import com.project.clinicaapi.service.businessRule.commitPatient.updatePatient.UpdatePatientArgs;
 import com.project.clinicaapi.service.businessRule.commitPatient.updatePatient.UpdatePatientVerification;
 import org.springframework.core.annotation.Order;
@@ -16,7 +16,7 @@ public class CpfFormatUpdate implements UpdatePatientVerification {
         String cpf = args.patientDTO().getCpf();
 
         if(cpf != null) {
-            CommitPatientValidations.cpfFormatValidation(cpf);
+            CpfFormat.verification(cpf);
         }
 
     }

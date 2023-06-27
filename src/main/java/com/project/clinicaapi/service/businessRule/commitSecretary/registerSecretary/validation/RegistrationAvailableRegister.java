@@ -1,6 +1,6 @@
 package com.project.clinicaapi.service.businessRule.commitSecretary.registerSecretary.validation;
 
-import com.project.clinicaapi.service.businessRule.commitSecretary.CommitSecretaryValidations;
+import com.project.clinicaapi.service.businessRule.commitSecretary.RegistrationAvailable;
 import com.project.clinicaapi.service.businessRule.commitSecretary.registerSecretary.RegisterSecretaryArgs;
 import com.project.clinicaapi.service.businessRule.commitSecretary.registerSecretary.RegisterSecretaryVerification;
 import org.springframework.core.annotation.Order;
@@ -13,7 +13,7 @@ public class RegistrationAvailableRegister implements RegisterSecretaryVerificat
     @Override
     public void verification(RegisterSecretaryArgs args) {
 
-        CommitSecretaryValidations.findSecretaryByRegistrationValidation(args.secretaryRepository(), args.secretaryDTO().getRegistration());
+        RegistrationAvailable.verification(args.secretaryRepository(), args.secretaryDTO().getRegistration());
 
     }
 

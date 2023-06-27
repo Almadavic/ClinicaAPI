@@ -6,13 +6,13 @@ import com.project.clinicaapi.service.customException.*;
 
 import java.util.Optional;
 
-public class CommitSecretaryValidations {
+public class RegistrationAvailable {
 
-    private CommitSecretaryValidations() {
+    private RegistrationAvailable() {
 
     }
 
-    public static void findSecretaryByRegistrationValidation(SecretaryRepository secretaryRepository, String registration) {
+    public static void verification(SecretaryRepository secretaryRepository, String registration) {
 
         Optional<Secretary> secretaryOptional = secretaryRepository.findByRegistration(registration);
 

@@ -1,6 +1,6 @@
 package com.project.clinicaapi.businessRule.commitAppointment;
 
-import com.project.clinicaapi.service.businessRule.commitAppointment.CommitAppointmentValidations;
+import com.project.clinicaapi.service.businessRule.commitAppointment.TimeOrder;
 import com.project.clinicaapi.service.customException.DateOrderException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -17,7 +17,7 @@ class TimeOrderTest {
     void timeEndBeforeTimeStart() {
 
         Assertions.assertThrows(DateOrderException.class,
-                () -> CommitAppointmentValidations.timeOrderValidation(LocalTime.of(05, 40), LocalTime.of(5, 30)));
+                () -> TimeOrder.verification(LocalTime.of(05, 40), LocalTime.of(5, 30)));
 
     }
 
@@ -25,7 +25,7 @@ class TimeOrderTest {
     void timeEndAfterTimeStart() {
 
         Assertions.assertDoesNotThrow(
-                () -> CommitAppointmentValidations.timeOrderValidation(LocalTime.of(5, 40), LocalTime.of(5, 50)));
+                () -> TimeOrder.verification(LocalTime.of(5, 40), LocalTime.of(5, 50)));
 
     }
 

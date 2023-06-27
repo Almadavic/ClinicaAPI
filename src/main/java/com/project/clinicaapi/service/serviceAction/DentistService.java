@@ -6,7 +6,7 @@ import com.project.clinicaapi.dto.response.DentistResponseDTO;
 import com.project.clinicaapi.entity.Dentist;
 import com.project.clinicaapi.entity.User;
 import com.project.clinicaapi.repository.DentistRepository;
-import com.project.clinicaapi.service.businessRule.commitDentist.CommitDentistValidations;
+import com.project.clinicaapi.service.businessRule.commitDentist.SpecialtyValue;
 import com.project.clinicaapi.service.businessRule.commitDentist.registerDentist.RegisterDentistArgs;
 import com.project.clinicaapi.service.businessRule.commitDentist.registerDentist.RegisterDentistVerification;
 import com.project.clinicaapi.service.businessRule.commitDentist.updateDentist.UpdateDentistArgs;
@@ -66,7 +66,7 @@ public class DentistService {
 
     public Page<DentistResponseDTO> findPage(Pageable pageable, String name, String specialty) {
 
-        Specification<Dentist> spec = DentistSpecifications.filter(name, CommitDentistValidations.specialtyValueValidation(specialty));
+        Specification<Dentist> spec = DentistSpecifications.filter(name, SpecialtyValue.verification(specialty));
 
         return mapper.toDentistDTOPage(dentistRepository.findAll(spec, pageable));
     }

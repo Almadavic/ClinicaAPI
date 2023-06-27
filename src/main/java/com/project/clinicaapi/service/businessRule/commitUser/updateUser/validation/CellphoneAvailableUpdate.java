@@ -1,7 +1,7 @@
 package com.project.clinicaapi.service.businessRule.commitUser.updateUser.validation;
 
 import com.project.clinicaapi.repository.UserRepository;
-import com.project.clinicaapi.service.businessRule.commitUser.CommitUserValidations;
+import com.project.clinicaapi.service.businessRule.commitUser.CellphoneAvailable;
 import com.project.clinicaapi.service.businessRule.commitUser.updateUser.UpdateUserArgs;
 import com.project.clinicaapi.service.businessRule.commitUser.updateUser.UpdateUserVerification;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +21,7 @@ public class CellphoneAvailableUpdate implements UpdateUserVerification {
         String cellphone = args.userDTO().getCellphone();
 
         if (cellphone != null && !cellphone.equals(args.user().getCellphone())) {
-            CommitUserValidations.findUserByCellphoneValidation(userRepository, cellphone);
+            CellphoneAvailable.verification(userRepository, cellphone);
         }
 
     }

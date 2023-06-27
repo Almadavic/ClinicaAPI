@@ -1,6 +1,6 @@
 package com.project.clinicaapi.businessRule.commitDentist;
 
-import com.project.clinicaapi.service.businessRule.commitDentist.CommitDentistValidations;
+import com.project.clinicaapi.service.businessRule.commitDentist.CroFormat;
 import com.project.clinicaapi.service.customException.InvalidCroFormatException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -33,11 +33,11 @@ class CroFormatTest {
 
     private void testingThrowsException(String cro) {
         Assertions.assertThrows(InvalidCroFormatException.class,
-                () -> CommitDentistValidations.croFormatValidation(cro));
+                () -> CroFormat.verification(cro));
     }
 
     private void testingDoesNotThrowException(String cro) {
-        Assertions.assertDoesNotThrow(() -> CommitDentistValidations.croFormatValidation(cro));
+        Assertions.assertDoesNotThrow(() -> CroFormat.verification(cro));
     }
 
 }

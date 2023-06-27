@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Order(value = 5)
 @Component
-public class DayOfTheWeekUpdate implements UpdateAppointmentVerification {
+public class BusinessDayUpdate implements UpdateAppointmentVerification {
 
     @Override
     public void verification(UpdateAppointmentArgs args) {

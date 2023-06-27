@@ -1,9 +1,8 @@
 package com.project.clinicaapi.service.businessRule.commitAppointment.registerAppointment.validation;
 
-import com.project.clinicaapi.service.businessRule.commitAppointment.CommitAppointmentValidations;
+import com.project.clinicaapi.service.businessRule.commitAppointment.AppointmentTimeLimit;
 import com.project.clinicaapi.service.businessRule.commitAppointment.registerAppointment.RegisterAppointmentArgs;
 import com.project.clinicaapi.service.businessRule.commitAppointment.registerAppointment.RegisterAppointmentVerification;
-import com.project.clinicaapi.service.customException.ClinicOpeningHoursException;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +13,7 @@ public class AppointmentTimeLimitRegister implements RegisterAppointmentVerifica
     @Override
     public void verification(RegisterAppointmentArgs args) {
 
-        CommitAppointmentValidations.appointmentTimeLimitValidation(args.appointmentDTO().getTimeStart(), args.appointmentDTO().getTimeEnd());
+        AppointmentTimeLimit.verification(args.appointmentDTO().getTimeStart(), args.appointmentDTO().getTimeEnd());
 
     }
 

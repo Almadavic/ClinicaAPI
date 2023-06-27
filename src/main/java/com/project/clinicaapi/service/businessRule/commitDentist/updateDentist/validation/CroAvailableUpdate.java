@@ -1,10 +1,8 @@
 package com.project.clinicaapi.service.businessRule.commitDentist.updateDentist.validation;
 
-import com.project.clinicaapi.repository.DentistRepository;
-import com.project.clinicaapi.service.businessRule.commitDentist.CommitDentistValidations;
+import com.project.clinicaapi.service.businessRule.commitDentist.CroAvailable;
 import com.project.clinicaapi.service.businessRule.commitDentist.updateDentist.UpdateDentistArgs;
 import com.project.clinicaapi.service.businessRule.commitDentist.updateDentist.UpdateDentistVerification;
-import lombok.RequiredArgsConstructor;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
@@ -18,7 +16,7 @@ public class CroAvailableUpdate implements UpdateDentistVerification {
         String cro = args.dentistDTO().getCro();
 
         if (cro != null && !cro.equals(args.dentist().getCro())) {
-            CommitDentistValidations.findDentistByCroValidation(args.dentistRepository(), cro);
+            CroAvailable.verification(args.dentistRepository(), cro);
         }
 
     }

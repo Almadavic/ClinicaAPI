@@ -1,12 +1,9 @@
 package com.project.clinicaapi.businessRule.commitSecretary.update;
 
-import com.project.clinicaapi.dto.request.update.AddressUpdateDTO;
 import com.project.clinicaapi.dto.request.update.SecretaryUpdateDTO;
-import com.project.clinicaapi.service.businessRule.commitSecretary.CommitSecretaryValidations;
 import com.project.clinicaapi.service.businessRule.commitSecretary.updateSecretary.UpdateSecretaryArgs;
 import com.project.clinicaapi.service.businessRule.commitSecretary.updateSecretary.validation.NoFieldFilledUpdateSecretary;
 import com.project.clinicaapi.service.customException.NoFieldFilledException;
-import com.project.clinicaapi.service.customException.RegistrationAlreadyRegisteredException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

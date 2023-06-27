@@ -131,7 +131,7 @@ class FindLogTest extends ClassTestParent {
                         .header("Authorization", token("admin", "123456")))
                 .andExpect(status().is(badRequest))
                 .andExpect(result -> assertTrue(result.getResolvedException() instanceof ParameterMissingException))
-                .andExpect(result -> assertEquals("The parameter datestart cannot be null in this query",
+                .andExpect(result -> assertEquals("The parameter dateStart cannot be null in this query",
                         result.getResolvedException().getMessage()));
 
     }

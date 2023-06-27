@@ -1,7 +1,7 @@
 package com.project.clinicaapi.service.businessRule.commitUser.updateUser.validation;
 
 import com.project.clinicaapi.dto.request.update.UserUpdateDTO;
-import com.project.clinicaapi.service.businessRule.commitUser.CommitUserValidations;
+import com.project.clinicaapi.service.businessRule.commitUser.PasswordNull;
 import com.project.clinicaapi.service.businessRule.commitUser.updateUser.UpdateUserArgs;
 import com.project.clinicaapi.service.businessRule.commitUser.updateUser.UpdateUserVerification;
 import org.springframework.core.annotation.Order;
@@ -16,7 +16,7 @@ public class PasswordNullUpdate implements UpdateUserVerification {
 
         UserUpdateDTO userDTO = args.userDTO();
 
-        CommitUserValidations.passwordNull(userDTO.getPassword(), userDTO.getPasswordConfirmation());
+        PasswordNull.verification(userDTO.getPassword(), userDTO.getPasswordConfirmation());
 
     }
 

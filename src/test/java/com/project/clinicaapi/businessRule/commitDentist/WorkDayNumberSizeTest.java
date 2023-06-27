@@ -1,6 +1,7 @@
 package com.project.clinicaapi.businessRule.commitDentist;
 
-import com.project.clinicaapi.service.businessRule.commitDentist.CommitDentistValidations;
+import com.project.clinicaapi.entity.WorkDay;
+import com.project.clinicaapi.service.businessRule.commitDentist.WorkDayList;
 import com.project.clinicaapi.service.customException.WorkDayNumberSizeException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -33,11 +34,11 @@ class WorkDayNumberSizeTest {
 
     private void testingThrowsException(Set<Integer> workDays) {
         Assertions.assertThrows(WorkDayNumberSizeException.class,
-                () -> CommitDentistValidations.workdayListValidation(workDays));
+                () -> WorkDayList.verification(workDays));
     }
 
     private void testingDoesNotThrowException(Set<Integer> workDays) {
-        Assertions.assertDoesNotThrow(() -> CommitDentistValidations.workdayListValidation(workDays));
+        Assertions.assertDoesNotThrow(() -> WorkDayList.verification(workDays));
     }
 
 }

@@ -1,6 +1,6 @@
 package com.project.clinicaapi.service.businessRule.commitPatient.registerPatient.validation;
 
-import com.project.clinicaapi.service.businessRule.commitPatient.CommitPatientValidations;
+import com.project.clinicaapi.service.businessRule.commitPatient.CpfFormat;
 import com.project.clinicaapi.service.businessRule.commitPatient.registerPatient.RegisterPatientArgs;
 import com.project.clinicaapi.service.businessRule.commitPatient.registerPatient.RegisterPatientVerification;
 import org.springframework.core.annotation.Order;
@@ -13,7 +13,7 @@ public class CpfFormatRegister implements RegisterPatientVerification {
     @Override
     public void verification(RegisterPatientArgs args) {
 
-        CommitPatientValidations.cpfFormatValidation(args.patientDTO().getCpf());
+        CpfFormat.verification(args.patientDTO().getCpf());
 
     }
 

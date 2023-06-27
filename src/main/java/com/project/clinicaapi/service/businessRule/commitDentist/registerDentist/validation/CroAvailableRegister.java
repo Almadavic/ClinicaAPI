@@ -1,6 +1,6 @@
 package com.project.clinicaapi.service.businessRule.commitDentist.registerDentist.validation;
 
-import com.project.clinicaapi.service.businessRule.commitDentist.CommitDentistValidations;
+import com.project.clinicaapi.service.businessRule.commitDentist.CroAvailable;
 import com.project.clinicaapi.service.businessRule.commitDentist.registerDentist.RegisterDentistArgs;
 import com.project.clinicaapi.service.businessRule.commitDentist.registerDentist.RegisterDentistVerification;
 import org.springframework.core.annotation.Order;
@@ -13,7 +13,7 @@ public class CroAvailableRegister implements RegisterDentistVerification {
     @Override
     public void verification(RegisterDentistArgs args) {
 
-        CommitDentistValidations.findDentistByCroValidation(args.dentistRepository(), args.dentistDTO().getCro());
+        CroAvailable.verification(args.dentistRepository(), args.dentistDTO().getCro());
 
     }
 

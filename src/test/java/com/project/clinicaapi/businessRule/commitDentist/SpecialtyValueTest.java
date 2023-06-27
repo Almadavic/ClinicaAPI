@@ -1,6 +1,6 @@
 package com.project.clinicaapi.businessRule.commitDentist;
 
-import com.project.clinicaapi.service.businessRule.commitDentist.CommitDentistValidations;
+import com.project.clinicaapi.service.businessRule.commitDentist.SpecialtyValue;
 import com.project.clinicaapi.service.customException.InvalidEnumValueException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -29,11 +29,11 @@ class SpecialtyValueTest {
 
     private void testingThrowsException(String value) {
         Assertions.assertThrows(InvalidEnumValueException.class,
-                () -> CommitDentistValidations.specialtyValueValidation(value));
+                () -> SpecialtyValue.verification(value));
     }
 
     private void testingDoesNotThrowException(String value) {
-        Assertions.assertDoesNotThrow(() -> CommitDentistValidations.specialtyValueValidation(value));
+        Assertions.assertDoesNotThrow(() -> SpecialtyValue.verification(value));
     }
 
 }

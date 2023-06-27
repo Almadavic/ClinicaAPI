@@ -1,6 +1,6 @@
 package com.project.clinicaapi.service.businessRule.commitDentist.registerDentist.validation;
 
-import com.project.clinicaapi.service.businessRule.commitDentist.CommitDentistValidations;
+import com.project.clinicaapi.service.businessRule.commitDentist.WorkDayList;
 import com.project.clinicaapi.service.businessRule.commitDentist.registerDentist.RegisterDentistArgs;
 import com.project.clinicaapi.service.businessRule.commitDentist.registerDentist.RegisterDentistVerification;
 import org.springframework.core.annotation.Order;
@@ -13,7 +13,7 @@ public class WorkDayListRegister implements RegisterDentistVerification {
     @Override
     public void verification(RegisterDentistArgs args) {
 
-        CommitDentistValidations.workdayListValidation(args.dentistDTO().getWorkDays());
+        WorkDayList.verification(args.dentistDTO().getWorkDays());
 
     }
 

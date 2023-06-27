@@ -1,9 +1,8 @@
 package com.project.clinicaapi.businessRule.commitUser;
 
 import com.project.clinicaapi.repository.UserRepository;
-import com.project.clinicaapi.service.businessRule.commitUser.CommitUserValidations;
+import com.project.clinicaapi.service.businessRule.commitUser.CellphoneAvailable;
 import com.project.clinicaapi.service.customException.CellphoneAlreadyRegisteredException;
-import com.project.clinicaapi.service.customException.EmailAlreadyRegisteredException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,14 +20,14 @@ class CellphoneAvailableTest {
     void cellphoneUnavailable() {
 
         Assertions.assertThrows(CellphoneAlreadyRegisteredException.class,
-                () -> CommitUserValidations.findUserByCellphoneValidation(userRepository, "(31)98858-8362"));
+                () -> CellphoneAvailable.verification(userRepository, "(31)98858-8362"));
 
     }
 
     @Test
     void cellphoneAvailable() {
 
-        Assertions.assertDoesNotThrow(() -> CommitUserValidations.findUserByCellphoneValidation(userRepository, "(31)98858-8364"));
+        Assertions.assertDoesNotThrow(() -> CellphoneAvailable.verification(userRepository, "(31)98858-8364"));
 
     }
 

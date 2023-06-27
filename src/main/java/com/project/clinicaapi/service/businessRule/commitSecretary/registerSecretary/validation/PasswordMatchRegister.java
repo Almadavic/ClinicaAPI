@@ -3,7 +3,7 @@ package com.project.clinicaapi.service.businessRule.commitSecretary.registerSecr
 import com.project.clinicaapi.dto.request.register.SecretaryRegisterDTO;
 import com.project.clinicaapi.service.businessRule.commitSecretary.registerSecretary.RegisterSecretaryArgs;
 import com.project.clinicaapi.service.businessRule.commitSecretary.registerSecretary.RegisterSecretaryVerification;
-import com.project.clinicaapi.service.businessRule.commitUser.CommitUserValidations;
+import com.project.clinicaapi.service.businessRule.commitUser.PasswordMatch;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +16,7 @@ public class PasswordMatchRegister implements RegisterSecretaryVerification {
 
         SecretaryRegisterDTO secretaryDTO = args.secretaryDTO();
 
-        CommitUserValidations.passwordMatch(secretaryDTO.getPassword(), secretaryDTO.getPasswordConfirmation());
+        PasswordMatch.verification(secretaryDTO.getPassword(), secretaryDTO.getPasswordConfirmation());
 
     }
 

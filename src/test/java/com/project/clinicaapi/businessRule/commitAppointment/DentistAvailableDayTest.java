@@ -2,7 +2,7 @@ package com.project.clinicaapi.businessRule.commitAppointment;
 
 import com.project.clinicaapi.entity.Dentist;
 import com.project.clinicaapi.repository.DentistRepository;
-import com.project.clinicaapi.service.businessRule.commitAppointment.CommitAppointmentValidations;
+import com.project.clinicaapi.service.businessRule.commitAppointment.DentistAvailableDay;
 import com.project.clinicaapi.service.customException.DentistNotAvailableException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -23,18 +23,18 @@ class DentistAvailableDayTest {
     void dentistAvailableDay() {
 
         Assertions.assertDoesNotThrow(
-                () -> CommitAppointmentValidations.dentistAvailableDayValidation(LocalDate.of(2023, 6, 26), returnDentistDataBaseId()));
+                () -> DentistAvailableDay.verification(LocalDate.of(2023, 6, 26), returnDentistDataBaseId()));
         Assertions.assertDoesNotThrow(
-                () -> CommitAppointmentValidations.dentistAvailableDayValidation(LocalDate.of(2023, 6, 27), returnDentistDataBaseId()));
+                () -> DentistAvailableDay.verification(LocalDate.of(2023, 6, 27), returnDentistDataBaseId()));
     }
 
     @Test
     void dentistUnavailableDay() {
 
         Assertions.assertThrows(DentistNotAvailableException.class,
-                () -> CommitAppointmentValidations.dentistAvailableDayValidation(LocalDate.of(2023, 6, 28), returnDentistDataBaseId()));
+                () -> DentistAvailableDay.verification(LocalDate.of(2023, 6, 28), returnDentistDataBaseId()));
         Assertions.assertThrows(DentistNotAvailableException.class,
-                () -> CommitAppointmentValidations.dentistAvailableDayValidation(LocalDate.of(2023, 6, 29), returnDentistDataBaseId()));
+                () -> DentistAvailableDay.verification(LocalDate.of(2023, 6, 29), returnDentistDataBaseId()));
     }
 
     private Dentist returnDentistDataBaseId() {

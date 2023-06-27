@@ -1,10 +1,8 @@
 package com.project.clinicaapi.businessRule.commitPatient;
 
 import com.project.clinicaapi.repository.PatientRepository;
-import com.project.clinicaapi.service.businessRule.commitPatient.CommitPatientValidations;
-import com.project.clinicaapi.service.businessRule.commitSecretary.CommitSecretaryValidations;
+import com.project.clinicaapi.service.businessRule.commitPatient.CpfAvailable;
 import com.project.clinicaapi.service.customException.CpfAlreadyRegisteredException;
-import com.project.clinicaapi.service.customException.RegistrationAlreadyRegisteredException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,14 +20,14 @@ class CpfAvailableTest {
     void cpfUnavailable() {
 
         Assertions.assertThrows(CpfAlreadyRegisteredException.class,
-                () -> CommitPatientValidations.findPatientByCpfValidation(patientRepository, "115.613.986-02"));
+                () -> CpfAvailable.verification(patientRepository, "115.613.986-02"));
 
     }
 
     @Test
     void cpfAvailable() {
 
-        Assertions.assertDoesNotThrow(() -> CommitPatientValidations.findPatientByCpfValidation(patientRepository, "1156139322"));
+        Assertions.assertDoesNotThrow(() -> CpfAvailable.verification(patientRepository, "1156139322"));
 
     }
 

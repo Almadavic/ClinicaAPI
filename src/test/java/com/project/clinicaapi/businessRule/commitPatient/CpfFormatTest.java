@@ -1,6 +1,6 @@
 package com.project.clinicaapi.businessRule.commitPatient;
 
-import com.project.clinicaapi.service.businessRule.commitPatient.CommitPatientValidations;
+import com.project.clinicaapi.service.businessRule.commitPatient.CpfFormat;
 import com.project.clinicaapi.service.customException.InvalidCpfFormatException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -33,11 +33,11 @@ class CpfFormatTest {
 
     private void testingThrowsException(String cpf) {
         Assertions.assertThrows(InvalidCpfFormatException.class,
-                () -> CommitPatientValidations.cpfFormatValidation(cpf));
+                () -> CpfFormat.verification(cpf));
     }
 
     private void testingDoesNotThrowException(String cpf) {
-        Assertions.assertDoesNotThrow(() -> CommitPatientValidations.cpfFormatValidation(cpf));
+        Assertions.assertDoesNotThrow(() -> CpfFormat.verification(cpf));
     }
 
 }

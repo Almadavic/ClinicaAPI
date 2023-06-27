@@ -1,10 +1,9 @@
 package com.project.clinicaapi.service.businessRule.commitPatient.updatePatient.validation;
 
 import com.project.clinicaapi.repository.PatientRepository;
-import com.project.clinicaapi.service.businessRule.commitPatient.CommitPatientValidations;
+import com.project.clinicaapi.service.businessRule.commitPatient.CpfAvailable;
 import com.project.clinicaapi.service.businessRule.commitPatient.updatePatient.UpdatePatientArgs;
 import com.project.clinicaapi.service.businessRule.commitPatient.updatePatient.UpdatePatientVerification;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -22,7 +21,7 @@ public class CpfAvailableUpdate implements UpdatePatientVerification {
         String cpf = args.patientDTO().getCpf();
 
         if(cpf != null && !cpf.equals(args.patient().getCpf())) {
-            CommitPatientValidations.findPatientByCpfValidation(args.patientRepository(), cpf);
+            CpfAvailable.verification(args.patientRepository(), cpf);
         }
 
     }

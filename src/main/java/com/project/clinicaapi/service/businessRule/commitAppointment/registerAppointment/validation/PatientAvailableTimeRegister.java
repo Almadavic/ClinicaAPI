@@ -2,7 +2,7 @@ package com.project.clinicaapi.service.businessRule.commitAppointment.registerAp
 
 import com.project.clinicaapi.entity.Appointment;
 import com.project.clinicaapi.repository.AppointmentRepository;
-import com.project.clinicaapi.service.businessRule.commitAppointment.CommitAppointmentValidations;
+import com.project.clinicaapi.service.businessRule.commitAppointment.AvailableTime;
 import com.project.clinicaapi.service.businessRule.commitAppointment.registerAppointment.RegisterAppointmentArgs;
 import com.project.clinicaapi.service.businessRule.commitAppointment.registerAppointment.RegisterAppointmentVerification;
 import lombok.RequiredArgsConstructor;
@@ -22,9 +22,7 @@ public class PatientAvailableTimeRegister implements RegisterAppointmentVerifica
     public void verification(RegisterAppointmentArgs args) {
 
         List<Appointment> appointments = appointmentRepository.findByPatientAndByDate(args.patient().getId(), args.appointmentDTO().getAppointmentDate());
-
-        CommitAppointmentValidations.availableAppointmentTimeValidation(appointments, args.appointmentDTO().getTimeStart(), args.appointmentDTO().getTimeEnd(),
-                "patient");
+        AvailableTime.verification(appointments, args.appointmentDTO().getTimeStart(), args.appointmentDTO().getTimeEnd(), "patient");
 
     }
 

@@ -1,7 +1,7 @@
 package com.project.clinicaapi.service.businessRule.commitUser.updateUser.validation;
 
 import com.project.clinicaapi.dto.request.update.UserUpdateDTO;
-import com.project.clinicaapi.service.businessRule.commitUser.CommitUserValidations;
+import com.project.clinicaapi.service.businessRule.commitUser.PasswordMatch;
 import com.project.clinicaapi.service.businessRule.commitUser.updateUser.UpdateUserArgs;
 import com.project.clinicaapi.service.businessRule.commitUser.updateUser.UpdateUserVerification;
 import org.springframework.core.annotation.Order;
@@ -16,7 +16,7 @@ public class PasswordMatchUpdate implements UpdateUserVerification {
 
         UserUpdateDTO userDTO = args.userDTO();
 
-        CommitUserValidations.passwordMatch(userDTO.getPassword(), userDTO.getPasswordConfirmation());
+        PasswordMatch.verification(userDTO.getPassword(), userDTO.getPasswordConfirmation());
 
     }
 

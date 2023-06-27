@@ -1,7 +1,7 @@
 package com.project.clinicaapi.service.businessRule.commitUser.updateUser.validation;
 
 import com.project.clinicaapi.repository.UserRepository;
-import com.project.clinicaapi.service.businessRule.commitUser.CommitUserValidations;
+import com.project.clinicaapi.service.businessRule.commitUser.EmailAvailable;
 import com.project.clinicaapi.service.businessRule.commitUser.updateUser.UpdateUserArgs;
 import com.project.clinicaapi.service.businessRule.commitUser.updateUser.UpdateUserVerification;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +21,7 @@ public class EmailAvailableUpdate implements UpdateUserVerification {
         String email = args.userDTO().getEmail();
 
         if (email != null && !email.equals(args.user().getEmail())) {
-            CommitUserValidations.findUserByEmailValidation(userRepository, email);
+            EmailAvailable.verification(userRepository, email);
         }
 
     }
