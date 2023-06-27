@@ -1,7 +1,7 @@
 package com.project.clinicaapi.businessRule.commitUser.update;
 
 import com.project.clinicaapi.service.businessRule.commitUser.CommitUserValidations;
-import com.project.clinicaapi.service.customException.PasswordNullException;
+import com.project.clinicaapi.service.customException.ParameterMissingException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,10 +14,10 @@ class PasswordNullTest {
     @Test
     void somePasswordFieldNull() {
 
-        Assertions.assertThrows(PasswordNullException.class,
+        Assertions.assertThrows(ParameterMissingException.class,
                 () -> CommitUserValidations.passwordNull("123456", null));
 
-        Assertions.assertThrows(PasswordNullException.class,
+        Assertions.assertThrows(ParameterMissingException.class,
                 () -> CommitUserValidations.passwordNull(null, "123456"));
 
     }

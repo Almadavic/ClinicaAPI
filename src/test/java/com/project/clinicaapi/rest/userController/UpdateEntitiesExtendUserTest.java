@@ -186,7 +186,7 @@ class UpdateEntitiesExtendUserTest extends ClassTestParent {
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(secretaryDTO)))
                 .andExpect(status().is(badRequest))
-                .andExpect(result -> assertTrue(result.getResolvedException() instanceof PasswordNullException))
+                .andExpect(result -> assertTrue(result.getResolvedException() instanceof ParameterMissingException))
                 .andExpect(result -> assertEquals("In order to register your account and set a password, you have to enter the fields 'password' and 'passwordconfirmation'."
                         , result.getResolvedException().getMessage()));
 
@@ -204,7 +204,7 @@ class UpdateEntitiesExtendUserTest extends ClassTestParent {
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(secretaryDTO)))
                 .andExpect(status().is(badRequest))
-                .andExpect(result -> assertTrue(result.getResolvedException() instanceof PasswordNullException))
+                .andExpect(result -> assertTrue(result.getResolvedException() instanceof ParameterMissingException))
                 .andExpect(result -> assertEquals("In order to register your account and set a password, you have to enter the fields 'password' and 'passwordconfirmation'."
                         , result.getResolvedException().getMessage()));
 

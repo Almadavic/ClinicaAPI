@@ -88,13 +88,11 @@ public class CommitUserValidations {
 
     public static void passwordNull(String password, String passwordConfirmation) {
 
-        if (password != null && passwordConfirmation == null) {
-            throw new PasswordNullException();
+        if ((password != null && passwordConfirmation == null)
+                || (password == null && passwordConfirmation != null)) {
+            throw new ParameterMissingException("In order to register your account and set a password, you have to enter the fields 'password' and 'passwordconfirmation'.");
         }
 
-        if (password == null && passwordConfirmation != null) {
-            throw new PasswordNullException();
-        }
 
     }
 
@@ -108,7 +106,7 @@ public class CommitUserValidations {
 
     public static void passwordFormatValidation(String password) {
 
-        if(password !=null) {
+        if (password != null) {
 
             String passwordValidFormat = "^(?=.*[A-Z])(?=.*\\d).+$";
 

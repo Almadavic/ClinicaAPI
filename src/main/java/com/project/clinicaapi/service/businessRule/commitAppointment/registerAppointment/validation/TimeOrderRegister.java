@@ -1,26 +1,20 @@
 package com.project.clinicaapi.service.businessRule.commitAppointment.registerAppointment.validation;
 
+import com.project.clinicaapi.service.businessRule.commitAppointment.CommitAppointmentValidations;
 import com.project.clinicaapi.service.businessRule.commitAppointment.registerAppointment.RegisterAppointmentArgs;
 import com.project.clinicaapi.service.businessRule.commitAppointment.registerAppointment.RegisterAppointmentVerification;
-import com.project.clinicaapi.service.customException.DateOrderException;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalTime;
 
-@Order(value = 4)
+@Order(value = 2)
 @Component
 public class TimeOrderRegister implements RegisterAppointmentVerification {
 
     @Override
     public void verification(RegisterAppointmentArgs args) {
 
-        LocalTime timeStart = args.appointmentDTO().getTimeStart();
-        LocalTime timeEnd = args.appointmentDTO().getTimeEnd();
-
-        if(timeStart.isAfter(timeEnd)) {
-            throw new DateOrderException("The timestart of the appointment cannot be after timeend");
-        }
+        CommitAppointmentValidations.timeOrderValidation(args.appointmentDTO().getTimeStart(), args.appointmentDTO().getTimeEnd());
 
     }
 

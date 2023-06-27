@@ -16,4 +16,8 @@ public interface AppointmentRepository extends JpaRepository<Appointment, String
             , nativeQuery = true)
     List<Appointment> findByDentistAndByDate(@Param(value = "dentistid")String dentistId, @Param(value = "appointmentdate")LocalDate appointmentDate);
 
+    @Query(value = "SELECT * from tb_appointments a where a.patient_id = :patientid AND a.appointment_date = :appointmentdate ORDER BY a.appointment_date, time_start ASC"
+            , nativeQuery = true)
+    List<Appointment> findByPatientAndByDate(@Param(value = "patientid")String dentistId, @Param(value = "appointmentdate")LocalDate appointmentDate);
+
 }

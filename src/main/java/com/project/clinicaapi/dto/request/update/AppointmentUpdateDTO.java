@@ -4,11 +4,14 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.project.clinicaapi.dto.response.WorkDayResponseDTO;
+import lombok.Getter;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 @JsonPropertyOrder(value = {"procedure", "appointmentDate", "timeStart", "timeEnd", "dentistId", "patientId"})
+@Getter
 public class AppointmentUpdateDTO {
 
     @JsonProperty(value = "procedure")

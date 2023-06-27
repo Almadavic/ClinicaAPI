@@ -1,0 +1,81 @@
+package com.project.clinicaapi.service.businessRule.commitAppointment.updateAppointment.validation;
+
+
+import com.project.clinicaapi.dto.request.update.AppointmentUpdateDTO;
+import com.project.clinicaapi.entity.Appointment;
+import com.project.clinicaapi.repository.DentistRepository;
+import com.project.clinicaapi.repository.PatientRepository;
+import com.project.clinicaapi.service.businessRule.commitAppointment.updateAppointment.UpdateAppointmentArgs;
+import com.project.clinicaapi.service.businessRule.commitAppointment.updateAppointment.UpdateAppointmentVerification;
+import com.project.clinicaapi.service.customException.ResourceNotFoundException;
+import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Component;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+
+
+@Order(value = 11)
+@Component
+public class UpdatingAppointmentData implements UpdateAppointmentVerification {
+
+    @Override
+    public void verification(UpdateAppointmentArgs args) {
+
+        AppointmentUpdateDTO appointmentDTO = args.appointmentDTO();
+        Appointment appointment = args.appointment();
+        setProcedure(appointmentDTO, appointment);
+        setAppointmentDate(appointmentDTO, appointment);
+        setTimeStart(appointmentDTO, appointment);
+        setTimeEnd(appointmentDTO, appointment);
+        setDentist(appointmentDTO, appointment, args.dentistRepository());
+        setPatient(appointmentDTO, appointment, args.patientRepository());
+
+    }
+
+    private void setProcedure(AppointmentUpdateDTO appointmentDTO, Appointment appointment) {
+        String procedure = appointmentDTO.getProcedure();
+        if (procedure != null) {
+            appointment.setProcedure(procedure);
+        }
+    }
+
+    private void setAppointmentDate(AppointmentUpdateDTO appointmentDTO, Appointment appointment) {
+        LocalDate appointmentDate = appointmentDTO.getAppointmentDate();
+        if (appointmentDate != null) {
+            appointment.setAppointmentDate(appointmentDate);
+        }
+    }
+
+    private void setTimeStart(AppointmentUpdateDTO appointmentDTO, Appointment appointment) {
+        LocalTime timeStart = appointmentDTO.getTimeStart();
+        if (timeStart != null) {
+            appointment.setTimeStart(timeStart);
+        }
+    }
+
+    private void setTimeEnd(AppointmentUpdateDTO appointmentDTO, Appointment appointment) {
+        LocalTime timeEnd = appointmentDTO.getTimeEnd();
+        if (timeEnd != null) {
+            appointment.setTimeEnd(timeEnd);
+        }
+    }
+
+    private void setDentist(AppointmentUpdateDTO appointmentDTO, Appointment appointment, DentistRepository dentistRepository) {
+        String dentistId = appointmentDTO.getDentistId();
+        if (dentistId != null) {
+            appointment.setDentist(dentistRepository.findById(dentistId)
+                    .orElseThrow(() -> new ResourceNotFoundException("The dentist id: " + dentistId + " wasn't found on database")));
+        }
+
+    }
+
+    private void setPatient(AppointmentUpdateDTO appointmentDTO, Appointment appointment, PatientRepository patientRepository) {
+        String patientId = appointmentDTO.getPatientId();
+        if (patientId != null) {
+            appointment.setPatient(patientRepository.findById(patientId)
+                    .orElseThrow(() -> new ResourceNotFoundException("The patient id: " + patientId + " wasn't found on database")));
+        }
+    }
+
+}

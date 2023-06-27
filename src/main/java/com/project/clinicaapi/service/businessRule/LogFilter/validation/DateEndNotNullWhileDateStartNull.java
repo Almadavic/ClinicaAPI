@@ -16,7 +16,7 @@ public class DateEndNotNullWhileDateStartNull extends LogFilterVerification {
     public Page<Log> verification(LogFilterArgs args) {
 
         if (args.dateEnd() != null && args.dateStart() == null) {
-            throw new ParameterMissingException("datestart");
+            throw new ParameterMissingException("The parameter dateStart cannot be null in this query");
         }
 
         return nextOne.verification(args);

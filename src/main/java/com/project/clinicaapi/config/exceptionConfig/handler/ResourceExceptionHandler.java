@@ -223,11 +223,6 @@ public class ResourceExceptionHandler {
         return handlingException(exception, request, "Required parameters missing", HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(value = PasswordNullException.class)
-    public ResponseEntity<StandardError> passwordNull(PasswordNullException exception, HttpServletRequest request) {
-        return handlingException(exception, request, "Password error", HttpStatus.BAD_REQUEST);
-    }
-
     @ExceptionHandler(value = PasswordDoesntMatchException.class)
     public ResponseEntity<StandardError> passwordsDontMatchException(PasswordDoesntMatchException exception, HttpServletRequest request) {
         return handlingException(exception, request, "Password error", HttpStatus.BAD_REQUEST);

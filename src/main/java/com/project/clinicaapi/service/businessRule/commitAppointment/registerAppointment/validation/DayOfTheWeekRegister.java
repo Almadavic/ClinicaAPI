@@ -1,5 +1,6 @@
 package com.project.clinicaapi.service.businessRule.commitAppointment.registerAppointment.validation;
 
+import com.project.clinicaapi.service.businessRule.commitAppointment.CommitAppointmentValidations;
 import com.project.clinicaapi.service.businessRule.commitAppointment.registerAppointment.RegisterAppointmentArgs;
 import com.project.clinicaapi.service.businessRule.commitAppointment.registerAppointment.RegisterAppointmentVerification;
 import com.project.clinicaapi.service.customException.ClinicOpeningHoursException;
@@ -16,9 +17,8 @@ public class DayOfTheWeekRegister implements RegisterAppointmentVerification {
     @Override
     public void verification(RegisterAppointmentArgs args) {
 
-        if (args.appointmentDTO().getAppointmentDate().getDayOfWeek().equals(DayOfWeek.SUNDAY)) {
-            throw new ClinicOpeningHoursException("Sunday is not a valid day, we work from monday to saturday");
-        }
+        CommitAppointmentValidations.dayOfTheWeekValidation(args.appointmentDTO().getAppointmentDate().getDayOfWeek());
+
     }
 
 }

@@ -2,6 +2,7 @@ package com.project.clinicaapi.service.businessRule.commitAppointment.registerAp
 
 import com.project.clinicaapi.entity.WorkDay;
 import com.project.clinicaapi.enumerated.WorkDayEnum;
+import com.project.clinicaapi.service.businessRule.commitAppointment.CommitAppointmentValidations;
 import com.project.clinicaapi.service.businessRule.commitAppointment.registerAppointment.RegisterAppointmentArgs;
 import com.project.clinicaapi.service.businessRule.commitAppointment.registerAppointment.RegisterAppointmentVerification;
 import com.project.clinicaapi.service.customException.DentistNotAvailableException;
@@ -13,21 +14,16 @@ import java.util.List;
 
 @Order(value = 5)
 @Component
-public class DentistAvailableDay implements RegisterAppointmentVerification {
+public class DentistAvailableDayRegister implements RegisterAppointmentVerification {
 
     @Override
     public void verification(RegisterAppointmentArgs args) {
 
-        WorkDayEnum workDay = ConvertingType.getWeekDayByLocalDate(args.appointmentDTO().getAppointmentDate());
+        CommitAppointmentValidations.dentistAvailableDayValidation(args.appointmentDTO().getAppointmentDate(), args.dentist());
 
-        if(!dentistAvailable(args.dentist().getWorkDays(), workDay)) {
-            throw new DentistNotAvailableException(workDay);
-        }
-
-    }
-
-    private boolean dentistAvailable(List<WorkDay> dentistWorkDays, WorkDayEnum workDay) {
-        return dentistWorkDays.stream().anyMatch(n -> n.getWorkDay().equals(workDay));
     }
 
 }
+
+
+
