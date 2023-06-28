@@ -7,8 +7,6 @@ import com.project.clinicaapi.enumerated.Gender;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
 
 @Component
 public class PatientMapper {

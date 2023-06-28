@@ -4,7 +4,7 @@ import com.project.clinicaapi.entity.Appointment;
 import com.project.clinicaapi.repository.AppointmentRepository;
 import com.project.clinicaapi.repository.DentistRepository;
 import com.project.clinicaapi.repository.PatientRepository;
-import com.project.clinicaapi.service.businessRule.commitAppointment.AvailableTime;
+import com.project.clinicaapi.service.businessRule.commitAppointment.AvailablePersonTime;
 import com.project.clinicaapi.service.customException.AnotherMeetingRunningException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -17,7 +17,7 @@ import java.util.List;
 
 @ActiveProfiles(value = "test")
 @SpringBootTest
-class AvailableTimeTest {
+class AvailablePersonTimeTest {
 
     @Autowired
     private AppointmentRepository appointmentRepository;
@@ -34,7 +34,7 @@ class AvailableTimeTest {
 
 
         Assertions.assertThrows(AnotherMeetingRunningException.class,
-                () -> AvailableTime.verification(getAppointmentList(), LocalTime.now(), LocalTime.now().minusMinutes(30),
+                () -> AvailablePersonTime.verification(getAppointmentList(), LocalTime.now(), LocalTime.now().minusMinutes(30),
                         null));
 
     }
@@ -44,7 +44,7 @@ class AvailableTimeTest {
 
 
         Assertions.assertDoesNotThrow(() ->
-                AvailableTime.verification(getAppointmentList(), LocalTime.now().plusHours(2), LocalTime.now().plusHours(4),
+                AvailablePersonTime.verification(getAppointmentList(), LocalTime.now().plusHours(2), LocalTime.now().plusHours(4),
                         null));
 
     }

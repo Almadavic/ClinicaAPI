@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Order(value = 2)
 @Component
-public class AppointmentTimeNullUpdate implements UpdateAppointmentVerification {
+public class AppointmentTimeNull implements UpdateAppointmentVerification {
 
     @Override
     public void verification(UpdateAppointmentArgs args) {

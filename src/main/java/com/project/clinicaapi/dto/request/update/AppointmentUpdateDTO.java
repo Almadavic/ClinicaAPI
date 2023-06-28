@@ -3,14 +3,14 @@ package com.project.clinicaapi.dto.request.update;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.project.clinicaapi.dto.response.WorkDayResponseDTO;
+import lombok.Builder;
 import lombok.Getter;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 @JsonPropertyOrder(value = {"procedure", "appointmentDate", "timeStart", "timeEnd", "dentistId", "patientId"})
+@Builder
 @Getter
 public class AppointmentUpdateDTO {
 

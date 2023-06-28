@@ -6,9 +6,9 @@ import com.project.clinicaapi.service.customException.AnotherMeetingRunningExcep
 import java.time.LocalTime;
 import java.util.List;
 
-public class AvailableTime {
+public class AvailablePersonTime {
 
-    private AvailableTime() {
+    private AvailablePersonTime() {
 
     }
 

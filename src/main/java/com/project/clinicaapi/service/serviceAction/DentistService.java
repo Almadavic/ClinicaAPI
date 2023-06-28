@@ -19,7 +19,6 @@ import com.project.clinicaapi.service.customException.ResourceNotFoundException;
 import com.project.clinicaapi.util.DentistSpecifications;
 import com.project.clinicaapi.util.LogRegistration;
 import com.project.clinicaapi.util.mapper.DentistMapper;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -81,7 +80,6 @@ public class DentistService {
                         .orElseThrow(() -> new ResourceNotFoundException("The dentist cro: " + cro + " wasn't found on database")));
     }
 
-    @Transactional
     public DentistResponseDTO update(String dentistId, DentistUpdateDTO updateData, User userLogged) {
 
         Dentist dentist = returnDentistDataBase(dentistId);

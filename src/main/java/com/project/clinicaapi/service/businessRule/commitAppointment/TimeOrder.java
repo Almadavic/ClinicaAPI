@@ -12,8 +12,8 @@ public class TimeOrder {
 
     public static void verification(LocalTime timeStart, LocalTime timeEnd) {
 
-        if(timeStart.isAfter(timeEnd)) {
-            throw new DateOrderException("The timestart of the appointment cannot be after timeend");
+        if(timeStart.isAfter(timeEnd) || timeStart.isBefore(LocalTime.now())) {
+            throw new DateOrderException("The timestart of the appointment cannot be after timeend and timestart cannot be in the past");
         }
 
     }

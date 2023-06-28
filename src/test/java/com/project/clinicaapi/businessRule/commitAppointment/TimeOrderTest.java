@@ -17,7 +17,16 @@ class TimeOrderTest {
     void timeEndBeforeTimeStart() {
 
         Assertions.assertThrows(DateOrderException.class,
-                () -> TimeOrder.verification(LocalTime.of(05, 40), LocalTime.of(5, 30)));
+                () -> TimeOrder.verification(LocalTime.of(5, 40), LocalTime.of(5, 30)));
+
+    }
+
+    @Test
+    void timeStartBeforeNow() {
+
+
+        Assertions.assertThrows(DateOrderException.class,
+                () -> TimeOrder.verification(LocalTime.now().minusHours(1), LocalTime.now()));
 
     }
 
@@ -25,7 +34,7 @@ class TimeOrderTest {
     void timeEndAfterTimeStart() {
 
         Assertions.assertDoesNotThrow(
-                () -> TimeOrder.verification(LocalTime.of(5, 40), LocalTime.of(5, 50)));
+                () -> TimeOrder.verification(LocalTime.now().plusHours(1), LocalTime.now().plusMinutes(90)));
 
     }
 
