@@ -5,9 +5,7 @@ import com.project.clinicaapi.entity.Appointment;
 import com.project.clinicaapi.entity.Dentist;
 import com.project.clinicaapi.entity.Patient;
 import com.project.clinicaapi.repository.AppointmentRepository;
-import com.project.clinicaapi.repository.DentistRepository;
-import com.project.clinicaapi.repository.PatientRepository;
 
-public record UpdateAppointmentArgs(AppointmentUpdateDTO appointmentDTO, Dentist dentist, Patient patient, Appointment appointment,
-                                    AppointmentRepository appointmentRepository, DentistRepository dentistRepository, PatientRepository patientRepository)  {
+public record UpdateAppointmentArgs(AppointmentUpdateDTO appointmentDTO, Appointment appointment,
+                                    AppointmentRepository appointmentRepository)  {
 }

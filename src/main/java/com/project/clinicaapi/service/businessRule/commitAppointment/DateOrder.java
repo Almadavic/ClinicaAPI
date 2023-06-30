@@ -12,9 +12,9 @@ public class DateOrder {
 
     public static void verification(LocalDate appointmentDate) {
 
-        if(appointmentDate.isBefore(LocalDate.now())) {
-            throw new DateOrderException("The appointment date has to be today or someday after");
-        }
+//        if(appointmentDate.isBefore(LocalDate.now())) {
+//            throw new DateOrderException("The appointment date has to be today or someday after");
+//        }
 
     }
 

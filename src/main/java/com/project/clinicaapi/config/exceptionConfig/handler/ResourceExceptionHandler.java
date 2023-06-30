@@ -115,12 +115,17 @@ public class ResourceExceptionHandler {
 
     @ExceptionHandler(DentistNotAvailableException.class)
     public ResponseEntity<StandardError> dentistAvailableDay(DentistNotAvailableException exception, HttpServletRequest request) {
-        return handlingException(exception, request, "Unavailable day", HttpStatus.INTERNAL_SERVER_ERROR);
+        return handlingException(exception, request, "Unavailable day", HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(UserNotEnable.class)
+    public ResponseEntity<StandardError> dentistAvailableDay(UserNotEnable exception, HttpServletRequest request) {
+        return handlingException(exception, request, "Unavailable user", HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(AppointmentDurationException.class)
     public ResponseEntity<StandardError> appointmentDuration(AppointmentDurationException exception, HttpServletRequest request) {
-        return handlingException(exception, request, "Appointment duration error", HttpStatus.INTERNAL_SERVER_ERROR);
+        return handlingException(exception, request, "Appointment duration error", HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(DisableOwnAccountException.class)

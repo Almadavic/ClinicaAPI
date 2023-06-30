@@ -63,9 +63,9 @@ public class DentistService {
         return dentistDTO;
     }
 
-    public Page<DentistResponseDTO> findPage(Pageable pageable, String name, String specialty) {
+    public Page<DentistResponseDTO> findPage(Pageable pageable, String name, Boolean enabled, String specialty) {
 
-        Specification<Dentist> spec = DentistSpecifications.filter(name, SpecialtyValue.verification(specialty));
+        Specification<Dentist> spec = DentistSpecifications.filter(name, enabled, SpecialtyValue.verification(specialty));
 
         return mapper.toDentistDTOPage(dentistRepository.findAll(spec, pageable));
     }

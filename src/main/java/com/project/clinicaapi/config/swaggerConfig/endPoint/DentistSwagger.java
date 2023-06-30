@@ -55,7 +55,7 @@ public interface DentistSwagger {
             @ApiResponse(responseCode = "400", description = "Valor incorreto para sort | Valor incorreto para Specialty",
                     content = {@Content(mediaType = "application/json", schema = @Schema(implementation = StandardError.class))})
     })
-    ResponseEntity<Page<DentistResponseDTO>> findPage(@Parameter(hidden = true) Pageable pageable, String name, String specialty);
+    ResponseEntity<Page<DentistResponseDTO>> findPage(@Parameter(hidden = true) Pageable pageable, String name, Boolean enabled, String specialty);
 
     @Operation(summary = "Encontra um dentista por id.", security = {@SecurityRequirement(name = "bearer-key")})
     @ApiResponses(value = {

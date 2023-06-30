@@ -42,9 +42,10 @@ public class DentistController implements DentistSwagger {
     @GetMapping
     public ResponseEntity<Page<DentistResponseDTO>> findPage(@PageableDefault(sort = "name") Pageable pageable,
                                                              @RequestParam(value = "name", required = false) String name,
+                                                             @RequestParam(value = "enabled", required = false) Boolean enabled,
                                                              @RequestParam(value = "specialty", required = false) String specialty) {
 
-        return ResponseEntity.ok().body(dentistService.findPage(pageable, name, specialty));
+        return ResponseEntity.ok().body(dentistService.findPage(pageable, name, enabled, specialty));
     }
 
     @Override

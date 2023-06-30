@@ -28,10 +28,4 @@ public class AppointmentUpdateDTO {
     @JsonProperty(value = "timeEnd")
     private LocalTime timeEnd;
 
-    @JsonProperty(value = "dentistId")
-    private String dentistId;
-
-    @JsonProperty(value = "patientId")
-    private String patientId;
-
 }

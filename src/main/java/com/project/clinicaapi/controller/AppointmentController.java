@@ -3,6 +3,8 @@ package com.project.clinicaapi.controller;
 import com.project.clinicaapi.config.swaggerConfig.endPoint.AppointmentSwagger;
 import com.project.clinicaapi.dto.request.register.AppointmentRegisterDTO;
 import com.project.clinicaapi.dto.request.register.DentistRegisterDTO;
+import com.project.clinicaapi.dto.request.update.AppointmentUpdateDTO;
+import com.project.clinicaapi.dto.request.update.DentistUpdateDTO;
 import com.project.clinicaapi.dto.response.AppointmentResponseDTO;
 import com.project.clinicaapi.dto.response.DentistResponseDTO;
 import com.project.clinicaapi.entity.User;
@@ -49,6 +51,15 @@ public class AppointmentController implements AppointmentSwagger {
     @GetMapping(value = "/{id}")
     public ResponseEntity<AppointmentResponseDTO> findById(@PathVariable(value = "id") String id) {
         return ResponseEntity.ok().body(appointmentService.findById(id));
+    }
+
+    @Override
+    @PatchMapping(value = "/{id}")
+    public ResponseEntity<AppointmentResponseDTO> update(@PathVariable(value = "id") String id,
+                                                     @RequestBody @Valid AppointmentUpdateDTO appointmentDTO,
+                                                     @AuthenticationPrincipal User userLogged) {
+
+        return ResponseEntity.ok().body(appointmentService.update(id, appointmentDTO, userLogged));
     }
 
 }

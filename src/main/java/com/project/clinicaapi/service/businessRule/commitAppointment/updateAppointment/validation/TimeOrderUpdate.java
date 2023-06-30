@@ -6,6 +6,7 @@ import com.project.clinicaapi.service.businessRule.commitAppointment.updateAppoi
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 
 @Order(value = 4)
@@ -15,11 +16,12 @@ public class TimeOrderUpdate implements UpdateAppointmentVerification {
     @Override
     public void verification(UpdateAppointmentArgs args) {
 
+        LocalDate appointmentDate = args.appointmentDTO().getAppointmentDate();
         LocalTime timeStart = args.appointmentDTO().getTimeStart();
         LocalTime timeEnd = args.appointment().getTimeEnd();
 
         if (timeStart != null) {
-            TimeOrder.verification(timeStart, timeEnd);
+            TimeOrder.verification(appointmentDate, timeStart, timeEnd);
         }
 
     }

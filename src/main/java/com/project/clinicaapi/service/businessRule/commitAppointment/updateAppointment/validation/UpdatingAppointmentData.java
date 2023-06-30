@@ -28,8 +28,6 @@ public class UpdatingAppointmentData implements UpdateAppointmentVerification {
         setAppointmentDate(appointmentDTO, appointment);
         setTimeStart(appointmentDTO, appointment);
         setTimeEnd(appointmentDTO, appointment);
-        setDentist(appointmentDTO, appointment, args.dentistRepository());
-        setPatient(appointmentDTO, appointment, args.patientRepository());
 
     }
 
@@ -58,23 +56,6 @@ public class UpdatingAppointmentData implements UpdateAppointmentVerification {
         LocalTime timeEnd = appointmentDTO.getTimeEnd();
         if (timeEnd != null) {
             appointment.setTimeEnd(timeEnd);
-        }
-    }
-
-    private void setDentist(AppointmentUpdateDTO appointmentDTO, Appointment appointment, DentistRepository dentistRepository) {
-        String dentistId = appointmentDTO.getDentistId();
-        if (dentistId != null) {
-            appointment.setDentist(dentistRepository.findById(dentistId)
-                    .orElseThrow(() -> new ResourceNotFoundException("The dentist id: " + dentistId + " wasn't found on database")));
-        }
-
-    }
-
-    private void setPatient(AppointmentUpdateDTO appointmentDTO, Appointment appointment, PatientRepository patientRepository) {
-        String patientId = appointmentDTO.getPatientId();
-        if (patientId != null) {
-            appointment.setPatient(patientRepository.findById(patientId)
-                    .orElseThrow(() -> new ResourceNotFoundException("The patient id: " + patientId + " wasn't found on database")));
         }
     }
 

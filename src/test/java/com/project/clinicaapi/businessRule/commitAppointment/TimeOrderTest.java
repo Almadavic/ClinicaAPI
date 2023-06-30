@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 
 @ActiveProfiles(value = "test")
@@ -17,7 +18,7 @@ class TimeOrderTest {
     void timeEndBeforeTimeStart() {
 
         Assertions.assertThrows(DateOrderException.class,
-                () -> TimeOrder.verification(LocalTime.of(5, 40), LocalTime.of(5, 30)));
+                () -> TimeOrder.verification(LocalDate.now(), LocalTime.of(5, 40), LocalTime.of(5, 30)));
 
     }
 
@@ -26,7 +27,7 @@ class TimeOrderTest {
 
 
         Assertions.assertThrows(DateOrderException.class,
-                () -> TimeOrder.verification(LocalTime.now().minusHours(1), LocalTime.now()));
+                () -> TimeOrder.verification(LocalDate.now(), LocalTime.now().minusHours(1), LocalTime.now()));
 
     }
 
@@ -34,7 +35,7 @@ class TimeOrderTest {
     void timeEndAfterTimeStart() {
 
         Assertions.assertDoesNotThrow(
-                () -> TimeOrder.verification(LocalTime.now().plusHours(1), LocalTime.now().plusMinutes(90)));
+                () -> TimeOrder.verification(LocalDate.now(), LocalTime.now().plusHours(1), LocalTime.now().plusMinutes(90)));
 
     }
 

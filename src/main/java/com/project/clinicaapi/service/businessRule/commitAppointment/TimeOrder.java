@@ -2,6 +2,7 @@ package com.project.clinicaapi.service.businessRule.commitAppointment;
 
 import com.project.clinicaapi.service.customException.DateOrderException;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class TimeOrder {
@@ -10,11 +11,11 @@ public class TimeOrder {
 
     }
 
-    public static void verification(LocalTime timeStart, LocalTime timeEnd) {
+    public static void verification(LocalDate localDate, LocalTime timeStart, LocalTime timeEnd) {
 
-        if(timeStart.isAfter(timeEnd) || timeStart.isBefore(LocalTime.now())) {
-            throw new DateOrderException("The timestart of the appointment cannot be after timeend and timestart cannot be in the past");
-        }
+//        if(timeStart.isAfter(timeEnd) || (localDate.isEqual(LocalDate.now()) && timeStart.isBefore(LocalTime.now()))) {
+//            throw new DateOrderException("The timestart of the appointment cannot be after timeend and timestart cannot be in the past");
+//        }
 
     }
 

@@ -6,7 +6,7 @@ import com.project.clinicaapi.service.businessRule.commitAppointment.registerApp
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-@Order(value = 5)
+@Order(value = 6)
 @Component
 public class DentistAvailableDayRegister implements RegisterAppointmentVerification {
 

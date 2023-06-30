@@ -14,7 +14,7 @@ public class TimeOrderRegister implements RegisterAppointmentVerification {
     @Override
     public void verification(RegisterAppointmentArgs args) {
 
-       TimeOrder.verification(args.appointmentDTO().getTimeStart(), args.appointmentDTO().getTimeEnd());
+       TimeOrder.verification(args.appointmentDTO().getAppointmentDate(), args.appointmentDTO().getTimeStart(), args.appointmentDTO().getTimeEnd());
 
     }
 

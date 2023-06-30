@@ -1,6 +1,7 @@
 package com.project.clinicaapi.config.swaggerConfig.endPoint;
 
 import com.project.clinicaapi.dto.request.register.AppointmentRegisterDTO;
+import com.project.clinicaapi.dto.request.update.AppointmentUpdateDTO;
 import com.project.clinicaapi.dto.response.AppointmentResponseDTO;
 import com.project.clinicaapi.entity.User;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -17,4 +18,7 @@ public interface AppointmentSwagger {
     ResponseEntity<Page<AppointmentResponseDTO>> findPage(Pageable pageable);
 
     ResponseEntity<AppointmentResponseDTO> findById(String id);
+
+    ResponseEntity<AppointmentResponseDTO> update(String id, AppointmentUpdateDTO appointmentDTO, User userLogged);
+
 }

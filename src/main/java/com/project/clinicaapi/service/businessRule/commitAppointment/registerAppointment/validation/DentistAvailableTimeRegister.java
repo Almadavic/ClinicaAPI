@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Order(value = 7)
+@Order(value = 8)
 @Component
 public class DentistAvailableTimeRegister implements RegisterAppointmentVerification {
 

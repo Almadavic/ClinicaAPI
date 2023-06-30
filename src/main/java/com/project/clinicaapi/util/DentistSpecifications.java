@@ -11,7 +11,7 @@ public class DentistSpecifications {
 
     }
 
-    public static Specification<Dentist> filter(String name, Specialty specialty) {
+    public static Specification<Dentist> filter(String name, Boolean enabled, Specialty specialty) {
         return (root, query, criteriaBuilder) -> {
 
             Predicate predicate = criteriaBuilder.conjunction();
@@ -19,6 +19,10 @@ public class DentistSpecifications {
             if (name != null) {
                 predicate = criteriaBuilder.and(predicate, criteriaBuilder.like(criteriaBuilder.lower(root.get("name")),
                         "%" + name.toLowerCase() + "%"));
+            }
+
+            if (enabled != null) {
+                predicate = criteriaBuilder.and(predicate, criteriaBuilder.equal(root.get("enabled"), enabled));
             }
 
             if (specialty != null) {

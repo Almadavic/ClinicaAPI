@@ -18,7 +18,7 @@ public class DentistAvailableDayUpdate implements UpdateAppointmentVerification 
         LocalDate appointmentDate = args.appointmentDTO().getAppointmentDate();
 
         if(appointmentDate != null) {
-            DentistAvailableDay.verification(appointmentDate, args.dentist());
+            DentistAvailableDay.verification(appointmentDate, args.appointment().getDentist());
         }
 
     }

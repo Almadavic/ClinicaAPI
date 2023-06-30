@@ -14,13 +14,13 @@ import java.time.LocalTime;
 class AppointmentDurationTest {
 
     @Test
-    void appointmentDurationNotAccepted() {
+    void appointmentDurationExceed() {
         testingThrowsException(LocalTime.of(1, 10), LocalTime.of(3, 30));
         testingThrowsException(LocalTime.of(1, 10), LocalTime.of(1, 20));
     }
 
     @Test
-    void appointmentDurationAccepted() {
+    void appointmentDurationInsufficient() {
         testingDoesNotThrowException(LocalTime.of(1, 10), LocalTime.of(1, 50));
         testingDoesNotThrowException(LocalTime.of(4, 13), LocalTime.of(5, 4));
     }

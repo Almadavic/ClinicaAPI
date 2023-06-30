@@ -24,8 +24,8 @@ public class NoFieldFilledUpdateAppointment implements UpdateAppointmentVerifica
 
         AppointmentUpdateDTO appointmentDTO = args.appointmentDTO();
 
-        List<Object> attributes = Arrays.asList(appointmentDTO.getAppointmentDate(), appointmentDTO.getDentistId(), appointmentDTO.getPatientId(),
-                appointmentDTO.getProcedure(), appointmentDTO.getTimeEnd(), appointmentDTO.getTimeStart());
+        List<Object> attributes = Arrays.asList(appointmentDTO.getAppointmentDate(), appointmentDTO.getProcedure(), appointmentDTO.getTimeEnd(),
+                appointmentDTO.getTimeStart());
 
         if(attributesListToUpdateService.allAttributesNull(attributes)) {
             throw new NoFieldFilledException();

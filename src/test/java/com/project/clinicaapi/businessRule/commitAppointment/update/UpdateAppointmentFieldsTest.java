@@ -25,8 +25,7 @@ class UpdateAppointmentFieldsTest {
         AppointmentUpdateDTO appointmentDTO = AppointmentUpdateDTO.builder().build();
 
         Assertions.assertThrows(NoFieldFilledException.class,
-                () -> service.verification(new UpdateAppointmentArgs(appointmentDTO, null, null, null, null,
-                        null, null)));
+                () -> service.verification(new UpdateAppointmentArgs(appointmentDTO, null, null)));
 
     }
 
@@ -37,8 +36,7 @@ class UpdateAppointmentFieldsTest {
                 .procedure("Procedimento novo")
                 .build();
 
-        Assertions.assertDoesNotThrow(() -> service.verification(new UpdateAppointmentArgs(appointmentDTO, null, null, null,
-                null, null, null)));
+        Assertions.assertDoesNotThrow(() -> service.verification(new UpdateAppointmentArgs(appointmentDTO, null, null)));
 
     }
 

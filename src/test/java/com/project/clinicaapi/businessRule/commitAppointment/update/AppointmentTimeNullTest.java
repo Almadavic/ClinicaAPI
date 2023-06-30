@@ -27,8 +27,7 @@ class AppointmentTimeNullTest {
                 .build();
 
         Assertions.assertThrows(ParameterMissingException.class,
-                () -> service.verification(new UpdateAppointmentArgs(appointmentDTO, null, null, null, null,
-                        null, null)));
+                () -> service.verification(new UpdateAppointmentArgs(appointmentDTO, null, null)));
 
     }
 
@@ -40,8 +39,7 @@ class AppointmentTimeNullTest {
                 .build();
 
         Assertions.assertThrows(ParameterMissingException.class,
-                () -> service.verification(new UpdateAppointmentArgs(appointmentDTO, null, null, null, null,
-                        null, null)));
+                () -> service.verification(new UpdateAppointmentArgs(appointmentDTO, null, null)));
 
     }
 
@@ -53,8 +51,7 @@ class AppointmentTimeNullTest {
                 .timeEnd(LocalTime.now().plusMinutes(50))
                 .build();
 
-        Assertions.assertDoesNotThrow(() -> service.verification(new UpdateAppointmentArgs(appointmentDTO, null, null, null,
-                null, null, null)));
+        Assertions.assertDoesNotThrow(() -> service.verification(new UpdateAppointmentArgs(appointmentDTO, null, null)));
 
     }
 

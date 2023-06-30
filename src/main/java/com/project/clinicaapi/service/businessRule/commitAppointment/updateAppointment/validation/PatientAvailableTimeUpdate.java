@@ -7,6 +7,7 @@ import com.project.clinicaapi.service.businessRule.commitAppointment.updateAppoi
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -17,14 +18,23 @@ public class PatientAvailableTimeUpdate implements UpdateAppointmentVerification
     @Override
     public void verification(UpdateAppointmentArgs args) {
 
+        LocalDate appointmentDate = args.appointmentDTO().getAppointmentDate();
         LocalTime timeStart = args.appointmentDTO().getTimeStart();
         LocalTime timeEnd = args.appointment().getTimeEnd();
 
-        if (timeStart != null) {
-            List<Appointment> appointments = args.appointmentRepository().findByPatientAndByDate(args.patient().getId(), args.appointmentDTO().getAppointmentDate());
+        if (timeStart != null || appointmentDate!= null) {
+            List<Appointment> appointments = args.appointmentRepository().findByPatientAndByDate(args.appointment().getPatient().getId(),
+                    verifyAppointmentDateNull(args.appointment().getAppointmentDate(), appointmentDate));
             AvailablePersonTime.verification(appointments, timeStart, timeEnd, "patient");
         }
 
+    }
+
+    private LocalDate verifyAppointmentDateNull(LocalDate appointmentDate, LocalDate appointmentDateDTO) {
+        if(appointmentDateDTO != null) {
+            return appointmentDateDTO;
+        }
+        return appointmentDate;
     }
 
 }

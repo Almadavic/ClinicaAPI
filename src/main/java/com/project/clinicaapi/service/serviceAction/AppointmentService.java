@@ -1,6 +1,7 @@
 package com.project.clinicaapi.service.serviceAction;
 
 import com.project.clinicaapi.dto.request.register.AppointmentRegisterDTO;
+import com.project.clinicaapi.dto.request.update.AppointmentUpdateDTO;
 import com.project.clinicaapi.dto.response.AppointmentResponseDTO;
 import com.project.clinicaapi.entity.Appointment;
 import com.project.clinicaapi.entity.Dentist;
@@ -11,6 +12,8 @@ import com.project.clinicaapi.repository.DentistRepository;
 import com.project.clinicaapi.repository.PatientRepository;
 import com.project.clinicaapi.service.businessRule.commitAppointment.registerAppointment.RegisterAppointmentArgs;
 import com.project.clinicaapi.service.businessRule.commitAppointment.registerAppointment.RegisterAppointmentVerification;
+import com.project.clinicaapi.service.businessRule.commitAppointment.updateAppointment.UpdateAppointmentArgs;
+import com.project.clinicaapi.service.businessRule.commitAppointment.updateAppointment.UpdateAppointmentVerification;
 import com.project.clinicaapi.service.customException.ResourceNotFoundException;
 import com.project.clinicaapi.util.LogRegistration;
 import com.project.clinicaapi.util.mapper.AppointmentMapper;
@@ -37,6 +40,8 @@ public class AppointmentService {
 
     private final List<RegisterAppointmentVerification> registerAppointmentVerifications;
 
+    private final List<UpdateAppointmentVerification> updateAppointmentVerifications;
+
     public AppointmentResponseDTO save(AppointmentRegisterDTO registerData, User userLogged) {
         Patient patient = returnPatientDataBase(registerData.getPatientId());
         Dentist dentist = returnDentistDataBase(registerData.getDentistId());
@@ -54,6 +59,14 @@ public class AppointmentService {
 
     public AppointmentResponseDTO findById(String appointmentId) {
         return mapper.toAppointmentDTO(returnAppointmentDataBase(appointmentId));
+    }
+
+    public AppointmentResponseDTO update(String appointmentId, AppointmentUpdateDTO updateData, User userLogged) {
+        Appointment appointment = returnAppointmentDataBase(appointmentId);
+        updateAppointmentVerifications.forEach(v -> v.verification(new UpdateAppointmentArgs(updateData, appointment, appointmentRepository)));
+        AppointmentResponseDTO appointmentDTO = saveAndConvert(appointment);
+        logRegistration.saveLog(userLogged.getUsername(), "updated the appointment: " + appointment.getId());
+        return appointmentDTO;
     }
 
     private AppointmentResponseDTO saveAndConvert(Appointment appointment) {
