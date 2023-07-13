@@ -16,7 +16,7 @@ public class AppointmentTimeLimitUpdate implements UpdateAppointmentVerification
     public void verification(UpdateAppointmentArgs args) {
 
         LocalTime timeStart = args.appointmentDTO().getTimeStart();
-        LocalTime timeEnd = args.appointment().getTimeEnd();
+        LocalTime timeEnd = args.appointmentDTO().getTimeEnd();
 
         if (timeStart != null) {
             AppointmentTimeLimit.verification(timeStart, timeEnd);

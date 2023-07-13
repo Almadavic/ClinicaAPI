@@ -1,5 +1,6 @@
 package com.project.clinicaapi.rest.secretaryController;
 
+import com.project.clinicaapi.Factory;
 import com.project.clinicaapi.entity.Secretary;
 import com.project.clinicaapi.entity.User;
 import com.project.clinicaapi.repository.SecretaryRepository;
@@ -23,7 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class FindSecretaryTest extends ClassTestParent {
 
     @Autowired
-    private UserRepository userRepository;
+    private Factory factory;
 
     private final String path = "/secretaries";
 
@@ -52,9 +53,7 @@ class FindSecretaryTest extends ClassTestParent {
     @Test
     void findSecretaryByIdSuccess() throws Exception {
 
-        Secretary secretary = (Secretary) userRepository.findByLogin("secretary").get();
-
-        mockMvc.perform(get(path + "/{secretaryid}", secretary.getId())
+        mockMvc.perform(get(path + "/{secretaryid}", factory.returnUserDataBaseByLogin("secretary2").getId())
                         .header("Authorization", token("admin", "123456")))
                 .andExpect(status().is(ok));
 

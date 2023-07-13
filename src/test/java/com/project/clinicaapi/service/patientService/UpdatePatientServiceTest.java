@@ -1,5 +1,6 @@
 package com.project.clinicaapi.service.patientService;
 
+import com.project.clinicaapi.Factory;
 import com.project.clinicaapi.dto.request.update.PatientUpdateDTO;
 import com.project.clinicaapi.dto.request.update.SecretaryUpdateDTO;
 import com.project.clinicaapi.dto.response.PatientResponseDTO;
@@ -22,7 +23,7 @@ class UpdatePatientServiceTest {
     private PatientService patientService;
 
     @Autowired
-    private UserRepository userRepository;
+    private Factory factory;
 
     @Test
     void fieldsValue() {
@@ -33,18 +34,11 @@ class UpdatePatientServiceTest {
                 .cpf(cpf)
                 .build();
 
-        PatientResponseDTO patientResponseDTO = patientService.update(returnPatientId(), patientDTO, userLogged());
+        PatientResponseDTO patientResponseDTO = patientService.update(factory.returnUserDataBaseByLogin("patient").getId(), patientDTO,
+                factory.returnUserDataBaseByLogin("admin"));
 
         Assertions.assertEquals(cpf, patientResponseDTO.getCpf());
 
-    }
-
-    private String returnPatientId() {
-        return userRepository.findByLogin("patient").get().getId();
-    }
-
-    private User userLogged() {
-        return userRepository.findByLogin("admin").get();
     }
 
 }

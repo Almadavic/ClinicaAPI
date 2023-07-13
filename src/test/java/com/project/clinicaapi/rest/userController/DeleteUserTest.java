@@ -1,5 +1,6 @@
 package com.project.clinicaapi.rest.userController;
 
+import com.project.clinicaapi.Factory;
 import com.project.clinicaapi.entity.User;
 import com.project.clinicaapi.repository.UserRepository;
 import com.project.clinicaapi.rest.ClassTestParent;
@@ -21,14 +22,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class DeleteUserTest extends ClassTestParent {
 
     @Autowired
-    private UserRepository userRepository;
+    private Factory factory;
 
     private final String path = "/users";
 
     @Test
     void deleteUserByIdSuccess() throws Exception {
 
-        mockMvc.perform(delete(path + "/{id}", returnUser())
+        mockMvc.perform(delete(path + "/{id}", factory.returnUserDataBaseByLogin("delete"))
                         .header("Authorization", token("admin", "123456")))
                 .andExpect(status().is(ok));
 
@@ -46,10 +47,6 @@ class DeleteUserTest extends ClassTestParent {
                 .andExpect(result -> assertEquals("The user id: " + id + " wasn't found on database",
                         result.getResolvedException().getMessage()));
 
-    }
-
-    private String returnUser() {
-        return userRepository.findByLogin("delete").get().getId();
     }
 
 }

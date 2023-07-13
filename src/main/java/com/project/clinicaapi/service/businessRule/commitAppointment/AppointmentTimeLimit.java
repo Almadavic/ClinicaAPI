@@ -12,12 +12,12 @@ public class AppointmentTimeLimit {
 
     public static void verification(LocalTime timeStart, LocalTime endTime) {
 
-//        LocalTime clinicOpeningTime = LocalTime.of(8, 0);
-//        LocalTime clinicClosingTime = LocalTime.of(18, 0);
-//
-//        if(timeStart.isBefore(clinicOpeningTime) || endTime.isAfter(clinicClosingTime)) {
-//            throw new ClinicOpeningHoursException("The clinic works from 8:00 a.m to 18:00 p.m");
-//        }
+        LocalTime clinicOpeningTime = LocalTime.of(8, 0);
+        LocalTime clinicClosingTime = LocalTime.of(18, 0);
+
+        if(timeStart.isBefore(clinicOpeningTime) || endTime.isAfter(clinicClosingTime)) {
+            throw new ClinicOpeningHoursException();
+        }
 
     }
 

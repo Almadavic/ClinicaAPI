@@ -18,12 +18,19 @@ public class TimeOrderUpdate implements UpdateAppointmentVerification {
 
         LocalDate appointmentDate = args.appointmentDTO().getAppointmentDate();
         LocalTime timeStart = args.appointmentDTO().getTimeStart();
-        LocalTime timeEnd = args.appointment().getTimeEnd();
+        LocalTime timeEnd = args.appointmentDTO().getTimeEnd();
 
         if (timeStart != null) {
-            TimeOrder.verification(appointmentDate, timeStart, timeEnd);
+            TimeOrder.verification(manageLocalDate(args.appointment().getAppointmentDate(), appointmentDate), timeStart, timeEnd);
         }
 
+    }
+
+    private LocalDate manageLocalDate(LocalDate appointmentDate, LocalDate appointmentDateDTO) {
+        if(appointmentDateDTO!=null) {
+            return appointmentDateDTO;
+        }
+       return appointmentDate;
     }
 
 }

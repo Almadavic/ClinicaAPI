@@ -20,7 +20,7 @@ public class DentistAvailableTimeUpdate implements UpdateAppointmentVerification
 
         LocalDate appointmentDate = args.appointmentDTO().getAppointmentDate();
         LocalTime timeStart = args.appointmentDTO().getTimeStart();
-        LocalTime timeEnd = args.appointment().getTimeEnd();
+        LocalTime timeEnd = args.appointmentDTO().getTimeEnd();
 
         if(timeStart != null || appointmentDate != null ) {
             List<Appointment> appointments = args.appointmentRepository().findByDentistAndByDate(args.appointment().getDentist().getId(),

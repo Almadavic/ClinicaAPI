@@ -1,5 +1,6 @@
 package com.project.clinicaapi.service.dentistService;
 
+import com.project.clinicaapi.Factory;
 import com.project.clinicaapi.dto.request.register.AddessRegisterDTO;
 import com.project.clinicaapi.dto.request.register.DentistRegisterDTO;
 import com.project.clinicaapi.dto.response.DentistResponseDTO;
@@ -28,7 +29,7 @@ class SaveDentistServiceTest {
     private WorkDayService workDayService;
 
     @Autowired
-    private UserRepository userRepository;
+    private Factory factory;
 
     @Test
     void fieldsValue() {
@@ -45,7 +46,7 @@ class SaveDentistServiceTest {
                 .gender("MALE")
                 .build();
 
-        DentistResponseDTO dentistResponseDTO = dentistService.save(dentistDTO, returnUser());
+        DentistResponseDTO dentistResponseDTO = dentistService.save(dentistDTO, factory.returnUserDataBaseByLogin("dentist"));
 
         Assertions.assertTrue(dentistResponseDTO.getWorkDays().contains(new WorkDayResponseDTO(workDayService.returnWorkDayDataBase(1))));
         Assertions.assertTrue(dentistResponseDTO.getWorkDays().contains(new WorkDayResponseDTO(workDayService.returnWorkDayDataBase(2))));
@@ -54,11 +55,6 @@ class SaveDentistServiceTest {
         Assertions.assertFalse(dentistResponseDTO.getWorkDays().contains(new WorkDayResponseDTO(workDayService.returnWorkDayDataBase(5))));
         Assertions.assertFalse(dentistResponseDTO.getWorkDays().contains(new WorkDayResponseDTO(workDayService.returnWorkDayDataBase(6))));
 
-    }
-
-
-    private User returnUser() {
-        return userRepository.findByLogin("admin").get();
     }
 
 }

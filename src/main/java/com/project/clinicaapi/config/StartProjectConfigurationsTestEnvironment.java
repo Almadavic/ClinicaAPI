@@ -1,6 +1,5 @@
 package com.project.clinicaapi.config;
 
-import com.project.clinicaapi.dto.response.DentistResponseDTO;
 import com.project.clinicaapi.entity.*;
 import com.project.clinicaapi.enumerated.Gender;
 import com.project.clinicaapi.enumerated.Role;
@@ -16,8 +15,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.time.DayOfWeek;
-import java.time.Instant;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Arrays;
@@ -258,7 +256,9 @@ public class StartProjectConfigurationsTestEnvironment implements CommandLineRun
         dentist4.addWorkDay(wd3);
         dentist4.addWorkDay(wd1);
 
-        userRepository.saveAll(Arrays.asList(dentist2, dentist3, dentist4));
+        dentist5.addWorkDay(wd1);
+
+        userRepository.saveAll(Arrays.asList(dentist2, dentist3, dentist4, dentist5));
 
         dentist1 = userRepository.save(dentist1);
 
@@ -268,7 +268,6 @@ public class StartProjectConfigurationsTestEnvironment implements CommandLineRun
                 .appointmentDate(LocalDate.of(2023, 6, 26))
                 .timeStart(LocalTime.now())
                 .timeEnd(LocalTime.now().plusHours(1))
-                .weekDay(WorkDayEnum.MONDAY)
                 .dentist(dentist1)
                 .patient(patient1)
                 .build();
@@ -278,7 +277,6 @@ public class StartProjectConfigurationsTestEnvironment implements CommandLineRun
                 .appointmentDate(LocalDate.of(2023, 6, 26))
                 .timeStart(LocalTime.now())
                 .timeEnd(LocalTime.now().plusHours(1))
-                .weekDay(WorkDayEnum.MONDAY)
                 .dentist(dentist1)
                 .patient(patient1)
                 .build();
@@ -288,7 +286,6 @@ public class StartProjectConfigurationsTestEnvironment implements CommandLineRun
                 .appointmentDate(LocalDate.of(2023, 6, 26))
                 .timeStart(LocalTime.now())
                 .timeEnd(LocalTime.now().plusHours(1))
-                .weekDay(WorkDayEnum.MONDAY)
                 .dentist(dentist1)
                 .patient(patient1)
                 .build();
@@ -298,7 +295,6 @@ public class StartProjectConfigurationsTestEnvironment implements CommandLineRun
                 .appointmentDate(LocalDate.of(2023, 6, 26))
                 .timeStart(LocalTime.now())
                 .timeEnd(LocalTime.now().plusHours(1))
-                .weekDay(WorkDayEnum.MONDAY)
                 .dentist(dentist1)
                 .patient(patient1)
                 .build();
@@ -308,7 +304,6 @@ public class StartProjectConfigurationsTestEnvironment implements CommandLineRun
                 .appointmentDate(LocalDate.of(2023, 6, 27))
                 .timeStart(LocalTime.now())
                 .timeEnd(LocalTime.now().plusHours(1))
-                .weekDay(WorkDayEnum.TUESDAY)
                 .dentist(dentist1)
                 .patient(patient1)
                 .build();
@@ -316,9 +311,8 @@ public class StartProjectConfigurationsTestEnvironment implements CommandLineRun
         Appointment appointment6 = Appointment.builder()
                 .procedure("Ginoplastia")
                 .appointmentDate(LocalDate.now())
-                .timeStart(LocalTime.of(17, 50))
-                .timeEnd(LocalTime.of(18, 50))
-                .weekDay(WorkDayEnum.TUESDAY)
+                .timeStart(LocalTime.of(17, 30))
+                .timeEnd(LocalTime.of(18, 0))
                 .dentist(dentist1)
                 .patient(patient1)
                 .build();
@@ -326,9 +320,8 @@ public class StartProjectConfigurationsTestEnvironment implements CommandLineRun
         Appointment appointment7 = Appointment.builder()
                 .procedure("Ginoplastia")
                 .appointmentDate(LocalDate.now())
-                .timeStart(LocalTime.now().plusHours(1))
-                .timeEnd(LocalTime.now().plusHours(2))
-                .weekDay(WorkDayEnum.TUESDAY)
+                .timeStart(LocalTime.now().plusMinutes(60))
+                .timeEnd(LocalTime.now().plusMinutes(90))
                 .dentist(dentist1)
                 .patient(patient1)
                 .build();

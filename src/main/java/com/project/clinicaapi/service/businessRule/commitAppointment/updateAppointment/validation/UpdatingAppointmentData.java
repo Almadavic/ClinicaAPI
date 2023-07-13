@@ -3,11 +3,8 @@ package com.project.clinicaapi.service.businessRule.commitAppointment.updateAppo
 
 import com.project.clinicaapi.dto.request.update.AppointmentUpdateDTO;
 import com.project.clinicaapi.entity.Appointment;
-import com.project.clinicaapi.repository.DentistRepository;
-import com.project.clinicaapi.repository.PatientRepository;
 import com.project.clinicaapi.service.businessRule.commitAppointment.updateAppointment.UpdateAppointmentArgs;
 import com.project.clinicaapi.service.businessRule.commitAppointment.updateAppointment.UpdateAppointmentVerification;
-import com.project.clinicaapi.service.customException.ResourceNotFoundException;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 

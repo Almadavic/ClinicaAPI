@@ -1,5 +1,6 @@
 package com.project.clinicaapi.rest.userController;
 
+import com.project.clinicaapi.Factory;
 import com.project.clinicaapi.entity.User;
 import com.project.clinicaapi.repository.UserRepository;
 import com.project.clinicaapi.rest.ClassTestParent;
@@ -20,7 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class FindUserTest extends ClassTestParent {
 
     @Autowired
-    private UserRepository userRepository;
+    private Factory factory;
 
     private final String path = "/users";
 
@@ -50,9 +51,7 @@ class FindUserTest extends ClassTestParent {
     @Test
     void findUserByIdSuccess() throws Exception {
 
-        User user = userRepository.findByLogin("admin").get();
-
-        mockMvc.perform(get(path + "/{userid}", user.getId())
+        mockMvc.perform(get(path + "/{userid}", factory.returnUserDataBaseByLogin("admin").getId())
                         .header("Authorization", token("admin", "123456")))
                 .andExpect(status().is(ok));
 

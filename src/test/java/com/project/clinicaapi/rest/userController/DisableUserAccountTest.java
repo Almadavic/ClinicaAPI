@@ -1,5 +1,6 @@
 package com.project.clinicaapi.rest.userController;
 
+import com.project.clinicaapi.Factory;
 import com.project.clinicaapi.config.securityConfig.LoginData;
 import com.project.clinicaapi.repository.UserRepository;
 import com.project.clinicaapi.rest.ClassTestParent;
@@ -25,7 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class DisableUserAccountTest extends ClassTestParent {
 
     @Autowired
-    private UserRepository userRepository;
+    private Factory factory;
 
     private final String path = "/users";
 
@@ -33,7 +34,6 @@ class DisableUserAccountTest extends ClassTestParent {
     void disableUserByIdNotFound() throws Exception {
 
         String id = "aspjaioasjs9aasjassaas9sa";
-
 
         mockMvc.perform(patch(path + "/disable/{userid}", id)
                         .header("Authorization", token("admin", "123456"))
@@ -49,7 +49,7 @@ class DisableUserAccountTest extends ClassTestParent {
     @Test
     void disableUserNoPermission() throws Exception {
 
-        mockMvc.perform(patch(path + "/disable/{userid}", returnUserDataBaseId("admin"))
+        mockMvc.perform(patch(path + "/disable/{userid}", factory.returnUserDataBaseByLogin("admin").getId())
                         .header("Authorization", token("secretary", "123456"))
                         .contentType("application/json"))
                 .andExpect(status().is(forbidden))
@@ -62,7 +62,7 @@ class DisableUserAccountTest extends ClassTestParent {
     @Test
     void disableOwnUserLoggedAccount() throws Exception {
 
-        mockMvc.perform(patch(path + "/disable/{userid}", returnUserDataBaseId("secretary"))
+        mockMvc.perform(patch(path + "/disable/{userid}", factory.returnUserDataBaseByLogin("secretary").getId())
                         .header("Authorization", token("secretary", "123456"))
                         .contentType("application/json"))
                 .andExpect(status().is(internalServerError))
@@ -77,7 +77,7 @@ class DisableUserAccountTest extends ClassTestParent {
 
         enterSystemSuccess("secretary2", "123456");
 
-        mockMvc.perform(patch(path + "/disable/{userid}", returnUserDataBaseId("secretary2"))
+        mockMvc.perform(patch(path + "/disable/{userid}", factory.returnUserDataBaseByLogin("secretary2").getId())
                         .header("Authorization", token("admin", "123456"))
                         .contentType("application/json"))
                 .andExpect(status().is(noContent));
@@ -86,10 +86,6 @@ class DisableUserAccountTest extends ClassTestParent {
 
     }
 
-
-    private String returnUserDataBaseId(String userName) {
-        return userRepository.findByLogin(userName).get().getId();
-    }
 
     private void enterSystemSuccess(String login, String password) throws Exception {
 

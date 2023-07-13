@@ -1,5 +1,6 @@
 package com.project.clinicaapi.rest.secretaryController;
 
+import com.project.clinicaapi.Factory;
 import com.project.clinicaapi.dto.request.update.AddressUpdateDTO;
 import com.project.clinicaapi.dto.request.update.DentistUpdateDTO;
 import com.project.clinicaapi.dto.request.update.SecretaryUpdateDTO;
@@ -25,7 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class UpdateSecretaryTest extends ClassTestParent {
 
     @Autowired
-    private UserRepository userRepository;
+    private Factory factory;
 
     private final String path = "/secretaries";
 
@@ -56,7 +57,7 @@ class UpdateSecretaryTest extends ClassTestParent {
                 .registration(registration)
                 .build();
 
-        mockMvc.perform(patch(path + "/" + returnSecretaryId())
+        mockMvc.perform(patch(path + "/" + factory.returnUserDataBaseByLogin("secretary2").getId())
                         .header("Authorization", token("admin", "123456"))
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(secretaryDTO)))
@@ -73,7 +74,7 @@ class UpdateSecretaryTest extends ClassTestParent {
         SecretaryUpdateDTO secretaryDTO = SecretaryUpdateDTO.builder()
                 .build();
 
-        mockMvc.perform(patch(path + "/" + returnSecretaryId())
+        mockMvc.perform(patch(path + "/" + factory.returnUserDataBaseByLogin("secretary2").getId())
                         .header("Authorization", token("admin", "123456"))
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(secretaryDTO)))
@@ -82,10 +83,6 @@ class UpdateSecretaryTest extends ClassTestParent {
                 .andExpect(result -> assertEquals("You have to update at least one field"
                         , result.getResolvedException().getMessage()));
 
-    }
-
-    private String returnSecretaryId() {
-        return userRepository.findByLogin("secretary2").get().getId();
     }
 
 }

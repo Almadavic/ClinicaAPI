@@ -16,7 +16,7 @@ public class AppointmentDurationUpdate implements UpdateAppointmentVerification 
     public void verification(UpdateAppointmentArgs args) {
 
         LocalTime timeStart = args.appointmentDTO().getTimeStart();
-        LocalTime timeEnd = args.appointment().getTimeEnd();
+        LocalTime timeEnd = args.appointmentDTO().getTimeEnd();
 
         if (timeStart != null) {
             AppointmentDuration.verification(timeStart, timeEnd);

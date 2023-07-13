@@ -1,5 +1,6 @@
 package com.project.clinicaapi.service.userService;
 
+import com.project.clinicaapi.Factory;
 import com.project.clinicaapi.entity.User;
 import com.project.clinicaapi.repository.UserRepository;
 import com.project.clinicaapi.service.serviceAction.UserService;
@@ -17,25 +18,22 @@ class DisableUserAccountServiceTest {
     private UserService userService;
 
     @Autowired
-    private UserRepository userRepository;
+    private Factory factory;
 
     @Test
     void fieldsValue() {
 
-        User userDataBase = returnUserDataBase("secretary");
+        User userDataBase = factory.returnUserDataBaseByLogin("secretary");
 
         Assertions.assertTrue(userDataBase.isEnabled());
 
-        userService.disableAccount(userDataBase.getId(), returnUserDataBase("admin"));
+        userService.disableAccount(userDataBase.getId(), factory.returnUserDataBaseByLogin("admin"));
 
-        User userDataBaseUpdated = returnUserDataBase("secretary");
+        User userDataBaseUpdated = factory.returnUserDataBaseByLogin("secretary");
 
         Assertions.assertFalse(userDataBaseUpdated.isEnabled());
 
     }
 
-    private User returnUserDataBase(String userName) {
-        return userRepository.findByLogin(userName).get();
-    }
 
 }

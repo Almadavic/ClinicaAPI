@@ -25,4 +25,5 @@ public class ConvertingType {
     public static WorkDayEnum getWeekDayByLocalDate(LocalDate appointmentDate) {
         return WorkDayEnum.valueOf(appointmentDate.getDayOfWeek().toString());
     }
+
 }

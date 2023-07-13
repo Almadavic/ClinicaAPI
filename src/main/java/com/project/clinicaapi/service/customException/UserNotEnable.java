@@ -8,7 +8,7 @@ public class UserNotEnable extends RuntimeException{
     private static final long serialVersionUID = 1L;
 
     public UserNotEnable(String userType) {
-        super("This " + userType + "account is not enabled");
+        super("This " + userType + " account is not enabled");
     }
 
 }

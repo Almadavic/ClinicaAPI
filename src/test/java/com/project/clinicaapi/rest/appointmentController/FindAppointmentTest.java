@@ -1,5 +1,6 @@
 package com.project.clinicaapi.rest.appointmentController;
 
+import com.project.clinicaapi.Factory;
 import com.project.clinicaapi.entity.Appointment;
 import com.project.clinicaapi.repository.AppointmentRepository;
 import com.project.clinicaapi.rest.ClassTestParent;
@@ -21,7 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class FindAppointmentTest extends ClassTestParent {
 
     @Autowired
-    private AppointmentRepository appointmentRepository;
+    private Factory factory;
 
     private final String path = "/appointments";
 
@@ -50,14 +51,10 @@ class FindAppointmentTest extends ClassTestParent {
     @Test
     void findDentistByIdSuccess() throws Exception {
 
-        mockMvc.perform(get(path + "/{appointmentid}", returnAppointmentDataBase().getId())
+        mockMvc.perform(get(path + "/{appointmentid}", factory.returnAppointment().getId())
                         .header("Authorization", token("admin", "123456")))
                 .andExpect(status().is(ok));
 
-    }
-
-    private Appointment returnAppointmentDataBase() {
-        return appointmentRepository.findAll().get(0);
     }
 
 

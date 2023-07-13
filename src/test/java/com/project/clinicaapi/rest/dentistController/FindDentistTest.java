@@ -1,5 +1,6 @@
 package com.project.clinicaapi.rest.dentistController;
 
+import com.project.clinicaapi.Factory;
 import com.project.clinicaapi.entity.Dentist;
 import com.project.clinicaapi.repository.UserRepository;
 import com.project.clinicaapi.rest.ClassTestParent;
@@ -21,7 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class FindDentistTest extends ClassTestParent {
 
     @Autowired
-    private UserRepository userRepository;
+    private Factory factory;
 
     private final String path = "/dentists";
 
@@ -50,9 +51,7 @@ class FindDentistTest extends ClassTestParent {
     @Test
     void findDentistByIdSuccess() throws Exception {
 
-        Dentist dentist = (Dentist) userRepository.findByLogin("dentist1").get();
-
-        mockMvc.perform(get(path + "/{dentistid}", dentist.getId())
+        mockMvc.perform(get(path + "/{dentistid}", factory.returnUserDataBaseByLogin("dentist1").getId())
                         .header("Authorization", token("admin", "123456")))
                 .andExpect(status().is(ok));
 

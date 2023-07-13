@@ -1,5 +1,6 @@
 package com.project.clinicaapi.dto;
 
+import com.project.clinicaapi.Factory;
 import com.project.clinicaapi.dto.response.PatientResponseDTO;
 import com.project.clinicaapi.dto.response.SecretaryResponseDTO;
 import com.project.clinicaapi.repository.UserRepository;
@@ -12,15 +13,15 @@ import org.springframework.test.context.ActiveProfiles;
 
 @ActiveProfiles(value = "test")
 @SpringBootTest
-class SecretaryDTOInstanceTest implements UserDTOInterface {
+class SecretaryDTOInstanceTest  {
 
     @Autowired
-    private UserRepository userRepository;
+    private Factory factory;
 
     @Test
     void correctInstance() {
 
-        Assertions.assertDoesNotThrow(() -> new SecretaryResponseDTO(returnUserDataBase("secretary", userRepository)));
+        Assertions.assertDoesNotThrow(() -> new SecretaryResponseDTO(factory.returnUserDataBaseByLogin("secretary")));
 
     }
 
@@ -28,7 +29,7 @@ class SecretaryDTOInstanceTest implements UserDTOInterface {
     void wrongInstance() {
 
         Assertions.assertThrows(InvalidInstanceException.class
-                ,() -> new SecretaryResponseDTO(returnUserDataBase("dentist1", userRepository)));
+                ,() -> new SecretaryResponseDTO(factory.returnUserDataBaseByLogin("dentist1")));
 
     }
 

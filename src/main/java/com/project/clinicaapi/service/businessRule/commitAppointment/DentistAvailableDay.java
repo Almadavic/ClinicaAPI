@@ -17,11 +17,11 @@ public class DentistAvailableDay {
 
     public static void verification(LocalDate appointmentDate, Dentist dentist) {
 
-//        WorkDayEnum workDay = ConvertingType.getWeekDayByLocalDate(appointmentDate);
-//
-//        if (!dentistAvailable(dentist.getWorkDays(), workDay)) {
-//            throw new DentistNotAvailableException(workDay);
-//        }
+        WorkDayEnum workDay = ConvertingType.getWeekDayByLocalDate(appointmentDate);
+
+        if (!dentistAvailable(dentist.getWorkDays(), workDay)) {
+            throw new DentistNotAvailableException(workDay);
+        }
 
     }
 

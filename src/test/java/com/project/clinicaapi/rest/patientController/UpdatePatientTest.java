@@ -1,5 +1,6 @@
 package com.project.clinicaapi.rest.patientController;
 
+import com.project.clinicaapi.Factory;
 import com.project.clinicaapi.dto.request.update.DentistUpdateDTO;
 import com.project.clinicaapi.dto.request.update.PatientUpdateDTO;
 import com.project.clinicaapi.repository.UserRepository;
@@ -25,7 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class UpdatePatientTest extends ClassTestParent {
 
     @Autowired
-    private UserRepository userRepository;
+    private Factory factory;
 
     private final String path = "/patients";
 
@@ -57,7 +58,7 @@ class UpdatePatientTest extends ClassTestParent {
                 .build();
 
 
-        mockMvc.perform(patch(path + "/" + returnSecretaryId())
+        mockMvc.perform(patch(path + "/" + factory.returnUserDataBaseByLogin("secretary"))
                         .header("Authorization", token("admin", "123456"))
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(patientDTO)))
@@ -77,7 +78,7 @@ class UpdatePatientTest extends ClassTestParent {
                 .cpf(cpf)
                 .build();
 
-        mockMvc.perform(patch(path + "/" + returnSecretaryId())
+        mockMvc.perform(patch(path + "/" + factory.returnUserDataBaseByLogin("patient").getId())
                         .header("Authorization", token("admin", "123456"))
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(patientDTO)))
@@ -93,7 +94,7 @@ class UpdatePatientTest extends ClassTestParent {
 
         PatientUpdateDTO patientDTO = PatientUpdateDTO.builder().build();
 
-        mockMvc.perform(patch(path + "/" + returnSecretaryId())
+        mockMvc.perform(patch(path + "/" + factory.returnUserDataBaseByLogin("patient").getId())
                         .header("Authorization", token("admin", "123456"))
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(patientDTO)))
@@ -111,16 +112,12 @@ class UpdatePatientTest extends ClassTestParent {
                 .cpf("112.448.221-02")
                 .build();
 
-        mockMvc.perform(patch(path + "/" + returnSecretaryId())
+        mockMvc.perform(patch(path + "/" + factory.returnUserDataBaseByLogin("patient").getId())
                         .header("Authorization", token("admin", "123456"))
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(patientDTO)))
                 .andExpect(status().is(ok));
 
-    }
-
-    private String returnSecretaryId() {
-        return userRepository.findByLogin("patient").get().getId();
     }
 
 }

@@ -16,7 +16,7 @@ import com.project.clinicaapi.service.businessRule.commitUser.registerUser.Regis
 import com.project.clinicaapi.service.businessRule.commitUser.updateUser.UpdateUserArgs;
 import com.project.clinicaapi.service.businessRule.commitUser.updateUser.UpdateUserVerification;
 import com.project.clinicaapi.service.customException.ResourceNotFoundException;
-import com.project.clinicaapi.util.DentistSpecifications;
+import com.project.clinicaapi.repository.specification.DentistSpecifications;
 import com.project.clinicaapi.util.LogRegistration;
 import com.project.clinicaapi.util.mapper.DentistMapper;
 import lombok.RequiredArgsConstructor;

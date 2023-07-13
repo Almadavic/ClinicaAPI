@@ -1,4 +1,4 @@
-package com.project.clinicaapi.util;
+package com.project.clinicaapi.repository.specification;
 
 import com.project.clinicaapi.entity.Dentist;
 import com.project.clinicaapi.enumerated.Specialty;

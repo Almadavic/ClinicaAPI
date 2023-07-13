@@ -13,7 +13,7 @@ public class BusinessDay {
     public static void verification(DayOfWeek dayOfWeek) {
 
         if (dayOfWeek.equals(DayOfWeek.SUNDAY)) {
-            throw new ClinicOpeningHoursException("Sunday is not a valid day, we work from monday to saturday");
+            throw new ClinicOpeningHoursException();
         }
 
     }

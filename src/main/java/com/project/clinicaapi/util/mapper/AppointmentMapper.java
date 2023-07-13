@@ -23,7 +23,6 @@ public class AppointmentMapper {
                 .appointmentDate(appointmentDTO.getAppointmentDate())
                 .timeStart(appointmentDTO.getTimeStart())
                 .timeEnd(appointmentDTO.getTimeEnd())
-                .weekDay(ConvertingType.getWeekDayByLocalDate(appointmentDTO.getAppointmentDate()))
                 .build();
     }
 

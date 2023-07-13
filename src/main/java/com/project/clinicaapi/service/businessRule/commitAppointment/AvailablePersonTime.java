@@ -12,37 +12,30 @@ public class AvailablePersonTime {
 
     }
 
-    public static void verification(List<Appointment> appointments, LocalTime timeStart, LocalTime timeEnd, String userType) {
-        if (requiredAppointmentTimeAvailable(appointments, timeStart, timeEnd)) {
+    public static void verification(List<Appointment> appointments, LocalTime timeStartDTO, LocalTime timeEndDTO, String userType) {
+
+        if (appointments.stream().anyMatch(appointment -> timeUnavailable(appointment, timeStartDTO, timeEndDTO))) {
             throw new AnotherMeetingRunningException(userType);
         }
+
     }
 
-    private static boolean requiredAppointmentTimeAvailable(List<Appointment> appointments, LocalTime timeStartDTO, LocalTime timeEndDTO) {
-        return appointments.stream().anyMatch(a -> verifyAvailability(a, timeStartDTO, timeEndDTO));
+    private static boolean timeUnavailable(Appointment appointment, LocalTime timeStartDTO, LocalTime timeEndDTO) {
+        return timeStartDTOWithinExistingAppointment(appointment, timeStartDTO) ||
+                timeEndDTOWithinExistingAppointment(appointment, timeEndDTO) ||
+                timeStartDTOBeforeExistingAppointmentAndTimeEndDTOAfter(appointment, timeStartDTO, timeEndDTO);
     }
 
-
-    private static boolean verifyAvailability(Appointment appointment, LocalTime timeStartDTO, LocalTime timeEndDTO) {
-        return timeStartBeforeAnotherAppointmentButTimeEndWithin(appointment, timeStartDTO, timeEndDTO) ||
-                timeStartWithinAnotherAppointment(appointment, timeStartDTO) ||
-                anotherAppointmentWithinTimeStartAndTimeEnd(appointment, timeStartDTO, timeEndDTO);
-    }
-
-    private static boolean timeStartBeforeAnotherAppointmentButTimeEndWithin(Appointment appointment, LocalTime timeStartDTO, LocalTime timeEndDTO) {
-        LocalTime timeStart = appointment.getTimeStart();
-        LocalTime timeEnd = appointment.getTimeEnd();
-        return timeStartDTO.isBefore(timeStart) && timeEndDTO.isAfter(timeStart) &&
-                timeEndDTO.isBefore(timeEnd);
-    }
-
-    private static boolean timeStartWithinAnotherAppointment(Appointment appointment, LocalTime timeStartDTO) {
+    private static boolean timeStartDTOWithinExistingAppointment(Appointment appointment, LocalTime timeStartDTO) {
         return timeStartDTO.isAfter(appointment.getTimeStart()) && timeStartDTO.isBefore(appointment.getTimeEnd());
     }
 
-    private static boolean anotherAppointmentWithinTimeStartAndTimeEnd(Appointment appointment, LocalTime timeStartDTO, LocalTime timeEndDTO) {
-        return timeStartDTO.isBefore(appointment.getTimeStart()) && timeEndDTO.isAfter(appointment.getTimeEnd());
+    private static boolean timeEndDTOWithinExistingAppointment(Appointment appointment, LocalTime timeEndDTO) {
+        return timeEndDTO.isAfter(appointment.getTimeStart()) && timeEndDTO.isBefore(appointment.getTimeEnd());
     }
 
+    private static boolean timeStartDTOBeforeExistingAppointmentAndTimeEndDTOAfter(Appointment appointment, LocalTime timeStartDTO, LocalTime timeEndDTO) {
+        return timeStartDTO.isBefore(appointment.getTimeStart()) && timeEndDTO.isAfter(appointment.getTimeEnd());
+    }
 
 }

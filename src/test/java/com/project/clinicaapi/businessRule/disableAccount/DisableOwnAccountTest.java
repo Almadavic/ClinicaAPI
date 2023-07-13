@@ -1,5 +1,6 @@
 package com.project.clinicaapi.businessRule.disableAccount;
 
+import com.project.clinicaapi.Factory;
 import com.project.clinicaapi.entity.User;
 import com.project.clinicaapi.repository.UserRepository;
 import com.project.clinicaapi.service.businessRule.disableAccount.DisableAccountArgs;
@@ -19,7 +20,7 @@ class DisableOwnAccountTest {
     private DisableOwnAccount service;
 
     @Autowired
-    private UserRepository userRepository;
+    private Factory factory;
 
     @Test
     void deleteOwnAccount() {
@@ -32,11 +33,7 @@ class DisableOwnAccountTest {
 
     private void cannotDeleteOwnAccount(String login) {
         Assertions.assertThrows(DisableOwnAccountException.class,
-                () -> service.verification(new DisableAccountArgs(returnUserDataBase(login), returnUserDataBase(login))));
-    }
-
-    private User returnUserDataBase(String login) {
-        return userRepository.findByLogin(login).get();
+                () -> service.verification(new DisableAccountArgs(factory.returnUserDataBaseByLogin("login"), factory.returnUserDataBaseByLogin("login"))));
     }
 
 }

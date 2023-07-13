@@ -1,12 +1,11 @@
 package com.project.clinicaapi.entity;
 
 import com.project.clinicaapi.enumerated.WorkDayEnum;
+import com.project.clinicaapi.util.ConvertingType;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.jdbc.Work;
 
 import java.io.Serializable;
-import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.UUID;
@@ -48,15 +47,15 @@ public class Appointment implements Serializable {
 
     @Builder
     public Appointment(@NonNull String procedure, @NonNull LocalDate appointmentDate, @NonNull LocalTime timeStart, @NonNull LocalTime timeEnd,
-                       @NonNull WorkDayEnum weekDay, Dentist dentist, Patient patient) {
+                       Dentist dentist, Patient patient) {
 
         this.procedure = procedure;
         this.appointmentDate = appointmentDate;
         this.timeStart = timeStart;
         this.timeEnd = timeEnd;
-        this.weekDay = weekDay;
         this.dentist = dentist;
         this.patient = patient;
+        this.weekDay = ConvertingType.getWeekDayByLocalDate(appointmentDate);
     }
 
 }

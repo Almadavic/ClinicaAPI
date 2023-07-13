@@ -1,5 +1,6 @@
 package com.project.clinicaapi.rest.dentistController;
 
+import com.project.clinicaapi.Factory;
 import com.project.clinicaapi.dto.request.register.AddessRegisterDTO;
 import com.project.clinicaapi.dto.request.register.DentistRegisterDTO;
 import com.project.clinicaapi.dto.request.update.AddressUpdateDTO;
@@ -32,7 +33,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class UpdateDentistTest extends ClassTestParent {
 
     @Autowired
-    private UserRepository userRepository;
+    private Factory factory;
 
     private final String path = "/dentists";
 
@@ -64,7 +65,7 @@ class UpdateDentistTest extends ClassTestParent {
                 .build();
 
 
-        mockMvc.perform(patch(path + "/" + returnDentistId())
+        mockMvc.perform(patch(path + "/" + factory.returnUserDataBaseByLogin("dentist1").getId())
                         .header("Authorization", token("admin", "123456"))
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(dentistDTO)))
@@ -84,7 +85,7 @@ class UpdateDentistTest extends ClassTestParent {
                 .cro(cro)
                 .build();
 
-        mockMvc.perform(patch(path + "/" + returnDentistId())
+        mockMvc.perform(patch(path + "/" + factory.returnUserDataBaseByLogin("dentist1").getId())
                         .header("Authorization", token("admin", "123456"))
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(dentistDTO)))
@@ -100,7 +101,7 @@ class UpdateDentistTest extends ClassTestParent {
 
         DentistUpdateDTO dentistDTO = DentistUpdateDTO.builder().build();
 
-        mockMvc.perform(patch(path + "/" + returnDentistId())
+        mockMvc.perform(patch(path + "/" + factory.returnUserDataBaseByLogin("dentist1").getId())
                         .header("Authorization", token("admin", "123456"))
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(dentistDTO)))
@@ -119,7 +120,7 @@ class UpdateDentistTest extends ClassTestParent {
                 .workDays(new HashSet<>())
                 .build();
 
-        mockMvc.perform(patch(path + "/" + returnDentistId())
+        mockMvc.perform(patch(path + "/" + factory.returnUserDataBaseByLogin("dentist1").getId())
                         .header("Authorization", token("admin", "123456"))
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(dentistDTO)))
@@ -139,7 +140,7 @@ class UpdateDentistTest extends ClassTestParent {
                 .speciality(specialty)
                 .build();
 
-        mockMvc.perform(patch(path + "/" + returnDentistId())
+        mockMvc.perform(patch(path + "/" + factory.returnUserDataBaseByLogin("dentist1").getId())
                         .header("Authorization", token("admin", "123456"))
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(dentistDTO)))
@@ -158,7 +159,7 @@ class UpdateDentistTest extends ClassTestParent {
                 .workDays(new HashSet<>(Arrays.asList(0, 9, -1)))
                 .build();
 
-        mockMvc.perform(patch(path + "/" + returnDentistId())
+        mockMvc.perform(patch(path + "/" + factory.returnUserDataBaseByLogin("dentist1").getId())
                         .header("Authorization", token("admin", "123456"))
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(dentistDTO)))
@@ -179,16 +180,12 @@ class UpdateDentistTest extends ClassTestParent {
                 .build();
 
 
-        mockMvc.perform(patch(path + "/" + returnDentistId())
+        mockMvc.perform(patch(path + "/" + factory.returnUserDataBaseByLogin("dentist1").getId())
                         .header("Authorization", token("admin", "123456"))
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(dentistDTO)))
                 .andExpect(status().is(ok));
 
-    }
-
-    private String returnDentistId() {
-        return userRepository.findByLogin("dentist1").get().getId();
     }
 
 }
