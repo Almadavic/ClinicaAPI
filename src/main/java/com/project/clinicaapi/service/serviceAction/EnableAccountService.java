@@ -109,7 +109,7 @@ public class EnableAccountService {
 
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(emailFrom);
-        message.setTo("90qu39u9d9dwwd");
+        message.setTo(user.getEmail());
         message.setSubject(subject);
         message.setText(text);
 
@@ -125,7 +125,7 @@ public class EnableAccountService {
 
     private EnableAccount returnEnableAccountByCode(String code) {
         return enableAccountRepository.findByCode(code)
-                .orElseThrow(() -> new ResourceNotFoundException(" The code doesn't existis on dataBase "));
+                .orElseThrow(() -> new ResourceNotFoundException("The code doesn't existis on dataBase"));
     }
 
 }

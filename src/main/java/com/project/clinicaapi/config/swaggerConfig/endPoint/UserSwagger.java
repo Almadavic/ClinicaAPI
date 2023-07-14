@@ -1,6 +1,7 @@
 package com.project.clinicaapi.config.swaggerConfig.endPoint;
 
 import com.project.clinicaapi.config.exceptionConfig.standardError.commomStandardError.StandardError;
+import com.project.clinicaapi.dto.request.EnableAccountDTO;
 import com.project.clinicaapi.dto.response.UserResponseDTO;
 import com.project.clinicaapi.entity.User;
 import io.swagger.v3.oas.annotations.Operation;
@@ -13,11 +14,13 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Tag(name = "Usuários", description = "Operações relacionadas á usuários")
 public interface UserSwagger {
@@ -64,6 +67,17 @@ public interface UserSwagger {
                     content = {@Content(mediaType = "application/json", schema = @Schema(implementation = StandardError.class))})
     })
     ResponseEntity<Void> disableAccount(String id, User userLogged);
+
+    @Operation(summary = "Habilita um usuário por código.", security = {@SecurityRequirement(name = "bearer-key")})
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Usuário habilitado com sucesso.",
+                    content = {@Content(mediaType = "application/json")}),
+            @ApiResponse(responseCode = "400", description = "Senha com formato incorreto | Senhas não correspondem",
+                    content = {@Content(mediaType = "application/json", schema = @Schema(implementation = StandardError.class))}),
+            @ApiResponse(responseCode = "404", description = "Código não encontrado",
+                    content = {@Content(mediaType = "application/json", schema = @Schema(implementation = StandardError.class))})
+    })
+    ResponseEntity<String> enableAccount(@RequestBody @Valid EnableAccountDTO enableAccountDTO);
 
     @Operation(summary = "Deleta um usuário por id.", security = {@SecurityRequirement(name = "bearer-key")})
     @ApiResponses(value = {

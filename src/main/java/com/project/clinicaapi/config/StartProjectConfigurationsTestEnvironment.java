@@ -6,6 +6,7 @@ import com.project.clinicaapi.enumerated.Role;
 import com.project.clinicaapi.enumerated.Specialty;
 import com.project.clinicaapi.enumerated.WorkDayEnum;
 import com.project.clinicaapi.repository.AppointmentRepository;
+import com.project.clinicaapi.repository.EnableAccountRepository;
 import com.project.clinicaapi.repository.UserRepository;
 import com.project.clinicaapi.repository.WorkDayRepository;
 import com.project.clinicaapi.util.LogRegistration;
@@ -31,6 +32,8 @@ public class StartProjectConfigurationsTestEnvironment implements CommandLineRun
     private final WorkDayRepository workDayRepository;
 
     private final AppointmentRepository appointmentRepository;
+
+    private final EnableAccountRepository enableAccountRepository;
 
     private final PasswordEncoder encoder;
 
@@ -113,6 +116,19 @@ public class StartProjectConfigurationsTestEnvironment implements CommandLineRun
                 .city("Belo Horizonte")
                 .email("dentist5@hotmail.com")
                 .cro("00000")
+                .specialty(Specialty.DENTISTRY)
+                .gender(Gender.MALE)
+                .build();
+
+        Dentist dentist6 = Dentist.dentistBuilder()
+                .login("dentist6")
+                .name("dentist6")
+                .country("Brasil")
+                .cellphone("(31)98882-8762")
+                .state("MG")
+                .city("Belo Horizonte")
+                .email("dentist6@hotmail.com")
+                .cro("00001")
                 .specialty(Specialty.DENTISTRY)
                 .gender(Gender.MALE)
                 .build();
@@ -230,7 +246,8 @@ public class StartProjectConfigurationsTestEnvironment implements CommandLineRun
 
         u3.setRole(Role.PATIENT);
 
-        userRepository.saveAll(Arrays.asList(dentist1, dentist2, dentist3, dentist4, dentist5, patient1, patient2, secretary, secretary2, secretary3, u1, u2, u3));
+        userRepository.saveAll(Arrays.asList(dentist1, dentist2, dentist3, dentist4, dentist5, dentist6, patient1, patient2, secretary, secretary2,
+                secretary3, u1, u2, u3));
 
         WorkDay wd1 = new WorkDay(WorkDayEnum.MONDAY);
         WorkDay wd2 = new WorkDay(WorkDayEnum.TUESDAY);
@@ -329,6 +346,8 @@ public class StartProjectConfigurationsTestEnvironment implements CommandLineRun
         appointmentRepository.saveAll(Arrays.asList(appointment1, appointment2, appointment3, appointment4, appointment5, appointment6, appointment7));
 
         logRegistration.saveLog("admin", "authenticated in the system");
+
+        enableAccountRepository.save(new EnableAccount(dentist1, "abcolpqstu"));
 
     }
 

@@ -45,6 +45,7 @@ public class UserController implements UserSwagger {
         return ResponseEntity.noContent().build();
     }
 
+    @Override
     @PatchMapping(value = "/enableaccount")
     public ResponseEntity<String> enableAccount(@RequestBody @Valid EnableAccountDTO enableAccountDTO) {
 

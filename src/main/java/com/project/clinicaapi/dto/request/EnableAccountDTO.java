@@ -3,8 +3,10 @@ package com.project.clinicaapi.dto.request;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import lombok.Builder;
 import lombok.Getter;
 
+@Builder
 @Getter
 public class EnableAccountDTO {
 
