@@ -18,6 +18,7 @@ import com.project.clinicaapi.service.customException.ResourceNotFoundException;
 import com.project.clinicaapi.util.LogRegistration;
 import com.project.clinicaapi.util.mapper.AppointmentMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,8 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class AppointmentService {
+
+    private final AppointmentSendEmail appointmentSendEmailService;
 
     private final AppointmentRepository appointmentRepository;
 
@@ -49,6 +52,7 @@ public class AppointmentService {
         Appointment appointment = mapper.toAppointmentEntity(registerData);
         setReferences(appointment, patient, dentist);
         AppointmentResponseDTO appointmentDTO = saveAndConvert(appointment);
+        appointmentSendEmailService.buildEmailMessage(appointment);
         logRegistration.saveLog(userLogged.getUsername(), " registered the appointment: " + appointment.getId());
         return appointmentDTO;
     }
@@ -65,6 +69,7 @@ public class AppointmentService {
         Appointment appointment = returnAppointmentDataBase(appointmentId);
         updateAppointmentVerifications.forEach(v -> v.verification(new UpdateAppointmentArgs(updateData, appointment, appointmentRepository)));
         AppointmentResponseDTO appointmentDTO = saveAndConvert(appointment);
+        appointmentSendEmailService.buildEmailMessage(appointment);
         logRegistration.saveLog(userLogged.getUsername(), "updated the appointment: " + appointment.getId());
         return appointmentDTO;
     }
