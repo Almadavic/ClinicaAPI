@@ -58,7 +58,7 @@ class UpdatePatientTest extends ClassTestParent {
                 .build();
 
 
-        mockMvc.perform(patch(path + "/" + factory.returnUserDataBaseByLogin("secretary"))
+        mockMvc.perform(patch(path + "/" + factory.returnUserDataBaseByLogin("patient").getId())
                         .header("Authorization", token("admin", "123456"))
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(patientDTO)))

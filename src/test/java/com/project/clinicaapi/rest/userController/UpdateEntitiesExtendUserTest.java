@@ -41,7 +41,7 @@ class UpdateEntitiesExtendUserTest extends ClassTestParent {
                 .email(email)
                 .build();
 
-        mockMvc.perform(patch(path + "/" + factory.returnUserDataBaseByLogin("secretary3"))
+        mockMvc.perform(patch(path + "/" + factory.returnUserDataBaseByLogin("secretary2").getId())
                         .header("Authorization", token("admin", "123456"))
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(secretaryDTO)))
@@ -61,7 +61,7 @@ class UpdateEntitiesExtendUserTest extends ClassTestParent {
                 .login(login)
                 .build();
 
-        mockMvc.perform(patch(path + "/" + factory.returnUserDataBaseByLogin("secretary3"))
+        mockMvc.perform(patch(path + "/" + factory.returnUserDataBaseByLogin("secretary3").getId())
                         .header("Authorization", token("admin", "123456"))
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(secretaryDTO)))
@@ -81,7 +81,7 @@ class UpdateEntitiesExtendUserTest extends ClassTestParent {
                 .gender(gender)
                 .build();
 
-        mockMvc.perform(patch(path + "/" + factory.returnUserDataBaseByLogin("secretary3"))
+        mockMvc.perform(patch(path + "/" + factory.returnUserDataBaseByLogin("secretary3").getId())
                         .header("Authorization", token("admin", "123456"))
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(secretaryDTO)))
@@ -103,7 +103,7 @@ class UpdateEntitiesExtendUserTest extends ClassTestParent {
                 .build();
 
 
-        mockMvc.perform(patch(path + "/" + factory.returnUserDataBaseByLogin("secretary3"))
+        mockMvc.perform(patch(path + "/" + factory.returnUserDataBaseByLogin("secretary3").getId())
                         .header("Authorization", token("admin", "123456"))
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(secretaryDTO)))
@@ -123,7 +123,7 @@ class UpdateEntitiesExtendUserTest extends ClassTestParent {
                 .name(name)
                 .build();
 
-        mockMvc.perform(patch(path + "/" + factory.returnUserDataBaseByLogin("secretary3"))
+        mockMvc.perform(patch(path + "/" + factory.returnUserDataBaseByLogin("secretary3").getId())
                         .header("Authorization", token("admin", "123456"))
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(secretaryDTO)))
@@ -143,7 +143,7 @@ class UpdateEntitiesExtendUserTest extends ClassTestParent {
                 .email(email)
                 .build();
 
-        mockMvc.perform(patch(path + "/" + factory.returnUserDataBaseByLogin("secretary3"))
+        mockMvc.perform(patch(path + "/" + factory.returnUserDataBaseByLogin("secretary3").getId())
                         .header("Authorization", token("admin", "123456"))
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(secretaryDTO)))
@@ -164,7 +164,7 @@ class UpdateEntitiesExtendUserTest extends ClassTestParent {
                 .passwordConfirmation(password)
                 .build();
 
-        mockMvc.perform(patch(path + "/" + factory.returnUserDataBaseByLogin("secretary3"))
+        mockMvc.perform(patch(path + "/" + factory.returnUserDataBaseByLogin("secretary3").getId())
                         .header("Authorization", token("admin", "123456"))
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(secretaryDTO)))
@@ -182,7 +182,7 @@ class UpdateEntitiesExtendUserTest extends ClassTestParent {
                 .passwordConfirmation("123456")
                 .build();
 
-        mockMvc.perform(patch(path + "/" + factory.returnUserDataBaseByLogin("secretary3"))
+        mockMvc.perform(patch(path + "/" + factory.returnUserDataBaseByLogin("secretary3").getId())
                         .header("Authorization", token("admin", "123456"))
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(secretaryDTO)))
@@ -200,7 +200,7 @@ class UpdateEntitiesExtendUserTest extends ClassTestParent {
                 .password("123456")
                 .build();
 
-        mockMvc.perform(patch(path + "/" + factory.returnUserDataBaseByLogin("secretary3"))
+        mockMvc.perform(patch(path + "/" + factory.returnUserDataBaseByLogin("secretary3").getId())
                         .header("Authorization", token("admin", "123456"))
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(secretaryDTO)))
@@ -219,7 +219,7 @@ class UpdateEntitiesExtendUserTest extends ClassTestParent {
                 .passwordConfirmation("1234567")
                 .build();
 
-        mockMvc.perform(patch(path + "/" + factory.returnUserDataBaseByLogin("secretary3"))
+        mockMvc.perform(patch(path + "/" + factory.returnUserDataBaseByLogin("secretary3").getId())
                         .header("Authorization", token("admin", "123456"))
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(secretaryDTO)))
@@ -237,7 +237,7 @@ class UpdateEntitiesExtendUserTest extends ClassTestParent {
                 .address(new AddressUpdateDTO())
                 .build();
 
-        mockMvc.perform(patch(path + "/" + factory.returnUserDataBaseByLogin("secretary3"))
+        mockMvc.perform(patch(path + "/" + factory.returnUserDataBaseByLogin("secretary3").getId())
                         .header("Authorization", token("admin", "123456"))
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(secretaryDTO)))
@@ -258,7 +258,7 @@ class UpdateEntitiesExtendUserTest extends ClassTestParent {
                         .build())
                 .build();
 
-        mockMvc.perform(patch(path + "/" + factory.returnUserDataBaseByLogin("secretary3"))
+        mockMvc.perform(patch(path + "/" + factory.returnUserDataBaseByLogin("secretary3").getId())
                         .header("Authorization", token("admin", "123456"))
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(secretaryDTO)))
@@ -279,7 +279,7 @@ class UpdateEntitiesExtendUserTest extends ClassTestParent {
                 .address(new AddressUpdateDTO("country", "state", "city"))
                 .build();
 
-        mockMvc.perform(patch(path + "/" + factory.returnUserDataBaseByLogin("secretary3"))
+        mockMvc.perform(patch(path + "/" + factory.returnUserDataBaseByLogin("secretary3").getId())
                         .header("Authorization", token("admin", "123456"))
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(secretaryDTO)))

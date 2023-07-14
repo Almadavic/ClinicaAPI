@@ -29,7 +29,7 @@ class DentistDTOInstanceTest {
     void wrongInstance() {
 
         Assertions.assertThrows(InvalidInstanceException.class
-                ,() -> new DentistResponseDTO(factory.returnUserDataBaseByLogin("dentist1")));
+                ,() -> new DentistResponseDTO(factory.returnUserDataBaseByLogin("secretary3")));
 
     }
 

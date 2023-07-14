@@ -33,7 +33,7 @@ class DisableOwnAccountTest {
 
     private void cannotDeleteOwnAccount(String login) {
         Assertions.assertThrows(DisableOwnAccountException.class,
-                () -> service.verification(new DisableAccountArgs(factory.returnUserDataBaseByLogin("login"), factory.returnUserDataBaseByLogin("login"))));
+                () -> service.verification(new DisableAccountArgs(factory.returnUserDataBaseByLogin(login), factory.returnUserDataBaseByLogin(login))));
     }
 
 }

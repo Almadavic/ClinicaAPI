@@ -46,7 +46,7 @@ class SaveDentistServiceTest {
                 .gender("MALE")
                 .build();
 
-        DentistResponseDTO dentistResponseDTO = dentistService.save(dentistDTO, factory.returnUserDataBaseByLogin("dentist"));
+        DentistResponseDTO dentistResponseDTO = dentistService.save(dentistDTO, factory.returnUserDataBaseByLogin("dentist1"));
 
         Assertions.assertTrue(dentistResponseDTO.getWorkDays().contains(new WorkDayResponseDTO(workDayService.returnWorkDayDataBase(1))));
         Assertions.assertTrue(dentistResponseDTO.getWorkDays().contains(new WorkDayResponseDTO(workDayService.returnWorkDayDataBase(2))));

@@ -1,9 +1,12 @@
 package com.project.clinicaapi.controller;
 
 import com.project.clinicaapi.config.swaggerConfig.endPoint.UserSwagger;
+import com.project.clinicaapi.dto.request.EnableAccountDTO;
 import com.project.clinicaapi.dto.response.UserResponseDTO;
 import com.project.clinicaapi.entity.User;
+import com.project.clinicaapi.service.serviceAction.SendCodeToActiveAccountToEmailService;
 import com.project.clinicaapi.service.serviceAction.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,6 +21,8 @@ import org.springframework.web.bind.annotation.*;
 public class UserController implements UserSwagger {
 
     private final UserService userService;
+
+    private final SendCodeToActiveAccountToEmailService activeAccountService;
 
     @Override
     @GetMapping
@@ -38,6 +43,13 @@ public class UserController implements UserSwagger {
 
         userService.disableAccount(id, userLogged);
         return ResponseEntity.noContent().build();
+    }
+
+    @PatchMapping(value = "/enableaccount")
+    public ResponseEntity<String> disableAccount(@RequestBody @Valid EnableAccountDTO enableAccountDTO) {
+
+        activeAccountService.enableAccount(enableAccountDTO);
+        return ResponseEntity.ok().body("Conta ativada com sucesso");
     }
 
     @Override

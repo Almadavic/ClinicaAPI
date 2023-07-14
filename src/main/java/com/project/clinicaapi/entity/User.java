@@ -54,6 +54,9 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    @OneToOne(mappedBy = "user")
+    private EnableAccount enableAccount;
+
     @Embedded
     private Address address;
 
