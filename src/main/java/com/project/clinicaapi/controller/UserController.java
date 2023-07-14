@@ -4,7 +4,7 @@ import com.project.clinicaapi.config.swaggerConfig.endPoint.UserSwagger;
 import com.project.clinicaapi.dto.request.EnableAccountDTO;
 import com.project.clinicaapi.dto.response.UserResponseDTO;
 import com.project.clinicaapi.entity.User;
-import com.project.clinicaapi.service.serviceAction.SendCodeToActiveAccountToEmailService;
+import com.project.clinicaapi.service.serviceAction.EnableAccountService;
 import com.project.clinicaapi.service.serviceAction.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +22,7 @@ public class UserController implements UserSwagger {
 
     private final UserService userService;
 
-    private final SendCodeToActiveAccountToEmailService activeAccountService;
+    private final EnableAccountService activeAccountService;
 
     @Override
     @GetMapping
@@ -46,7 +46,7 @@ public class UserController implements UserSwagger {
     }
 
     @PatchMapping(value = "/enableaccount")
-    public ResponseEntity<String> disableAccount(@RequestBody @Valid EnableAccountDTO enableAccountDTO) {
+    public ResponseEntity<String> enableAccount(@RequestBody @Valid EnableAccountDTO enableAccountDTO) {
 
         activeAccountService.enableAccount(enableAccountDTO);
         return ResponseEntity.ok().body("Conta ativada com sucesso");

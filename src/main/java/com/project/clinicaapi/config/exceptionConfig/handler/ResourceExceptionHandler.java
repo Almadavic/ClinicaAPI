@@ -108,6 +108,11 @@ public class ResourceExceptionHandler {
         return handlingException(exception, request, "Property Reference error", HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(SendEmailException.class)
+    public ResponseEntity<StandardError> noFieldFilled(SendEmailException exception, HttpServletRequest request) {
+        return handlingException(exception, request, "Send email Error", HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
     @ExceptionHandler(NoFieldFilledException.class)
     public ResponseEntity<StandardError> noFieldFilled(NoFieldFilledException exception, HttpServletRequest request) {
         return handlingException(exception, request, "No value filled", HttpStatus.BAD_REQUEST);

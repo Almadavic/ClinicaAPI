@@ -28,6 +28,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PatientService {
 
+    private final EnableAccountService enableAccountService;
+
     private final PatientRepository patientRepository;
 
     private final PatientMapper mapper;
@@ -49,6 +51,7 @@ public class PatientService {
         Patient patient = mapper.toPatientEntity(registerData);
 
         PatientResponseDTO patientDTO = saveAndConvertToDTO(patient);
+        enableAccountService.sendCodeToEmail(patient);
 
         logRegistration.saveLog(userLogged.getUsername(), "registered the patient: " + patient.getUsername());
 

@@ -4,10 +4,8 @@ import com.project.clinicaapi.dto.request.register.DentistRegisterDTO;
 import com.project.clinicaapi.dto.request.update.DentistUpdateDTO;
 import com.project.clinicaapi.dto.response.DentistResponseDTO;
 import com.project.clinicaapi.entity.Dentist;
-import com.project.clinicaapi.entity.EnableAccount;
 import com.project.clinicaapi.entity.User;
 import com.project.clinicaapi.repository.DentistRepository;
-import com.project.clinicaapi.repository.EnableAccountRepository;
 import com.project.clinicaapi.service.businessRule.commitDentist.SpecialtyValue;
 import com.project.clinicaapi.service.businessRule.commitDentist.registerDentist.RegisterDentistArgs;
 import com.project.clinicaapi.service.businessRule.commitDentist.registerDentist.RegisterDentistVerification;
@@ -28,14 +26,13 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Random;
 import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
 public class DentistService {
 
-    private final SendCodeToActiveAccountToEmailService activeAccountService;
+    private final EnableAccountService enableAccountService;
 
     private final DentistRepository dentistRepository;
 
@@ -62,8 +59,8 @@ public class DentistService {
         setWorkDaysList(dentist, registerData);
 
         DentistResponseDTO dentistDTO = saveAndConvert(dentist);
+        enableAccountService.sendCodeToEmail(dentist);
 
-        activeAccountService.sendCodeToEmail(dentist);
         logRegistration.saveLog(userLogged.getUsername(), "registered the dentist: " + dentist.getUsername());
 
         return dentistDTO;

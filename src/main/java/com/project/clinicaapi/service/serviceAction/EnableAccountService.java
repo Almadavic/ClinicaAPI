@@ -4,9 +4,12 @@ import com.project.clinicaapi.dto.request.EnableAccountDTO;
 import com.project.clinicaapi.entity.*;
 import com.project.clinicaapi.repository.EnableAccountRepository;
 import com.project.clinicaapi.repository.UserRepository;
-import com.project.clinicaapi.service.businessRule.commitUser.PasswordMatch;
+import com.project.clinicaapi.service.businessRule.enableAccount.EnableAccountArgs;
+import com.project.clinicaapi.service.businessRule.enableAccount.EnableAccountVerification;
 import com.project.clinicaapi.service.customException.ResourceNotFoundException;
+import com.project.clinicaapi.service.customException.SendEmailException;
 import com.project.clinicaapi.util.LogRegistration;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
@@ -14,26 +17,31 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Random;
 
 @Service
 @RequiredArgsConstructor
-public class SendCodeToActiveAccountToEmailService {
+public class EnableAccountService {
 
     @Value("${spring.mail.username}")
     private String emailFrom;
 
     private final EnableAccountRepository enableAccountRepository;
 
-    private final LogRegistration logRegistration;
-
     private final UserRepository userRepository;
+
+    private final LogRegistration logRegistration;
 
     private final JavaMailSender javaMailSender;
 
     private final PasswordEncoder encoder;
 
+    private final List<EnableAccountVerification> enableAccountVerifications;
+
     public void enableAccount(EnableAccountDTO enableAccountDTO) {
+
+        enableAccountVerifications.forEach(ea -> ea.verification(new EnableAccountArgs(enableAccountDTO)));
 
         String code = enableAccountDTO.getCode();
 
@@ -41,31 +49,39 @@ public class SendCodeToActiveAccountToEmailService {
 
         EnableAccount enableAccount = returnEnableAccountByCode(code);
 
-        PasswordMatch.verification(password, enableAccountDTO.getPasswordConfirmation());
-
-        enableAccount.getUser().setEnabled(true);
-
         User user = userRepository.findUserInnerCode(code);
-        user.setEnabled(true);
-        user.setPassword(encoder.encode(password));
+        enableAccount(user, password);
 
         userRepository.save(user);
         enableAccountRepository.delete(enableAccount);
 
+        String userLogin = user.getUsername();
 
-        buildEmailMessage(user.getEmail(), "Ativação de conta", "Sua conta foi ativada com sucesso");
-        logRegistration.saveLog(user.getUsername(), "enabled its account");
+        buildEmailMessage(user, user.getEnableAccount(), "Ativação de conta  | Clinica API", user.getName() +
+                ", Sua conta foi ativada com sucesso no sistema\n" +
+                "Login: " + userLogin + "\n" +
+                "Senha: " + password);
+
+        logRegistration.saveLog(userLogin, "enabled its account");
     }
 
     public void sendCodeToEmail(User user) {
 
         String code = randomPasswordGenerate();
 
-        enableAccountRepository.save(new EnableAccount(user, code));
+        EnableAccount enableAccount = new EnableAccount(user, code);
 
-        buildEmailMessage(user.getEmail(), "Ativar conta | Clinica API", "Acesse o recurso : /users/enableaccount\n" +
-                " coloque o seguinte código: " + code + " e informe sua senha e confirmação!");
+        enableAccountRepository.save(enableAccount);
 
+        buildEmailMessage(user, enableAccount, "Ativar conta | Clinica API",
+                "Acesse o recurso : /users/enableaccount\n" +
+                        " coloque o seguinte código: " + code + " e informe sua senha e confirmação!");
+
+    }
+
+    private void enableAccount(User user, String password) {
+        user.setEnabled(true);
+        user.setPassword(encoder.encode(password));
     }
 
     private String randomPasswordGenerate() {
@@ -88,20 +104,28 @@ public class SendCodeToActiveAccountToEmailService {
 
     }
 
-    private void buildEmailMessage(String userEmail, String subject, String text) {
+    @Transactional
+    private void buildEmailMessage(User user, EnableAccount enableAccount, String subject, String text) {
 
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(emailFrom);
-        message.setTo(userEmail);
+        message.setTo("90qu39u9d9dwwd");
         message.setSubject(subject);
         message.setText(text);
 
-        javaMailSender.send(message);
+        try {
+            javaMailSender.send(message);
+        }catch (Exception e) {
+            enableAccountRepository.delete(enableAccount);
+            userRepository.delete(user);
+            throw new SendEmailException();
+        }
     }
 
 
     private EnableAccount returnEnableAccountByCode(String code) {
-        return enableAccountRepository.findByCode(code).orElseThrow(() -> new ResourceNotFoundException(" The code doesn't existis on dataBase "));
+        return enableAccountRepository.findByCode(code)
+                .orElseThrow(() -> new ResourceNotFoundException(" The code doesn't existis on dataBase "));
     }
 
 }
