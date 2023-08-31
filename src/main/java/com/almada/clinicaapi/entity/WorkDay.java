@@ -1,6 +1,6 @@
 package com.almada.clinicaapi.entity;
 
-import com.project.clinicaapi.enumerated.WorkDayEnum;
+import com.almada.clinicaapi.enumerated.WorkDayEnum;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

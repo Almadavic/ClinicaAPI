@@ -1,6 +1,7 @@
 package com.almada.clinicaapi.entity;
 
 import com.almada.clinicaapi.enumerated.WorkDayEnum;
+import com.almada.clinicaapi.util.ConvertingType;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -55,6 +56,7 @@ public class Appointment implements Serializable {
         this.timeEnd = timeEnd;
         this.dentist = dentist;
         this.patient = patient;
+        this.weekDay = ConvertingType.getWeekDayByLocalDate(appointmentDate);
     }
 
 }
