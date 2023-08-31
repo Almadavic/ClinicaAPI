@@ -1,0 +1,5 @@
+  CREATE TABLE tb_workdays(
+  id SERIAL PRIMARY KEY ,
+  work_day VARCHAR(9) NOT NULL UNIQUE,
+  index INT NOT NULL UNIQUE
+  );
