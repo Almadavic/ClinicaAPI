@@ -1,6 +1,8 @@
 package com.almada.clinicaapi.service.serviceAction;
 
+import com.almada.clinicaapi.dto.response.UserMonitoringResponseDTO;
 import com.almada.clinicaapi.entity.User;
+import com.almada.clinicaapi.mapper.UserMapper;
 import com.almada.clinicaapi.service.customException.JWTException;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -8,7 +10,6 @@ import com.auth0.jwt.exceptions.JWTCreationException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -25,16 +26,18 @@ public class TokenService {
     @Value("${jwt.secret}")
     private String secret;
 
+    private final UserMapper mapper;
+
     public String generateToken(Authentication authentication) {
 
-      User user = (User) authentication.getPrincipal();
+        UserMonitoringResponseDTO userDTO = mapper.toUserMonitoringDTO((User) authentication.getPrincipal());
 
         try {
             return JWT.create()
                     .withIssuer("Clinica API")
-                    .withSubject(user.getId())
-                    .withClaim("login", user.getUsername())
-                    .withClaim("role", user.getRole().name())
+                    .withSubject(userDTO.getId())
+                    .withClaim("login", userDTO.getLogin())
+                    .withClaim("role", userDTO.getRole())
                     .withIssuedAt(Instant.now())
                     .withExpiresAt(expirationInstant())
                     .sign(secretAlgorithm());
