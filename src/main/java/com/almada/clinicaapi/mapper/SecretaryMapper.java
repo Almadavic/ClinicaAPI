@@ -1,13 +1,18 @@
 package com.almada.clinicaapi.mapper;
 
+import com.almada.clinicaapi.controller.SecretaryController;
 import com.almada.clinicaapi.dto.request.register.SecretaryRegisterDTO;
 import com.almada.clinicaapi.dto.response.SecretaryResponseDTO;
 import com.almada.clinicaapi.entity.Secretary;
 import com.almada.clinicaapi.enumerated.Gender;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.hateoas.IanaLinkRelations;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 
 @Component
@@ -45,7 +50,10 @@ public class SecretaryMapper {
     }
 
     private void addHateoas(SecretaryResponseDTO secretaryDTO) {
-
+        secretaryDTO.add(linkTo(methodOn(SecretaryController.class).findById(secretaryDTO.getId())).withSelfRel());
+        secretaryDTO.add(linkTo(methodOn(SecretaryController.class).findPage(null)).withRel(IanaLinkRelations.COLLECTION));
+        secretaryDTO.add(linkTo(methodOn(SecretaryController.class).update(secretaryDTO.getId(), null, null))
+                .withRel("update"));
     }
 
     private String getPassword(String passwordRequest) {

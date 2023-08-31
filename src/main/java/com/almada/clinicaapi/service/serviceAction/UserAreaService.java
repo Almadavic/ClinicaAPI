@@ -1,6 +1,7 @@
 package com.almada.clinicaapi.service.serviceAction;
 
 
+import com.almada.clinicaapi.controller.UserAreaController;
 import com.almada.clinicaapi.dto.request.update.DentistUpdateDTO;
 import com.almada.clinicaapi.dto.request.update.PatientUpdateDTO;
 import com.almada.clinicaapi.dto.request.update.SecretaryUpdateDTO;
@@ -22,6 +23,7 @@ import java.util.List;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 
 @Service
 @RequiredArgsConstructor
@@ -76,18 +78,27 @@ public class UserAreaService {
 
         if (userLogged instanceof Secretary secretary) {
             SecretaryResponseDTO secretaryDTO = new SecretaryResponseDTO(secretary);
+            secretaryDTO.add(linkTo(methodOn(UserAreaController.class).myProfile(null)).withSelfRel());
+            secretaryDTO.add(linkTo(methodOn(UserAreaController.class).changeProfileDataAsSecretary(null, null)).withRel("UPDATE"));
             return secretaryDTO;
         } else if (userLogged instanceof Dentist dentist) {
             DentistResponseDTO dentistDTO = new DentistResponseDTO(dentist);
+            dentistDTO.add(linkTo(methodOn(UserAreaController.class).myProfile(null)).withSelfRel());
+            dentistDTO.add(linkTo(methodOn(UserAreaController.class).changeProfileDataAsDentist(null, null)).withRel("UPDATE"));
+            dentistDTO.add(linkTo(methodOn(UserAreaController.class).appointmentsByDentist(null, null, null, null)).withRel("CONSULTAS"));
             return dentistDTO;
         } else if (userLogged instanceof Patient patient) {
             PatientResponseDTO patientDTO = new PatientResponseDTO(patient);
+            patientDTO.add(linkTo(methodOn(UserAreaController.class).myProfile(null)).withSelfRel());
+            patientDTO.add(linkTo(methodOn(UserAreaController.class).changeProfileDataAsPatient(null, null)).withRel("UPDATE"));
+            patientDTO.add(linkTo(methodOn(UserAreaController.class).appointmentsByPatient(null, null, null, null)).withRel("CONSULTAS"));
             return patientDTO;
         } else {
             UserResponseDTO userDTO = new UserResponseDTO(userLogged);
+            userDTO.add(linkTo(methodOn(UserAreaController.class).myProfile(null)).withSelfRel());
+            userDTO.add(linkTo(methodOn(UserAreaController.class).changeProfileDataAsUserGeneric(null, null)).withRel("UPDATE"));
             return userDTO;
         }
-
     }
 
 }

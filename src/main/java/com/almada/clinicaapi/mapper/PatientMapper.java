@@ -1,13 +1,17 @@
 package com.almada.clinicaapi.mapper;
 
 
+import com.almada.clinicaapi.controller.PatientController;
 import com.almada.clinicaapi.dto.request.register.PatientRegisterDTO;
 import com.almada.clinicaapi.dto.response.PatientResponseDTO;
 import com.almada.clinicaapi.entity.Patient;
 import com.almada.clinicaapi.enumerated.Gender;
 import org.springframework.data.domain.Page;
+import org.springframework.hateoas.IanaLinkRelations;
 import org.springframework.stereotype.Component;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 
 @Component
@@ -40,7 +44,10 @@ public class PatientMapper {
     }
 
     private void addHateoas(PatientResponseDTO patientDTO) {
-
+        patientDTO.add(linkTo(methodOn(PatientController.class).findById(patientDTO.getId())).withSelfRel());
+        patientDTO.add(linkTo(methodOn(PatientController.class).findPage(null)).withRel(IanaLinkRelations.COLLECTION));
+        patientDTO.add(linkTo(methodOn(PatientController.class).update(patientDTO.getId(), null, null))
+                .withRel("update"));
     }
 
 }
