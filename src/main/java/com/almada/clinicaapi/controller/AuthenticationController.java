@@ -15,11 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "/auth")
 @RequiredArgsConstructor
-public class AuthenticationController{
+public class AuthenticationController {
 
     private final AuthenticationService authService;
 
-    // Colocar override e adicionar swagger
     @PostMapping
     public ResponseEntity<Token> authenticate(@RequestBody @Valid LoginData loginData) {
         return ResponseEntity.ok().body(authService.authenticate(loginData));
