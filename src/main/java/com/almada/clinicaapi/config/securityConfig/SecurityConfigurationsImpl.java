@@ -1,5 +1,7 @@
 package com.almada.clinicaapi.config.securityConfig;
 
+import com.almada.clinicaapi.config.exceptionConfig.handler.ForbiddenHandler;
+import com.almada.clinicaapi.config.exceptionConfig.handler.UnauthorizedHandler;
 import com.almada.clinicaapi.filter.AuthenticationJWTFilter;
 import com.almada.clinicaapi.repository.UserRepository;
 import com.almada.clinicaapi.service.serviceAction.TokenService;
@@ -102,11 +104,13 @@ public class SecurityConfigurationsImpl implements SecurityConfigurations {
 
                 .anyRequest().authenticated()
 
-                 .and().cors()
+                .and().cors()
                 .and().headers().frameOptions().disable()
                 .and().csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and().addFilterBefore(new AuthenticationJWTFilter(tokenService, userRepository), UsernamePasswordAuthenticationFilter.class);
+                .and().addFilterBefore(new AuthenticationJWTFilter(tokenService, userRepository), UsernamePasswordAuthenticationFilter.class)
+                .exceptionHandling().authenticationEntryPoint(new UnauthorizedHandler())
+                .and().exceptionHandling().accessDeniedHandler(new ForbiddenHandler());
 
 
         return http.build();
