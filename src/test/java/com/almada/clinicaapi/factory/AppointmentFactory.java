@@ -34,7 +34,7 @@ public class AppointmentFactory {
                 .procedure("Limpeza de dente")
                 .appointmentDate(LocalDate.now())
                 .timeStart(LocalTime.now())
-                .timeEnd(LocalTime.now().plusHours(1))
+                .timeEnd(LocalTime.now().plusMinutes(50))
                 .dentistId("0945e-98kdop")
                 .patientId("0189380-2j9da9")
                 .build();

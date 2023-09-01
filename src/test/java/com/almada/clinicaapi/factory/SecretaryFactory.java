@@ -27,6 +27,21 @@ public class SecretaryFactory {
                 .build();
     }
 
+    public Secretary entityTwo() {
+        return Secretary.secretaryBuilder()
+                .login("secretary2")
+                .name("nome2")
+                .password("1234567")
+                .country("Brasil")
+                .cellphone("1934131141")
+                .state("MG")
+                .city("Belo Horizonte")
+                .email("secratary2@hotmail.com")
+                .gender(Gender.FEMALE)
+                .registration("1256139862302")
+                .build();
+    }
+
     public SecretaryResponseDTO dtoResponse() {
         return new SecretaryResponseDTO(entity());
     }

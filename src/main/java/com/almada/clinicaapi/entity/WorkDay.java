@@ -2,6 +2,7 @@ package com.almada.clinicaapi.entity;
 
 import com.almada.clinicaapi.enumerated.WorkDayEnum;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -35,6 +36,7 @@ public class WorkDay implements Serializable {
     @ManyToMany(mappedBy = "workDays")
     private final List<Dentist> dentists = new ArrayList<>();
 
+    @Builder
     public WorkDay(WorkDayEnum workDay) {
         this.workDay = workDay;
         this.index = workDay.getIndex();

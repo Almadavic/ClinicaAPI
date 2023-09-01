@@ -13,11 +13,7 @@ public class DisableOwnAccount implements DisableAccountVerification {
     @Override
     public void verification(DisableAccountArgs args) {
 
-        String idUserLogged = args.userLogged().getId();
-
-        String idToBeDisable = args.toBeDisable().getId();
-
-        if (idUserLogged.equals(idToBeDisable)) {
+        if (args.userLogged().equals(args.toBeDisable())) {
             throw new DisableOwnAccountException();
         }
 
