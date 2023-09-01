@@ -20,7 +20,7 @@ import java.util.Arrays;
 
 @Configuration
 @RequiredArgsConstructor
-@Profile(value = "test")
+@Profile(value = "backup")
 public class StartProjectConfigurationsTestEnvironment implements CommandLineRunner {
 
     private final UserRepository userRepository;
@@ -39,6 +39,12 @@ public class StartProjectConfigurationsTestEnvironment implements CommandLineRun
 
     @Override
     public void run(String... args) {
+
+        userRepository.deleteAll();
+        workDayRepository.deleteAll();
+        appointmentRepository.deleteAll();
+        enableAccountRepository.deleteAll();
+        changePasswordRepository.deleteAll();
 
         Dentist dentist1 = Dentist.dentistBuilder()
                 .login("dentist1")

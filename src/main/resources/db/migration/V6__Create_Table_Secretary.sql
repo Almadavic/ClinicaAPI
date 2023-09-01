@@ -1,9 +1,5 @@
 CREATE TABLE tb_secretaries (
     id VARCHAR(255) PRIMARY KEY,
-    registration VARCHAR(255) NOT NULL UNIQUE
+    registration VARCHAR(255) NOT NULL UNIQUE,
+    FOREIGN KEY (id) REFERENCES tb_users(id)
 );
-
-alter table if exists tb_secreataries
-       add constraint tb_secretaries_tb_users
-       foreign key (id)
-       references tb_users;
