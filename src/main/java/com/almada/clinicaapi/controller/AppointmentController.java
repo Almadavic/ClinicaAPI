@@ -1,5 +1,6 @@
 package com.almada.clinicaapi.controller;
 
+import com.almada.clinicaapi.config.swaggerConfig.endPoint.AppointmentSwagger;
 import com.almada.clinicaapi.dto.request.register.AppointmentRegisterDTO;
 import com.almada.clinicaapi.dto.request.update.AppointmentUpdateDTO;
 import com.almada.clinicaapi.dto.response.AppointmentResponseDTO;
@@ -20,10 +21,11 @@ import java.net.URI;
 @RestController
 @RequestMapping(value = "/appointments")
 @RequiredArgsConstructor
-public class AppointmentController {
+public class AppointmentController implements AppointmentSwagger {
 
     private final AppointmentService appointmentService;
 
+    @Override
     @PostMapping
     public ResponseEntity<AppointmentResponseDTO> save(@RequestBody @Valid AppointmentRegisterDTO dentistDTO,
                                                    @AuthenticationPrincipal User userLogged,
@@ -36,16 +38,19 @@ public class AppointmentController {
         return ResponseEntity.created(uri).body(appointmentResponseDTO);
     }
 
+    @Override
     @GetMapping
     public ResponseEntity<Page<AppointmentResponseDTO>> findPage(@PageableDefault(sort = "appointmentDate") Pageable pageable) {
         return ResponseEntity.ok().body(appointmentService.findPage(pageable));
     }
 
+    @Override
     @GetMapping(value = "/{id}")
     public ResponseEntity<AppointmentResponseDTO> findById(@PathVariable(value = "id") String id) {
         return ResponseEntity.ok().body(appointmentService.findById(id));
     }
 
+    @Override
     @PutMapping(value = "/{id}")
     public ResponseEntity<AppointmentResponseDTO> update(@PathVariable(value = "id") String id,
                                                      @RequestBody @Valid AppointmentUpdateDTO appointmentDTO,

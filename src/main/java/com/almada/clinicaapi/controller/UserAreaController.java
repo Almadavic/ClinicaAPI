@@ -1,5 +1,6 @@
 package com.almada.clinicaapi.controller;
 
+import com.almada.clinicaapi.config.swaggerConfig.endPoint.UserAreaSwagger;
 import com.almada.clinicaapi.dto.request.update.DentistUpdateDTO;
 import com.almada.clinicaapi.dto.request.update.PatientUpdateDTO;
 import com.almada.clinicaapi.dto.request.update.SecretaryUpdateDTO;
@@ -24,15 +25,17 @@ import java.time.LocalDate;
 @RestController
 @RequestMapping(value = "/userarea")
 @RequiredArgsConstructor
-public class UserAreaController {
+public class UserAreaController implements UserAreaSwagger {
 
     private final UserAreaService userAreaService;
 
+    @Override
     @GetMapping(value = "/myprofile")
     public ResponseEntity<UserResponseDTO> myProfile(@AuthenticationPrincipal User user) {
         return ResponseEntity.ok().body(userAreaService.myProfile(user));
     }
 
+    @Override
     @GetMapping(value = "/dentist/appointments")
     public ResponseEntity<Page<AppointmentResponseDTO>> appointmentsByDentist(@AuthenticationPrincipal User user,
                                                                               @RequestParam(value = "appointment_date", required = false) LocalDate appointmentDate,
@@ -42,6 +45,7 @@ public class UserAreaController {
         return ResponseEntity.ok().body(userAreaService.appointmentsByDentist(user, appointmentDate, patientName, pageable));
     }
 
+    @Override
     @GetMapping(value = "/patient/appointments")
     public ResponseEntity<Page<AppointmentResponseDTO>> appointmentsByPatient(@AuthenticationPrincipal User user,
                                                                               @RequestParam(value = "appointment_date", required = false) LocalDate appointmentDate,
@@ -51,7 +55,7 @@ public class UserAreaController {
         return ResponseEntity.ok().body(userAreaService.appointmentsByPatient(user, appointmentDate, dentistName, pageable));
     }
 
-
+    @Override
     @PutMapping(value = "/admin")
     public ResponseEntity<UserResponseDTO> changeProfileDataAsUserGeneric(@RequestBody @Valid UserUpdateDTO updateData,
                                                                           @AuthenticationPrincipal User userLogged) {
@@ -59,6 +63,7 @@ public class UserAreaController {
         return ResponseEntity.ok().body(userAreaService.changeProfileDataAsUserGeneric(updateData, userLogged));
     }
 
+    @Override
     @PutMapping(value = "/secretary")
     public ResponseEntity<SecretaryResponseDTO> changeProfileDataAsSecretary(@RequestBody @Valid SecretaryUpdateDTO updateData,
                                                                              @AuthenticationPrincipal Secretary userLogged) {
@@ -66,6 +71,7 @@ public class UserAreaController {
         return ResponseEntity.ok().body(userAreaService.changeProfileDataAsSecretary(updateData, userLogged));
     }
 
+    @Override
     @PutMapping(value = "dentist")
     public ResponseEntity<DentistResponseDTO> changeProfileDataAsDentist(@RequestBody @Valid DentistUpdateDTO updateData,
                                                                          @AuthenticationPrincipal Dentist userLogged) {
@@ -73,6 +79,7 @@ public class UserAreaController {
         return ResponseEntity.ok().body(userAreaService.changeProfileDataAsDentist(updateData, userLogged));
     }
 
+    @Override
     @PutMapping(value = "/patient")
     public ResponseEntity<PatientResponseDTO> changeProfileDataAsPatient(@RequestBody @Valid PatientUpdateDTO updateData,
                                                                          @AuthenticationPrincipal Patient userLogged) {

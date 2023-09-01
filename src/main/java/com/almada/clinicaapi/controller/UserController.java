@@ -1,5 +1,6 @@
 package com.almada.clinicaapi.controller;
 
+import com.almada.clinicaapi.config.swaggerConfig.endPoint.UserSwagger;
 import com.almada.clinicaapi.dto.request.ChangePasswordDTO;
 import com.almada.clinicaapi.dto.request.EnableAccountDTO;
 import com.almada.clinicaapi.dto.response.UserMonitoringResponseDTO;
@@ -19,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(value = "/users")
 @RequiredArgsConstructor
-public class UserController {
+public class UserController implements UserSwagger {
 
     private final UserService userService;
 
@@ -27,16 +28,19 @@ public class UserController {
 
     private final ChangePasswordService changePasswordService;
 
+    @Override
     @GetMapping
     public ResponseEntity<Page<UserMonitoringResponseDTO>> findPage(@PageableDefault(sort = "name") Pageable pageable) {
         return ResponseEntity.ok().body(userService.findPage(pageable));
     }
 
+    @Override
     @GetMapping(value = "/{userid}")
     public ResponseEntity<UserMonitoringResponseDTO> findById(@PathVariable(value = "userid") String userId) {
         return ResponseEntity.ok().body(userService.findById(userId));
     }
 
+    @Override
     @PatchMapping(value = "/disable/{userId}")
     public ResponseEntity<Void> disableAccount(@PathVariable(value = "userId") String id,
                                                @AuthenticationPrincipal User userLogged) {
@@ -45,6 +49,7 @@ public class UserController {
         return ResponseEntity.noContent().build();
     }
 
+    @Override
     @PutMapping(value = "/enableaccount")
     public ResponseEntity<String> enableAccount(@RequestBody @Valid EnableAccountDTO enableAccountDTO) {
 
@@ -52,17 +57,20 @@ public class UserController {
         return ResponseEntity.ok().body("Conta ativada com sucesso");
     }
 
+    @Override
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<String> delete(@PathVariable(value = "id") String id, @AuthenticationPrincipal User userLogged) {
         userService.delete(id, userLogged);
         return ResponseEntity.ok().body("The user id: " + id + " was deleted from the system");
     }
 
+    @Override
     @GetMapping(value = "/forgetpassword/{email}")
     public ResponseEntity<String> forgetPassword(@PathVariable(value = "email") String email) {
         return ResponseEntity.ok().body(userService.forgetPassword(email));
     }
 
+    @Override
     @PutMapping(value = "/changepassword")
     public ResponseEntity<String> changePasswordForgotten(@RequestBody @Valid ChangePasswordDTO changePasswordDTO) {
         changePasswordService.changePassword(changePasswordDTO);
