@@ -4,6 +4,7 @@ import com.almada.clinicaapi.controller.DentistController;
 import com.almada.clinicaapi.dto.request.register.DentistRegisterDTO;
 import com.almada.clinicaapi.dto.response.DentistResponseDTO;
 import com.almada.clinicaapi.entity.Dentist;
+import com.almada.clinicaapi.entity.WorkDay;
 import com.almada.clinicaapi.enumerated.Gender;
 import com.almada.clinicaapi.enumerated.Specialty;
 import org.springframework.data.domain.Page;

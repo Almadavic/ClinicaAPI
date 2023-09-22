@@ -1,6 +1,5 @@
 package com.almada.clinicaapi.service.serviceAction.userAreaService;
 
-import com.almada.clinicaapi.controller.UserAreaController;
 import com.almada.clinicaapi.dto.response.DentistResponseDTO;
 import com.almada.clinicaapi.dto.response.PatientResponseDTO;
 import com.almada.clinicaapi.dto.response.SecretaryResponseDTO;
@@ -12,13 +11,9 @@ import com.almada.clinicaapi.factory.UserFactory;
 import com.almada.clinicaapi.service.serviceAction.UserAreaService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
-
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @ActiveProfiles(value = "test")
 @SpringBootTest

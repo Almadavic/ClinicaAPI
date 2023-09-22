@@ -10,7 +10,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 @ActiveProfiles(value = "test")
-@SpringBootTest
 class TimeOrderTest {
 
     @Test

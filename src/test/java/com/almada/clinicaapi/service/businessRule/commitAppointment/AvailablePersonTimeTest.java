@@ -1,10 +1,7 @@
 package com.almada.clinicaapi.service.businessRule.commitAppointment;
 
-import com.almada.clinicaapi.entity.Appointment;
+
 import com.almada.clinicaapi.factory.AppointmentFactory;
-import com.almada.clinicaapi.repository.AppointmentRepository;
-import com.almada.clinicaapi.repository.DentistRepository;
-import com.almada.clinicaapi.repository.PatientRepository;
 import com.almada.clinicaapi.service.customException.AnotherMeetingRunningException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

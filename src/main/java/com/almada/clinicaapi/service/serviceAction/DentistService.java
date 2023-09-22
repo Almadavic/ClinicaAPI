@@ -60,6 +60,7 @@ public class DentistService {
         setWorkDaysList(dentist, registerData);
 
         DentistResponseDTO dentistDTO = saveAndConvert(dentist);
+
         enableAccountService.sendCodeToEmail(dentist);
 
         logRegistration.saveLog(userLogged.getUsername(), "registered the dentist: " + dentist.getUsername());
@@ -120,7 +121,6 @@ public class DentistService {
     private void setWorkDaysList(Dentist dentist, DentistRegisterDTO dentistDTO) {
 
         Set<Integer> workDays = dentistDTO.getWorkDays();
-
         if (workDays != null) {
             workDays.forEach(workday ->
                     dentist.addWorkDay(workDayService.returnWorkDayDataBase(workday)));

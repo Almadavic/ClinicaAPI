@@ -15,8 +15,8 @@ public class DentistFactory {
 
     public Dentist entity() {
         return  Dentist.dentistBuilder()
-                .login("dentist1")
-                .name("dentist1")
+                .login("dentist")
+                .name("dentist")
                 .password("123456")
                 .country("Brasil")
                 .cellphone("(31)98858-8362")
@@ -38,11 +38,11 @@ public class DentistFactory {
         return DentistRegisterDTO.builder()
                 .login("dentist1")
                 .address(new AddessRegisterDTO("country", "state", "city"))
-                .name("dentist1")
+                .name("dentist")
                 .cellphone("(31)98858-8362")
                 .email("dentist1@hotmail.com")
                 .cro("137180")
-                .speciality("othodontics")
+                .speciality("orthodontics")
                 .gender("MALE")
                 .build();
     }
@@ -51,7 +51,7 @@ public class DentistFactory {
        return DentistUpdateDTO.builder()
                .login("dentist1")
                .address(new AddressUpdateDTO("country", "state", "city"))
-               .name("dentist1")
+               .name("dentist")
                .cellphone("(31)98858-8362")
                .email("dentist1@hotmail.com")
                .cro("137180")

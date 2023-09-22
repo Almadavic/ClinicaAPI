@@ -34,6 +34,8 @@ public class Log implements Serializable {
     public Log(String user, String event) {
         this.user = user;
         this.event = event;
+        this.eventTime = LocalDateTime.now(); // Observe que nalinha 24, já temos a anotação para passar o valor quando for persistido no banco de dados, mas para mock de teste,
+                                             // precisamos setar um valor para testas.
     }
 
 }

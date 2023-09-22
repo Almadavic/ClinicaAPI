@@ -11,7 +11,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 @ActiveProfiles(value = "test")
-@SpringBootTest
 class WorkDayNumberSizeTest {
 
     @Test

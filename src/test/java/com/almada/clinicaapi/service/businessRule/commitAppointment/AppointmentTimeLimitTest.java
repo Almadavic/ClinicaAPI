@@ -9,7 +9,6 @@ import org.springframework.test.context.ActiveProfiles;
 import java.time.LocalTime;
 
 @ActiveProfiles(value = "test")
-@SpringBootTest
 class AppointmentTimeLimitTest {
 
     @Test

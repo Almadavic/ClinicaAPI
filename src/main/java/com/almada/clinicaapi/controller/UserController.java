@@ -52,7 +52,6 @@ public class UserController implements UserSwagger {
     @Override
     @PutMapping(value = "/enableaccount")
     public ResponseEntity<String> enableAccount(@RequestBody @Valid EnableAccountDTO enableAccountDTO) {
-
         activeAccountService.enableAccount(enableAccountDTO);
         return ResponseEntity.ok().body("Conta ativada com sucesso");
     }

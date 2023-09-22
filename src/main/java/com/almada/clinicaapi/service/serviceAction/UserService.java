@@ -52,7 +52,7 @@ public class UserService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository.findByLogin(username)
-                .orElseThrow(() -> new RuntimeException("User not found with the login : " + username));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with the login : " + username));
     }
 
     @Cacheable(value = "usersPage")

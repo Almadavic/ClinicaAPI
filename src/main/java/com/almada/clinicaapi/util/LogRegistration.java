@@ -13,7 +13,6 @@ public class LogRegistration {
     private final LogRepository logRepository;
 
     public void saveLog(String login, String event) {
-
         logRepository.save(new Log(login, event));
     }
 

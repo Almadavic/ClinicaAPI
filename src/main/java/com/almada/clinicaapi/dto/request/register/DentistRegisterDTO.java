@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 import java.util.Set;
@@ -27,6 +28,7 @@ public class DentistRegisterDTO extends UserRegisterDTO {
 
     @JsonProperty(value = "workdays")
     @Size(max = 6)
+    @Setter
     private Set<Integer> workDays;
 
 }

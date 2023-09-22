@@ -9,7 +9,6 @@ import org.springframework.test.context.ActiveProfiles;
 import java.time.LocalDate;
 
 @ActiveProfiles(value = "test")
-@SpringBootTest
 class DateOrderTest {
 
     @Test

@@ -13,6 +13,7 @@ public class PatientResponseDTO extends UserResponseDTO{
 
     @JsonProperty(value = "cpf")
     private final String cpf;
+
     public PatientResponseDTO(User user) {
         super(user);
         Patient patient = verifyInstance(user);

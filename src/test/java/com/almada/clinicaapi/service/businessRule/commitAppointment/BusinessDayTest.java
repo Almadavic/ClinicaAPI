@@ -9,7 +9,6 @@ import org.springframework.test.context.ActiveProfiles;
 import java.time.DayOfWeek;
 
 @ActiveProfiles(value = "test")
-@SpringBootTest
 class BusinessDayTest {
 
     @Test

@@ -42,7 +42,6 @@ public class ChangePasswordService {
 
     @Transactional
     public void sendCodeToEmail(User user) {
-
         if (user.getChangePassword() != null) {
             changePasswordRepository.delete(user.getChangePassword());
             user = userRepository.save(user);
